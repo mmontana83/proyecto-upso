@@ -1,5 +1,4 @@
-# Ejemplo de API RESTful implementada con Python + Flask + MYSQL
-
+# API RESTful implementada con Python + Flask + MYSQL
 
 1. Crear directorio de proyecto (PROYECTO)
 
