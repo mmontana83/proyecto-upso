@@ -7,62 +7,63 @@ from api.models.Cliente import Cliente
 @app.route('/usuario/<id_usuario>/clientes', methods = ['GET'])
 def get_clientes_by_usuario(id_usuario):
     try:
-        cur = mysql.connection.cursor()
-        cur.callproc('sp_listarClientesByUsuario',[id_usuario])
-        datos = cur.fetchall()
-        
-        if datos != None:
-            clientes = []
-            for fila in datos:
-                cliente = Cliente.sp_listarClientesByUsuarioToJson(fila)
-                clientes.append(cliente)
-        return jsonify(clientes)
+        return jsonify(Cliente.obtenerClientesByUsuario(id_usuario))
     except Exception as ex:
-        return jsonify({'mensaje': 'Error'})
+        return jsonify({'mensaje':str(ex)})
     
 #Obtengo los datos de un cliente en particular
 @app.route('/usuario/<id_usuario>/cliente/<id_cliente>', methods = ['GET'])
 def get_cliente_by_id_cliente(id_usuario, id_cliente):
     try:
-        cur = mysql.connection.cursor()
-        cur.callproc('sp_obtenerClienteByID',[id_usuario, id_cliente])
-        fila = cur.fetchone()
-        
-        if fila != None:
-            cliente = Cliente.sp_listarClientesByUsuarioToJson(fila)
-        return jsonify(cliente)
+        return jsonify(Cliente.obtenerClienteByIdCliente(id_usuario, id_cliente))
     except Exception as ex:
-        return jsonify({'mensaje': 'Error'})
+        return jsonify({'mensaje':str(ex)})
     
 #Registrar un nuevo Cliente
 @app.route('/usuario/<id_usuario>/nuevocliente/', methods = ['POST'])
 def registrar_cliente(id_usuario):
     try:
-        cur = mysql.connection.cursor()
-        cur.callproc('sp_obtenerClienteByID', [id_usuario, request.json['id_cliente']])
-        fila = cur.fetchone()
+        #Obtengo el json del front
+        json = request.get_json()
 
-        if fila == None:
-            cur.callproc('sp_insertarCliente',[id_usuario, request.json['nombre'], request.json['apellido'], 
-                                            request.json['empresa'], request.json['email'], request.json['telefono'],
-                                            request.json['direccion'], request.json['id_tipoCondicionIVA'], request.json['id_cliente']])
-            mysql.connection.commit() #Esto confirma la acción de inserción
-            return jsonify({'mensaje':'Cliente Registrado con Éxito'})
-        else:
-            return jsonify({'mensaje':'Cliente ya se encuentra Registrado'})
+        #Agrego la clave id_usuario al diccionario json
+        json['id_usuario'] = id_usuario
+
+        #Inserto el cliente en la Base de Datos
+        mensaje = Cliente.insertarCliente(json)
+        return jsonify(mensaje)
     except Exception as ex:
-        return jsonify({'mensaje': 'Error'})
+        return jsonify({'mensaje': str(ex)})
     
 #Actualizar Cliente
-@app.route('/usuario/<id_usuario>/cliente/<id_cliente>', methods = ['POST'])
+@app.route('/usuario/<id_usuario>/actualizarcliente/<id_cliente>', methods = ['POST'])
 def actualizar_cliente(id_usuario, id_cliente):
     try:
-        print(request.json)
-        cur = mysql.connection.cursor()
-        cur.callproc('sp_actualizarCliente',[id_usuario, request.json['nombre'], request.json['apellido'], 
-                                           request.json['empresa'], request.json['email'], request.json['telefono'],
-                                           request.json['direccion'], request.json['id_tipoCondicionIVA'], id_cliente])
-        mysql.connection.commit() #Esto confirma la acción de inserción
-        return jsonify({'mensaje':'Cliente Actualizado con Éxito'})
+        #Obtengo el json del front
+        json = request.get_json()
+
+        #Agrego la clave id_usuario e id_cliente al diccionario json
+        json['id_usuario'] = id_usuario
+        json['id_cliente'] = id_cliente
+
+        #Inserto el cliente en la Base de Datos
+        mensaje = Cliente.actualizarCliente(json)
+        return jsonify(mensaje)
     except Exception as ex:
-        return jsonify({'mensaje': 'Error'})
+        return jsonify({'mensaje': str(ex)})
+    
+@app.route('/usuario/<id_usuario>/eliminarcliente/<id_cliente>', methods = ['POST'])
+def eliminar_cliente(id_usuario, id_cliente):
+    try:
+        mensaje = Cliente.eliminarCliente(id_cliente, id_usuario)
+        return jsonify(mensaje)
+    except Exception as ex:
+        return jsonify({'mensaje': str(ex)})
+    
+@app.route('/usuario/<id_usuario>/altacliente/<id_cliente>', methods = ['POST'])
+def alta_cliente(id_usuario, id_cliente):
+    try:
+        mensaje = Cliente.altaCliente(id_cliente, id_usuario)
+        return jsonify(mensaje)
+    except Exception as ex:
+        return jsonify({'mensaje': str(ex)})

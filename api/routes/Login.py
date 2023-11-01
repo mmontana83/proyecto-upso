@@ -17,8 +17,11 @@ def login():
     cur.callproc('sp_loginUsuario',(auth.username, auth.password))
     row = cur.fetchone()
 
-    if not row:
-       return jsonify({"message": "No autorizado"}), 401  
+    if row is None:
+       return jsonify({"message": "No se haya registrado en el sistema"}), 401
+    
+    if row[5] == 2:
+        return jsonify({"message": "El usuario se halla desactivado. Consulte al administrador"}), 402
     
     """ El usuario existe en la BD y coincide su contraseña """
     token = jwt.encode({'id': row[0],
