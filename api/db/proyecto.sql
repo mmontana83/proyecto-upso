@@ -1,8 +1,10 @@
+CREATE DATABASE  IF NOT EXISTS `proyecto` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `proyecto`;
 -- MySQL dump 10.13  Distrib 8.0.34, for Win64 (x86_64)
 --
--- Host: 192.168.0.254    Database: proyecto
+-- Host: casitamontana.ddns.net    Database: proyecto
 -- ------------------------------------------------------
--- Server version	8.0.34-0ubuntu0.22.04.1
+-- Server version	8.0.35-0ubuntu0.22.04.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -31,12 +33,15 @@ CREATE TABLE `clientes` (
   `telefono` varchar(50) NOT NULL,
   `direccion` varchar(100) NOT NULL,
   `id_tipoCondicionIVA` int NOT NULL,
+  `id_tipoEstado` int NOT NULL DEFAULT '1',
   `id_usuario` varchar(11) NOT NULL,
   PRIMARY KEY (`id_cliente`),
   KEY `id_usuario` (`id_usuario`),
   KEY `clientes_ibfk_2_idx` (`id_tipoCondicionIVA`),
+  KEY `clientes_ibfk_3_idx1` (`id_tipoEstado`),
   CONSTRAINT `clientes_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id_usuario`),
-  CONSTRAINT `clientes_ibfk_2` FOREIGN KEY (`id_tipoCondicionIVA`) REFERENCES `tipocondicioniva` (`id_tipoCondicionIVA`)
+  CONSTRAINT `clientes_ibfk_2` FOREIGN KEY (`id_tipoCondicionIVA`) REFERENCES `tipocondicioniva` (`id_tipoCondicionIVA`),
+  CONSTRAINT `clientes_ibfk_3` FOREIGN KEY (`id_tipoEstado`) REFERENCES `tipoestado` (`id_tipoestado`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -46,7 +51,7 @@ CREATE TABLE `clientes` (
 
 LOCK TABLES `clientes` WRITE;
 /*!40000 ALTER TABLE `clientes` DISABLE KEYS */;
-INSERT INTO `clientes` VALUES ('20110336209','Antonio','Montaña','','antonio@gmail.com','2932454545','ATEPAM 1 CASA 44',5,'23302022739'),('20139570910','Walter Rubén','Bozzo','','wrbozzo@gmail.com','2932444555','Uriburu 1357',3,'24302022737'),('23183214579','Rosa','Gonzalez',NULL,'no posee','2932447788','Bº CENTENARIO CASA 44',5,'20302022731'),('24123654889','Norma','Martínez',NULL,'normamartinez@gmail.com','2932455444','Uriburu 758',5,'23302022739'),('25789457891',NULL,NULL,'Clínica Salud Mental','saludmentalpa@gmail.com','2932457897','Murature 688',1,'20302022731'),('30627393713','','','Dirección de Cultura y Educación (Bajo Hondo)','essa1coronesrosales@abc.gob.ar','2392491114','C. 8 - Victoria Llanos, Bajo Hondo',4,'23302022739'),('30681157375',NULL,NULL,'Hospital Eva Perón','evaperon@gmail.com','2932422955','Uriburu 650',1,'20302022731'),('30999018447','','','Ministerio de Seguridad (Punta Alta)','estacionpuntaalta@gmail.com','2932421444','Murature 572',3,'23302022739');
+INSERT INTO `clientes` VALUES ('20110336209','Antonio','Montaña','','antonio@gmail.com','2932454545','ATEPAM 1 CASA 44',5,1,'23302022739'),('20139570910','Walter Rubén','Bozzo','','wrbozzo@gmail.com','2932444555','Uriburu 1357',3,2,'24302022737'),('23183214579','Rosa','Gonzalez',NULL,'no posee','2932447788','Bº CENTENARIO CASA 44',5,2,'20302022731'),('23491199983','Laura','Gonzalez','Panadería Anocheciendo','panaderiaamanacer@gmail.com','2932556677','Paso 2044',2,2,'23302022739'),('23551234563','Rodrigo','Forte','STI S.R.L COMPUTACIÓN','stisrlpa@gmail.com','2932119944','Mitre 891',4,1,'23302022739'),('23668931023','Carla','Rueda','Fashion Nails','fnails@gmail.com','2195566778','Colón 123, Bahía Blanca',2,1,'24302022737'),('24123654889','Norma','Martínez',NULL,'normamartinez@gmail.com','2932455444','Uriburu 758',5,1,'23302022739'),('24367894360','','','La Carlota Rectificaciones','carlotarect@gmail.com','011288371098','Florida 443',1,1,'24302022737'),('25789457891',NULL,NULL,'Clínica Salud Mental','saludmentalpa@gmail.com','2932457897','Murature 688',1,1,'20302022731'),('30627393713','','','Dirección de Cultura y Educación (Bajo Hondo)','essa1coronesrosales@abc.gob.ar','2392491114','C. 8 - Victoria Llanos, Bajo Hondo',4,1,'23302022739'),('30681157375',NULL,NULL,'Hospital Eva Perón','evaperon@gmail.com','2932422955','Uriburu 650',1,1,'20302022731'),('30999018447','','','Ministerio de Seguridad (Punta Alta)','estacionpuntaalta@gmail.com','2932421444','Murature 572',3,1,'23302022739');
 /*!40000 ALTER TABLE `clientes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -59,17 +64,17 @@ DROP TABLE IF EXISTS `detallefactura`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `detallefactura` (
   `id_detalle` int NOT NULL AUTO_INCREMENT,
-  `id_factura` int DEFAULT NULL,
-  `id_producto` int DEFAULT NULL,
+  `id_factura` int NOT NULL,
+  `id_producto` int NOT NULL,
   `cantidad` int NOT NULL,
   `precio` decimal(10,2) NOT NULL,
-  `cantidad * precio as precioTotal` decimal(10,2) NOT NULL,
+  `precioTotal` decimal(10,2) NOT NULL,
   PRIMARY KEY (`id_detalle`),
   KEY `detallefactura_ibfk_2_idx` (`id_producto`),
   KEY `detallefactura_ibfk_1_idx` (`id_factura`),
   CONSTRAINT `detallefactura_ibfk_1` FOREIGN KEY (`id_factura`) REFERENCES `factura` (`id_factura`),
   CONSTRAINT `detallefactura_ibfk_2` FOREIGN KEY (`id_producto`) REFERENCES `productos` (`id_producto`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -78,6 +83,7 @@ CREATE TABLE `detallefactura` (
 
 LOCK TABLES `detallefactura` WRITE;
 /*!40000 ALTER TABLE `detallefactura` DISABLE KEYS */;
+INSERT INTO `detallefactura` VALUES (1,1,1,1,500.00,500.00),(2,1,1,1,500.00,500.00),(3,1,1,3,300.00,900.00);
 /*!40000 ALTER TABLE `detallefactura` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -102,7 +108,7 @@ CREATE TABLE `factura` (
   CONSTRAINT `factura_ibfk_1` FOREIGN KEY (`id_tipoFactura`) REFERENCES `tipofactura` (`id_tipoFactura`),
   CONSTRAINT `factura_ibfk_2` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id_usuario`),
   CONSTRAINT `factura_ibfk_3` FOREIGN KEY (`id_cliente`) REFERENCES `clientes` (`id_cliente`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -111,6 +117,7 @@ CREATE TABLE `factura` (
 
 LOCK TABLES `factura` WRITE;
 /*!40000 ALTER TABLE `factura` DISABLE KEYS */;
+INSERT INTO `factura` VALUES (1,'2023-10-30',1000.00,1,'23302022739','20110336209');
 /*!40000 ALTER TABLE `factura` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -128,11 +135,14 @@ CREATE TABLE `productos` (
   `precio` decimal(10,2) NOT NULL,
   `stock` int NOT NULL,
   `id_tipoProducto` int NOT NULL,
+  `id_tipoEstado` int NOT NULL DEFAULT '1',
   `id_usuario` varchar(11) NOT NULL,
   PRIMARY KEY (`id_producto`),
   KEY `id_usuario` (`id_usuario`),
   KEY `id_tipoproducto` (`id_tipoProducto`),
+  KEY `tipoestado_ibfk_1_idx` (`id_tipoEstado`),
   CONSTRAINT `productos_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id_usuario`),
+  CONSTRAINT `tipoestado_ibfk_1` FOREIGN KEY (`id_tipoEstado`) REFERENCES `tipoestado` (`id_tipoestado`),
   CONSTRAINT `tipoproducto_ibfk_1` FOREIGN KEY (`id_tipoProducto`) REFERENCES `tipoproducto` (`id_tipoProducto`)
 ) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -143,7 +153,7 @@ CREATE TABLE `productos` (
 
 LOCK TABLES `productos` WRITE;
 /*!40000 ALTER TABLE `productos` DISABLE KEYS */;
-INSERT INTO `productos` VALUES (1,'PASTILLA DE FRENO',NULL,7887.00,50,1,'23302022739'),(2,'BUJÍA NAFTERA',NULL,6500.00,50,1,'23302022739'),(3,'BUJÍA DIESEL',NULL,7988.00,50,1,'23302022739'),(4,'ACEITE MOTOR 10W40',NULL,35000.00,16,1,'23302022739'),(5,'SERVICE AUTOMOTOR','SERVICE QUE SE REALIZA CADA 10.000 KM',18000.00,0,2,'23302022739'),(6,'AFINACION',NULL,15000.00,0,2,'23302022739'),(7,'GASAS',NULL,3000.00,50,1,'20302022731'),(8,'JERINGA X 10ml',NULL,175.00,100,1,'20302022731'),(9,'NEBULIZADOR',NULL,7800.00,3,1,'20302022731'),(10,'VACUNACION A DOMICILIO',NULL,3000.00,0,2,'20302022731'),(11,'MEDICION PRESION','',500.00,0,2,'20302022731');
+INSERT INTO `productos` VALUES (1,'PASTILLA DE FRENO',NULL,7887.00,50,1,1,'23302022739'),(2,'BUJÍA NAFTERA',NULL,6500.00,50,1,1,'23302022739'),(3,'BUJÍA DIESEL',NULL,7988.00,50,1,1,'23302022739'),(4,'ACEITE MOTOR 10W40',NULL,35000.00,16,1,1,'23302022739'),(5,'SERVICE AUTOMOTOR','SERVICE QUE SE REALIZA CADA 10.000 KM',18000.00,0,2,1,'23302022739'),(6,'AFINACION',NULL,15000.00,0,2,1,'23302022739'),(7,'GASAS',NULL,3000.00,50,1,2,'20302022731'),(8,'JERINGA X 10ml',NULL,175.00,100,1,1,'20302022731'),(9,'NEBULIZADOR',NULL,7800.00,3,1,1,'20302022731'),(10,'VACUNACION A DOMICILIO',NULL,3000.00,0,2,1,'20302022731'),(11,'MEDICION PRESION','',500.00,0,2,1,'20302022731');
 /*!40000 ALTER TABLE `productos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -169,6 +179,30 @@ LOCK TABLES `tipocondicioniva` WRITE;
 /*!40000 ALTER TABLE `tipocondicioniva` DISABLE KEYS */;
 INSERT INTO `tipocondicioniva` VALUES (1,'IVA RESPONSABLE INSCRIPTO'),(2,'IVA RESPONSABLE NO INSCRIPTO'),(3,'IVA NO RESPOSABLE'),(4,'IVA SUJETO EXTERNO'),(5,'CONSUMIDOR FINAL'),(6,'RESPONSABLE MONOTRIBUTO'),(7,'SUJETO NO CATEGORIZADO'),(8,'PROVEEDOR DEL EXTERIOR'),(9,'CLIENTE DEL EXTERIOR'),(10,'IVA LIBERADO - LEY Nº 19.640'),(11,'IVA RESPONSABLE INSCRIPTO - AGENTE DE PERCEPCIÓN'),(12,'PEQUEÑO CONTRIBUYENTE EVENTUAL'),(13,'MONOTRIBUTISTA SOCIAL'),(14,'PEQUEÑO CONTRIBUYENTE EVENTUAL SOCIAL');
 /*!40000 ALTER TABLE `tipocondicioniva` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tipoestado`
+--
+
+DROP TABLE IF EXISTS `tipoestado`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `tipoestado` (
+  `id_tipoestado` int NOT NULL AUTO_INCREMENT,
+  `tipoestado` varchar(6) NOT NULL,
+  PRIMARY KEY (`id_tipoestado`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='En esta tabla almaceno el estado de un cliente: "ACTIVO" si el cliente esta vigente, "BAJA" si el cliente fue dado de baja';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tipoestado`
+--
+
+LOCK TABLES `tipoestado` WRITE;
+/*!40000 ALTER TABLE `tipoestado` DISABLE KEYS */;
+INSERT INTO `tipoestado` VALUES (1,'ACTIVO'),(2,'BAJA');
+/*!40000 ALTER TABLE `tipoestado` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -234,7 +268,10 @@ CREATE TABLE `usuarios` (
   `contraseña` char(200) NOT NULL,
   `email` varchar(50) NOT NULL,
   `telefono` varchar(50) NOT NULL,
-  PRIMARY KEY (`id_usuario`)
+  `id_tipoEstado` int NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id_usuario`),
+  KEY `usuarios_ibfk_1_idx` (`id_tipoEstado`),
+  CONSTRAINT `usuarios_ibfk_1` FOREIGN KEY (`id_tipoEstado`) REFERENCES `tipoestado` (`id_tipoestado`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -244,7 +281,7 @@ CREATE TABLE `usuarios` (
 
 LOCK TABLES `usuarios` WRITE;
 /*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
-INSERT INTO `usuarios` VALUES ('20302022731','Cristian','Lich','clich','1234','cris.joel.lich@gmail.com','+5492932613757'),('21302022735','Gerónimo','Sanchez','gsanchez','1234','sanchezgeronimo01@gmail.com','+5492932495043'),('23302022739','Martín','Montaña','mmontana','scrypt:32768:8:1$SJQvp4mKf41POAow$dcc5a23b62fc47aa1eef92552d7dd10f33a7e87ad6f7b11c7a57fb661eb5fbad6a54c10ead696192b6d2dae6986d2da95042dc5a2f28d2b6f7312126fa64fc16','martin.miguel.montana@gmail.com','+5492932614608'),('24302022737','Eduardo','Weinzettel','eweinz','1234','eduardoweinz@hotmail.com','+5492932540008');
+INSERT INTO `usuarios` VALUES ('20302022731','Cristian','Lich','clich','1234','cris.joel.lich@gmail.com','+5492932613757',1),('21302022735','Gerónimo','Sanchez','gsanchez','1234','sanchezgeronimo01@gmail.com','+5492932495043',1),('23302022739','Martín','Montaña','mmontana','1234','martin.miguel.montana@gmail.com','+5492932614608',1),('24302022737','Eduardo','Weinzettel','eweinz','1234','eduardoweinz@hotmail.com','+5492932540008',1);
 /*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -261,13 +298,13 @@ UNLOCK TABLES;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`proyecto`@`%` PROCEDURE `sp_actualizarCliente`(in p_nombre varchar(50), in p_apellido varchar(50), in p_empresa varchar(50), in p_email varchar(50),
-										 in p_telefono varchar(50), in p_direccion varchar(100), in p_id_tipoCondicionIVA int, in p_id_cliente varchar(11))
+CREATE DEFINER=`proyecto`@`%` PROCEDURE `sp_actualizarCliente`(in p_id_cliente varchar(11), in p_nombre varchar(50), in p_apellido varchar(50), in p_empresa varchar(50), in p_email varchar(50),
+										 in p_telefono varchar(50), in p_direccion varchar(100), in p_id_tipoCondicionIVA int, in p_id_usuario varchar(11))
 BEGIN
 	UPDATE clientes
     SET nombre = p_nombre, apellido = p_apellido, empresa = p_empresa, email = p_email, telefono = p_telefono, direccion = p_direccion,
 		id_tipoCondicionIVA = p_id_tipoCondicionIVA
-	WHERE id_cliente = p_id_cliente;
+	WHERE clientes.id_usuario = p_id_usuario AND clientes.id_cliente = p_id_cliente;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -285,11 +322,74 @@ DELIMITER ;
 /*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE DEFINER=`proyecto`@`%` PROCEDURE `sp_actualizarProducto`(in p_producto varchar(100), in p_descripcion text, in p_precio decimal(10,2), in p_stock int, p_id_tipoProducto int,
-										  in p_id_producto int)
+										  in p_id_producto int, in p_id_usuario varchar(11))
 BEGIN
 	UPDATE productos
     SET producto = p_producto, descripcion = p_descripcion, precio = p_precio, stock = p_stock, id_tipoProducto = p_id_tipoProducto
-    WHERE id_producto = p_id_producto;
+    WHERE id_producto = p_id_producto and id_usuario = p_id_usuario;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_altaCliente` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`proyecto`@`%` PROCEDURE `sp_altaCliente`(in p_id_cliente varchar(11), in p_id_usuario varchar(11))
+BEGIN
+	UPDATE clientes
+    SET id_tipoEstado = 1
+    WHERE id_cliente = p_id_cliente AND id_usuario = p_id_usuario;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_eliminarCliente` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`proyecto`@`%` PROCEDURE `sp_eliminarCliente`(in p_id_cliente varchar(11), in p_id_usuario varchar(11))
+BEGIN
+	UPDATE clientes
+    SET id_tipoEstado = 2
+    WHERE id_cliente = p_id_cliente AND id_usuario = p_id_usuario;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_eliminarProducto` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`proyecto`@`%` PROCEDURE `sp_eliminarProducto`(in p_id_producto int, in p_id_usuario varchar(11))
+BEGIN
+	UPDATE productos
+	SET id_tipoEstado = 2
+    WHERE id_producto = p_id_producto AND id_usuario = p_id_usuario;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -306,14 +406,12 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`proyecto`@`%` PROCEDURE `sp_insertarCliente`(in p_id_cliente varchar(11), in p_nombre varchar(50), in p_apellido varchar(50), in p_empresa varchar(50),
-									   in p_email varchar(50), in p_telefono varchar(50), in p_direccion varchar(100), in p_id_tipoCondicionIVA int,
-                                       in p_id_usuario varchar(11))
+CREATE DEFINER=`proyecto`@`%` PROCEDURE `sp_insertarCliente`(in p_id_cliente varchar(11), in p_nombre varchar(50), in p_apellido varchar(50),
+									   in p_empresa varchar(50), in p_email varchar(50), in p_telefono varchar(50), in p_direccion varchar(100),
+                                       in p_id_tipoCondicionIVA int, in p_id_usuario varchar(11))
 BEGIN
-	IF NOT EXISTS ( SELECT id_cliente FROM clientes WHERE id_cliente = p_id_cliente ) THEN
-		INSERT INTO clientes (id_cliente, nombre, apellido, empresa, email, telefono, direccion, id_tipoCondicionIVA, id_usuario)
-		VALUES (p_id_cliente, p_nombre, p_apellido, p_empresa, p_email, p_telefono, p_direccion, p_id_tipoCondicionIVA, p_id_usuario);
-	END IF;
+	INSERT INTO clientes (id_cliente, nombre, apellido, empresa, email, telefono, direccion, id_tipoCondicionIVA, id_usuario)
+	VALUES (p_id_cliente, p_nombre, p_apellido, p_empresa, p_email, p_telefono, p_direccion, p_id_tipoCondicionIVA, p_id_usuario);
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -351,10 +449,13 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`proyecto`@`%` PROCEDURE `sp_insertarFacturaDetalle`(in id_factura int, in id_producto int, in cantidad int , in precio decimal(10,2))
+CREATE DEFINER=`proyecto`@`%` PROCEDURE `sp_insertarFacturaDetalle`(in p_id_producto int, 
+																	in p_cantidad int , in p_precio decimal(10,2))
 BEGIN
-	INSERT INTO detalleFactura (id_factura, id_producto, cantidad, precio)
-	VALUES (p_fecha, p_total, p_id_tipoFactura, p_id_usuario, p_id_cliente);
+	DECLARE p_id_factura int;
+	SELECT MAX( id_factura ) INTO p_id_factura FROM factura; -- obtengo el último ID de la tabla factura
+	INSERT INTO detallefactura (id_factura, id_producto, cantidad, precio, precioTotal)
+	VALUES (p_id_factura, p_id_producto, p_cantidad, p_precio, p_cantidad * p_precio);
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -374,10 +475,8 @@ DELIMITER ;;
 CREATE DEFINER=`proyecto`@`%` PROCEDURE `sp_insertarProducto`(in p_producto varchar(100), in p_descripcion text, in p_precio decimal(10,2), 
 										in p_stock int, in p_id_tipoProducto int, in p_id_usuario varchar(11))
 BEGIN
-	IF NOT EXISTS ( SELECT producto FROM productos WHERE producto = p_producto) THEN
-		INSERT INTO productos (producto, descripcion, precio, stock, id_tipoProducto, id_usuario)
-		VALUES (p_producto, p_descripcion, p_precio, p_stock, p_id_tipoProducto, p_id_usuario);
-	END IF;
+	INSERT INTO productos (producto, descripcion, precio, stock, id_tipoProducto, id_usuario)
+	VALUES (p_producto, p_descripcion, p_precio, p_stock, p_id_tipoProducto, p_id_usuario);
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -396,9 +495,10 @@ DELIMITER ;
 DELIMITER ;;
 CREATE DEFINER=`proyecto`@`%` PROCEDURE `sp_listarClientesByUsuario`(in id_usuario varchar(11))
 BEGIN
-	SELECT clientes.nombre, clientes.apellido, clientes.empresa, clientes.email, clientes.telefono, clientes.direccion, tipocondicioniva.descripcion 
+	SELECT clientes.id_cliente, clientes.nombre, clientes.apellido, clientes.empresa, clientes.email, clientes.telefono, 
+		   clientes.direccion, tipocondicioniva.descripcion as 'condicionIVA'
     FROM clientes INNER JOIN tipocondicioniva ON clientes.id_tipoCondicionIVA = tipocondicioniva.id_tipoCondicionIVA
-    WHERE clientes.id_usuario = id_usuario;
+    WHERE clientes.id_usuario = id_usuario and clientes.id_tipoEstado = '1';
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -441,7 +541,7 @@ CREATE DEFINER=`proyecto`@`%` PROCEDURE `sp_listarProductosByUsuario`(in id_usua
 BEGIN
 	SELECT productos.id_producto, productos.producto, productos.descripcion, productos.precio, productos.stock, tipoproducto.tipoproducto
     FROM productos INNER JOIN tipoproducto ON productos.id_tipoProducto = tipoproducto.id_tipoProducto
-    WHERE productos.id_usuario = id_usuario;
+    WHERE productos.id_usuario = id_usuario AND productos.id_tipoEstado = 1;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -515,11 +615,32 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`proyecto`@`%` PROCEDURE `sp_loginUsuario`(in u varchar(50), in c char(200))
+CREATE DEFINER=`proyecto`@`%` PROCEDURE `sp_loginUsuario`(in p_usuario varchar(50), in p_contraseña char(200))
 BEGIN
-	SELECT id_usuario, nombre, apellido, email, telefono
+	SELECT id_usuario, nombre, apellido, email, telefono, id_tipoEstado
 	FROM usuarios
-    WHERE usuario = u AND contraseña = c;
+    WHERE usuario = lower(p_usuario) AND contraseña = p_contraseña;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_obtenerClienteById_Cliente` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`proyecto`@`%` PROCEDURE `sp_obtenerClienteById_Cliente`(in p_id_usuario varchar(11), in p_id_cliente varchar(11))
+BEGIN
+	SELECT clientes.id_cliente, clientes.nombre, clientes.apellido, clientes.empresa, clientes.email, clientes.telefono, clientes.direccion, tipocondicioniva.descripcion 
+    FROM clientes INNER JOIN tipocondicioniva ON clientes.id_tipoCondicionIVA = tipocondicioniva.id_tipoCondicionIVA
+    WHERE clientes.id_usuario = p_id_usuario AND clientes.id_cliente = p_id_cliente;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -560,8 +681,11 @@ DELIMITER ;
 DELIMITER ;;
 CREATE DEFINER=`proyecto`@`%` PROCEDURE `sp_obtenerFacturaByCliente`(in id_cliente varchar(11))
 BEGIN
-	SELECT factura.id_factura, factura.fecha, tipofactura.tipofactura, factura.total
+	SELECT factura.id_factura, factura.fecha, tipofactura.tipofactura, clientes.nombre, clientes.apellido, clientes.empresa, clientes.direccion,
+    clientes.telefono, tipocondicioniva.descripcion, factura.total
     FROM factura
+    INNER JOIN clientes on factura.id_cliente = clientes.id_cliente
+    INNER JOIN tipocondicioniva on clientes.id_tipoCondicionIVA = tipocondicioniva.id_tipoCondicionIVA
     INNER JOIN tipofactura ON factura.id_tipoFactura = tipofactura.id_tipoFactura
     WHERE factura.id_cliente = id_cliente;
 END ;;
@@ -580,4 +704,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-10-29 15:19:55
+-- Dump completed on 2023-11-01 15:59:11
