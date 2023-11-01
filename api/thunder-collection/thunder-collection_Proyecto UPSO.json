@@ -1,0 +1,139 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "Proyecto UPSO",
+    "dateExported": "2023-11-01T21:05:06.396Z",
+    "version": "1.1",
+    "folders": [
+        {
+            "_id": "613e5b80-2f58-4f92-b499-0f52bd369281",
+            "name": "Login",
+            "containerId": "",
+            "created": "2023-10-31T19:48:36.029Z",
+            "sortNum": 10000
+        },
+        {
+            "_id": "e8e04641-032e-4443-ab23-96558fa0d5c1",
+            "name": "Clientes",
+            "containerId": "",
+            "created": "2023-10-31T19:48:47.382Z",
+            "sortNum": 20000
+        }
+    ],
+    "requests": [
+        {
+            "_id": "c075cd5b-90fa-43df-9a48-ea15b68beac1",
+            "colId": "dc7c0ff4-ffb6-4188-8af2-a930a3057dd6",
+            "containerId": "e8e04641-032e-4443-ab23-96558fa0d5c1",
+            "name": "get_clientes_by_usuario",
+            "url": "127.0.0.1:5000/usuario/23302022739/clientes",
+            "method": "GET",
+            "sortNum": 10000,
+            "created": "2023-10-31T18:53:56.707Z",
+            "modified": "2023-11-01T14:27:33.978Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "824803b6-4878-47f5-8999-4070cca34b44",
+            "colId": "dc7c0ff4-ffb6-4188-8af2-a930a3057dd6",
+            "containerId": "613e5b80-2f58-4f92-b499-0f52bd369281",
+            "name": "Login",
+            "url": "127.0.0.1:5000/login",
+            "method": "POST",
+            "sortNum": 10000,
+            "created": "2023-10-31T19:47:50.047Z",
+            "modified": "2023-10-31T19:47:50.047Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "basic",
+                "basic": {
+                    "username": "mmontana1",
+                    "password": "1234"
+                }
+            },
+            "tests": []
+        },
+        {
+            "_id": "5850ffd0-9bd9-4a32-ac77-d98d015c89b6",
+            "colId": "dc7c0ff4-ffb6-4188-8af2-a930a3057dd6",
+            "containerId": "e8e04641-032e-4443-ab23-96558fa0d5c1",
+            "name": "get_cliente_by_id_cliente",
+            "url": "http://127.0.0.1:5000/usuario/20302022731/cliente/23183214579",
+            "method": "GET",
+            "sortNum": 20000,
+            "created": "2023-10-31T19:48:28.795Z",
+            "modified": "2023-10-31T19:50:26.836Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "7b71f9f6-fe6f-4131-83be-3a20b726316e",
+            "colId": "dc7c0ff4-ffb6-4188-8af2-a930a3057dd6",
+            "containerId": "e8e04641-032e-4443-ab23-96558fa0d5c1",
+            "name": "Registrar Cliente",
+            "url": "127.0.0.1:5000/usuario/24302022737/nuevocliente",
+            "method": "POST",
+            "sortNum": 30000,
+            "created": "2023-10-31T19:53:35.801Z",
+            "modified": "2023-11-01T13:41:11.035Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"id_cliente\" : \"23668931023\",\n  \"nombre\" : \"Carla\", \n  \"apellido\" : \"Rueda\", \n  \"empresa\" : \"Fashion Nails\", \n  \"email\" : \"fnails@gmail.com\", \n  \"telefono\" : \"2195566778\", \n  \"direccion\" : \"Colón 123, Bahía Blanca\", \n  \"id_tipoCondicionIVA\" : \"2\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "ace5ab9a-f4fb-4bd8-a9c8-ab322f5c1135",
+            "colId": "dc7c0ff4-ffb6-4188-8af2-a930a3057dd6",
+            "containerId": "e8e04641-032e-4443-ab23-96558fa0d5c1",
+            "name": "ActualizarCliente",
+            "url": "127.0.0.1:5000/usuario/23302022739/actualizarcliente/23551234563",
+            "method": "POST",
+            "sortNum": 40000,
+            "created": "2023-11-01T13:06:45.827Z",
+            "modified": "2023-11-01T14:01:27.600Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"nombre\" : \"Rodrigo\", \n  \"apellido\" : \"Forte\", \n  \"empresa\" : \"STI S.R.L COMPUTACIÓN\", \n  \"email\" : \"stisrlpa@gmail.com\", \n  \"telefono\" : \"2932119944\", \n  \"direccion\" : \"Mitre 891\", \n  \"id_tipoCondicionIVA\" : \"4\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "bf054e88-aaf3-4116-9b04-d961b156108d",
+            "colId": "dc7c0ff4-ffb6-4188-8af2-a930a3057dd6",
+            "containerId": "e8e04641-032e-4443-ab23-96558fa0d5c1",
+            "name": "EliminarCliente",
+            "url": "127.0.0.1:5000/usuario/23302022739/eliminarcliente/23551234563",
+            "method": "POST",
+            "sortNum": 50000,
+            "created": "2023-11-01T13:24:14.287Z",
+            "modified": "2023-11-01T13:26:47.021Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "ac156db5-1ecc-4ba8-8d47-63a4b302b9b5",
+            "colId": "dc7c0ff4-ffb6-4188-8af2-a930a3057dd6",
+            "containerId": "e8e04641-032e-4443-ab23-96558fa0d5c1",
+            "name": "AltaCliente",
+            "url": "127.0.0.1:5000/usuario/23302022739/altacliente/23551234563",
+            "method": "POST",
+            "sortNum": 60000,
+            "created": "2023-11-01T14:08:38.544Z",
+            "modified": "2023-11-01T14:09:38.860Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        }
+    ]
+}
