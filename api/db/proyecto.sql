@@ -33,7 +33,6 @@ CREATE TABLE `clientes` (
   `telefono` varchar(50) NOT NULL,
   `direccion` varchar(100) NOT NULL,
   `id_tipoCondicionIVA` int NOT NULL,
-  `id_tipoEstado` int NOT NULL DEFAULT '1',
   `id_usuario` varchar(11) NOT NULL,
   PRIMARY KEY (`id_cliente`),
   KEY `id_usuario` (`id_usuario`),
@@ -51,7 +50,7 @@ CREATE TABLE `clientes` (
 
 LOCK TABLES `clientes` WRITE;
 /*!40000 ALTER TABLE `clientes` DISABLE KEYS */;
-INSERT INTO `clientes` VALUES ('20110336209','Antonio','Montaña','','antonio@gmail.com','2932454545','ATEPAM 1 CASA 44',5,1,'23302022739'),('20139570910','Walter Rubén','Bozzo','','wrbozzo@gmail.com','2932444555','Uriburu 1357',3,2,'24302022737'),('23183214579','Rosa','Gonzalez',NULL,'no posee','2932447788','Bº CENTENARIO CASA 44',5,2,'20302022731'),('23491199983','Laura','Gonzalez','Panadería Anocheciendo','panaderiaamanacer@gmail.com','2932556677','Paso 2044',2,2,'23302022739'),('23551234563','Rodrigo','Forte','STI S.R.L COMPUTACIÓN','stisrlpa@gmail.com','2932119944','Mitre 891',4,1,'23302022739'),('23668931023','Carla','Rueda','Fashion Nails','fnails@gmail.com','2195566778','Colón 123, Bahía Blanca',2,1,'24302022737'),('24123654889','Norma','Martínez',NULL,'normamartinez@gmail.com','2932455444','Uriburu 758',5,1,'23302022739'),('24367894360','','','La Carlota Rectificaciones','carlotarect@gmail.com','011288371098','Florida 443',1,1,'24302022737'),('25789457891',NULL,NULL,'Clínica Salud Mental','saludmentalpa@gmail.com','2932457897','Murature 688',1,1,'20302022731'),('30627393713','','','Dirección de Cultura y Educación (Bajo Hondo)','essa1coronesrosales@abc.gob.ar','2392491114','C. 8 - Victoria Llanos, Bajo Hondo',4,1,'23302022739'),('30681157375',NULL,NULL,'Hospital Eva Perón','evaperon@gmail.com','2932422955','Uriburu 650',1,1,'20302022731'),('30999018447','','','Ministerio de Seguridad (Punta Alta)','estacionpuntaalta@gmail.com','2932421444','Murature 572',3,1,'23302022739');
+INSERT INTO `clientes` VALUES ('20110336209','Antonio','Montaña','','antonio@gmail.com','2932454545','ATEPAM 1 CASA 44',5,'23302022739'),('20139570910','Walter Rubén','Bozzo','','wrbozzo@gmail.com','2932444555','Uriburu 1357',3,'24302022737'),('23183214579','Rosa','Gonzalez',NULL,'no posee','2932447788','Bº CENTENARIO CASA 44',5,'20302022731'),('24123654889','Norma','Martínez',NULL,'normamartinez@gmail.com','2932455444','Uriburu 758',5,'23302022739'),('25789457891',NULL,NULL,'Clínica Salud Mental','saludmentalpa@gmail.com','2932457897','Murature 688',1,'20302022731'),('30627393713','','','Dirección de Cultura y Educación (Bajo Hondo)','essa1coronesrosales@abc.gob.ar','2392491114','C. 8 - Victoria Llanos, Bajo Hondo',4,'23302022739'),('30681157375',NULL,NULL,'Hospital Eva Perón','evaperon@gmail.com','2932422955','Uriburu 650',1,'20302022731'),('30999018447','','','Ministerio de Seguridad (Punta Alta)','estacionpuntaalta@gmail.com','2932421444','Murature 572',3,'23302022739');
 /*!40000 ALTER TABLE `clientes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -74,7 +73,7 @@ CREATE TABLE `detallefactura` (
   KEY `detallefactura_ibfk_1_idx` (`id_factura`),
   CONSTRAINT `detallefactura_ibfk_1` FOREIGN KEY (`id_factura`) REFERENCES `factura` (`id_factura`),
   CONSTRAINT `detallefactura_ibfk_2` FOREIGN KEY (`id_producto`) REFERENCES `productos` (`id_producto`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -83,7 +82,6 @@ CREATE TABLE `detallefactura` (
 
 LOCK TABLES `detallefactura` WRITE;
 /*!40000 ALTER TABLE `detallefactura` DISABLE KEYS */;
-INSERT INTO `detallefactura` VALUES (1,1,1,1,500.00,500.00),(2,1,1,1,500.00,500.00),(3,1,1,3,300.00,900.00);
 /*!40000 ALTER TABLE `detallefactura` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -268,10 +266,7 @@ CREATE TABLE `usuarios` (
   `contraseña` char(200) NOT NULL,
   `email` varchar(50) NOT NULL,
   `telefono` varchar(50) NOT NULL,
-  `id_tipoEstado` int NOT NULL DEFAULT '1',
-  PRIMARY KEY (`id_usuario`),
-  KEY `usuarios_ibfk_1_idx` (`id_tipoEstado`),
-  CONSTRAINT `usuarios_ibfk_1` FOREIGN KEY (`id_tipoEstado`) REFERENCES `tipoestado` (`id_tipoestado`)
+  PRIMARY KEY (`id_usuario`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -281,7 +276,7 @@ CREATE TABLE `usuarios` (
 
 LOCK TABLES `usuarios` WRITE;
 /*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
-INSERT INTO `usuarios` VALUES ('20302022731','Cristian','Lich','clich','1234','cris.joel.lich@gmail.com','+5492932613757',1),('21302022735','Gerónimo','Sanchez','gsanchez','1234','sanchezgeronimo01@gmail.com','+5492932495043',1),('23302022739','Martín','Montaña','mmontana','1234','martin.miguel.montana@gmail.com','+5492932614608',1),('24302022737','Eduardo','Weinzettel','eweinz','1234','eduardoweinz@hotmail.com','+5492932540008',1);
+INSERT INTO `usuarios` VALUES ('20302022731','Cristian','Lich','clich','1234','cris.joel.lich@gmail.com','+5492932613757'),('21302022735','Gerónimo','Sanchez','gsanchez','1234','sanchezgeronimo01@gmail.com','+5492932495043'),('23302022739','Martín','Montaña','mmontana','scrypt:32768:8:1$SJQvp4mKf41POAow$dcc5a23b62fc47aa1eef92552d7dd10f33a7e87ad6f7b11c7a57fb661eb5fbad6a54c10ead696192b6d2dae6986d2da95042dc5a2f28d2b6f7312126fa64fc16','martin.miguel.montana@gmail.com','+5492932614608'),('24302022737','Eduardo','Weinzettel','eweinz','1234','eduardoweinz@hotmail.com','+5492932540008');
 /*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -298,8 +293,8 @@ UNLOCK TABLES;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`proyecto`@`%` PROCEDURE `sp_actualizarCliente`(in p_id_cliente varchar(11), in p_nombre varchar(50), in p_apellido varchar(50), in p_empresa varchar(50), in p_email varchar(50),
-										 in p_telefono varchar(50), in p_direccion varchar(100), in p_id_tipoCondicionIVA int, in p_id_usuario varchar(11))
+CREATE DEFINER=`proyecto`@`%` PROCEDURE `sp_actualizarCliente`(in p_nombre varchar(50), in p_apellido varchar(50), in p_empresa varchar(50), in p_email varchar(50),
+										 in p_telefono varchar(50), in p_direccion varchar(100), in p_id_tipoCondicionIVA int, in p_id_cliente varchar(11))
 BEGIN
 	UPDATE clientes
     SET nombre = p_nombre, apellido = p_apellido, empresa = p_empresa, email = p_email, telefono = p_telefono, direccion = p_direccion,
@@ -410,8 +405,10 @@ CREATE DEFINER=`proyecto`@`%` PROCEDURE `sp_insertarCliente`(in p_id_cliente var
 									   in p_empresa varchar(50), in p_email varchar(50), in p_telefono varchar(50), in p_direccion varchar(100),
                                        in p_id_tipoCondicionIVA int, in p_id_usuario varchar(11))
 BEGIN
-	INSERT INTO clientes (id_cliente, nombre, apellido, empresa, email, telefono, direccion, id_tipoCondicionIVA, id_usuario)
-	VALUES (p_id_cliente, p_nombre, p_apellido, p_empresa, p_email, p_telefono, p_direccion, p_id_tipoCondicionIVA, p_id_usuario);
+	IF NOT EXISTS ( SELECT id_cliente FROM clientes WHERE id_cliente = p_id_cliente ) THEN
+		INSERT INTO clientes (id_cliente, nombre, apellido, empresa, email, telefono, direccion, id_tipoCondicionIVA, id_usuario)
+		VALUES (p_id_cliente, p_nombre, p_apellido, p_empresa, p_email, p_telefono, p_direccion, p_id_tipoCondicionIVA, p_id_usuario);
+	END IF;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -495,8 +492,7 @@ DELIMITER ;
 DELIMITER ;;
 CREATE DEFINER=`proyecto`@`%` PROCEDURE `sp_listarClientesByUsuario`(in id_usuario varchar(11))
 BEGIN
-	SELECT clientes.id_cliente, clientes.nombre, clientes.apellido, clientes.empresa, clientes.email, clientes.telefono, 
-		   clientes.direccion, tipocondicioniva.descripcion as 'condicionIVA'
+	SELECT clientes.nombre, clientes.apellido, clientes.empresa, clientes.email, clientes.telefono, clientes.direccion, tipocondicioniva.descripcion 
     FROM clientes INNER JOIN tipocondicioniva ON clientes.id_tipoCondicionIVA = tipocondicioniva.id_tipoCondicionIVA
     WHERE clientes.id_usuario = id_usuario and clientes.id_tipoEstado = '1';
 END ;;
@@ -647,6 +643,27 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_obtenerClienteByID` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`proyecto`@`%` PROCEDURE `sp_obtenerClienteByID`(in p_id_usuario varchar(11), in p_id_cliente varchar(11))
+BEGIN
+	SELECT clientes.id_cliente, clientes.nombre, clientes.apellido, clientes.empresa, clientes.email, clientes.telefono, clientes.direccion, tipocondicioniva.descripcion 
+    FROM clientes INNER JOIN tipocondicioniva ON clientes.id_tipoCondicionIVA = tipocondicioniva.id_tipoCondicionIVA
+    WHERE clientes.id_usuario = p_id_usuario AND clientes.id_cliente = p_id_cliente;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `sp_obtenerDetalleFactura` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -704,4 +721,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-11-01 15:59:11
+-- Dump completed on 2023-10-29 15:19:55
