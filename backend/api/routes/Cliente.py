@@ -1,10 +1,13 @@
 from api import app
+from api.utils import token_required, client_resource, user_resources
 from flask import request, jsonify
 from api.db.db import mysql
 from api.models.Cliente import Cliente
 
 #Obtengo la lista de clientes de un usuario
 @app.route('/usuario/<id_usuario>/clientes', methods = ['GET'])
+@token_required
+@user_resources
 def get_clientes_by_usuario(id_usuario):
     try:
         return jsonify(Cliente.obtenerClientesByUsuario(id_usuario))
@@ -13,6 +16,9 @@ def get_clientes_by_usuario(id_usuario):
     
 #Obtengo los datos de un cliente en particular
 @app.route('/usuario/<id_usuario>/cliente/<id_cliente>', methods = ['GET'])
+@token_required
+@user_resources
+@client_resource
 def get_cliente_by_id_cliente(id_usuario, id_cliente):
     try:
         return jsonify(Cliente.obtenerClienteByIdCliente(id_usuario, id_cliente))
