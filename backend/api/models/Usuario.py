@@ -29,7 +29,7 @@ class Usuario():
     def login():
     
         try:
-
+            #recibo el request del front
             auth = request.authorization
 
             """ Control: existen valores para la autenticacion? """
