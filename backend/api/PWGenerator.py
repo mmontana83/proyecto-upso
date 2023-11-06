@@ -1,5 +1,5 @@
 #Con esta rutina genero contraseñas encriptadas para los Usuarios
-from werkzeug.security import check_password_hash, generate_password_hash
+from werkzeug.security import generate_password_hash
 
 print("#### Password Generator ####")
 print("============================")
