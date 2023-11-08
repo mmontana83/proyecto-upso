@@ -4,12 +4,13 @@ from flask import request, jsonify
 class Factura():
     
     def __init__(self, json):
+        self._id_cliente = json['id_cliente']        
+        self._id_usuario = json['id_usuario']
         self._fecha = json['fecha']
         self._total = json['total']
         self._id_tipoFactura = json['id_tipoFactura']
-        self._id_cliente = json['id_cliente']        
         self._id_condicionVenta = json['id_condicionVenta']
-        self._id_usuario = json['id_usuario']
+        
 
     def to_json(self):
         return {
@@ -22,21 +23,27 @@ class Factura():
         }
     
     @staticmethod
-    def insertarFactura(jsonFactura, jsonDetalleFactura):
+    def insertarFactura(json):
         try:
-            factura = Factura(jsonFactura)
-            detalleFactura = DetalleFactura(jsonDetalleFactura)
+            factura = Factura(json)
 
             #Inserto el encabezado de la factura
             cur = mysql.connection.cursor()
-            cur.callproc('sp_insertarFactura', [factura._fecha, factura._total, factura._id_tipoFactura, factura._id_cliente,
-                                                factura._id_condicionVenta, factura._id_usuario])
+            cur.callproc('sp_insertarFactura', [factura._id_cliente, factura._id_usuario, factura._fecha, factura._total, factura._id_tipoFactura,
+                                                factura._id_condicionVenta])
             mysql.connection.commit()
             cur.close()
+        except Exception as ex:
+            return {'mensaje':str(ex)}
+        
+    @staticmethod
+    def insertarDetalleFactura(json):
+        try:
+            detalleFactura = DetalleFactura(json)
 
             #Inserto el Detalle de la Factura
             cur = mysql.connection.cursor()
-            for fila in jsonDetalleFactura:
+            for fila in json:
                 cur.callproc('sp_insertarFacturaDetalle', [fila._id_producto, fila._cantidad, fila._precio])
                 mysql.connection.commit()
             cur.close()
