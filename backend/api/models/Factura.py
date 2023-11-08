@@ -1,5 +1,6 @@
 from api.db.db import mysql
 from flask import request, jsonify
+import re
 
 class Factura():
     
@@ -10,8 +11,7 @@ class Factura():
         self._total = json['total']
         self._id_tipoFactura = json['id_tipoFactura']
         self._id_condicionVenta = json['id_condicionVenta']
-        
-
+    
     def to_json(self):
         return {
             'fecha': self._fecha,
@@ -25,36 +25,27 @@ class Factura():
     @staticmethod
     def insertarFactura(jsonEncabezadoFactura, jsonDetalleFactura):
         try:            
+            #Creo un objeto que representa el encabezado de la factura a partir del json del request
             encabezadoFactura = Factura(jsonEncabezadoFactura)
 
-            # Inserto el encabezado de la factura
+            #Calculo el monto total de la factura
+            totalFactura = DetalleFactura.obtenerTotalFactura(jsonDetalleFactura)
+
+            # Inserto el encabezado de la factura en le BD
             cur = mysql.connection.cursor()
             cur.callproc('sp_insertarFactura', [encabezadoFactura._id_cliente, encabezadoFactura._id_usuario, encabezadoFactura._fecha,
-                                                encabezadoFactura._total, encabezadoFactura._id_tipoFactura, encabezadoFactura._id_condicionVenta])
+                                                totalFactura, encabezadoFactura._id_tipoFactura, encabezadoFactura._id_condicionVenta])
             
+            #Agrego cada fila del detalle de la factura a la BD
             for fila in jsonDetalleFactura:
                 detalleFactura = DetalleFactura(fila)
                 cur.callproc('sp_insertarFacturaDetalle', [encabezadoFactura._id_cliente, encabezadoFactura._id_usuario, detalleFactura._id_producto,
                                                        detalleFactura._cantidad, detalleFactura._precio])
             
+            #Confirmo los cambios
             mysql.connection.commit()
             cur.close()
             return{'Mensaje':'Factura Creada con Éxito'}
-        except Exception as ex:
-            return {'mensaje':str(ex)}
-        
-    @staticmethod
-    def insertarDetalleFactura(json):
-        try:
-            detalleFactura = DetalleFactura(json)
-
-            #Inserto el Detalle de la Factura
-            cur = mysql.connection.cursor()
-            for fila in json:
-                cur.callproc('sp_insertarFacturaDetalle', [fila._fila._id_producto, fila._cantidad, fila._precio])
-                mysql.connection.commit()
-            cur.close()
-
         except Exception as ex:
             return {'mensaje':str(ex)}
         
@@ -120,7 +111,6 @@ class Factura():
             return {'mensaje':'El usuario no tiene facturas registradas.'}
         cur.close()
 
-        
         #Luego obtengo el detalle de la factura
         cur = mysql.connection.cursor()
         cur.callproc('sp_obtenerDetalleFactura', [id_usuario,id_cliente,nroFactura])
@@ -153,6 +143,16 @@ class DetalleFactura():
             'precioTotal': self._precio * self._cantidad
         }
     
+    @staticmethod
+    def obtenerTotalFactura(json):
+        try:
+            total = 0        
+            for detalle in json:
+                total += int(detalle['cantidad'])*float(detalle['precio'])
+            return total
+        except Exception as ex:
+            return {'mensaje':str(ex)}
+     
     @staticmethod
     def detalleFacturaTo_json(json):
         return{
