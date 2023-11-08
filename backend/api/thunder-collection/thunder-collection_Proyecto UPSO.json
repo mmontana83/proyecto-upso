@@ -1,7 +1,7 @@
 {
     "client": "Thunder Client",
     "collectionName": "Proyecto UPSO",
-    "dateExported": "2023-11-08T19:05:03.690Z",
+    "dateExported": "2023-11-08T19:56:46.471Z",
     "version": "1.1",
     "folders": [
         {
@@ -218,12 +218,12 @@
             "method": "POST",
             "sortNum": 90000,
             "created": "2023-11-08T12:48:54.381Z",
-            "modified": "2023-11-08T13:05:41.034Z",
+            "modified": "2023-11-08T19:49:56.558Z",
             "headers": [],
             "params": [],
             "body": {
                 "type": "json",
-                "raw": "{\n   \"encabezado\": {\n    \"fecha\":\"2023-11-08\",\n    \"total\":\"15000.00\",\n    \"id_tipoFactura\": 1,\n    \"id_condicionVenta\":1\n  },\n  \"detalle\": [\n    {\n      \"id_producto\": 1,\n      \"cantidad\": 2,\n      \"precio\": \"7887.00\"\n    },\n    {\n      \"id_producto\": 3,\n      \"cantidad\": 2,\n      \"precio\": \"7988.00\"\n    }\n  ]\n}",
+                "raw": "{\n   \"encabezado\": {\n    \"fecha\":\"2023-11-08\",\n    \"total\":\"15000.00\",\n    \"id_tipoFactura\": 1,\n    \"id_condicionVenta\":\"2\"\n  },\n  \"detalle\": [\n    {\n      \"id_producto\": 1,\n      \"cantidad\": 2,\n      \"precio\": \"7887.00\"\n    },\n    {\n      \"id_producto\": 3,\n      \"cantidad\": 2,\n      \"precio\": \"7988.00\"\n    }\n  ]\n}",
                 "form": []
             },
             "tests": []
