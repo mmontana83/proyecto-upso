@@ -20,6 +20,7 @@ class Factura():
             'id_condicionVenta': self._id_condicionVenta,
             'id_usuario': self._id_usuario
         }
+    
     @staticmethod
     def insertarFactura(jsonFactura, jsonDetalleFactura):
         try:
@@ -43,9 +44,36 @@ class Factura():
         except Exception as ex:
             return {'mensaje':str(ex)}
         
+    def obtenerFacturasById_UsuarioToJson(fila):
+        return{
+            'id_factura': fila[0],
+            'fecha': fila[1],
+            'tipoFactura': fila[2],
+            'nombre': fila[3],
+            'apellido': fila[4],
+            'empresa': fila[5],
+            'direccion': fila[6],
+            'telefono': fila[7],
+            'condicionVenta': fila[8],
+            'condicionIVA': fila[9],
+            'total': fila[10]
+        }
+    
     @staticmethod
-    def obtenerFacturasById_Cliente(id_cliente):
-        None
+    def obtenerFacturasById_Usuario(id_usuario):
+        cur = mysql.connection.cursor()
+        cur.callproc('sp_obtenerFacturasById_Usuario', [id_usuario,])
+        datos = cur.fetchall()
+
+        if len(datos) != 0:
+            facturas = []
+            for fila in datos:
+                factura = Factura.obtenerFacturasById_UsuarioToJson(fila)
+                facturas.append(factura)
+            return facturas
+        else:
+            return {'mensaje':'El usuario no tiene facturas registradas.'}
+        cur.close()
 
 class DetalleFactura():
     
