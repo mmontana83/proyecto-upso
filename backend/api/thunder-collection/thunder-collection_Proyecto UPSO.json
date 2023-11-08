@@ -1,7 +1,7 @@
 {
     "client": "Thunder Client",
     "collectionName": "Proyecto UPSO",
-    "dateExported": "2023-11-08T14:36:02.007Z",
+    "dateExported": "2023-11-08T19:05:03.690Z",
     "version": "1.1",
     "folders": [
         {
@@ -24,6 +24,13 @@
             "containerId": "",
             "created": "2023-11-05T00:24:50.834Z",
             "sortNum": 30000
+        },
+        {
+            "_id": "28113cfa-6050-4cac-924f-dd9b87db82dc",
+            "name": "Categorías",
+            "containerId": "",
+            "created": "2023-11-08T17:35:59.381Z",
+            "sortNum": 40000
         }
     ],
     "requests": [
@@ -219,6 +226,62 @@
                 "raw": "{\n   \"encabezado\": {\n    \"fecha\":\"2023-11-08\",\n    \"total\":\"15000.00\",\n    \"id_tipoFactura\": 1,\n    \"id_condicionVenta\":1\n  },\n  \"detalle\": [\n    {\n      \"id_producto\": 1,\n      \"cantidad\": 2,\n      \"precio\": \"7887.00\"\n    },\n    {\n      \"id_producto\": 3,\n      \"cantidad\": 2,\n      \"precio\": \"7988.00\"\n    }\n  ]\n}",
                 "form": []
             },
+            "tests": []
+        },
+        {
+            "_id": "f470ff3c-799a-45cd-a610-6e46d7666635",
+            "colId": "dc7c0ff4-ffb6-4188-8af2-a930a3057dd6",
+            "containerId": "28113cfa-6050-4cac-924f-dd9b87db82dc",
+            "name": "MostrarTipoCondicionIVA",
+            "url": "127.0.0.1:5000/dashboard/listarTipoCondicionIVA",
+            "method": "GET",
+            "sortNum": 100000,
+            "created": "2023-11-08T17:36:12.541Z",
+            "modified": "2023-11-08T17:36:54.879Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "c6fc473c-d028-4d53-b21b-3abe71a8c7ca",
+            "colId": "dc7c0ff4-ffb6-4188-8af2-a930a3057dd6",
+            "containerId": "28113cfa-6050-4cac-924f-dd9b87db82dc",
+            "name": "MostrarTipoFactura",
+            "url": "127.0.0.1:5000/dashboard/listarTipoFactura",
+            "method": "GET",
+            "sortNum": 110000,
+            "created": "2023-11-08T17:57:59.840Z",
+            "modified": "2023-11-08T17:58:06.198Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "e92cd62e-cd07-4f00-a7c4-1a32a407a38e",
+            "colId": "dc7c0ff4-ffb6-4188-8af2-a930a3057dd6",
+            "containerId": "28113cfa-6050-4cac-924f-dd9b87db82dc",
+            "name": "MostrarTipoProducto",
+            "url": "127.0.0.1:5000/dashboard/listarTipoProducto",
+            "method": "GET",
+            "sortNum": 120000,
+            "created": "2023-11-08T18:10:44.751Z",
+            "modified": "2023-11-08T18:12:18.993Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "483e0cd1-2f3e-4cef-a033-74220d4c0693",
+            "colId": "dc7c0ff4-ffb6-4188-8af2-a930a3057dd6",
+            "containerId": "28113cfa-6050-4cac-924f-dd9b87db82dc",
+            "name": "MostrarTipoCondicionVenta",
+            "url": "127.0.0.1:5000/dashboard/listarTipoCondicionVenta",
+            "method": "GET",
+            "sortNum": 130000,
+            "created": "2023-11-08T19:01:47.243Z",
+            "modified": "2023-11-08T19:02:11.177Z",
+            "headers": [],
+            "params": [],
             "tests": []
         }
     ]
