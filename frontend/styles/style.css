@@ -361,6 +361,7 @@ nav.close ~ .dashboard .top{
     justify-content: space-between;
     align-items: center;
     width: 100%;
+    margin-top: 20px;
 }
 .activity .activity-data{
     display: flex;
@@ -436,6 +437,7 @@ span .material-symbols-outlined {
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
     text-align: center;
+    overflow: scroll;
 }
 
 #cerrarPopup {

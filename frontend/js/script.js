@@ -39,7 +39,6 @@ function toggleSection(sectionId) {
 
     // Oculta todas las secciones antes de mostrar la seleccionada
     var sections = document.querySelectorAll(".toggle");
-    console.log(sections)
     sections.forEach(function (sec) {
         sec.classList.add("hidden");
     });
@@ -86,23 +85,25 @@ let count = 0;
 window.addEventListener("click", (e) => { //el evento es sobre la ventana entera
     if (e.target.matches(".material-symbols-outlined")) { 
       let data = e.target.parentElement.parentElement.children;
-      console.log(data);
-      fillData(data)
+    //   console.log(data)
+      fillData(data);
     }
   
-    if (e.target.matches("#cerrar")) {
-    cerrarPopup('editar');
+    if (e.target.matches(".btn-secondary" )) {
+    
     count=0
     }
   });
   const fillData = (data) => {
     for (let index of inputs) {
       index.value = data[count].textContent;
-      console.log(index);
+      console.log(index.value);
       count += 1;
+      
     }
   };
 
+  /////// CONTROL DE BOOTSTRAP SOBRE CAMPOS VACIOS---------------------
 
 // Example starter JavaScript for disabling form submissions if there are invalid fields
 (() => {
@@ -124,7 +125,7 @@ window.addEventListener("click", (e) => { //el evento es sobre la ventana entera
     })
   })()
 
-
+/////// --------------------------------------------------
 
 
 
@@ -175,20 +176,20 @@ function getAll_Client(){
         .then( response => handleResponse(response) )
         .then(
             (data) => {
-                console.log(data); 
+                // console.log(data); 
                 const tableBody = document.getElementById('all-persons');
                 let list = ``;
                 data.forEach(person => {
                     let fila = 
                     `<tr id="${person.id}"> 
-                        <td class="data-title">${person.id} </td>
+                        <td class="data-title">${person.cuit} </td>
                         <td class="data-title">${person.name}</td>
                         <td class="data-title">${person.apellido}</td>
                         <td class="data-title">${person.empresa}</td>
                         <td class="data-title">${person.telefono}</td>
                         <td class="data-title">${person.condicionIVA}</td>
                         <td class="data-title">${person.email}</td>
-                        <td class="data-title table-toggle " ><span onclick="mostrarPopup('editar')" class="material-symbols-outlined">
+                        <td class="data-title table-toggle " ><span data-bs-toggle="modal" data-bs-target="#M-Editar" class="material-symbols-outlined">
                         manage_accounts</span></td>
                         <td class="data-title "><span class="material-symbols-outlined table-togle">delete</span></td>
                     </tr>`;
