@@ -23,16 +23,23 @@ class Factura():
         }
     
     @staticmethod
-    def insertarFactura(json):
-        try:
-            factura = Factura(json)
+    def insertarFactura(jsonEncabezadoFactura, jsonDetalleFactura):
+        try:            
+            encabezadoFactura = Factura(jsonEncabezadoFactura)
 
-            #Inserto el encabezado de la factura
+            # Inserto el encabezado de la factura
             cur = mysql.connection.cursor()
-            cur.callproc('sp_insertarFactura', [factura._id_cliente, factura._id_usuario, factura._fecha, factura._total, factura._id_tipoFactura,
-                                                factura._id_condicionVenta])
+            cur.callproc('sp_insertarFactura', [encabezadoFactura._id_cliente, encabezadoFactura._id_usuario, encabezadoFactura._fecha,
+                                                encabezadoFactura._total, encabezadoFactura._id_tipoFactura, encabezadoFactura._id_condicionVenta])
+            
+            for fila in jsonDetalleFactura:
+                detalleFactura = DetalleFactura(fila)
+                cur.callproc('sp_insertarFacturaDetalle', [encabezadoFactura._id_cliente, encabezadoFactura._id_usuario, detalleFactura._id_producto,
+                                                       detalleFactura._cantidad, detalleFactura._precio])
+            
             mysql.connection.commit()
             cur.close()
+            return{'Mensaje':'Factura Creada con Éxito'}
         except Exception as ex:
             return {'mensaje':str(ex)}
         
@@ -44,26 +51,27 @@ class Factura():
             #Inserto el Detalle de la Factura
             cur = mysql.connection.cursor()
             for fila in json:
-                cur.callproc('sp_insertarFacturaDetalle', [fila._id_producto, fila._cantidad, fila._precio])
+                cur.callproc('sp_insertarFacturaDetalle', [fila._fila._id_producto, fila._cantidad, fila._precio])
                 mysql.connection.commit()
             cur.close()
 
         except Exception as ex:
             return {'mensaje':str(ex)}
         
-    def obtenerFacturasById_UsuarioToJson(fila):
+    def encabezadoFacturaToJson(fila):
         return{
-            'id_factura': fila[0],
+            'nroFactura': fila[0],
             'fecha': fila[1],
             'tipoFactura': fila[2],
-            'nombre': fila[3],
-            'apellido': fila[4],
-            'empresa': fila[5],
-            'direccion': fila[6],
-            'telefono': fila[7],
-            'condicionVenta': fila[8],
-            'condicionIVA': fila[9],
-            'total': fila[10]
+            'id_cliente': fila[3],
+            'nombre': fila[4],
+            'apellido': fila[5],
+            'empresa': fila[6],
+            'direccion': fila[7],
+            'telefono': fila[8],
+            'condicionVenta': fila[9],
+            'condicionIVA': fila[10],
+            'total': fila[11]
         }
     
     @staticmethod
@@ -75,9 +83,54 @@ class Factura():
         if len(datos) != 0:
             facturas = []
             for fila in datos:
-                factura = Factura.obtenerFacturasById_UsuarioToJson(fila)
+                factura = Factura.encabezadoFacturaToJson(fila)
                 facturas.append(factura)
             return facturas
+        else:
+            return {'mensaje':'El usuario no tiene facturas registradas.'}
+        cur.close()
+
+    @staticmethod
+    def obtenerFacturasById_Cliente(id_usuario, id_cliente):
+        cur = mysql.connection.cursor()
+        cur.callproc('sp_obtenerFacturasByCliente', [id_usuario,id_cliente])
+        datos = cur.fetchall()
+
+        if len(datos) != 0:
+            facturas = []
+            for fila in datos:
+                factura = Factura.encabezadoFacturaToJson(fila)
+                facturas.append(factura)
+            return facturas
+        else:
+            return {'mensaje':'El usuario no tiene facturas registradas.'}
+        cur.close()
+
+    @staticmethod
+    def obtenerFacturaById_Cliente(id_usuario, id_cliente, nroFactura):
+        
+        #Primero obtengo el encabezado de la factura
+        cur = mysql.connection.cursor()
+        cur.callproc('sp_obtenerFacturaByCliente', [id_usuario, id_cliente,nroFactura])
+        datos = cur.fetchone()
+        
+        if len(datos) != 0:
+            encabezadoFactura = Factura.encabezadoFacturaToJson(datos)
+        else:
+            return {'mensaje':'El usuario no tiene facturas registradas.'}
+        cur.close()
+
+        
+        #Luego obtengo el detalle de la factura
+        cur = mysql.connection.cursor()
+        cur.callproc('sp_obtenerDetalleFactura', [id_usuario,id_cliente,nroFactura])
+        datos = cur.fetchall()
+
+        if len(datos) != 0:
+            detalleFactura = []
+            for fila in datos:
+                detalleFactura.append(DetalleFactura.detalleFacturaTo_json(fila))
+            return {'encabezado':encabezadoFactura, 'detalle':detalleFactura}
         else:
             return {'mensaje':'El usuario no tiene facturas registradas.'}
         cur.close()
@@ -85,15 +138,26 @@ class Factura():
 class DetalleFactura():
     
     def __init__(self, json):
-        self._id_factura = json['id_factura']
         self._id_producto = json['id_producto']
         self._cantidad = json['cantidad']
         self._precio = json['precio']        
     
     def to_json(self):
         return{
-            'id_factura': self._id_factura,
-            'id_producto': self._id_producto,
+            'nroFactura': self._nroFactura,
+            'id_cliente': self._id_cliente,
+            'id_usuario': self._id_usuario,
+            'id_producto': self._id_producto,            
             'cantidad': self._cantidad,
-            'precio': self._precio
+            'precio': self._precio,
+            'precioTotal': self._precio * self._cantidad
+        }
+    
+    @staticmethod
+    def detalleFacturaTo_json(json):
+        return{
+            'producto': json[0],
+            'cantidad': json[1],
+            'precio': json[2],
+            'precioTotal': json[3]
         }
