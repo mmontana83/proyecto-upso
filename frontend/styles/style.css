@@ -69,7 +69,7 @@ nav{
     top: 0;
     left: 0;
     height: 100%;
-    width: 250px;
+    width: 210px;
     padding: 10px 14px;
     background-color: var(--panel-color);
     border-right: 1px solid var(--border-color);
@@ -130,6 +130,12 @@ nav .menu-items{
     border-radius: 50%;
     background-color: var(--primary-color);
 }
+
+.menu-items ul {
+    padding-left: 0;
+}
+
+
 body.dark li a:hover:before{
     background-color: var(--text-color);
 }
@@ -205,7 +211,7 @@ body.dark .switch:before{
 
 .dashboard{
     position: relative;
-    left: 250px;
+    left: 210px;
     background-color: var(--panel-color);
     min-height: 100vh;
     width: calc(100% - 250px);
@@ -219,7 +225,7 @@ nav.close ~ .dashboard{
 .dashboard .top{
     position: fixed;
     top: 0;
-    left: 250px;
+    left: 210px;
     display: flex;
     width: calc(100% - 250px);
     justify-content: space-between;
@@ -239,7 +245,6 @@ nav.close ~ .dashboard .top{
     cursor: pointer;
 }
 .table-toggle{
-    display: flex;
     justify-content: center;
     cursor: pointer;
 }
@@ -356,6 +361,7 @@ nav.close ~ .dashboard .top{
     justify-content: space-between;
     align-items: center;
     width: 100%;
+    margin-top: 20px;
 }
 .activity .activity-data{
     display: flex;
@@ -369,6 +375,10 @@ nav.close ~ .dashboard .top{
     font-weight: 500;
     color: var(--text-color);
 }
+span.material-symbols-outlined{
+    padding: 5px 10px;
+    font-size: 30px;
+}
 .activity-data .data .data-list{
     font-size: 18px;
     font-weight: 400;
@@ -380,6 +390,7 @@ nav.close ~ .dashboard .top{
 .activity-data table {
     width: 100%;
 }
+
 /* *************************************************************+ */
 
 .hidden {
@@ -396,12 +407,16 @@ nav.close ~ .dashboard .top{
 
 .material-symbols-outlined {
   font-variation-settings:
-  'FILL' 0,
-  'wght' 400,
+  'FILL' 10,
+  'wght' 500,
   'GRAD' 0,
   'opsz' 24
 }
-
+span .material-symbols-outlined {
+    display: flex;
+    justify-content: space-around;
+    font-size: 33px;
+}
 .popup {
     display: none;
     position: fixed;
@@ -417,11 +432,12 @@ nav.close ~ .dashboard .top{
     background: #fff;
     width: 80%;
     max-width: 600px;
-    margin: 10% auto;
+    margin: 2% auto;
     padding: 20px;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
     text-align: center;
+    overflow: scroll;
 }
 
 #cerrarPopup {
@@ -429,14 +445,6 @@ nav.close ~ .dashboard .top{
     cursor: pointer;
 }
 
-.contenido-popup .form-popup{
-    display: grid;
-    grid-template-columns: .4fr 2fr 1fr;
-    margin-bottom: 15px;
-    align-items: baseline;
-    justify-items: center;
-    justify-content: space-between;
-}
 .contenido-popup .form-popup input{
     height: 35px;
     width: 100%;
@@ -457,13 +465,6 @@ nav.close ~ .dashboard .top{
     height: 30px;
     margin: 0 0 20px 0;
 
-}
-.form-popup .btn-actions button {
-    width: 100px;
-    height: 50px;
-}
-.form-popup .btn-actions {
-    grid-column: span 2;
 }
 
 

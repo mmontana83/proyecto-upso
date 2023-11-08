@@ -39,7 +39,6 @@ function toggleSection(sectionId) {
 
     // Oculta todas las secciones antes de mostrar la seleccionada
     var sections = document.querySelectorAll(".toggle");
-    console.log(sections)
     sections.forEach(function (sec) {
         sec.classList.add("hidden");
     });
@@ -51,13 +50,6 @@ function toggleSection(sectionId) {
         section.classList.add("hidden");
     }
 
-    // // Asegúrate de que solo una sección tenga una clase activa
-    // navLinks.forEach(function (link) {
-    //     link.classList.remove("active");
-    // });
-
-    // // Agrega una clase activa al enlace seleccionado
-    // document.getElementById(sectionId + "Button").classList.add("active");
 }
 
 function mostrarPopup(ventana) {
@@ -82,44 +74,58 @@ function cerrarPopup(ventana) {
     }
 }
 
-function guardarDatos() {
-    cerrarPopup('crear');
-}
 
 
 
 
 
-const campos = ["id_cliente", "nombre", "apellido", "empresa", "email", "telefono", "direccion", "condicion_iva"];
+const inputs = document.getElementById('edit-form').querySelectorAll('input')
+let count = 0;
 
-campos.forEach(function(campo) {
-    document.getElementById(campo).addEventListener("input", validarCampos);
-});
+window.addEventListener("click", (e) => { //el evento es sobre la ventana entera
+    if (e.target.matches(".material-symbols-outlined")) { 
+      let data = e.target.parentElement.parentElement.children;
+    //   console.log(data)
+      fillData(data);
+    }
+  
+    if (e.target.matches(".btn-secondary" )) {
+    
+    count=0
+    }
+  });
+  const fillData = (data) => {
+    for (let index of inputs) {
+      index.value = data[count].textContent;
+      console.log(index.value);
+      count += 1;
+      
+    }
+  };
 
-function validarCampos() {
-    const enviarButton = document.getElementById("enviar");
-    let camposCompletos = true;
+  /////// CONTROL DE BOOTSTRAP SOBRE CAMPOS VACIOS---------------------
 
-    campos.forEach(function(campo) {
-        const input = document.getElementById(campo);
-        const errorMessage = document.getElementById(`${campo}_error`);
-
-        if (!input.value) {
-            camposCompletos = false;
-            errorMessage.textContent = "Debe completar el campo";
-        } else {
-            errorMessage.textContent = "";
+// Example starter JavaScript for disabling form submissions if there are invalid fields
+(() => {
+    'use strict'
+  
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    const forms = document.querySelectorAll('.needs-validation')
+  
+    // Loop over them and prevent submission
+    Array.from(forms).forEach(form => {
+      form.addEventListener('submit', event => {
+        if (!form.checkValidity()) {
+          event.preventDefault()
+          event.stopPropagation()
         }
-    });
+  
+        form.classList.add('was-validated')
+      }, false)
+    })
+  })()
 
-    enviarButton.disabled = !camposCompletos;
-}
-
-
-
-
-
-
+/////// --------------------------------------------------
 
 
 
@@ -166,24 +172,26 @@ function getAll_Client(){
             'Content-Type': 'application/json'
         }
     }
-    fetch('https://64ea871fbf99bdcc8e6798fc.mockapi.io/v1/persons', requestOptions)
+    fetch('https://64ea871fbf99bdcc8e6798fc.mockapi.io/v1/personas', requestOptions)
         .then( response => handleResponse(response) )
         .then(
             (data) => {
-                console.log(data); 
+                // console.log(data); 
                 const tableBody = document.getElementById('all-persons');
                 let list = ``;
                 data.forEach(person => {
                     let fila = 
                     `<tr id="${person.id}"> 
-                        <td class="data-title">${person.id} </td>
+                        <td class="data-title">${person.cuit} </td>
                         <td class="data-title">${person.name}</td>
-                        <td class="data-title">${person.surname}</td>
+                        <td class="data-title">${person.apellido}</td>
+                        <td class="data-title">${person.empresa}</td>
+                        <td class="data-title">${person.telefono}</td>
+                        <td class="data-title">${person.condicionIVA}</td>
                         <td class="data-title">${person.email}</td>
-                        <td class="data-title">${person.dni}</td>
-                        <td class="data-title table-toggle "><span onclick="mostrarPopup('editar')" class="material-symbols-outlined">
+                        <td class="data-title table-toggle " ><span data-bs-toggle="modal" data-bs-target="#M-Editar" class="material-symbols-outlined">
                         manage_accounts</span></td>
-                        <td class="data-title "><i class="uil uil-trash table-toggle"></i></td>
+                        <td class="data-title "><span class="material-symbols-outlined table-togle">delete</span></td>
                     </tr>`;
                     list += fila;
                 });
