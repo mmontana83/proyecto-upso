@@ -51,7 +51,7 @@ CREATE TABLE `clientes` (
 
 LOCK TABLES `clientes` WRITE;
 /*!40000 ALTER TABLE `clientes` DISABLE KEYS */;
-INSERT INTO `clientes` VALUES ('20110336209','Antonio','Montaña','','antonio@gmail.com','2932454545','ATEPAM 1 CASA 44',1,1,'23302022739'),('20139570910','Walter Rubén','Bozzo','','wrbozzo@gmail.com','2932444555','Uriburu 1357',3,2,'24302022737'),('23183214579','Rosa','Gonzalez',NULL,'no posee','2932447788','Bº CENTENARIO CASA 44',5,1,'20302022731'),('23491199983','Laura','Gonzalez','Panadería Anocheciendo','panaderiaamanacer@gmail.com','2932556677','Paso 2044',2,2,'23302022739'),('23551234563','Rodrigo','Forte','STI S.R.L COMPUTACIÓN','stisrlpa@gmail.com','2932119944','paso 321',4,1,'23302022739'),('23668931023','Carla','Rueda','Fashion Nails','fnails@gmail.com','2195566778','Colón 123, Bahía Blanca',2,1,'24302022737'),('23668931331','Roberto','Martinez','Calzado Sport','sportcalzadospa@gmail.com','2932444666','Colón 123, Punta Alta',1,1,'24302022737'),('24123654889','Norma','Martínez',NULL,'normamartinez@gmail.com','2932455444','Uriburu 758',5,1,'23302022739'),('24367894360','','','La Carlota Rectificaciones','carlotarect@gmail.com','011288371098','Florida 443',1,1,'24302022737'),('25789457891',NULL,NULL,'Clínica Salud Mental','saludmentalpa@gmail.com','2932457897','Murature 688',1,1,'20302022731'),('30627393713','','','Dirección de Cultura y Educación (Bajo Hondo)','essa1coronesrosales@abc.gob.ar','2392491114','C. 8 - Victoria Llanos, Bajo Hondo',4,1,'23302022739'),('30681157375',NULL,NULL,'Hospital Eva Perón','evaperon@gmail.com','2932422955','Uriburu 650',1,1,'20302022731'),('30999018447','','','Ministerio de Seguridad (Punta Alta)','estacionpuntaalta@gmail.com','2932421444','Murature 572',3,1,'23302022739');
+INSERT INTO `clientes` VALUES ('20110336209','Antonio','Montaña','','antonio@gmail.com','2932454545','ATEPAM 1 CASA 44',1,1,'23302022739'),('20139570910','Walter Rubén','Bozzo','Bozzo Construcciones','wrbozzo@gmail.com','2932444555','Uriburu 1357',3,2,'24302022737'),('23183214579','Rosa','Gonzalez',NULL,'no posee','2932447788','Bº CENTENARIO CASA 44',5,1,'20302022731'),('23491199983','Laura','Gonzalez','Panadería Anocheciendo','panaderiaamanacer@gmail.com','2932556677','Paso 2044',2,2,'23302022739'),('23551234563','Rodrigo','Forte','STI S.R.L COMPUTACIÓN','stisrlpa@gmail.com','2932119944','paso 321',4,1,'23302022739'),('23668931023','Carla','Rueda','Fashion Nails','fnails@gmail.com','2195566778','Colón 123, Bahía Blanca',2,1,'24302022737'),('23668931331','Roberto','Martinez','Calzado Sport','sportcalzadospa@gmail.com','2932444666','Colón 123, Punta Alta',1,1,'24302022737'),('24123654889','Norma','Martínez',NULL,'normamartinez@gmail.com','2932455444','Uriburu 758',5,1,'23302022739'),('24367894360','','','La Carlota Rectificaciones','carlotarect@gmail.com','011288371098','Florida 443',1,1,'24302022737'),('25789457891',NULL,NULL,'Clínica Salud Mental','saludmentalpa@gmail.com','2932457897','Murature 688',1,1,'20302022731'),('30627393713','','','Dirección de Cultura y Educación (Bajo Hondo)','essa1coronesrosales@abc.gob.ar','2392491114','C. 8 - Victoria Llanos, Bajo Hondo',4,1,'23302022739'),('30681157375',NULL,NULL,'Hospital Eva Perón','evaperon@gmail.com','2932422955','Uriburu 650',1,1,'20302022731'),('30999018447','','','Ministerio de Seguridad (Punta Alta)','estacionpuntaalta@gmail.com','2932421444','Murature 572',3,1,'23302022739');
 /*!40000 ALTER TABLE `clientes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -121,7 +121,7 @@ CREATE TABLE `factura` (
 
 LOCK TABLES `factura` WRITE;
 /*!40000 ALTER TABLE `factura` DISABLE KEYS */;
-INSERT INTO `factura` VALUES (1,'20110336209','23302022739','2023-10-30',1000.00,1,3),(1,'25789457891','20302022731','2023-11-01',1500.00,1,1),(2,'20110336209','23302022739','2023-11-08',15000.00,1,1);
+INSERT INTO `factura` VALUES (1,'20110336209','23302022739','2023-10-30',1000.00,1,3),(1,'20139570910','24302022737','2023-10-10',23457.00,1,1),(1,'25789457891','20302022731','2023-11-01',1500.00,1,1),(2,'20110336209','23302022739','2023-11-08',15000.00,1,1);
 /*!40000 ALTER TABLE `factura` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -157,7 +157,7 @@ CREATE TABLE `productos` (
 
 LOCK TABLES `productos` WRITE;
 /*!40000 ALTER TABLE `productos` DISABLE KEYS */;
-INSERT INTO `productos` VALUES (1,'PASTILLA DE FRENO','PASTILLA DE FRENO',7887.00,50,1,2,'23302022739'),(2,'BUJÍA NAFTERA','BUJÍA ',6500.00,50,1,2,'23302022739'),(3,'BUJÍA DIESEL','BUJÍA ',7988.00,50,1,1,'23302022739'),(4,'ACEITE MOTOR 10W40','ACEITE',35000.00,16,1,1,'23302022739'),(5,'SERVICE AUTOMOTOR','SERVICE QUE SE REALIZA CADA 10.000 KM',18000.00,0,2,1,'23302022739'),(6,'AFINACION','AFINACION',15000.00,0,2,1,'23302022739'),(7,'GASAS',NULL,3000.00,50,1,2,'20302022731'),(8,'JERINGA X 10ml',NULL,175.00,100,1,1,'20302022731'),(9,'NEBULIZADOR',NULL,7800.00,3,1,1,'20302022731'),(10,'VACUNACION A DOMICILIO',NULL,3000.00,0,2,1,'20302022731'),(11,'MEDICION PRESION','',500.00,0,2,1,'20302022731');
+INSERT INTO `productos` VALUES (1,'PASTILLA DE FRENO','PASTILLA DE FRENO',7887.00,50,1,1,'23302022739'),(2,'BUJÍA NAFTERA','BUJÍA',6500.00,50,1,2,'23302022739'),(3,'BUJÍA DIESEL','BUJÍA',7988.00,4,1,1,'23302022739'),(4,'ACEITE MOTOR 10W40','ACEITE',35000.00,16,1,1,'23302022739'),(5,'SERVICE AUTOMOTOR','SERVICE QUE SE REALIZA CADA 10.000 KM',18000.00,0,2,1,'23302022739'),(6,'AFINACIÓN','AFINACIÓN',15000.00,0,2,1,'23302022739'),(7,'GASAS',NULL,3000.00,50,1,2,'20302022731'),(8,'JERINGA X 10ml',NULL,175.00,100,1,1,'20302022731'),(9,'NEBULIZADOR',NULL,7800.00,3,1,1,'20302022731'),(10,'VACUNACION A DOMICILIO',NULL,3000.00,0,2,1,'20302022731'),(11,'MEDICION PRESION','',500.00,0,2,1,'20302022731');
 /*!40000 ALTER TABLE `productos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -350,24 +350,23 @@ DELIMITER ;
 /*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE DEFINER=`proyecto`@`%` PROCEDURE `sp_actualizarProducto`(
+    in p_id_producto int,
     in p_producto varchar(100), 
     in p_descripcion text, 
     in p_precio decimal(10,2), 
     in p_stock int, 
-    in p_id_tipoProducto int, 
-    in p_id_producto int, 
-    in p_id_usuario varchar(11)
+    in p_id_tipoProducto int,     
+    in p_id_usuario varchar(11)    
 )
 BEGIN   
-
     UPDATE productos
     SET producto = p_producto, 
         descripcion = p_descripcion, 
         precio = p_precio, 
         stock = p_stock, 
         id_tipoProducto = p_id_tipoProducto
-    WHERE id_producto = p_id_producto 
-    AND id_usuario = p_id_usuario;
+    WHERE id_usuario = p_id_usuario 
+    AND id_producto = p_id_producto;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -938,6 +937,36 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_rankingVentasByCliente` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`proyecto`@`%` PROCEDURE `sp_rankingVentasByCliente`()
+BEGIN
+	(SELECT sum(factura.total) as Venta, concat(clientes.nombre,' ', clientes.apellido) as Cliente
+    FROM factura
+    INNER JOIN clientes on factura.id_cliente = clientes.id_cliente
+    WHERE concat(clientes.nombre,' ', clientes.apellido) IS NOT NULL
+    GROUP BY factura.id_cliente
+    )
+    UNION
+    (SELECT sum(factura.total) as Venta, clientes.empresa as Cliente
+    FROM factura
+    INNER JOIN clientes on factura.id_cliente = clientes.id_cliente
+    WHERE concat(clientes.nombre,' ', clientes.apellido) IS NULL
+    GROUP BY factura.id_cliente);
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -948,4 +977,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-11-08 11:38:53
+-- Dump completed on 2023-11-10  7:46:01
