@@ -35,8 +35,6 @@ sidebarToggle.addEventListener("click", () => {
 ////////////////////////////////////////////////////////////////////////////////////////////
 function toggleSection(sectionId) {
     var section = document.getElementById(sectionId);
-    // var navLinks = document.querySelectorAll(".nav-links a");
-
     // Oculta todas las secciones antes de mostrar la seleccionada
     var sections = document.querySelectorAll(".toggle");
     sections.forEach(function (sec) {
@@ -52,56 +50,56 @@ function toggleSection(sectionId) {
 
 }
 
-function mostrarPopup(ventana) {
-    if (ventana == 'crear'){
-        const popup = document.getElementById("popup");
-        popup.style.display = "block";
-    };
-    if ( ventana == 'editar'){
-        const popupeditar = document.getElementById("popupEditar");
-        popupeditar.style.display = "block";
+///// FUNCION PARA FILTRAR BUSQUEDAS DE CLIENTES
+
+
+document.addEventListener("keyup", e => {
+    if (e.target.matches('#f-busqueda')) {
+        const searchTerm = e.target.value.toLowerCase();
+        const tableRows = document.querySelectorAll('table tr'); // Selector para las filas de la tabla
+
+        tableRows.forEach((fila) => {
+            const rowData = fila.textContent.toLowerCase();
+            if (rowData.includes(searchTerm)) {
+                fila.classList.remove('filter');
+            } else {
+                fila.classList.add('filter');
+            }
+        });
     }
-}
-
-function cerrarPopup(ventana) {
-    if (ventana == 'crear'){
-        const popup = document.getElementById("popup");
-        popup.style.display = "none";
-    };
-    if ( ventana == 'editar'){
-        const popupeditar = document.getElementById("popupEditar");
-        popupeditar.style.display = "none";
-    }
-}
+});
 
 
+/////_----------------------------
 
 
-
+// FUNCION PARA DEVOLVER LOS VALORES DE LA FILA A LOS INPUTS PARA EDITAR----------------
 
 const inputs = document.getElementById('edit-form').querySelectorAll('input')
 let count = 0;
 
 window.addEventListener("click", (e) => { //el evento es sobre la ventana entera
-    if (e.target.matches(".material-symbols-outlined")) { 
+    if (e.target.getAttribute("data-bs-target") === "#M-Editar") { 
       let data = e.target.parentElement.parentElement.children;
-    //   console.log(data)
+      console.log(data)
       fillData(data);
     }
   
-    if (e.target.matches(".btn-secondary" )) {
-    
+    if (e.target.matches(".btn-secondary" ) | (e.target.matches(".btn-close" )) | (e.target.matches(".modal.fade"))) {
     count=0
     }
   });
   const fillData = (data) => {
     for (let index of inputs) {
       index.value = data[count].textContent;
-      console.log(index.value);
+    //   console.log(data[count].textContent);
       count += 1;
       
     }
   };
+  ///-------------------------------------------------------------------------
+ 
+
 
   /////// CONTROL DE BOOTSTRAP SOBRE CAMPOS VACIOS---------------------
 
@@ -182,16 +180,24 @@ function getAll_Client(){
                 data.forEach(person => {
                     let fila = 
                     `<tr id="${person.id}"> 
-                        <td class="data-title">${person.cuit} </td>
-                        <td class="data-title">${person.name}</td>
-                        <td class="data-title">${person.apellido}</td>
-                        <td class="data-title">${person.empresa}</td>
-                        <td class="data-title">${person.telefono}</td>
-                        <td class="data-title">${person.condicionIVA}</td>
-                        <td class="data-title">${person.email}</td>
-                        <td class="data-title table-toggle " ><span data-bs-toggle="modal" data-bs-target="#M-Editar" class="material-symbols-outlined">
-                        manage_accounts</span></td>
-                        <td class="data-title "><span class="material-symbols-outlined table-togle">delete</span></td>
+                        <td>${person.cuit} </td>
+                        <td>${person.name}</td>
+                        <td>${person.apellido}</td>
+                        <td>${person.empresa}</td>
+                        <td>${person.telefono}</td>
+                        <td>${person.condicionIVA}</td>
+                        <td>${person.email}</td>
+                        <td>${person.direccion}</td>
+                        <td class= "table-toggle">
+                        <span class="material-symbols-outlined" onclick="toggleSection('section4')" >receipt_long</span>
+                        </td>
+                        <td class= "table-toggle" >
+                        <span data-bs-toggle="modal" data-bs-target="#M-Editar" class="material-symbols-outlined">
+                        manage_accounts</span>
+                        </td>
+                        <td>
+                        <span class="material-symbols-outlined table-togle">delete</span>
+                        </td>
                     </tr>`;
                     list += fila;
                 });

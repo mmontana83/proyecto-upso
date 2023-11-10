@@ -371,10 +371,7 @@ nav.close ~ .dashboard .top{
     flex-direction: column;
     margin: 0 15px;
 }
-.activity-data .data-title{
-    font-weight: 500;
-    color: var(--text-color);
-}
+
 span.material-symbols-outlined{
     padding: 5px 10px;
     font-size: 30px;
@@ -417,7 +414,7 @@ span .material-symbols-outlined {
     justify-content: space-around;
     font-size: 33px;
 }
-.popup {
+/* .popup {
     display: none;
     position: fixed;
     top: 0;
@@ -438,37 +435,18 @@ span .material-symbols-outlined {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
     text-align: center;
     overflow: scroll;
-}
+} */
 
 #cerrarPopup {
     margin-top: 20px;
     cursor: pointer;
 }
 
-.contenido-popup .form-popup input{
-    height: 35px;
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    margin-top: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+.filter{
+    display: none;
+    opacity: 0;
+    order: 1;
 }
-
-
-.form-popup label {
-    font-size: 20px;
-    color: var(--text-color);
-    display: flex;
-}
-.form-popup input {
-    height: 30px;
-    margin: 0 0 20px 0;
-
-}
-
-
-
 
 
 
