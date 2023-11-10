@@ -1,7 +1,7 @@
 {
     "client": "Thunder Client",
     "collectionName": "Proyecto UPSO",
-    "dateExported": "2023-11-01T21:05:06.396Z",
+    "dateExported": "2023-11-08T19:56:46.471Z",
     "version": "1.1",
     "folders": [
         {
@@ -17,6 +17,20 @@
             "containerId": "",
             "created": "2023-10-31T19:48:47.382Z",
             "sortNum": 20000
+        },
+        {
+            "_id": "357be653-e211-4001-b4ad-40b389916578",
+            "name": "Facturacion",
+            "containerId": "",
+            "created": "2023-11-05T00:24:50.834Z",
+            "sortNum": 30000
+        },
+        {
+            "_id": "28113cfa-6050-4cac-924f-dd9b87db82dc",
+            "name": "Categorías",
+            "containerId": "",
+            "created": "2023-11-08T17:35:59.381Z",
+            "sortNum": 40000
         }
     ],
     "requests": [
@@ -25,12 +39,21 @@
             "colId": "dc7c0ff4-ffb6-4188-8af2-a930a3057dd6",
             "containerId": "e8e04641-032e-4443-ab23-96558fa0d5c1",
             "name": "get_clientes_by_usuario",
-            "url": "127.0.0.1:5000/usuario/23302022739/clientes",
+            "url": "127.0.0.1:5000/usuario/20302022731/clientes",
             "method": "GET",
             "sortNum": 10000,
             "created": "2023-10-31T18:53:56.707Z",
-            "modified": "2023-11-01T14:27:33.978Z",
-            "headers": [],
+            "modified": "2023-11-05T23:17:41.529Z",
+            "headers": [
+                {
+                    "name": "x-access-token",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c3VhcmlvIjoiMjAzMDIwMjI3MzEiLCJleHAiOjE2OTkyMzIyNDV9.flgDkMbKUDT-JriihuTDHC6NNJn7MCI2k8OKWqbTEUY"
+                },
+                {
+                    "name": "user-id",
+                    "value": "20302022731"
+                }
+            ],
             "params": [],
             "tests": []
         },
@@ -43,13 +66,13 @@
             "method": "POST",
             "sortNum": 10000,
             "created": "2023-10-31T19:47:50.047Z",
-            "modified": "2023-10-31T19:47:50.047Z",
+            "modified": "2023-11-05T23:01:32.666Z",
             "headers": [],
             "params": [],
             "auth": {
                 "type": "basic",
                 "basic": {
-                    "username": "mmontana1",
+                    "username": "clich",
                     "password": "1234"
                 }
             },
@@ -60,12 +83,21 @@
             "colId": "dc7c0ff4-ffb6-4188-8af2-a930a3057dd6",
             "containerId": "e8e04641-032e-4443-ab23-96558fa0d5c1",
             "name": "get_cliente_by_id_cliente",
-            "url": "http://127.0.0.1:5000/usuario/20302022731/cliente/23183214579",
+            "url": "http://127.0.0.1:5000/usuario/20302022731/cliente/23551234563",
             "method": "GET",
             "sortNum": 20000,
             "created": "2023-10-31T19:48:28.795Z",
-            "modified": "2023-10-31T19:50:26.836Z",
-            "headers": [],
+            "modified": "2023-11-05T23:11:17.210Z",
+            "headers": [
+                {
+                    "name": "user-id",
+                    "value": "20302022731"
+                },
+                {
+                    "name": "x-access-token",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c3VhcmlvIjoiMjAzMDIwMjI3MzEiLCJleHAiOjE2OTkyMzE4NjB9.Usl30KvyqiuodKWJeLcvF5ZQnnc0mDwFI6MfnAcnWHM"
+                }
+            ],
             "params": [],
             "tests": []
         },
@@ -78,12 +110,12 @@
             "method": "POST",
             "sortNum": 30000,
             "created": "2023-10-31T19:53:35.801Z",
-            "modified": "2023-11-01T13:41:11.035Z",
+            "modified": "2023-11-08T14:20:52.100Z",
             "headers": [],
             "params": [],
             "body": {
                 "type": "json",
-                "raw": "{\n  \"id_cliente\" : \"23668931023\",\n  \"nombre\" : \"Carla\", \n  \"apellido\" : \"Rueda\", \n  \"empresa\" : \"Fashion Nails\", \n  \"email\" : \"fnails@gmail.com\", \n  \"telefono\" : \"2195566778\", \n  \"direccion\" : \"Colón 123, Bahía Blanca\", \n  \"id_tipoCondicionIVA\" : \"2\"\n}",
+                "raw": "{\n  \"id_cliente\" : \"23668931331\",\n  \"nombre\" : \"Roberto\", \n  \"apellido\" : \"Martinez\", \n  \"empresa\" : \"Calzado Sport\", \n  \"email\" : \"sportcalzadospa@gmail.com\", \n  \"telefono\" : \"2932444666\", \n  \"direccion\" : \"Colón 123, Punta Alta\", \n  \"id_tipoCondicionIVA\" : \"1\"\n}",
                 "form": []
             },
             "tests": []
@@ -97,12 +129,12 @@
             "method": "POST",
             "sortNum": 40000,
             "created": "2023-11-01T13:06:45.827Z",
-            "modified": "2023-11-01T14:01:27.600Z",
+            "modified": "2023-11-05T23:10:02.611Z",
             "headers": [],
             "params": [],
             "body": {
                 "type": "json",
-                "raw": "{\n  \"nombre\" : \"Rodrigo\", \n  \"apellido\" : \"Forte\", \n  \"empresa\" : \"STI S.R.L COMPUTACIÓN\", \n  \"email\" : \"stisrlpa@gmail.com\", \n  \"telefono\" : \"2932119944\", \n  \"direccion\" : \"Mitre 891\", \n  \"id_tipoCondicionIVA\" : \"4\"\n}",
+                "raw": "{\n  \"nombre\" : \"Rodrigo\", \n  \"apellido\" : \"Forte\", \n  \"empresa\" : \"STI S.R.L COMPUTACIÓN\", \n  \"email\" : \"stisrlpa@gmail.com\", \n  \"telefono\" : \"2932119944\", \n  \"direccion\" : \"Rosales 123\", \n  \"id_tipoCondicionIVA\" : \"4\"\n}",
                 "form": []
             },
             "tests": []
@@ -112,11 +144,11 @@
             "colId": "dc7c0ff4-ffb6-4188-8af2-a930a3057dd6",
             "containerId": "e8e04641-032e-4443-ab23-96558fa0d5c1",
             "name": "EliminarCliente",
-            "url": "127.0.0.1:5000/usuario/23302022739/eliminarcliente/23551234563",
+            "url": "127.0.0.1:5000/usuario/20302022731/eliminarcliente/23183214579",
             "method": "POST",
             "sortNum": 50000,
             "created": "2023-11-01T13:24:14.287Z",
-            "modified": "2023-11-01T13:26:47.021Z",
+            "modified": "2023-11-05T23:30:18.632Z",
             "headers": [],
             "params": [],
             "tests": []
@@ -126,11 +158,128 @@
             "colId": "dc7c0ff4-ffb6-4188-8af2-a930a3057dd6",
             "containerId": "e8e04641-032e-4443-ab23-96558fa0d5c1",
             "name": "AltaCliente",
-            "url": "127.0.0.1:5000/usuario/23302022739/altacliente/23551234563",
+            "url": "127.0.0.1:5000/usuario/20302022731/altacliente/23183214579",
             "method": "POST",
             "sortNum": 60000,
             "created": "2023-11-01T14:08:38.544Z",
-            "modified": "2023-11-01T14:09:38.860Z",
+            "modified": "2023-11-05T23:28:22.367Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "745b31f0-b4c2-4b07-8572-aef95a596a47",
+            "colId": "dc7c0ff4-ffb6-4188-8af2-a930a3057dd6",
+            "containerId": "357be653-e211-4001-b4ad-40b389916578",
+            "name": "get_facturas_by_usuario",
+            "url": "127.0.0.1:5000/usuario/23302022739/facturas",
+            "method": "GET",
+            "sortNum": 70000,
+            "created": "2023-11-07T18:51:02.302Z",
+            "modified": "2023-11-07T18:52:58.302Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "8b44b4be-535a-496b-b71b-fd74aa3239ea",
+            "colId": "dc7c0ff4-ffb6-4188-8af2-a930a3057dd6",
+            "containerId": "357be653-e211-4001-b4ad-40b389916578",
+            "name": "get_facturas_by_cliente",
+            "url": "127.0.0.1:5000/usuario/23302022739/cliente/20110336209/facturas",
+            "method": "GET",
+            "sortNum": 80000,
+            "created": "2023-11-08T11:24:31.031Z",
+            "modified": "2023-11-08T11:37:18.886Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "9db5a8ee-2384-4d38-9527-ce1a75ca47b2",
+            "colId": "dc7c0ff4-ffb6-4188-8af2-a930a3057dd6",
+            "containerId": "357be653-e211-4001-b4ad-40b389916578",
+            "name": "get_factura_by_cliente",
+            "url": "127.0.0.1:5000/usuario/23302022739/cliente/20110336209/factura/2",
+            "method": "GET",
+            "sortNum": 90000,
+            "created": "2023-11-08T11:44:25.970Z",
+            "modified": "2023-11-08T13:29:54.343Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "c29e3069-20a4-407c-a609-5234ea04cce9",
+            "colId": "dc7c0ff4-ffb6-4188-8af2-a930a3057dd6",
+            "containerId": "357be653-e211-4001-b4ad-40b389916578",
+            "name": "insertarFactura",
+            "url": "127.0.0.1:5000/usuario/23302022739/cliente/20110336209/nuevafactura",
+            "method": "POST",
+            "sortNum": 90000,
+            "created": "2023-11-08T12:48:54.381Z",
+            "modified": "2023-11-08T19:49:56.558Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n   \"encabezado\": {\n    \"fecha\":\"2023-11-08\",\n    \"total\":\"15000.00\",\n    \"id_tipoFactura\": 1,\n    \"id_condicionVenta\":\"2\"\n  },\n  \"detalle\": [\n    {\n      \"id_producto\": 1,\n      \"cantidad\": 2,\n      \"precio\": \"7887.00\"\n    },\n    {\n      \"id_producto\": 3,\n      \"cantidad\": 2,\n      \"precio\": \"7988.00\"\n    }\n  ]\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "f470ff3c-799a-45cd-a610-6e46d7666635",
+            "colId": "dc7c0ff4-ffb6-4188-8af2-a930a3057dd6",
+            "containerId": "28113cfa-6050-4cac-924f-dd9b87db82dc",
+            "name": "MostrarTipoCondicionIVA",
+            "url": "127.0.0.1:5000/dashboard/listarTipoCondicionIVA",
+            "method": "GET",
+            "sortNum": 100000,
+            "created": "2023-11-08T17:36:12.541Z",
+            "modified": "2023-11-08T17:36:54.879Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "c6fc473c-d028-4d53-b21b-3abe71a8c7ca",
+            "colId": "dc7c0ff4-ffb6-4188-8af2-a930a3057dd6",
+            "containerId": "28113cfa-6050-4cac-924f-dd9b87db82dc",
+            "name": "MostrarTipoFactura",
+            "url": "127.0.0.1:5000/dashboard/listarTipoFactura",
+            "method": "GET",
+            "sortNum": 110000,
+            "created": "2023-11-08T17:57:59.840Z",
+            "modified": "2023-11-08T17:58:06.198Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "e92cd62e-cd07-4f00-a7c4-1a32a407a38e",
+            "colId": "dc7c0ff4-ffb6-4188-8af2-a930a3057dd6",
+            "containerId": "28113cfa-6050-4cac-924f-dd9b87db82dc",
+            "name": "MostrarTipoProducto",
+            "url": "127.0.0.1:5000/dashboard/listarTipoProducto",
+            "method": "GET",
+            "sortNum": 120000,
+            "created": "2023-11-08T18:10:44.751Z",
+            "modified": "2023-11-08T18:12:18.993Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "483e0cd1-2f3e-4cef-a033-74220d4c0693",
+            "colId": "dc7c0ff4-ffb6-4188-8af2-a930a3057dd6",
+            "containerId": "28113cfa-6050-4cac-924f-dd9b87db82dc",
+            "name": "MostrarTipoCondicionVenta",
+            "url": "127.0.0.1:5000/dashboard/listarTipoCondicionVenta",
+            "method": "GET",
+            "sortNum": 130000,
+            "created": "2023-11-08T19:01:47.243Z",
+            "modified": "2023-11-08T19:02:11.177Z",
             "headers": [],
             "params": [],
             "tests": []
