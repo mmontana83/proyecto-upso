@@ -1,8 +1,6 @@
-CREATE DATABASE  IF NOT EXISTS `proyecto` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
-USE `proyecto`;
 -- MySQL dump 10.13  Distrib 8.0.34, for Win64 (x86_64)
 --
--- Host: casitamontana.ddns.net    Database: proyecto
+-- Host: 192.168.0.254    Database: proyecto
 -- ------------------------------------------------------
 -- Server version	8.0.35-0ubuntu0.22.04.1
 
@@ -56,6 +54,39 @@ INSERT INTO `clientes` VALUES ('20110336209','Antonio','Montaña','','antonio@gm
 UNLOCK TABLES;
 
 --
+-- Table structure for table `controlstock`
+--
+
+DROP TABLE IF EXISTS `controlstock`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `controlstock` (
+  `id_controlstock` int NOT NULL AUTO_INCREMENT,
+  `id_producto` int DEFAULT NULL,
+  `movimiento` int DEFAULT NULL,
+  `fecha` datetime DEFAULT NULL,
+  `precio` decimal(10,2) DEFAULT NULL,
+  `id_cliente` varchar(11) DEFAULT NULL,
+  `nroFactura` int DEFAULT NULL,
+  `id_usuario` varchar(11) DEFAULT NULL,
+  PRIMARY KEY (`id_controlstock`),
+  KEY `cs_ibfk_1_idx` (`id_producto`),
+  KEY `cs_ibfk_4_idx` (`id_usuario`),
+  CONSTRAINT `cs_ibfk_1` FOREIGN KEY (`id_producto`) REFERENCES `productos` (`id_producto`),
+  CONSTRAINT `cs_ibfk_2` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id_usuario`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `controlstock`
+--
+
+LOCK TABLES `controlstock` WRITE;
+/*!40000 ALTER TABLE `controlstock` DISABLE KEYS */;
+/*!40000 ALTER TABLE `controlstock` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `detallefactura`
 --
 
@@ -76,7 +107,7 @@ CREATE TABLE `detallefactura` (
   KEY `detallefactura_ibfk_1_idx` (`nroFactura`,`id_cliente`,`id_usuario`),
   CONSTRAINT `detallefactura_ibfk_1` FOREIGN KEY (`nroFactura`, `id_cliente`, `id_usuario`) REFERENCES `factura` (`nroFactura`, `id_cliente`, `id_usuario`),
   CONSTRAINT `detallefactura_ibfk_2` FOREIGN KEY (`id_producto`) REFERENCES `productos` (`id_producto`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -85,7 +116,7 @@ CREATE TABLE `detallefactura` (
 
 LOCK TABLES `detallefactura` WRITE;
 /*!40000 ALTER TABLE `detallefactura` DISABLE KEYS */;
-INSERT INTO `detallefactura` VALUES (1,1,'20110336209','23302022739',1,1,500.00,500.00),(2,1,'20110336209','23302022739',1,1,500.00,500.00),(3,1,'20110336209','23302022739',1,3,300.00,900.00),(6,1,'25789457891','20302022731',7,1,750.00,750.00),(7,1,'25789457891','20302022731',7,1,750.00,750.00),(8,2,'20110336209','23302022739',1,2,7887.00,15774.00),(9,2,'20110336209','23302022739',3,2,7988.00,15976.00);
+INSERT INTO `detallefactura` VALUES (1,1,'20110336209','23302022739',1,1,500.00,500.00),(2,1,'20110336209','23302022739',1,1,500.00,500.00),(3,1,'20110336209','23302022739',1,3,300.00,900.00),(6,1,'25789457891','20302022731',7,1,750.00,750.00),(7,1,'25789457891','20302022731',7,1,750.00,750.00),(8,2,'20110336209','23302022739',1,2,7887.00,15774.00),(9,2,'20110336209','23302022739',3,2,7988.00,15976.00),(12,2,'20110336209','23302022739',5,1,18000.00,18000.00);
 /*!40000 ALTER TABLE `detallefactura` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -121,7 +152,7 @@ CREATE TABLE `factura` (
 
 LOCK TABLES `factura` WRITE;
 /*!40000 ALTER TABLE `factura` DISABLE KEYS */;
-INSERT INTO `factura` VALUES (1,'20110336209','23302022739','2023-10-30',1000.00,1,3),(1,'20139570910','24302022737','2023-10-10',23457.00,1,1),(1,'25789457891','20302022731','2023-11-01',1500.00,1,1),(2,'20110336209','23302022739','2023-11-08',15000.00,1,1);
+INSERT INTO `factura` VALUES (1,'20110336209','23302022739','2023-10-30',1000.00,1,3),(1,'20139570910','24302022737','2023-10-10',23457.00,1,1),(1,'25789457891','20302022731','2023-11-01',1500.00,1,1),(2,'20110336209','23302022739','2023-11-08',15000.00,1,1),(3,'23491199983','23302022739','2023-05-23',56887.00,1,1),(4,'23551234563','23302022739','2023-02-28',65778.00,1,1),(5,'30627393713','23302022739','2023-05-15',453444.00,1,1);
 /*!40000 ALTER TABLE `factura` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -419,6 +450,145 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_dashboard_controlStock` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`proyecto`@`%` PROCEDURE `sp_dashboard_controlStock`(in p_id_usuario varchar(11))
+BEGIN
+	SELECT producto, stock
+    FROM productos
+    WHERE id_usuario = p_id_usuario and id_tipoProducto = '1';
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_dashboard_historialVentas` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`proyecto`@`%` PROCEDURE `sp_dashboard_historialVentas`(in p_id_usuario varchar(11))
+BEGIN
+SELECT year(fecha) as Año, month(fecha) as Mes, sum(total) as Ventas 
+from factura
+where id_usuario = p_id_usuario
+group by Mes, Año
+order by Año, Mes;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_dashboard_movimientoStock` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`proyecto`@`%` PROCEDURE `sp_dashboard_movimientoStock`(in p_id_usuario varchar(11))
+BEGIN
+SELECT productos.producto as Producto, movimiento as Movimiento, fecha as Fecha, 
+controlstock.precio as Precio, concat(clientes.nombre,' ',clientes.apellido,' - ', clientes.empresa) as Cliente,
+ nrofactura as Factura
+FROM controlstock
+INNER JOIN productos ON productos.id_producto = controlstock.id_producto
+INNER JOIN clientes ON clientes.id_cliente = controlstock.id_cliente
+INNER JOIN usuarios ON usuarios.id_usuario = controlstock.id_usuario
+WHERE controlstock.id_usuario = p_id_usuario;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_dashboard_rankingVentasByCliente` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`proyecto`@`%` PROCEDURE `sp_dashboard_rankingVentasByCliente`(in p_id_usuario varchar(11))
+BEGIN
+	SELECT concat(clientes.nombre,' ', clientes.apellido, ' - ', clientes.empresa) as Cliente, sum(factura.total) as Venta 
+    FROM factura
+    INNER JOIN clientes on factura.id_cliente = clientes.id_cliente
+    WHERE factura.id_usuario = p_id_usuario
+    GROUP BY factura.id_cliente;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_dashboard_rankingVentasByProducto` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`proyecto`@`%` PROCEDURE `sp_dashboard_rankingVentasByProducto`(in p_id_usuario varchar(11))
+BEGIN
+SELECT productos.producto as Producto, sum(detallefactura.precioTotal) as Venta
+    FROM detallefactura
+	INNER JOIN productos on detallefactura.id_producto = productos.id_producto
+    WHERE detallefactura.id_usuario = p_id_usuario and productos.id_tipoProducto = '1' 
+    GROUP BY productos.producto;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_dashboard_rankingVentasByServicio` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`proyecto`@`%` PROCEDURE `sp_dashboard_rankingVentasByServicio`(in p_id_usuario varchar(11))
+BEGIN
+SELECT productos.producto as Servicio, sum(detallefactura.precioTotal) as Venta
+    FROM detallefactura
+	INNER JOIN productos on detallefactura.id_producto = productos.id_producto
+    WHERE detallefactura.id_usuario = p_id_usuario and productos.id_tipoProducto = '2' 
+    GROUP BY productos.producto;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `sp_eliminarCliente` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -480,8 +650,8 @@ CREATE DEFINER=`proyecto`@`%` PROCEDURE `sp_insertarCliente`(in p_id_cliente var
 									   in p_empresa varchar(50), in p_email varchar(50), in p_telefono varchar(50), in p_direccion varchar(100),
                                        in p_id_tipoCondicionIVA int, in p_id_usuario varchar(11))
 BEGIN
-	INSERT INTO clientes (id_cliente, nombre, apellido, empresa, email, telefono, direccion, id_tipoCondicionIVA, id_usuario)
-	VALUES (p_id_cliente, p_nombre, p_apellido, p_empresa, p_email, p_telefono, p_direccion, p_id_tipoCondicionIVA, p_id_usuario);
+	INSERT INTO clientes (id_cliente, nombre, apellido, empresa, email, telefono, direccion, id_tipoCondicionIVA, id_tipoEstado, id_usuario)
+	VALUES (p_id_cliente, p_nombre, p_apellido, p_empresa, p_email, p_telefono, p_direccion, p_id_tipoCondicionIVA, 1, p_id_usuario);
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -529,10 +699,27 @@ DELIMITER ;;
 CREATE DEFINER=`proyecto`@`%` PROCEDURE `sp_insertarFacturaDetalle`(in p_id_cliente varchar(11), in p_id_usuario varchar(11), in p_id_producto int, 
 																	in p_cantidad int , in p_precio decimal(10,2))
 BEGIN
-	DECLARE p_nroFactura int;
-	SELECT MAX( nroFactura ) INTO p_nroFactura FROM factura WHERE id_cliente = p_id_cliente and id_usuario = p_id_usuario; -- obtengo el último Número de Factura de la tabla factura
-	INSERT INTO detallefactura (nroFactura, id_cliente, id_usuario, id_producto, cantidad, precio, precioTotal)
+	
+    DECLARE p_nroFactura int;
+    DECLARE p_id_tipoProducto int;
+    DECLARE p_fechaFactura datetime;
+	
+    -- obtengo el último número de factura
+    SELECT MAX( nroFactura ) INTO p_nroFactura FROM factura WHERE id_cliente = p_id_cliente and id_usuario = p_id_usuario; -- obtengo el último Número de Factura de la tabla factura
+	SELECT fecha INTO p_fechaFactura FROM factura WHERE id_cliente = p_id_cliente and id_usuario = p_id_usuario and nroFactura = p_nroFactura;
+
+    -- inserto el detalle de la factura
+    INSERT INTO detallefactura (nroFactura, id_cliente, id_usuario, id_producto, cantidad, precio, precioTotal)
 	VALUES (p_nroFactura, p_id_cliente, p_id_usuario, p_id_producto, p_cantidad, p_precio, p_cantidad * p_precio);
+    
+    -- agrego esta salida de producto al control de stock. Si es un servicio no lo agrego.
+    SELECT id_tipoProducto into p_id_tipoProducto from productos where id_producto = p_id_producto;
+    IF p_id_tipoProducto = 1
+    THEN 
+		INSERT INTO controlstock(id_producto, movimimiento, fecha, precio, id_cliente, nroFactura, id_usuario)
+        VALUES (p_id_producto, -1 * p_cantidad, p_fechaFactura, p_cantidad * p_precio, p_id_cliente, p_nroFactura, p_id_usuario);
+	END IF;
+	
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -552,8 +739,17 @@ DELIMITER ;;
 CREATE DEFINER=`proyecto`@`%` PROCEDURE `sp_insertarProducto`(in p_producto varchar(100), in p_descripcion text, in p_precio decimal(10,2), 
 										in p_stock int, in p_id_tipoProducto int, in p_id_usuario varchar(11))
 BEGIN
-	INSERT INTO productos (producto, descripcion, precio, stock, id_tipoProducto, id_usuario)
-	VALUES (p_producto, p_descripcion, p_precio, p_stock, p_id_tipoProducto, p_id_usuario);
+	DECLARE p_id_producto int;
+    -- Inserto el nuevo producto en la tabla con el campo id_tipoEstado = 1 por defecto
+    INSERT INTO productos (producto, descripcion, precio, stock, id_tipoProducto, id_tipoEstado, id_usuario)
+	VALUES (p_producto, p_descripcion, p_precio, p_stock, p_id_tipoProducto, 1, p_id_usuario);
+    
+    -- Recupero el Inserto el producto en el control de stock
+	SELECT MAX(id_producto) INTO p_id_producto FROM productos WHERE id_usuario = p_id_usuario; -- obtengo el último Número de Factura de la tabla factura
+
+	-- Inserto el último producto en el controlstock
+    INSERT INTO controlstock (id_producto, movimiento, fecha, precio, id_usuario)
+	VALUES (p_id_producto, p_stock, now(), p_precio, p_id_usuario);
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -937,36 +1133,6 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
-/*!50003 DROP PROCEDURE IF EXISTS `sp_rankingVentasByCliente` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
-DELIMITER ;;
-CREATE DEFINER=`proyecto`@`%` PROCEDURE `sp_rankingVentasByCliente`()
-BEGIN
-	(SELECT sum(factura.total) as Venta, concat(clientes.nombre,' ', clientes.apellido) as Cliente
-    FROM factura
-    INNER JOIN clientes on factura.id_cliente = clientes.id_cliente
-    WHERE concat(clientes.nombre,' ', clientes.apellido) IS NOT NULL
-    GROUP BY factura.id_cliente
-    )
-    UNION
-    (SELECT sum(factura.total) as Venta, clientes.empresa as Cliente
-    FROM factura
-    INNER JOIN clientes on factura.id_cliente = clientes.id_cliente
-    WHERE concat(clientes.nombre,' ', clientes.apellido) IS NULL
-    GROUP BY factura.id_cliente);
-END ;;
-DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -977,4 +1143,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-11-10  7:46:01
+-- Dump completed on 2023-11-11  0:53:34
