@@ -66,10 +66,15 @@ def eliminar_cliente(id_usuario, id_cliente):
     except Exception as ex:
         return jsonify({'mensaje': str(ex)})
     
-@app.route('/usuario/<id_usuario>/altacliente/<id_cliente>', methods = ['POST'])
+
+@app.route('/usuario/<id_usuario>/altacliente/<id_cliente>', methods=['POST'])
 def alta_cliente(id_usuario, id_cliente):
     try:
+        # Se intenta realizar la operación de alta del cliente.
         mensaje = Cliente.altaCliente(id_cliente, id_usuario)
+
+        # Si la operación fue exitosa, se devuelve un mensaje en formato JSON.
         return jsonify(mensaje)
     except Exception as ex:
+        # En caso de que ocurra una excepción (error), se captura y se devuelve un mensaje de error en formato JSON.
         return jsonify({'mensaje': str(ex)})
