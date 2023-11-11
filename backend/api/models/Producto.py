@@ -201,16 +201,18 @@ class Producto:
         Returns:
             dict: Un objeto JSON que contiene los datos del producto o un mensaje de error.
         """
+        print(id_usuario)
+        
         try:
             cur = mysql.connection.cursor()
             cur.callproc('sp_listarProductosByUsuario', [id_usuario])
-            datos = cur.fetchone()
+            datos = cur.fetchall()
             
             if len(datos) != 0:
                 productos = []
                 for fila in datos:
                     producto = Producto.listarProductosToJson(fila)
-                    productos.append(producto)                   
+                    productos.append(producto)
                 return productos  
             else:
                 return {'mensaje': 'Productos no encontrado'}
