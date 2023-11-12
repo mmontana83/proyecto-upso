@@ -146,7 +146,7 @@ btnGuardar.onclick = () => {
     localStorage.setItem("facturas", JSON.stringify(facturas));
     // borrar tbody
     arregloDetalle = []
-    // redibujarTabla();
+    redibujarTabla();
 
 };
 /////
