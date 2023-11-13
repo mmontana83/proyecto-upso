@@ -1,7 +1,7 @@
 {
     "client": "Thunder Client",
     "collectionName": "Proyecto UPSO",
-    "dateExported": "2023-11-08T19:56:46.471Z",
+    "dateExported": "2023-11-13T17:51:49.668Z",
     "version": "1.1",
     "folders": [
         {
@@ -31,6 +31,13 @@
             "containerId": "",
             "created": "2023-11-08T17:35:59.381Z",
             "sortNum": 40000
+        },
+        {
+            "_id": "e39c996b-27e7-4816-b983-018e6c6b7e63",
+            "name": "Dashboard",
+            "containerId": "",
+            "created": "2023-11-13T16:14:58.168Z",
+            "sortNum": 50000
         }
     ],
     "requests": [
@@ -280,6 +287,90 @@
             "sortNum": 130000,
             "created": "2023-11-08T19:01:47.243Z",
             "modified": "2023-11-08T19:02:11.177Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "fb184561-adc3-42ee-8de5-1341f40d3add",
+            "colId": "dc7c0ff4-ffb6-4188-8af2-a930a3057dd6",
+            "containerId": "e39c996b-27e7-4816-b983-018e6c6b7e63",
+            "name": "Control Stock",
+            "url": "127.0.0.1:5000/usuario/23302022739/dashboard/controlStock",
+            "method": "GET",
+            "sortNum": 140000,
+            "created": "2023-11-13T16:15:15.113Z",
+            "modified": "2023-11-13T16:54:32.986Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "30b1c341-f2f0-4179-b271-aefbf6ee7a08",
+            "colId": "dc7c0ff4-ffb6-4188-8af2-a930a3057dd6",
+            "containerId": "e39c996b-27e7-4816-b983-018e6c6b7e63",
+            "name": "Historial de Ventas",
+            "url": "127.0.0.1:5000/usuario/23302022739/dashboard/historialVentas",
+            "method": "GET",
+            "sortNum": 150000,
+            "created": "2023-11-13T16:54:27.035Z",
+            "modified": "2023-11-13T16:54:42.808Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "d1e7b3e5-c3fd-4979-b23b-cd6274b3fb69",
+            "colId": "dc7c0ff4-ffb6-4188-8af2-a930a3057dd6",
+            "containerId": "e39c996b-27e7-4816-b983-018e6c6b7e63",
+            "name": "Movimiento de Stock",
+            "url": "127.0.0.1:5000/usuario/23302022739/dashboard/movimientoStock",
+            "method": "GET",
+            "sortNum": 160000,
+            "created": "2023-11-13T17:00:41.738Z",
+            "modified": "2023-11-13T17:01:17.961Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "efbcc571-74c9-464d-bd51-044008f61a26",
+            "colId": "dc7c0ff4-ffb6-4188-8af2-a930a3057dd6",
+            "containerId": "e39c996b-27e7-4816-b983-018e6c6b7e63",
+            "name": "Ranking de Ventas por Cliente",
+            "url": "127.0.0.1:5000/usuario/23302022739/dashboard/rankingVentasByCliente",
+            "method": "GET",
+            "sortNum": 170000,
+            "created": "2023-11-13T17:13:08.290Z",
+            "modified": "2023-11-13T17:15:42.021Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "572222c9-f0a2-4e27-a71a-79513454dd9f",
+            "colId": "dc7c0ff4-ffb6-4188-8af2-a930a3057dd6",
+            "containerId": "e39c996b-27e7-4816-b983-018e6c6b7e63",
+            "name": "Ranking de Ventas por Producto",
+            "url": "127.0.0.1:5000/usuario/23302022739/dashboard/rankingVentasByProducto",
+            "method": "GET",
+            "sortNum": 180000,
+            "created": "2023-11-13T17:20:51.432Z",
+            "modified": "2023-11-13T17:22:10.184Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "8d896d1b-bc52-422c-9db7-75db6577a3e3",
+            "colId": "dc7c0ff4-ffb6-4188-8af2-a930a3057dd6",
+            "containerId": "e39c996b-27e7-4816-b983-018e6c6b7e63",
+            "name": "Ranking de Ventas por Servicio",
+            "url": "127.0.0.1:5000/usuario/23302022739/dashboard/rankingVentasByServicio",
+            "method": "GET",
+            "sortNum": 190000,
+            "created": "2023-11-13T17:22:27.430Z",
+            "modified": "2023-11-13T17:23:10.406Z",
             "headers": [],
             "params": [],
             "tests": []
