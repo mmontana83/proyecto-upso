@@ -1,3 +1,4 @@
+// Esto lo obtuvimos de la plantilla de BS
 const body = document.querySelector("body"),
       modeToggle = body.querySelector(".mode-toggle");
       sidebar = body.querySelector("nav");
@@ -30,6 +31,27 @@ sidebarToggle.addEventListener("click", () => {
         localStorage.setItem("status", "open");
     }
 })
+
+// Obtén los valores de los parámetros
+const nombre = obtenerParametroDeConsulta('nombre');
+const apellido = obtenerParametroDeConsulta('apellido');
+const id_usuario = obtenerParametroDeConsulta('id_usuario');
+const token = obtenerParametroDeConsulta('token');
+
+// Obtención de los datos del login
+function obtenerParametroDeConsulta(parametro) {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(parametro);
+}
+
+const usuario = document.getElementById("usuario")
+
+function insertarUsuarioEnHTML(nombre, apellido){
+    usuario.innerText = `Bienvenido ${nombre} ${apellido}`
+}
+
+//Esto es para que al momento de cargar la página se llame a la función insertar UsuarioEnHTML
+document.addEventListener('DOMContentLoaded', insertarUsuarioEnHTML(nombre, apellido));
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////
@@ -167,11 +189,13 @@ function getAll_Client(){
     const requestOptions = {
         method : 'GET',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'x-access-token': token,
+            'user-id':id_usuario
         }
     }
-    // https://64ea871fbf99bdcc8e6798fc.mockapi.io/v1/personas
-    fetch('https://64ea871fbf99bdcc8e6798fc.mockapi.io/v1/personas', requestOptions)
+
+    fetch(`http://127.0.0.1:5000/usuario/${id_usuario}/clientes`, requestOptions)
         .then( response => handleResponse(response) )
         .then(
             (data) => {
@@ -181,8 +205,8 @@ function getAll_Client(){
                 data.forEach(person => {
                     let fila = 
                     `<tr id="${person.id}"> 
-                        <td>${person.cuit} </td>
-                        <td>${person.name}</td>
+                        <td>${person.id_cliente} </td>
+                        <td>${person.nombre}</td>
                         <td>${person.apellido}</td>
                         <td>${person.empresa}</td>
                         <td>${person.telefono}</td>
