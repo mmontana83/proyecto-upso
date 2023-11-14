@@ -35,7 +35,7 @@
                     <span class="link-name">Dahsboard</span>
                 </a></li>
 
-                <li><a href="#" id="section2Button" onclick="getAll_Client(),toggleSection('section2')">
+                <li><a href="#" id="section2Button" onclick="getAll_Clients(),toggleSection('section2')">
                     <i class="uil uil-users-alt"></i>
                     <span class="link-name">Clientes</span>
                 </a></li>
@@ -115,7 +115,7 @@
                 
                 <div class="row mt-5 shadow-none text-center">
                     <div class="col-sm-3">
-                        <button class="btn btn-primary btn-lg" onclick=" getAll_Client(),toggleSection('section2')"> Consultar Clientes</button>
+                        <button class="btn btn-primary btn-lg" onclick="getAll_Clients(),toggleSection('section2')"> Consultar Clientes</button>
                     </div>
                     <div class="col-sm-3">
                         <button class="btn btn-primary btn-lg" onclick="toggleSection('section3')"> Consultar Productos</button>
@@ -507,7 +507,7 @@
             </div>
             <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-            <button type="submit" class="btn btn-primary">Confirmar</button>
+            <button type="submit" class="btn btn-primary" onclick="insert_Client()">Confirmar</button>
             </div>
         </div>
         </div>
@@ -580,6 +580,8 @@
 
     <script src="./js/dashboard.js"></script>
     <script src="./js/factura.js"></script>
+    <script src="./js/cliente.js"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
