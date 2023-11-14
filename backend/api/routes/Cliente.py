@@ -26,7 +26,7 @@ def get_cliente_by_id_cliente(id_usuario, id_cliente):
         return jsonify({'mensaje':str(ex)})
     
 #Registrar un nuevo Cliente
-@app.route('/usuario/<id_usuario>/nuevocliente/', methods = ['POST'])
+@app.route('/usuario/<id_usuario>/nuevocliente', methods = ['POST'])
 def registrar_cliente(id_usuario):
     try:
         #Obtengo el json del front
