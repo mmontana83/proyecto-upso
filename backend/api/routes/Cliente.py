@@ -5,7 +5,7 @@ from api.db.db import mysql
 from api.models.Cliente import Cliente
 
 #Obtengo la lista de clientes de un usuario
-@app.route('/usuario/<id_usuario>', methods = ['GET'])
+@app.route('/usuario/<id_usuario>/cliente', methods = ['GET'])
 @token_required
 @user_resources
 def get_clientes_by_usuario(id_usuario):
@@ -15,7 +15,7 @@ def get_clientes_by_usuario(id_usuario):
         return jsonify({'mensaje':str(ex)})
     
 #Registrar un nuevo Cliente
-@app.route('/usuario/<id_usuario>', methods = ['POST'])
+@app.route('/usuario/<id_usuario>/cliente', methods = ['POST'])
 def registrar_cliente(id_usuario):
     try:
         #Obtengo el json del front
