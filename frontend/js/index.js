@@ -1,12 +1,11 @@
-function login() {
+function login(event) {
+    
+    //Evito que se recargue la página
+    event.preventDefault()
+
     // Obtener valores de usuario y contraseña
     var username = document.getElementById('username').value;
     var password = document.getElementById('password').value;
-
-    document.getElementById('mensaje-exito').style.display = 'Hola Mundo'
-    setTimeout(() => {
-        console.log("Retrasado por 5 segundo.");
-      }, "5000");
 
     // URL de la API para iniciar sesión
     var apiUrl = 'http://127.0.0.1:5000/login';
@@ -23,7 +22,7 @@ function login() {
         headers: {
             // Aquí se agrega otro contenido de acuerdo a la necesidad de la API
             'Content-Type': 'application/json',
-            'Authorization': 'Basic ' + btoa(username + ':' + password)
+            'Authorization': 'Basic ' +  btoa(username + ':' + password)
         },
         body: JSON.stringify(data)
     };
@@ -39,37 +38,20 @@ function login() {
 
     // Hacer la solicitud fetch
     fetch(apiUrl, requestOptions)
-        .then(response => response.json())
-        .then(data => {
-            // Manejar la respuesta de la API
-            console.log(data);
-
-    
-            // if (data.success) {
-            //     // Mostrar el mensaje de éxito
-            //     document.getElementById('mensaje-exito').style.display = data.json();
-
-            //     setTimeout(function() {
-            //         window.location.href = 'dashboard.html';
-            //     }, 5000);
-            // } else {
-            //     // Aquí puedes manejar casos de inicio de sesión no exitosos si es necesario
-            // }
-
-            // Aquí puedes realizar acciones adicionales después de iniciar sesión,
-            // como redireccionar a otra página o mostrar un mensaje de éxito.
+        .then(response => handleResponse(response))
+        .then(userData => {
+            const id_usuario = encodeURIComponent(userData.id_usuario);
+            const nombre = encodeURIComponent(userData.nombre);
+            const apellido = encodeURIComponent(userData.apellido);
+            const token = encodeURIComponent(userData.token);
+            
+            window.location.href = `dashboard.html?id_usuario=${id_usuario}&nombre=${nombre}&apellido=${apellido}&token=${token}`;
         })
         .catch(error => {
             // Manejar errores de la solicitud
-            console.error('Error en la solicitud:', error);
-            setTimeout(() => {
-                console.log("Retrasado por 1 segundo.");
-              }, "5000");
+            console.log('Error en la solicitud:', error);
         })
         .finally( () => { 
             console.log("Promesa finalizada (resuelta o rechazada)");
-            setTimeout(() => {
-                console.log("Promesa Finalizasa.");
-              }, "5000");
         })
 }
