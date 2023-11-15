@@ -6,52 +6,36 @@ from api.models.Producto import Producto
 # ---------- Atualizacion/Modificacion de un producto by usuario -------------------
 # ------------------------------------anda ok --------------------------------------
 
-
-@app.route('/usuario/<id_usuario>/actualizarproducto/<id_producto>', methods=['POST'])
-def actualizar_producto(id_usuario, id_producto):
-    try:
-        # Obtiene el JSON del front-end
+@app.route('/usuario/<id_usuario>/producto/<codigoProducto>', methods=['POST'])
+def actualizar_producto(id_usuario, codigoProducto):
+    try:       
         json = request.get_json()
-
-        # Agrega la clave id_usuario al diccionario JSON
+        
         json['id_usuario'] = id_usuario
-        json['id_producto'] = id_producto       
+        json['codigoProducto'] = codigoProducto 
 
-        # Actualiza el cliente en la Base de Datos
         mensaje = Producto.actualizarProducto(json)
         return jsonify(mensaje)
     except Exception as ex:
         return jsonify({'mensaje': str(ex)})
     
-# ----------------------------------- fin  --------------------------------------
+# ----------------------------------- fin  --------------------------------------   
+ 
 
-
-    
-
-# ----------------------------- alta producto by usuario -------------------
-# ------------------------------------anda ok -------------------------------
+# ----------------------------- alta producto by usuario ------------------------
+# ------------------------------------anda ok -----------------------------------
 
 # Alta de un producto, los produtos en esta tabla se les cambia de estado, es decir
 # no se hace el borrado logico, se les cambia de estado: 1 es ACTIVO, 2 es BAJA
 
-@app.route('/usuario/<id_usuario>/producto/<id_producto>', methods=['POST'])
-def post_alta_producto_by_usuario(id_usuario, id_producto):
-    """
-    Realiza una acción para dar de alta un producto específico asociado a un usuario.
-
-    Args:
-        id_usuario (str): ID del usuario.
-        id_producto (str): ID del producto.
-
-    Returns:
-        dict: Mensaje de éxito o error.
-    """
+@app.route('/usuario/<id_usuario>/AltaProducto/<codigoProducto>', methods=['POST'])
+def post_alta_producto_by_usuario(id_usuario, codigoProducto):
     try:
-        return jsonify(Producto.altaProductoByUsuario(id_usuario, id_producto))
+        return jsonify(Producto.altaProductoByUsuario(id_usuario, codigoProducto))
     except Exception as ex:
         return jsonify({'mensaje': str(ex)})
     
-# ----------------------------------- fin alta prodcucto by usuario -----------------
+# -------------------------------- fin alta prodcucto by usuario -----------------
 
 
 
@@ -61,22 +45,10 @@ def post_alta_producto_by_usuario(id_usuario, id_producto):
 
 # --------- este metodo obtiene los productos de un usuario en particular -----------
 
-@app.route('/usuario/<id_usuario>/producto/<id_producto>', methods=['GET'])
-def get_producto_by_id_usuario(id_usuario, id_producto):
-
-    """
-    Obtiene los detalles de un producto específico asociado a un usuario.
-
-    Args:
-        id_usuario (str): ID del usuario.
-        id_producto (str): ID del producto.
-
-    Returns:
-        dict: Detalles del producto o un mensaje de error.
-    """
-
+@app.route('/usuario/<id_usuario>/producto/<codigoProducto>', methods=['GET'])
+def get_producto_by_id_usuario(id_usuario, codigoProducto):
     try:        
-        return jsonify(Producto.obtenerProductoByUsuario(id_usuario, id_producto))        
+        return jsonify(Producto.obtenerProductoByUsuario(id_usuario, codigoProducto))        
     except Exception as ex:
         return jsonify({'mensaje': str(ex)})
     
@@ -90,18 +62,8 @@ def get_producto_by_id_usuario(id_usuario, id_producto):
 
 @app.route('/usuario/<id_usuario>/productos', methods=['GET'])
 def get_productos_by_id_usuario(id_usuario):
-    """
-    Obtiene una lista de productos asociados a un usuario.
 
-    Args:
-        id_usuario (str): ID del usuario.
-
-    Returns:
-        dict: Lista de productos o un mensaje de error.
-    """   
-        
     try:
-        
         return jsonify(Producto.obtenerProductosByUsuario(id_usuario))
     except Exception as ex:
         return jsonify({'mensaje': str(ex)})
@@ -117,22 +79,29 @@ def get_productos_by_id_usuario(id_usuario):
 # no se hace el borrado logico, se les cambia de estado: 1 es ACTIVO, 2 es BAJA
 
 
-@app.route('/usuario/<id_usuario>/eliminarProducto/<id_producto>', methods=['POST'])
-def eliminar_producto(id_usuario, id_producto):
-    """
-    Elimina un producto de la base de datos.
-
-    Args:
-        id_usuario (int): ID del usuario.
-        id_producto (int): ID del producto a eliminar.
-
-    Returns:
-        dict: Un objeto JSON que contiene un mensaje de éxito o error.
-    """
+@app.route('/usuario/<id_usuario>/Producto/<codigoProducto>', methods=['DELETE'])
+def eliminar_producto(id_usuario, codigoProducto):    
     try:
-        mensaje = Producto.eliminarProducto(id_usuario, id_producto)
+        mensaje = Producto.eliminarProducto(id_usuario, codigoProducto)
         return jsonify(mensaje)
     except Exception as ex:
         return jsonify({'mensaje': str(ex)})
     
 # ----------------------------------- fin Eliminar  -----------------
+
+
+@app.route('/usuario/<id_usuario>/insertarProducto/<cod_producto>', methods = ['PUT'])
+def insertar_producto(id_usuario, cod_producto):
+    try:
+        json = request.get_json()      
+        json['id_usuario'] = id_usuario
+        json['codigoProducto'] = cod_producto
+
+        print('route', id_usuario, cod_producto)
+        print(json)
+           
+        mensaje = Producto.insertarProductoByUsuario(json)
+        return jsonify(mensaje)
+    except Exception as ex:
+        return jsonify({'mensaje': str(ex)})
+

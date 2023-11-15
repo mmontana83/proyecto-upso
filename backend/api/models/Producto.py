@@ -1,25 +1,10 @@
 from api.db.db import mysql
 from flask import request, jsonify
 
-class Producto:
-    """
-    Esta clase representa un producto y proporciona métodos para interactuar con sus datos.
-    """
+class Producto:   
 
-    def __init__(self, json):    
-        """
-        Constructor de la clase Producto. Inicializa las propiedades del producto con los datos proporcionados.
-
-        Args:
-            id_producto (int): ID del producto.
-            producto (str): Nombre del producto.
-            descripcion (str): Descripción del producto.
-            precio (float): Precio del producto.
-            stock (int): Cantidad en stock del producto.
-            id_tipoProducto (int): ID del tipo de producto.
-            id_usuario (int): ID del usuario que crea el producto.
-        """
-        self._id_producto = json['id_producto']
+    def __init__(self, json):       
+        self._codigoProducto = json['codigoProducto']
         self._producto = json['producto']
         self._descripcion = json['descripcion']
         self._precio = json['precio']
@@ -28,15 +13,9 @@ class Producto:
         self._id_usuario = json['id_usuario']
 
     def to_json(self):
-        """
-        Convierte el objeto Producto en un objeto JSON.
-
-        Returns:
-            dict: Un objeto JSON con los datos del producto.
-        """
-        return {
-       
-            'id_producto':self._id_producto,
+        
+        return {               
+            'codigoProducto':self._codigoProducto,
             'producto': self._producto,
             'descripcion': self._descripcion,
             'precio': self._precio,
@@ -46,44 +25,48 @@ class Producto:
         }
     
 
- #   @staticmethod
- #   def insertarProductoByUsuario(json):
 
-  #      print(json)
-        """
-   #     Inserta un nuevo producto en la base de datos.
 
-        Args:
-            json (dict): Un objeto JSON con los datos del producto a insertar.
+    
 
-        Returns:
-            dict: Un objeto JSON que contiene un mensaje de éxito o error.
-        """
-  #      try:
-  #          producto = Producto(json)
+    @staticmethod
+    def insertarProductoByUsuario(json):
 
-   #         cur = mysql.connection.cursor()
-   #         cur.callproc('sp_listarProductosByUsuario', [producto.id_usuario])
-    #        fila = cur.fetchone()
+        print('Modelo', json)
+      
+        try:
+            producto = Producto(json)
+            cur = mysql.connection.cursor()
 
-     #       if fila is None:
-     #           cur.close()
-     #           cur.mysqlconnection.cursor()
-     #           cur.callproc('sp_actualizarProducto', [producto._producto,
-     #                                                  producto._descripcion,
-     ###                                                  producto._precio,
-     #                                                  producto._stock,
-     #                                                  producto._id_tipoProducto,
-     #                                                  producto._id_producto,
-     #                                                  producto._id_usuario])                
-     #           mysql.connection.commit()
-     #           cur.close()
-     #           return {'mensaje': 'Producto Agregado con Éxito'}
-     #       else:
-     #           return {'mensaje': 'El Producto ya se encuentra agregado en el sistema'}
-        
-     #   except Exception as ex:
-     #       return {'mensaje': str(ex)}
+            print(producto._id_usuario, producto._codigoProducto)
+             
+            cur.callproc('sp_listarProductoByUsuario', [producto._id_usuario, producto._codigoProducto])
+            fila = cur.fetchone()
+           # cur.close()
+
+
+            print(fila)
+
+            if fila == None:
+                 #   cur.open()       
+                    cur.callproc('sp_insertarProducto', [producto._codigoProducto,
+                                                            producto._producto,
+                                                            producto._descripcion,
+                                                            producto._precio,
+                                                            producto._stock,
+                                                            producto._id_tipoProducto,
+                                                            producto._id_usuario])
+                    mysql.connection.commit()
+                    cur.close()
+                    return {'mensaje': 'Producto Insertado con Éxito'}
+            else:
+                    cur.close()
+                    return {'mensaje': 'El Producto ya se encuentra agregado en el sistema'}
+
+        except Exception as ex:
+    
+            return {'mensaje': str(ex)}
+
         
 
 
@@ -95,23 +78,11 @@ class Producto:
 
     @staticmethod
     def actualizarProducto(json):
-     
-        """
-        Actualiza la información de un producto existente en la base de datos.
-
-        Args:
-            json (dict): Un objeto JSON con los datos actualizados del producto.
-
-        Returns:
-            dict: Un objeto JSON que contiene un mensaje de éxito o error.
-        """
+       
         try:
-
             producto = Producto(json)
-          
-
             cur = mysql.connection.cursor()
-            cur.callproc('sp_actualizarProducto', [producto._id_producto,
+            cur.callproc('sp_actualizarProducto', [producto._codigoProducto,
                                                    producto._producto, 
                                                    producto._descripcion, 
                                                    producto._precio, 
@@ -133,20 +104,11 @@ class Producto:
     # ------------------------------------------ funciona ok ---------------------------------
     
     @staticmethod
-    def eliminarProducto(id_usuario, id_producto):
-        """
-        Elimina un producto de la base de datos.
-
-        Args:
-            id_usuario (str): ID del usuario que realiza la operación.
-            id_producto (int): ID del producto a eliminar.
-
-        Returns:
-            dict: Un objeto JSON que contiene un mensaje de éxito o error.
-        """
+    def eliminarProducto(id_usuario, codigoProducto):
+        
         try:
             cur = mysql.connection.cursor()
-            cur.callproc('sp_eliminarProducto', [id_usuario, id_producto])
+            cur.callproc('sp_eliminarProducto', [id_usuario, codigoProducto])
             mysql.connection.commit()
             cur.close()
             return {'mensaje':'Producto Eliminado con Éxito'}
@@ -158,24 +120,14 @@ class Producto:
 
     
     
-# -------------------------------- alta prodcucto by usuario ----------------------------
+# -------------------------------- alta producto by usuario ----------------------------
 # -----------------------------------------anda ok --------------------------------------
     
     @staticmethod
-    def altaProductoByUsuario(id_usuario, id_producto):
-        """
-        Da de alta nuevamente un producto que previamente había sido eliminado.
-
-        Args:
-            id_usuario (str): ID del usuario que realiza la operación.
-            id_producto (int): ID del producto a dar de alta.
-
-        Returns:
-            dict: Un objeto JSON que contiene un mensaje de éxito o error.
-        """
+    def altaProductoByUsuario(id_usuario, codigoProducto):
         try:
             cur = mysql.connection.cursor()
-            cur.callproc('sp_altaProducto', [id_usuario, id_producto])
+            cur.callproc('sp_altaProducto', [id_usuario, codigoProducto])
             mysql.connection.commit()
             cur.close()
             return {'mensaje': 'Producto agregado nuevamente con Éxito'}
@@ -187,20 +139,11 @@ class Producto:
 
 
 # ----------------------------- alta obtener Productos por Usuario -------------------
-# ------------------------------------------NO anda ----------------------------------    
+# ------------------------------------------ anda ok ---------------------------------    
     
     @staticmethod
     def obtenerProductosByUsuario(id_usuario):
-        """
-        Obtiene un producto específico por su ID y el ID del usuario.
-
-        Args:
-            id_usuario (str): ID del usuario.
-            id_producto (int): ID del producto a obtener.
-
-        Returns:
-            dict: Un objeto JSON que contiene los datos del producto o un mensaje de error.
-        """
+        
         print(id_usuario)
         
         try:
@@ -227,21 +170,11 @@ class Producto:
 # -------------------------------------- funciona ok -------------------------------------    
     
     @staticmethod
-    def obtenerProductoByUsuario(id_usuario, id_producto):
-        """
-        Obtiene un producto específico por su ID y el ID del usuario.
-
-        Args:
-            id_usuario (str): ID del usuario.
-            id_producto (int): ID del producto a obtener.
-
-        Returns:
-            dict: Un objeto JSON que contiene los datos del producto o un mensaje de error.
-        """
+    def obtenerProductoByUsuario(id_usuario, codigoProducto):
         
         try:
             cur = mysql.connection.cursor()
-            cur.callproc('sp_listarProductoByUsuario', [id_usuario, id_producto])
+            cur.callproc('sp_listarProductoByUsuario', [id_usuario, codigoProducto])
             fila = cur.fetchone()
 
             if fila is not None:   
