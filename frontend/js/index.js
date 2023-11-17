@@ -23,16 +23,17 @@ function login(event) {
             // Aquí se agrega otro contenido de acuerdo a la necesidad de la API
             'Content-Type': 'application/json',
             'Authorization': 'Basic ' +  btoa(username + ':' + password)
-        },
-        body: JSON.stringify(data)
+        }//,
+        //body: JSON.stringify(data)
     };
 
     function handleResponse(response)  {
         if (!response.ok){
-            return Promise.reject({message: "HTTP Code:" + response.status + " - Description:" + response.statusText})
+            return alert(response.json()
+//            return Promise.reject({message: "HTTP Code:" + response.status + " - Description:" + response.statusText})
         }
         else{
-            return response.json()
+            return response.json();
         }
     }
 
@@ -49,7 +50,7 @@ function login(event) {
         })
         .catch(error => {
             // Manejar errores de la solicitud
-            console.log('Error en la solicitud:', error);
+            //console.log('Error en la solicitud:', error);
         })
         .finally( () => { 
             console.log("Promesa finalizada (resuelta o rechazada)");
