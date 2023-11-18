@@ -31,7 +31,16 @@ class Usuario():
         try:
             #recibo el request del front
             auth = request.authorization
-
+            
+            if not auth.username and not auth.password:
+                return jsonify({"message": "El campo Usuario y Contraseña no pueden estar vacios"}), 401
+            else:
+                if not auth.username:
+                    return jsonify({"message": "El campo Usuario no puede esta vacío"}), 401
+                else:
+                    if not auth.password:
+                        return jsonify({"message": "El campo Contraseña no puede esta vacío"}), 401
+            
             """ Control: existen valores para la autenticacion? """
             if not auth or not auth.username or not auth.password:
                 return jsonify({"message": "No autorizado"}), 401       
@@ -43,7 +52,7 @@ class Usuario():
             cur.close()
             
             if data is None:
-                return jsonify({"mensaje": "El usuario es incorrecto o no se haya registrado en el sistema"}), 401
+                return jsonify({"mensaje": "El usuario es incorrecto o no se haya registrado en el sistema"}),401
 
             """ Obtengo la contraseña encriptada de la BD y la comparo con la contraseña ingresada por el usuario"""
             pwdEncriptada = data[0]
@@ -70,5 +79,5 @@ class Usuario():
             return jsonify(usuarioJson)
         
         except Exception as ex:
-            return {'mensaje': str(ex)}    
+            return {'mensaje': str(ex)},401    
     
