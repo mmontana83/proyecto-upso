@@ -1,7 +1,7 @@
-function login(event) {
+async function login(event) {
     
     //Evito que se recargue la página
-    event.preventDefault()
+    event.preventDefault();
 
     // Obtener valores de usuario y contraseña
     var username = document.getElementById('username').value;
@@ -23,17 +23,16 @@ function login(event) {
             // Aquí se agrega otro contenido de acuerdo a la necesidad de la API
             'Content-Type': 'application/json',
             'Authorization': 'Basic ' +  btoa(username + ':' + password)
-        }//,
-        //body: JSON.stringify(data)
+        },
+        body: JSON.stringify(data)
     };
 
-    function handleResponse(response)  {
+    async function handleResponse(response)  {
         if (!response.ok){
-            return alert(response.json()
-//            return Promise.reject({message: "HTTP Code:" + response.status + " - Description:" + response.statusText})
+            throw await response.json();
         }
         else{
-            return response.json();
+            return await response.json();
         }
     }
 
@@ -49,10 +48,11 @@ function login(event) {
             window.location.href = `dashboard.html?id_usuario=${id_usuario}&nombre=${nombre}&apellido=${apellido}&token=${token}`;
         })
         .catch(error => {
-            // Manejar errores de la solicitud
-            //console.log('Error en la solicitud:', error);
+            console.log(error.message);
+            alert(error.message);
+            console.log(error.message);
         })
         .finally( () => { 
             console.log("Promesa finalizada (resuelta o rechazada)");
         })
-}
+};
