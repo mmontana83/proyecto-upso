@@ -36,8 +36,6 @@ class Producto:
             fila = cur.fetchone()
             cur.close()  # Cierra el cursor después de cada consulta
 
-            print(fila)
-
             if fila is None:
                 cur = mysql.connection.cursor()  # Vuelve a abrir el cursor para la siguiente consulta
                 cur.callproc('sp_insertarProducto', [producto._codigoProducto,
@@ -49,9 +47,9 @@ class Producto:
                                                      producto._id_usuario])
                 mysql.connection.commit()
                 cur.close()
-                return {'mensaje': 'Producto Insertado con Éxito'}
+                return jsonify({'mensaje': 'Producto Insertado con Éxito'}), 200
             else:
-                return {'mensaje': 'El Producto ya se encuentra agregado en el sistema'}
+                return jsonify({'mensaje': 'El Producto ya se encuentra agregado en el sistema'}), 409
 
         except Exception as ex:
             return {'mensaje': str(ex)}  
@@ -69,7 +67,7 @@ class Producto:
             cur.close()  # Cierra el cursor después de cada consulta
 
             if fila is None:
-                return {'mensaje': 'El Producto NO se encuentra en el sistema'}                
+                return jsonify({'mensaje': 'El Producto NO se encuentra en el sistema'}), 409
             else:
 
                 cur = mysql.connection.cursor()
@@ -82,12 +80,10 @@ class Producto:
                                                        producto._id_usuario])
                 mysql.connection.commit()
                 cur.close()
-                return {'mensaje': 'Producto Actualizado correctamente'}
+                return jsonify({'mensaje': 'Producto Actualizado correctamente'}), 200
 
-                
-        
         except Exception as ex:
-            return {'mensaje': str(ex)}
+            return jsonify({'mensaje': str(ex)}), 409
         
     # --------------------------------- fin Actualziar producto -------------------------------
 
@@ -107,15 +103,15 @@ class Producto:
             cur.close()  # Cierra el cursor después de cada consulta
 
             if fila is None:                
-                return {'mensaje': 'Producto No se encuentra en el sistema'}
+                return jsonify({'mensaje': 'Producto No se encuentra en el sistema'}), 409
             else:
                 cur = mysql.connection.cursor()
                 cur.callproc('sp_eliminarProducto', [id_usuario, codigoProducto])
                 mysql.connection.commit()
                 cur.close()
-                return {'mensaje':'Producto Eliminado con Éxito'}
+                return jsonify({'mensaje':'Producto Eliminado con Éxito'}), 200
         except Exception as ex:
-            return {'mensaje': str(ex)} 
+            return jsonify({'mensaje': str(ex)}), 409
 
 # --------------------------------- fin eliminar producto -------------------------------        
 
@@ -134,8 +130,6 @@ class Producto:
             fila = cur.fetchone()
             cur.close()  # Cierra el cursor después de la primera consulta
 
-            print(fila)
-
             if fila is None:
                 cur = mysql.connection.cursor()
 
@@ -148,13 +142,13 @@ class Producto:
                     pass
 
                 cur.close()
-                return {'mensaje': 'Producto agregado nuevamente con Éxito'}
+                return jsonify({'mensaje': 'Producto agregado nuevamente con Éxito'}), 200
             
             else:
-                return {'mensaje': 'Producto YA se encuentra en el Sistema'}
+                return jsonify({'mensaje': 'Producto ya se encuentra en el Sistema y fué dado de alta nuevamente.'}), 200
             
         except Exception as ex:
-                return {'mensaje': str(ex)}
+                return jsonify({'mensaje': str(ex)}), 409
 
 # ------------------------------- fin alta prodcucto by usuario ---------------------
 
@@ -166,8 +160,6 @@ class Producto:
     @staticmethod
     def obtenerProductosByUsuario(id_usuario):
         
-        print(id_usuario)
-        
         try:
             cur = mysql.connection.cursor()
             cur.callproc('sp_listarProductosByUsuario', [id_usuario])
@@ -178,11 +170,11 @@ class Producto:
                 for fila in datos:
                     producto = Producto.listarProductosToJson(fila)
                     productos.append(producto)
-                return productos  
+                return jsonify(productos), 200
             else:
-                return {'mensaje': 'Productos no encontrado'}
+                return jsonify({'mensaje': 'Productos no encontrado'}), 409
         except Exception as ex:
-            return {'mensaje': str(ex)}
+            return jsonify({'mensaje': str(ex)}), 409
         
 # ------------------------------ fin obtener Productos Usuario ---------------------------
         
@@ -201,11 +193,11 @@ class Producto:
 
             if fila is not None:   
                 producto = Producto.listarProductosToJson(fila)
-                return producto     
+                return jsonify(producto), 200
             else:
-                return {'mensaje': 'Productos no encontrado'}
+                return jsonify({'mensaje': 'Productos no encontrado'}), 409
         except Exception as ex:
-            return {'mensaje': str(ex)}
+            return jsonify({'mensaje': str(ex)}), 409
         
 # --------------- fin obtener un determinado productode un determinado usuario -------------
 
@@ -248,11 +240,12 @@ class Producto:
 
         return {
             'id_producto': json[0],
-            'producto': json[1],
-            'descripcion': json[2],
-            'precio': json[3],
-            'stock': json[4],
-            'tipoproducto': json[5]
+            'codigoProducto':json[1],
+            'producto': json[2],
+            'descripcion': json[3],
+            'precio': json[4],
+            'stock': json[6],
+            'tipoproducto': json[6]
         }
 
 """ Constructor __init__:
