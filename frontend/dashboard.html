@@ -115,7 +115,7 @@
                 
                 <div class="row mt-5 shadow-none text-center">
                     <div class="col-sm-3">
-                        <button class="btn btn-primary btn-lg" onclick="getAll_Client(),toggleSection('section2')"> Consultar Clientes</button>
+                        <button class="btn btn-primary btn-lg" onclick="getAll_Clients(),toggleSection('section2')"> Consultar Clientes</button>
                     </div>
                     <div class="col-sm-3">
                         <button class="btn btn-primary btn-lg" onclick="getAll_Product(),toggleSection('section3')"> Consultar Productos</button>
@@ -180,10 +180,10 @@
                                 <th> Nombre </th>   
                                 <th> Apellido </th>
                                 <th> Empresa </th>
-                                <th> Telefono </th>
-                                <th> Condicion IVA </th>
                                 <th> Email </th>
+                                <th> Telefono </th>
                                 <th> Direccion </th>
+                                <th> Condicion IVA </th>
                                 <th></th>
                                 <th> Editar</th>
                                 <th> Eliminar</th>
@@ -329,6 +329,12 @@
                     <div class="card">
                         <div class="card-body">
                             <form action="" class="row shadow-none" id="formDetalle">
+                                <div class="form-group col-md-5">
+                                    <label for="">Descripcion</label>
+                                    <select class="form-select" id="selectDescripcion">
+                                       <!-- aca van colocados los options con los productos de manera dinamica -->
+                                    </select>
+                                </div>
                                 <div class="form-group col-md-2">
                                     <label for="">Cantidad</label>
                                     <input 
@@ -338,12 +344,6 @@
                                     class="form-control"
                                     id="inputCantidad">
                                 </div>
-                                <div class="form-group col-md-5">
-                                    <label for="">Descripcion</label>
-                                    <select class="form-select" id="selectDescripcion">
-                                       <!-- aca van colocados los options con los productos de manera dinamica -->
-                                    </select>
-                                </div>
                                 <div class="form-group col-md">
                                     <label for="">P. Unitario</label>
                                     <input 
@@ -351,7 +351,6 @@
                                     class="form-control"
                                     id="inputPUnitario"
                                     disabled>
-                                    
                                 </div>
                                 <div class="form-group col-md">
                                     <label for="">P. Total</label>
@@ -494,13 +493,10 @@
     
                      
                       <div class="form-floating">
-                        <select class="form-select" id="floatingSelect" aria-label="Floating label select example">
-                          <option selected value=""></option>
-                          <option value="1">One</option>
-                          <option value="2">Two</option>
-                          <option value="3">Three</option>
+                        <select class="form-select" id="in-condicionIVA" aria-label="Floating label select example">
+                            <option selected value=""></option>
                         </select>
-                        <label for="floatingSelect">Condicion IVA</label>
+                        <label for="in-condicionIVA">Condicion IVA</label>
                       </div>
                 </form>
             </div>
@@ -533,72 +529,39 @@
 
                 <div class="form-floating mb-3">
                     <input type="text" for="validacion" class="form-control" id="ed-nombre" required>
-<<<<<<< HEAD
-<<<<<<< HEAD
-                    <label for="in-nombre" id="validacion">Nombre</label>
-=======
                     <label for="ed-nombre" id="validacion">Nombre</label>
->>>>>>> 9eef251f030349f03e679f8d1ed026f5a3f4010e
-=======
-                    <label for="ed-nombre" id="validacion">Nombre</label>
-=======
-                    <label for="in-nombre" id="validacion">Nombre</label>
->>>>>>> 0669de48f597d3a8160167d210187e19c5045a61
->>>>>>> f7a197cd891c5891c5af7c9f3cb9f3189dd791f5
                   </div>
                 
                 <div class="form-floating mb-3">
                     <input type="text" class="form-control" id="ed-apellido"  required>
-<<<<<<< HEAD
-<<<<<<< HEAD
-                    <label for="in-apellido">Apellido</label>
-=======
                     <label for="ed-apellido">Apellido</label>
->>>>>>> 9eef251f030349f03e679f8d1ed026f5a3f4010e
-=======
-                    <label for="ed-apellido">Apellido</label>
-=======
-                    <label for="in-apellido">Apellido</label>
->>>>>>> 0669de48f597d3a8160167d210187e19c5045a61
->>>>>>> f7a197cd891c5891c5af7c9f3cb9f3189dd791f5
                 </div>
                 
                 <div class="form-floating mb-3">
                     <input type="text" class="form-control" id="ed-empresa"  required>
-                    <label for="in-empresa">Empresa</label>
+                    <label for="ed-empresa">Empresa</label>
                 </div>
                 
                 <div class="form-floating mb-3">
-                    <input type="text" class="form-control" id="ed-telefono" required>
-                    <label for="in-telefono">Telefono</label>
-                  </div>
-                
-                  <div class="form-floating mb-3">
-<<<<<<< HEAD
-<<<<<<< HEAD
-                    <input type="text" class="form-control" id="ed-condIVA" required>
-=======
-                    <input type="text" class="form-control" id="in-condIVA" required>
->>>>>>> 9eef251f030349f03e679f8d1ed026f5a3f4010e
-=======
-                    <input type="text" class="form-control" id="in-condIVA" required>
-=======
-                    <input type="text" class="form-control" id="ed-condIVA" required>
->>>>>>> 0669de48f597d3a8160167d210187e19c5045a61
->>>>>>> f7a197cd891c5891c5af7c9f3cb9f3189dd791f5
-                    <label for="in-condIVA">Condicion IVA</label>
-                  </div>
-
-                  <div class="form-floating mb-3">
                     <input type="email" class="form-control" id="ed-email"  required>
-                    <label for="in-email">Email address</label>
+                    <label for="ed-email">Email address</label>
                 </div>
-                
+
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="ed-telefono" required>
+                    <label for="ed-telefono">Telefono</label>
+                  </div>
+                  
                   <div class="form-floating mb-3">
                     <input type="text" class="form-control" id="ed-direccion"  required>
-                    <label for="in-direccion">Direccion</label>
+                    <label for="ed-direccion">Direccion</label>
                   </div>
 
+                  <div class="form-floating">
+                    <select class="form-select" id="ed-condicionIVA" aria-label="Floating label select example">
+                    </select>
+                    <label for="ed-condicionIVA">Condicion IVA</label>
+                  </div>
             </form>
         </div>
         <div class="modal-footer">
@@ -612,12 +575,8 @@
 
     <script src="./js/dashboard.js"></script>
     <script src="./js/factura.js"></script>
-<<<<<<< HEAD
-    <script src="./js/cliente.js"></script>
-
-=======
     <script src="./js/CRUD_facturas.js"></script>
->>>>>>> 9eef251f030349f03e679f8d1ed026f5a3f4010e
+    <script src="./js/CRUD_clientes.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
