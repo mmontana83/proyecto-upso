@@ -31,7 +31,7 @@ function getAll_Product(){
                 data.forEach(producto => {
                     let fila = 
                     `<tr id="${producto.id}"> 
-                        <td>${producto.id_producto} </td>
+                        <td>${producto.codigoProducto} </td>
                         <td>${producto.producto}</td>
                         <td>${producto.descripcion}</td>
                         <td>${producto.precio}</td>
