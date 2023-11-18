@@ -25,73 +25,66 @@ class Producto:
         }
     
 
-
-
-    
-
     @staticmethod
-    def insertarProductoByUsuario(json):
-
-        print('Modelo', json)
-      
+    def insertarProductoByUsuario(json): 
+        print(json)      
+    
         try:
             producto = Producto(json)
-            cur = mysql.connection.cursor()
-
-            print(producto._id_usuario, producto._codigoProducto)
-             
+            cur = mysql.connection.cursor()            
             cur.callproc('sp_listarProductoByUsuario', [producto._id_usuario, producto._codigoProducto])
             fila = cur.fetchone()
-           # cur.close()
-
+            cur.close()  # Cierra el cursor después de cada consulta
 
             print(fila)
 
-            if fila == None:
-                 #   cur.open()       
-                    cur.callproc('sp_insertarProducto', [producto._codigoProducto,
-                                                            producto._producto,
-                                                            producto._descripcion,
-                                                            producto._precio,
-                                                            producto._stock,
-                                                            producto._id_tipoProducto,
-                                                            producto._id_usuario])
-                    mysql.connection.commit()
-                    cur.close()
-                    return {'mensaje': 'Producto Insertado con Éxito'}
+            if fila is None:
+                cur = mysql.connection.cursor()  # Vuelve a abrir el cursor para la siguiente consulta
+                cur.callproc('sp_insertarProducto', [producto._codigoProducto,
+                                                     producto._producto,
+                                                     producto._descripcion,
+                                                     producto._precio,
+                                                     producto._stock,
+                                                     producto._id_tipoProducto,
+                                                     producto._id_usuario])
+                mysql.connection.commit()
+                cur.close()
+                return {'mensaje': 'Producto Insertado con Éxito'}
             else:
-                    cur.close()
-                    return {'mensaje': 'El Producto ya se encuentra agregado en el sistema'}
+                return {'mensaje': 'El Producto ya se encuentra agregado en el sistema'}
 
         except Exception as ex:
-    
-            return {'mensaje': str(ex)}
-
-        
-
-
-
-
+            return {'mensaje': str(ex)}  
                 
     # --------------------------------------- Actualizar producto ------------------------------
     # ------------------------------------------ funciona ok ---------------------------------
 
     @staticmethod
-    def actualizarProducto(json):
-       
-        try:
+    def actualizarProducto(json):       
+        try:            
             producto = Producto(json)
-            cur = mysql.connection.cursor()
-            cur.callproc('sp_actualizarProducto', [producto._codigoProducto,
-                                                   producto._producto, 
-                                                   producto._descripcion, 
-                                                   producto._precio, 
-                                                   producto._stock, 
-                                                   producto._id_tipoProducto,
-                                                   producto._id_usuario])
-            mysql.connection.commit()
-            cur.close()
-            return {'mensaje': 'Producto Actualizado correctamente'}
+            cur = mysql.connection.cursor()            
+            cur.callproc('sp_listarProductoByUsuario', [producto._id_usuario, producto._codigoProducto])
+            fila = cur.fetchone()
+            cur.close()  # Cierra el cursor después de cada consulta
+
+            if fila is None:
+                return {'mensaje': 'El Producto NO se encuentra en el sistema'}                
+            else:
+
+                cur = mysql.connection.cursor()
+                cur.callproc('sp_actualizarProducto', [producto._codigoProducto,
+                                                       producto._producto, 
+                                                       producto._descripcion, 
+                                                       producto._precio, 
+                                                       producto._stock, 
+                                                       producto._id_tipoProducto,
+                                                       producto._id_usuario])
+                mysql.connection.commit()
+                cur.close()
+                return {'mensaje': 'Producto Actualizado correctamente'}
+
+                
         
         except Exception as ex:
             return {'mensaje': str(ex)}
@@ -104,18 +97,26 @@ class Producto:
     # ------------------------------------------ funciona ok ---------------------------------
     
     @staticmethod
-    def eliminarProducto(id_usuario, codigoProducto):
-        
+    def eliminarProducto(id_usuario, codigoProducto):       
+        print('hola')
+
         try:
-            cur = mysql.connection.cursor()
-            cur.callproc('sp_eliminarProducto', [id_usuario, codigoProducto])
-            mysql.connection.commit()
-            cur.close()
-            return {'mensaje':'Producto Eliminado con Éxito'}
-        
-        except Exception as ex: 
-            return {'mensaje': str(ex)}
-        
+            cur = mysql.connection.cursor()            
+            cur.callproc('sp_listarProductoByUsuario', [id_usuario, codigoProducto])
+            fila = cur.fetchone()
+            cur.close()  # Cierra el cursor después de cada consulta
+
+            if fila is None:                
+                return {'mensaje': 'Producto No se encuentra en el sistema'}
+            else:
+                cur = mysql.connection.cursor()
+                cur.callproc('sp_eliminarProducto', [id_usuario, codigoProducto])
+                mysql.connection.commit()
+                cur.close()
+                return {'mensaje':'Producto Eliminado con Éxito'}
+        except Exception as ex:
+            return {'mensaje': str(ex)} 
+
 # --------------------------------- fin eliminar producto -------------------------------        
 
     
@@ -127,13 +128,34 @@ class Producto:
     def altaProductoByUsuario(id_usuario, codigoProducto):
         try:
             cur = mysql.connection.cursor()
-            cur.callproc('sp_altaProducto', [id_usuario, codigoProducto])
-            mysql.connection.commit()
-            cur.close()
-            return {'mensaje': 'Producto agregado nuevamente con Éxito'}
+
+            # Primera consulta
+            cur.callproc('sp_listarProductoByUsuario', [id_usuario, codigoProducto])
+            fila = cur.fetchone()
+            cur.close()  # Cierra el cursor después de la primera consulta
+
+            print(fila)
+
+            if fila is None:
+                cur = mysql.connection.cursor()
+
+                # Segunda consulta
+                cur.callproc('sp_altaProducto', [id_usuario, codigoProducto])
+                mysql.connection.commit()
+
+                # Manejo de múltiples conjuntos de resultados
+                while cur.nextset():
+                    pass
+
+                cur.close()
+                return {'mensaje': 'Producto agregado nuevamente con Éxito'}
+            
+            else:
+                return {'mensaje': 'Producto YA se encuentra en el Sistema'}
+            
         except Exception as ex:
-            return {'mensaje': str(ex)}
-        
+                return {'mensaje': str(ex)}
+
 # ------------------------------- fin alta prodcucto by usuario ---------------------
 
 
