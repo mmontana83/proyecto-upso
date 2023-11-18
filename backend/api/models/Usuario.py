@@ -52,7 +52,7 @@ class Usuario():
             cur.close()
             
             if data is None:
-                return jsonify({"mensaje": "El usuario es incorrecto o no se haya registrado en el sistema"}), 401
+                return jsonify({"mensaje": "El usuario es incorrecto o no se haya registrado en el sistema"})
 
             """ Obtengo la contraseña encriptada de la BD y la comparo con la contraseña ingresada por el usuario"""
             pwdEncriptada = data[0]

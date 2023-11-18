@@ -29,10 +29,12 @@ async function login(event) {
 
     async function handleResponse(response)  {
         if (!response.ok){
-            throw await response.json();
+            
+            mensaje = await response.json().then(data => data.message);
+            console.log(mensaje);          
         }
         else{
-            return await response.json();
+            return response.json();
         }
     }
 
@@ -48,9 +50,7 @@ async function login(event) {
             window.location.href = `dashboard.html?id_usuario=${id_usuario}&nombre=${nombre}&apellido=${apellido}&token=${token}`;
         })
         .catch(error => {
-            console.log(error.message);
-            alert(error.message);
-            console.log(error.message);
+            console.error(error.message);
         })
         .finally( () => { 
             console.log("Promesa finalizada (resuelta o rechazada)");
