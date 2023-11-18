@@ -27,11 +27,11 @@ async function login(event) {
         body: JSON.stringify(data)
     };
 
-    async function handleResponse(response)  {
+    function handleResponse(response)  {
         if (!response.ok){
             
-            mensaje = await response.json().then(data => data.message);
-            console.log(mensaje);          
+            return Promise.reject(response);
+            //return Promise.reject({message: "HTTP Code: " + response.status + " - Description: " + response.statusText});          
         }
         else{
             return response.json();
@@ -49,8 +49,10 @@ async function login(event) {
             
             window.location.href = `dashboard.html?id_usuario=${id_usuario}&nombre=${nombre}&apellido=${apellido}&token=${token}`;
         })
-        .catch(error => {
-            console.error(error.message);
+        .catch(async error => {
+            
+            await error.json().then(er => alert(er.message));
+
         })
         .finally( () => { 
             console.log("Promesa finalizada (resuelta o rechazada)");
