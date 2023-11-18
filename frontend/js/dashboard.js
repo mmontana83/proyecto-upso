@@ -107,7 +107,7 @@ window.addEventListener("click", (e) => { //el evento es sobre la ventana entera
     }
   });
 
-  const fillDataCliente = (data) => {
+const fillDataCliente = (data) => {
     for (let index of inputs) {
         if (count == 7){
             switch(data[count].textContent){
@@ -160,7 +160,19 @@ window.addEventListener("click", (e) => { //el evento es sobre la ventana entera
             count += 1;
         }
     }
-  };
+};
+
+
+window.addEventListener("click", (e) => { //el evento es sobre la ventana entera
+    if (e.target.getAttribute("data-bs-target") === "#M-Editar") { 
+      let data = e.target.parentElement.parentElement.children;
+      fillDataCliente(data);
+    }
+  
+    if (e.target.matches(".btn-secondary" ) | (e.target.matches(".btn-close" )) | (e.target.matches(".modal.fade"))) {
+        count=0
+    }
+  });
   ///-------------------------------------------------------------------------
  
 

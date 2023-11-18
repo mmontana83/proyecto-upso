@@ -19,6 +19,7 @@ let arregloProductos = [
     {id:3, nombre: "teclado", precio: 33},
     {id:4, nombre: "computador", precio: 32.7}
 ];
+
 ///
 // INSERTAMOS LOS OPTIONS DENTRO DEL SELECT CON LOS PRODUCTOS TRAIDOS DE LA BD
 const optionProductos = () => {
@@ -51,8 +52,8 @@ const redibujarTabla = () => {
     arregloDetalle.forEach((detalle =>{
         let fila = `
         <tr>
-            <td>${detalle.cant}</td>
             <td>${detalle.nombreDescripcion}</td>
+            <td>${detalle.cant}</td>
             <td>${detalle.pUnit}</td>
             <td>${detalle.pTotal}</td>
             <td><button class="btn btn-danger" onclick ="eliminarRegistroById(${detalle.descripcion})" >Eiminar</button></td>
