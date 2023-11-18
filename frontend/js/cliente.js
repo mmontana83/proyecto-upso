@@ -17,7 +17,7 @@ function getAll_Clients() {
         }
     };
 
-    fetch(`http://127.0.0.1:5000/usuario/${id_usuario}/clientes`, requestOptions)
+    fetch(`http://127.0.0.1:5000/usuario/${id_usuario}/cliente`, requestOptions)
         .then(response => handleResponse(response))
         .then(
             (data) => {
@@ -68,8 +68,6 @@ function insert_Client(){
         "id_tipoCondicionIVA" : document.getElementById('floatingSelect').value
     };
 
-    console.log(jsonInsertCliente);
-
     const requestOptions = {
         method: 'POST',
         headers: {
@@ -79,7 +77,7 @@ function insert_Client(){
         body: JSON.stringify(jsonInsertCliente) 
     };
 
-    fetch(`http://127.0.0.1:5000/usuario/${id_usuario}/nuevocliente`, requestOptions)
+    fetch(`http://127.0.0.1:5000/usuario/${id_usuario}/cliente`, requestOptions)
         .then(response => handleResponse(response))
         .then(
             console.log('Insertar')
@@ -88,4 +86,41 @@ function insert_Client(){
         .finally(() => {
             console.log("Promesa finalizada (resuelta o rechazada)");
         });
+}
+
+function update_Client(){
+
+    var id_cliente = document.getElementById('in-cuit').value;
+
+    var jsonUpdateCliente = {
+        "nombre" : document.getElementById('ed-nombre').value, 
+        "apellido" : document.getElementById('ed-apellido').value,
+        "empresa" : document.getElementById('ed-empresa').value, 
+        "email" : document.getElementById('ed-email').value,  
+        "telefono" : document.getElementById('ed-telefono').value, 
+        "direccion" : document.getElementById('ed-direccion').value, 
+        "id_tipoCondicionIVA" : document.getElementById('ed-condIVA').value
+    };
+
+    console.log(jsonUpdateCliente);
+    // const requestOptions = {
+    //     method: 'POST',
+    //     headers: {
+    //         'Accept': '*/*',
+    //         'Content-Type': 'application/json'
+    //     },
+    //     body: JSON.stringify(jsonInsertCliente) 
+    // };
+
+    // fetch(`http://127.0.0.1:5000/usuario/${id_usuario}/cliente/${id_cliente}`, requestOptions)
+    //     .then(response => handleResponse(response))
+    //     .then(
+    //         data => {
+    //             console.log(data);
+    //         }
+    //     )
+    //     .catch((error) => { console.log("Promesa rechazada por", error); })
+    //     .finally(() => {
+    //         console.log("Promesa finalizada (resuelta o rechazada)");
+    //     });
 }
