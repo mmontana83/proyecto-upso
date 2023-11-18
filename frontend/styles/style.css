@@ -87,11 +87,6 @@ nav .logo-image{
     justify-content: center;
     min-width: 45px;
 }
-nav .logo-image img{
-    width: 40px;
-    object-fit: cover;
-    border-radius: 50%;
-}
 
 nav .logo-name .logo_name{
     font-size: 22px;
@@ -277,10 +272,7 @@ nav.close ~ .dashboard .top{
     transform: translateY(-50%);
     color: var(--black-light-color);
 }
-.top img{
-    width: 40px;
-    border-radius: 50%;
-}
+
 .dashboard .dash-content{
     padding-top: 50px;
 }
