@@ -52,7 +52,7 @@ async function login(event) {
             window.location.href = `dashboard.html?id_usuario=${id_usuario}&nombre=${nombre}&apellido=${apellido}&token=${token}`;
         })
         .catch(async error => {
-            await error.json().then(er => alert(er.message));
+            await error.json().then(er => alert(er.mensaje));
         })
         .finally( () => { 
             console.log("Promesa finalizada (resuelta o rechazada)");

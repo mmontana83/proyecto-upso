@@ -124,8 +124,8 @@ function update_Client(){
             data => {
                 
                 console.log(data);
-                alert(data.text);
-                cerrarModalCliente("M-Editar");
+                alert(JSON.stringify(data.mensaje));
+                // cerrarModalCliente("M-Editar");
                 getAll_Clients();
             }
         )
