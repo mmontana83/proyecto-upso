@@ -1,11 +1,7 @@
 {
     "client": "Thunder Client",
     "collectionName": "Proyecto UPSO",
-<<<<<<< HEAD
     "dateExported": "2023-11-18T20:54:12.512Z",
-=======
-    "dateExported": "2023-11-18T21:54:19.627Z",
->>>>>>> desarrollo-productos
     "version": "1.1",
     "folders": [
         {
@@ -23,31 +19,6 @@
             "sortNum": 20000
         },
         {
-<<<<<<< HEAD
-<<<<<<< HEAD
-            "_id": "357be653-e211-4001-b4ad-40b389916578",
-=======
-            "_id": "3e71caa1-ccfa-46ac-99bd-73705a4e5235",
->>>>>>> df7a34271f5ec6037a74f70b20660d3d0c20fbc5
-            "name": "Facturacion",
-            "containerId": "",
-            "created": "2023-11-14T01:04:38.659Z",
-            "sortNum": 30000
-        },
-        {
-            "_id": "0f69ddc0-137d-4797-9443-58a0e3a3ab7f",
-            "name": "Categorías",
-            "containerId": "",
-            "created": "2023-11-14T01:04:38.660Z",
-            "sortNum": 40000
-        },
-        {
-            "_id": "6c760f7e-c374-45e9-ab93-83ad3391bcaf",
-            "name": "Dashboard",
-            "containerId": "",
-<<<<<<< HEAD
-            "created": "2023-11-13T16:14:58.168Z",
-=======
             "_id": "3e71caa1-ccfa-46ac-99bd-73705a4e5235",
             "name": "Facturacion",
             "containerId": "",
@@ -66,10 +37,6 @@
             "name": "Dashboard",
             "containerId": "",
             "created": "2023-11-14T01:04:38.661Z",
->>>>>>> desarrollo-ruta-cliente
-=======
-            "created": "2023-11-14T01:04:38.661Z",
->>>>>>> df7a34271f5ec6037a74f70b20660d3d0c20fbc5
             "sortNum": 50000
         },
         {
@@ -82,24 +49,10 @@
     ],
     "requests": [
         {
-<<<<<<< HEAD
-<<<<<<< HEAD
-            "_id": "c075cd5b-90fa-43df-9a48-ea15b68beac1",
-            "colId": "dc7c0ff4-ffb6-4188-8af2-a930a3057dd6",
-            "containerId": "e8e04641-032e-4443-ab23-96558fa0d5c1",
-            "name": "get_clientes_by_usuario",
-=======
             "_id": "822081ff-83a1-4968-ab0d-cb18117b6c46",
             "colId": "1bda38a2-7b3b-4361-85dd-4357632d3945",
             "containerId": "f89ef947-28cf-4458-a8ab-22a52f888481",
             "name": "Listar Clientes por Usuario",
-<<<<<<< HEAD
-            "url": "127.0.0.1:5000/usuario/20302022731/cliente",
-            "method": "GET",
-            "sortNum": 10000,
-            "created": "2023-11-14T01:04:38.657Z",
-            "modified": "2023-11-18T17:48:40.784Z",
-=======
             "url": "127.0.0.1:5000/usuario/20302022731/clientes",
             "method": "GET",
             "sortNum": 10000,
@@ -109,32 +62,10 @@
                 {
                     "name": "user-id",
                     "value": "20302022731"
-<<<<<<< HEAD
-=======
-            "_id": "822081ff-83a1-4968-ab0d-cb18117b6c46",
-            "colId": "1bda38a2-7b3b-4361-85dd-4357632d3945",
-            "containerId": "f89ef947-28cf-4458-a8ab-22a52f888481",
-            "name": "Listar Clientes por Usuario",
-            "url": "127.0.0.1:5000/usuario/20302022731",
-            "method": "GET",
-            "sortNum": 10000,
-            "created": "2023-11-14T01:04:38.657Z",
-            "modified": "2023-11-14T22:22:35.322Z",
-            "headers": [
-                {
-                    "name": "user-id",
-                    "value": "20302022731"
-                },
-                {
-                    "name": "x-access-token",
-                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c3VhcmlvIjoiMjAzMDIwMjI3MzEiLCJleHAiOjE3MDAwMDYzNTl9.Tpn0gWJrlIl-NjGKqyoVKdvtx-c1W1VylVDrSeY7zyM"
->>>>>>> desarrollo-ruta-cliente
-=======
                 },
                 {
                     "name": "x-access-token",
                     "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c3VhcmlvIjoiMjAzMDIwMjI3MzEiLCJleHAiOjE3MDAzMzU3MDB9.UC52CdbviQyTXwHlbM5sx8KGT3pq6HhS3avQ6mI-6S0"
->>>>>>> df7a34271f5ec6037a74f70b20660d3d0c20fbc5
                 }
             ],
             "params": [],
@@ -148,18 +79,8 @@
             "url": "127.0.0.1:5000/login",
             "method": "POST",
             "sortNum": 10000,
-<<<<<<< HEAD
-<<<<<<< HEAD
-            "created": "2023-10-31T19:47:50.047Z",
-            "modified": "2023-11-05T23:01:32.666Z",
-=======
-            "created": "2023-11-14T01:04:38.658Z",
-            "modified": "2023-11-14T20:55:32.768Z",
->>>>>>> desarrollo-ruta-cliente
-=======
             "created": "2023-11-14T01:04:38.658Z",
             "modified": "2023-11-18T15:13:01.560Z",
->>>>>>> df7a34271f5ec6037a74f70b20660d3d0c20fbc5
             "headers": [],
             "params": [],
             "auth": {
@@ -172,29 +93,6 @@
             "tests": []
         },
         {
-<<<<<<< HEAD
-<<<<<<< HEAD
-            "_id": "5850ffd0-9bd9-4a32-ac77-d98d015c89b6",
-            "colId": "dc7c0ff4-ffb6-4188-8af2-a930a3057dd6",
-            "containerId": "e8e04641-032e-4443-ab23-96558fa0d5c1",
-            "name": "get_cliente_by_id_cliente",
-            "url": "http://127.0.0.1:5000/usuario/20302022731/cliente/23551234563",
-            "method": "GET",
-            "sortNum": 20000,
-            "created": "2023-10-31T19:48:28.795Z",
-            "modified": "2023-11-05T23:11:17.210Z",
-=======
-            "_id": "788d05c3-f57b-4b97-ba0b-cee165c53ff4",
-            "colId": "1bda38a2-7b3b-4361-85dd-4357632d3945",
-            "containerId": "f89ef947-28cf-4458-a8ab-22a52f888481",
-            "name": "Obtener Cliente por Usuario",
-            "url": "127.0.0.1:5000/usuario/20302022731/cliente/30681157375",
-            "method": "GET",
-            "sortNum": 20000,
-            "created": "2023-11-14T01:04:38.659Z",
-            "modified": "2023-11-14T22:23:56.595Z",
->>>>>>> desarrollo-ruta-cliente
-=======
             "_id": "788d05c3-f57b-4b97-ba0b-cee165c53ff4",
             "colId": "1bda38a2-7b3b-4361-85dd-4357632d3945",
             "containerId": "f89ef947-28cf-4458-a8ab-22a52f888481",
@@ -204,7 +102,6 @@
             "sortNum": 20000,
             "created": "2023-11-14T01:04:38.659Z",
             "modified": "2023-11-18T17:48:53.064Z",
->>>>>>> df7a34271f5ec6037a74f70b20660d3d0c20fbc5
             "headers": [
                 {
                     "name": "user-id",
@@ -212,15 +109,7 @@
                 },
                 {
                     "name": "x-access-token",
-<<<<<<< HEAD
-<<<<<<< HEAD
-                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c3VhcmlvIjoiMjAzMDIwMjI3MzEiLCJleHAiOjE2OTkyMzE4NjB9.Usl30KvyqiuodKWJeLcvF5ZQnnc0mDwFI6MfnAcnWHM"
-=======
-                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c3VhcmlvIjoiMjAzMDIwMjI3MzEiLCJleHAiOjE3MDAwMDY1Mzh9.hiI1FK_LWJx4esFbzaeIPhbo2-UFQ_XzP1bNGG2ttjY"
->>>>>>> desarrollo-ruta-cliente
-=======
                     "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c3VhcmlvIjoiMjAzMDIwMjI3MzEiLCJleHAiOjE3MDAzMzU3MDB9.UC52CdbviQyTXwHlbM5sx8KGT3pq6HhS3avQ6mI-6S0"
->>>>>>> df7a34271f5ec6037a74f70b20660d3d0c20fbc5
                 }
             ],
             "params": [],
@@ -231,24 +120,11 @@
             "colId": "1bda38a2-7b3b-4361-85dd-4357632d3945",
             "containerId": "f89ef947-28cf-4458-a8ab-22a52f888481",
             "name": "Registrar Cliente",
-<<<<<<< HEAD
-            "url": "127.0.0.1:5000/usuario/24302022737",
-            "method": "POST",
-            "sortNum": 30000,
-<<<<<<< HEAD
-            "created": "2023-10-31T19:53:35.801Z",
-            "modified": "2023-11-08T14:20:52.100Z",
-=======
-            "created": "2023-11-14T01:04:38.660Z",
-            "modified": "2023-11-14T22:21:44.537Z",
->>>>>>> desarrollo-ruta-cliente
-=======
             "url": "127.0.0.1:5000/usuario/24302022737/cliente",
             "method": "POST",
             "sortNum": 30000,
             "created": "2023-11-14T01:04:38.660Z",
             "modified": "2023-11-14T22:39:04.691Z",
->>>>>>> df7a34271f5ec6037a74f70b20660d3d0c20fbc5
             "headers": [],
             "params": [],
             "body": {
@@ -263,54 +139,21 @@
             "colId": "1bda38a2-7b3b-4361-85dd-4357632d3945",
             "containerId": "f89ef947-28cf-4458-a8ab-22a52f888481",
             "name": "Actualizar Cliente",
-<<<<<<< HEAD
-            "url": "127.0.0.1:5000/usuario/23302022739/cliente/23551234563",
-            "method": "POST",
-            "sortNum": 40000,
-<<<<<<< HEAD
-            "created": "2023-11-01T13:06:45.827Z",
-            "modified": "2023-11-05T23:10:02.611Z",
-=======
-            "created": "2023-11-14T01:04:38.661Z",
-            "modified": "2023-11-14T22:07:42.006Z",
->>>>>>> desarrollo-ruta-cliente
-=======
             "url": "127.0.0.1:5000/usuario/23302022739/cliente/23551234568",
             "method": "POST",
             "sortNum": 40000,
             "created": "2023-11-14T01:04:38.661Z",
             "modified": "2023-11-18T17:49:16.712Z",
->>>>>>> df7a34271f5ec6037a74f70b20660d3d0c20fbc5
             "headers": [],
             "params": [],
             "body": {
                 "type": "json",
-<<<<<<< HEAD
-<<<<<<< HEAD
-                "raw": "{\n  \"nombre\" : \"Rodrigo\", \n  \"apellido\" : \"Forte\", \n  \"empresa\" : \"STI S.R.L COMPUTACIÓN\", \n  \"email\" : \"stisrlpa@gmail.com\", \n  \"telefono\" : \"2932119944\", \n  \"direccion\" : \"Rosales 123\", \n  \"id_tipoCondicionIVA\" : \"4\"\n}",
-=======
-                "raw": "{\n  \"nombre\" : \"Rodrigo\", \n  \"apellido\" : \"Forte\", \n  \"empresa\" : \"STI S.R.L COMPUTACIÓN\", \n  \"email\" : \"stisrlpa@gmail.com\", \n  \"telefono\" : \"2932119944\", \n  \"direccion\" : \"Murature 1234\", \n  \"id_tipoCondicionIVA\" : \"4\"\n}",
->>>>>>> desarrollo-ruta-cliente
-=======
                 "raw": "{\n  \"nombre\" : \"Rodrigo\", \n  \"apellido\" : \"Forte\", \n  \"empresa\" : \"STI S.R.L COMPUTACIÓN\", \n  \"email\" : \"stisrlpa@gmail.com\", \n  \"telefono\" : \"2932224455\", \n  \"direccion\" : \"Murature 1234\", \n  \"id_tipoCondicionIVA\" : \"4\"\n}",
->>>>>>> df7a34271f5ec6037a74f70b20660d3d0c20fbc5
                 "form": []
             },
             "tests": []
         },
         {
-<<<<<<< HEAD
-<<<<<<< HEAD
-            "_id": "bf054e88-aaf3-4116-9b04-d961b156108d",
-            "colId": "dc7c0ff4-ffb6-4188-8af2-a930a3057dd6",
-            "containerId": "e8e04641-032e-4443-ab23-96558fa0d5c1",
-            "name": "EliminarCliente",
-            "url": "127.0.0.1:5000/usuario/20302022731/eliminarcliente/23183214579",
-            "method": "POST",
-            "sortNum": 50000,
-            "created": "2023-11-01T13:24:14.287Z",
-            "modified": "2023-11-05T23:30:18.632Z",
-=======
             "_id": "43ddc341-5369-48d2-8cff-416c99faf0db",
             "colId": "1bda38a2-7b3b-4361-85dd-4357632d3945",
             "containerId": "f89ef947-28cf-4458-a8ab-22a52f888481",
@@ -320,35 +163,11 @@
             "sortNum": 50000,
             "created": "2023-11-14T01:04:38.662Z",
             "modified": "2023-11-14T22:06:06.621Z",
->>>>>>> desarrollo-ruta-cliente
-=======
-            "_id": "43ddc341-5369-48d2-8cff-416c99faf0db",
-            "colId": "1bda38a2-7b3b-4361-85dd-4357632d3945",
-            "containerId": "f89ef947-28cf-4458-a8ab-22a52f888481",
-            "name": "Eliminar Cliente",
-            "url": "127.0.0.1:5000/usuario/20302022731/cliente/23183214579",
-            "method": "DELETE",
-            "sortNum": 50000,
-            "created": "2023-11-14T01:04:38.662Z",
-            "modified": "2023-11-14T22:06:06.621Z",
->>>>>>> df7a34271f5ec6037a74f70b20660d3d0c20fbc5
             "headers": [],
             "params": [],
             "tests": []
         },
         {
-<<<<<<< HEAD
-<<<<<<< HEAD
-            "_id": "ac156db5-1ecc-4ba8-8d47-63a4b302b9b5",
-            "colId": "dc7c0ff4-ffb6-4188-8af2-a930a3057dd6",
-            "containerId": "e8e04641-032e-4443-ab23-96558fa0d5c1",
-            "name": "AltaCliente",
-            "url": "127.0.0.1:5000/usuario/20302022731/altacliente/23183214579",
-            "method": "POST",
-            "sortNum": 60000,
-            "created": "2023-11-01T14:08:38.544Z",
-            "modified": "2023-11-05T23:28:22.367Z",
-=======
             "_id": "9e07ccc1-a605-4ca0-a94f-c09abd8c7535",
             "colId": "1bda38a2-7b3b-4361-85dd-4357632d3945",
             "containerId": "f89ef947-28cf-4458-a8ab-22a52f888481",
@@ -358,221 +177,6 @@
             "sortNum": 60000,
             "created": "2023-11-14T01:04:38.663Z",
             "modified": "2023-11-14T22:07:00.964Z",
->>>>>>> desarrollo-ruta-cliente
-=======
-            "_id": "9e07ccc1-a605-4ca0-a94f-c09abd8c7535",
-            "colId": "1bda38a2-7b3b-4361-85dd-4357632d3945",
-            "containerId": "f89ef947-28cf-4458-a8ab-22a52f888481",
-            "name": "Alta Cliente",
-            "url": "127.0.0.1:5000/usuario/20302022731/cliente/23183214579",
-            "method": "PUT",
-            "sortNum": 60000,
-            "created": "2023-11-14T01:04:38.663Z",
-            "modified": "2023-11-14T22:07:00.964Z",
-<<<<<<< HEAD
-            "headers": [],
-            "params": [],
-            "tests": []
-        },
-        {
-            "_id": "a05e5763-7fdd-48be-be28-2437b2c80909",
-            "colId": "1bda38a2-7b3b-4361-85dd-4357632d3945",
-            "containerId": "3e71caa1-ccfa-46ac-99bd-73705a4e5235",
-            "name": "get_facturas_by_usuario",
-            "url": "127.0.0.1:5000/usuario/20302022731/facturas",
-            "method": "GET",
-            "sortNum": 70000,
-            "created": "2023-11-14T01:04:38.664Z",
-            "modified": "2023-11-18T19:39:45.182Z",
-            "headers": [],
-            "params": [],
-            "tests": []
-        },
-        {
-            "_id": "86477884-0b15-4712-8540-c74f306a0a42",
-            "colId": "1bda38a2-7b3b-4361-85dd-4357632d3945",
-            "containerId": "3e71caa1-ccfa-46ac-99bd-73705a4e5235",
-            "name": "get_facturas_by_cliente",
-            "url": "127.0.0.1:5000/usuario/23302022739/cliente/20110336209/factura",
-            "method": "GET",
-            "sortNum": 80000,
-            "created": "2023-11-14T01:04:38.665Z",
-            "modified": "2023-11-14T22:52:35.261Z",
-            "headers": [],
-            "params": [],
-            "tests": []
-        },
-        {
-            "_id": "6061ec09-ed43-4c04-b338-582ac6e23faf",
-            "colId": "1bda38a2-7b3b-4361-85dd-4357632d3945",
-            "containerId": "3e71caa1-ccfa-46ac-99bd-73705a4e5235",
-            "name": "get_factura_by_cliente",
-            "url": "127.0.0.1:5000/usuario/23302022739/cliente/20110336209/factura/2",
-            "method": "GET",
-            "sortNum": 90000,
-            "created": "2023-11-14T01:04:38.666Z",
-            "modified": "2023-11-18T19:45:05.425Z",
-            "headers": [],
-            "params": [],
-            "tests": []
-        },
-        {
-            "_id": "23996e82-2857-423b-9c93-9d11a9ff7893",
-            "colId": "1bda38a2-7b3b-4361-85dd-4357632d3945",
-            "containerId": "3e71caa1-ccfa-46ac-99bd-73705a4e5235",
-            "name": "Insertar Factura",
-            "url": "127.0.0.1:5000/usuario/20302022731/cliente/23183214579/factura",
-            "method": "POST",
-            "sortNum": 90000,
-            "created": "2023-11-14T01:04:38.667Z",
-            "modified": "2023-11-18T20:49:59.665Z",
-            "headers": [],
-            "params": [],
-            "body": {
-                "type": "json",
-                "raw": "{\n   \"encabezado\": {\n    \"fecha\":\"2023-11-18\",\n    \"total\":\"55000.00\",\n    \"id_tipoFactura\": 1,\n    \"id_condicionVenta\": 2\n  },\n  \"detalle\": [\n    {\n      \"id_producto\": 1,\n      \"cantidad\": 2,\n      \"precio\": \"50000.00\"\n    },\n    {\n      \"id_producto\": 3,\n      \"cantidad\": 2,\n      \"precio\": \"5000.00\"\n    }\n  ]\n}",
-                "form": []
-            },
-            "tests": []
-        },
-        {
-            "_id": "7fd91842-77b0-4892-8260-9987c8dc6f27",
-            "colId": "1bda38a2-7b3b-4361-85dd-4357632d3945",
-            "containerId": "0f69ddc0-137d-4797-9443-58a0e3a3ab7f",
-            "name": "MostrarTipoCondicionIVA",
-            "url": "127.0.0.1:5000/dashboard/listarTipoCondicionIVA",
-            "method": "GET",
-            "sortNum": 100000,
-            "created": "2023-11-14T01:04:38.668Z",
-            "modified": "2023-11-14T01:04:38.668Z",
-            "headers": [],
-            "params": [],
-            "tests": []
-        },
-        {
-            "_id": "59a270b0-3719-4f64-ac0d-0968a66bdf5a",
-            "colId": "1bda38a2-7b3b-4361-85dd-4357632d3945",
-            "containerId": "0f69ddc0-137d-4797-9443-58a0e3a3ab7f",
-            "name": "MostrarTipoFactura",
-            "url": "127.0.0.1:5000/dashboard/listarTipoFactura",
-            "method": "GET",
-            "sortNum": 110000,
-            "created": "2023-11-14T01:04:38.669Z",
-            "modified": "2023-11-14T01:04:38.669Z",
-            "headers": [],
-            "params": [],
-            "tests": []
-        },
-        {
-            "_id": "64519566-0632-45f7-b52d-ae0a2e75880b",
-            "colId": "1bda38a2-7b3b-4361-85dd-4357632d3945",
-            "containerId": "0f69ddc0-137d-4797-9443-58a0e3a3ab7f",
-            "name": "MostrarTipoProducto",
-            "url": "127.0.0.1:5000/dashboard/listarTipoProducto",
-            "method": "GET",
-            "sortNum": 120000,
-            "created": "2023-11-14T01:04:38.670Z",
-            "modified": "2023-11-14T01:04:38.670Z",
-            "headers": [],
-            "params": [],
-            "tests": []
-        },
-        {
-            "_id": "2dfa774d-1ab8-49bd-a34a-79cae5f423b3",
-            "colId": "1bda38a2-7b3b-4361-85dd-4357632d3945",
-            "containerId": "0f69ddc0-137d-4797-9443-58a0e3a3ab7f",
-            "name": "MostrarTipoCondicionVenta",
-            "url": "127.0.0.1:5000/dashboard/listarTipoCondicionVenta",
-            "method": "GET",
-            "sortNum": 130000,
-            "created": "2023-11-14T01:04:38.671Z",
-            "modified": "2023-11-14T01:04:38.671Z",
-            "headers": [],
-            "params": [],
-            "tests": []
-        },
-        {
-            "_id": "17adb8c1-fc7a-4510-b979-163a0dd6867d",
-            "colId": "1bda38a2-7b3b-4361-85dd-4357632d3945",
-            "containerId": "6c760f7e-c374-45e9-ab93-83ad3391bcaf",
-            "name": "Control Stock",
-            "url": "127.0.0.1:5000/usuario/23302022739/dashboard/controlStock",
-            "method": "GET",
-            "sortNum": 140000,
-            "created": "2023-11-14T01:04:38.672Z",
-            "modified": "2023-11-14T01:04:38.672Z",
-            "headers": [],
-            "params": [],
-            "tests": []
-        },
-        {
-            "_id": "686cc9ca-6356-4b99-91d3-698367d9f85a",
-            "colId": "1bda38a2-7b3b-4361-85dd-4357632d3945",
-            "containerId": "6c760f7e-c374-45e9-ab93-83ad3391bcaf",
-            "name": "Historial de Ventas",
-            "url": "127.0.0.1:5000/usuario/23302022739/dashboard/historialVentas",
-            "method": "GET",
-            "sortNum": 150000,
-            "created": "2023-11-14T01:04:38.673Z",
-            "modified": "2023-11-14T01:04:38.673Z",
-            "headers": [],
-            "params": [],
-            "tests": []
-        },
-        {
-            "_id": "99164a2d-1772-4293-ac53-cff3e8bb2a13",
-            "colId": "1bda38a2-7b3b-4361-85dd-4357632d3945",
-            "containerId": "6c760f7e-c374-45e9-ab93-83ad3391bcaf",
-            "name": "Movimiento de Stock",
-            "url": "127.0.0.1:5000/usuario/23302022739/dashboard/movimientoStock",
-            "method": "GET",
-            "sortNum": 160000,
-            "created": "2023-11-14T01:04:38.674Z",
-            "modified": "2023-11-14T01:04:38.674Z",
-            "headers": [],
-            "params": [],
-            "tests": []
-        },
-        {
-            "_id": "ab8c4410-f019-41b8-bdbf-3dc6dabb4fa2",
-            "colId": "1bda38a2-7b3b-4361-85dd-4357632d3945",
-            "containerId": "6c760f7e-c374-45e9-ab93-83ad3391bcaf",
-            "name": "Ranking de Ventas por Cliente",
-            "url": "127.0.0.1:5000/usuario/23302022739/dashboard/rankingVentasByCliente",
-            "method": "GET",
-            "sortNum": 170000,
-            "created": "2023-11-14T01:04:38.675Z",
-            "modified": "2023-11-14T01:04:38.675Z",
-            "headers": [],
-            "params": [],
-            "tests": []
-        },
-        {
-            "_id": "797686d8-8327-40ad-9ae2-7808cc5c6c2a",
-            "colId": "1bda38a2-7b3b-4361-85dd-4357632d3945",
-            "containerId": "6c760f7e-c374-45e9-ab93-83ad3391bcaf",
-            "name": "Ranking de Ventas por Producto",
-            "url": "127.0.0.1:5000/usuario/23302022739/dashboard/rankingVentasByProducto",
-            "method": "GET",
-            "sortNum": 180000,
-            "created": "2023-11-14T01:04:38.676Z",
-            "modified": "2023-11-14T01:04:38.676Z",
-            "headers": [],
-            "params": [],
-            "tests": []
-        },
-        {
-            "_id": "7d0515d2-7e8d-421b-8fbd-e185e9240729",
-            "colId": "1bda38a2-7b3b-4361-85dd-4357632d3945",
-            "containerId": "6c760f7e-c374-45e9-ab93-83ad3391bcaf",
-            "name": "Ranking de Ventas por Servicio",
-            "url": "127.0.0.1:5000/usuario/23302022739/dashboard/rankingVentasByServicio",
-            "method": "GET",
-            "sortNum": 190000,
-            "created": "2023-11-14T01:04:38.677Z",
-            "modified": "2023-11-14T01:04:38.677Z",
-=======
->>>>>>> desarrollo-productos
             "headers": [],
             "params": [],
             "tests": []
