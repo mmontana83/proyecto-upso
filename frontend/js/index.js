@@ -1,7 +1,7 @@
-function login(event) {
+async function login(event) {
     
     //Evito que se recargue la página
-    event.preventDefault()
+    event.preventDefault();
 
     // Obtener valores de usuario y contraseña
     var username = document.getElementById('username').value;
@@ -29,10 +29,14 @@ function login(event) {
 
     function handleResponse(response)  {
         if (!response.ok){
-            return Promise.reject({message: "HTTP Code:" + response.status + " - Description:" + response.statusText})
+            
+            //response.json().then(data => console.log(data.message));
+            return Promise.reject(response);
+            
+            //return Promise.reject({message: "HTTP Code: " + response.status + " - Description: " + response.statusText});          
         }
         else{
-            return response.json()
+            return response.json();
         }
     }
 
@@ -47,11 +51,10 @@ function login(event) {
             
             window.location.href = `dashboard.html?id_usuario=${id_usuario}&nombre=${nombre}&apellido=${apellido}&token=${token}`;
         })
-        .catch(error => {
-            // Manejar errores de la solicitud
-            console.log('Error en la solicitud:', error);
+        .catch(async error => {
+            await error.json().then(er => alert(er.message));
         })
         .finally( () => { 
             console.log("Promesa finalizada (resuelta o rechazada)");
         })
-}
+};
