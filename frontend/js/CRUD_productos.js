@@ -20,7 +20,7 @@ function getAll_Product(){
         }
     }
 
-    fetch(`http://127.0.0.1:5000/usuario/${id_usuario}/producto`, requestOptions)
+    fetch(`http://127.0.0.1:5000/usuario/${id_usuario}/productos`, requestOptions)
         .then( response => handleResponse(response) )
         .then(
             (data) => {
