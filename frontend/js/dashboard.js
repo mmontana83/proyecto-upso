@@ -58,8 +58,8 @@ function toggleSection(sectionId) {
     var section = document.getElementById(sectionId);
     // Oculta todas las secciones antes de mostrar la seleccionada
     var sections = document.querySelectorAll(".toggle");
-    sections.forEach(function (sec) {
-        sec.classList.add("hidden");
+    sections.forEach(function (section) {
+        section.classList.add("hidden");
     });
     
     // Muestra o oculta la sección actual
@@ -187,4 +187,101 @@ window.addEventListener("click", (e) => { //el evento es sobre la ventana entera
     })
   })()
 
-/////// --------------------------------------------------
+/////// -----------------TOASTS---------------------------------
+// const toastElList = document.querySelectorAll('.toast')
+// const toastList = [...toastElList].map(toastEl => new bootstrap.Toast(toastEl, option))
+const toastTrigger = document.getElementById('liveToastBtn')
+const toastLiveExample = document.getElementById('liveToast')
+console.log(toastTrigger)
+if (toastTrigger) {
+  const toastBootstrap =  bootstrap.Toast.getOrCreateInstance(toastLiveExample)
+  toastTrigger.addEventListener('click', () => {
+    toastBootstrap.show()
+  })
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+////////////////////    CRUD        ///////////////////////////////////////////////////
+
+
+function handleResponse(response)  {
+    if (!response.ok){
+        return Promise.reject({message: "HTTP Code:" + response.status + " - Description:" + response.statusText})
+    }
+    else{
+        return response.json()
+    }
+}
+
+
+function getAll_Client(){
+    const requestOptions = {
+        method : 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'x-access-token': token,
+            'user-id':id_usuario
+        }
+    }
+
+    fetch(`http://127.0.0.1:5000/usuario/${id_usuario}/cliente`, requestOptions)
+        .then( response => handleResponse(response) )
+        .then(
+            (data) => {
+                // console.log(data); 
+                const tableBody = document.getElementById('all-persons');
+                let list = ``;
+                data.forEach(person => {
+                    let fila = 
+                    `<tr id="${person.id}"> 
+                        <td>${person.id_cliente} </td>
+                        <td class="d-none d-md-table-cell">${person.nombre}</td>
+                        <td>${person.apellido}</td>
+                        <td class="d-none d-md-table-cell">${person.empresa}</td>
+                        <td>${person.telefono}</td>
+                        <td class="d-none d-md-table-cell">${person.condicionIVA}</td>
+                        <td>${person.email}</td>
+                        <td>${person.direccion}</td>
+                        <td class= "table-toggle">
+                        <span class="material-symbols-outlined" onclick="toggleSection('section4')" >receipt_long</span>
+                        </td>
+                        <td class= "table-toggle" >
+                        <span data-bs-toggle="modal" data-bs-target="#M-Editar" class="material-symbols-outlined">
+                        manage_accounts</span>
+                        </td>
+                        <td>
+                        <span class="material-symbols-outlined table-togle">delete</span>
+                        </td>
+                    </tr>`;
+                    list += fila;
+                });
+                tableBody.innerHTML = list;
+            }
+        )
+        .catch( (error) => { console.log("Promesa rechazada por" , error)})
+        .finally( () => { 
+            console.log("Promesa finalizada (resuelta o rechazada)");
+        })
+}
