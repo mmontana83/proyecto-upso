@@ -59,8 +59,8 @@ function toggleSection(sectionId) {
     var section = document.getElementById(sectionId);
     // Oculta todas las secciones antes de mostrar la seleccionada
     var sections = document.querySelectorAll(".toggle");
-    sections.forEach(function (sec) {
-        sec.classList.add("hidden");
+    sections.forEach(function (section) {
+        section.classList.add("hidden");
     });
     
     // Muestra o oculta la sección actual
@@ -145,9 +145,18 @@ window.addEventListener("click", (e) => { //el evento es sobre la ventana entera
     })
   })()
 
-/////// --------------------------------------------------
-
-
+/////// -----------------TOASTS---------------------------------
+// const toastElList = document.querySelectorAll('.toast')
+// const toastList = [...toastElList].map(toastEl => new bootstrap.Toast(toastEl, option))
+const toastTrigger = document.getElementById('liveToastBtn')
+const toastLiveExample = document.getElementById('liveToast')
+console.log(toastTrigger)
+if (toastTrigger) {
+  const toastBootstrap =  bootstrap.Toast.getOrCreateInstance(toastLiveExample)
+  toastTrigger.addEventListener('click', () => {
+    toastBootstrap.show()
+  })
+}
 
 
 
@@ -195,7 +204,7 @@ function getAll_Client(){
         }
     }
 
-    fetch(`http://127.0.0.1:5000/usuario/${id_usuario}/clientes`, requestOptions)
+    fetch(`http://127.0.0.1:5000/usuario/${id_usuario}/cliente`, requestOptions)
         .then( response => handleResponse(response) )
         .then(
             (data) => {
@@ -206,11 +215,11 @@ function getAll_Client(){
                     let fila = 
                     `<tr id="${person.id}"> 
                         <td>${person.id_cliente} </td>
-                        <td>${person.nombre}</td>
+                        <td class="d-none d-md-table-cell">${person.nombre}</td>
                         <td>${person.apellido}</td>
-                        <td>${person.empresa}</td>
+                        <td class="d-none d-md-table-cell">${person.empresa}</td>
                         <td>${person.telefono}</td>
-                        <td>${person.condicionIVA}</td>
+                        <td class="d-none d-md-table-cell">${person.condicionIVA}</td>
                         <td>${person.email}</td>
                         <td>${person.direccion}</td>
                         <td class= "table-toggle">
