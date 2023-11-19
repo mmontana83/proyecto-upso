@@ -16,7 +16,6 @@ function getAll_Product(){
         method : 'GET',
         headers: {
             'Content-Type': 'application/json',
-            'x-access-token': token,
             'user-id':id_usuario
         }
     }
@@ -31,13 +30,13 @@ function getAll_Product(){
                 data.forEach(producto => {
                     let fila = 
                     `<tr id="${producto.id}"> 
-                        <td>${producto.id_producto} </td>
+                        <td>${producto.codigoProducto} </td>
                         <td>${producto.producto}</td>
                         <td>${producto.descripcion}</td>
                         <td>${producto.precio}</td>
                         <td>${producto.stock}</td>
                         <td class= "table-toggle" >
-                        <span data-bs-toggle="modal" data-bs-target="#M-Editar" class="material-symbols-outlined">
+                        <span data-bs-toggle="modal" data-bs-target="#M-Editar-Prod" class="material-symbols-outlined">
                         manage_accounts</span>
                         </td>
                         <td>

@@ -36,6 +36,11 @@ class Factura():
             cur.callproc('sp_insertarFactura', [encabezadoFactura._id_cliente, encabezadoFactura._id_usuario, encabezadoFactura._fecha,
                                                 totalFactura, encabezadoFactura._id_tipoFactura, encabezadoFactura._id_condicionVenta])
             
+            #Confirmo los cambios
+            mysql.connection.commit()
+            cur.close()
+            
+            cur = mysql.connection.cursor()
             #Agrego cada fila del detalle de la factura a la BD
             for fila in jsonDetalleFactura:
                 detalleFactura = DetalleFactura(fila)
@@ -45,9 +50,9 @@ class Factura():
             #Confirmo los cambios
             mysql.connection.commit()
             cur.close()
-            return{'Mensaje':'Factura Creada con Éxito'}
+            return jsonify({'Mensaje':'Factura Creada con Éxito'}), 200
         except Exception as ex:
-            return {'mensaje':str(ex)}
+            return jsonify({'mensaje':str(ex)}), 409
         
     def encabezadoFacturaToJson(fila):
         return{
@@ -70,32 +75,34 @@ class Factura():
         cur = mysql.connection.cursor()
         cur.callproc('sp_obtenerFacturasById_Usuario', [id_usuario,])
         datos = cur.fetchall()
+        cur.close()
 
         if len(datos) != 0:
             facturas = []
             for fila in datos:
                 factura = Factura.encabezadoFacturaToJson(fila)
                 facturas.append(factura)
-            return facturas
+            return jsonify(facturas), 200
         else:
-            return {'mensaje':'El usuario no tiene facturas registradas.'}
-        cur.close()
+            return jsonify({'mensaje':'El usuario no tiene facturas registradas.'}), 409
+        
 
     @staticmethod
     def obtenerFacturasById_Cliente(id_usuario, id_cliente):
         cur = mysql.connection.cursor()
         cur.callproc('sp_obtenerFacturasByCliente', [id_usuario,id_cliente])
         datos = cur.fetchall()
+        cur.close()
 
         if len(datos) != 0:
             facturas = []
             for fila in datos:
                 factura = Factura.encabezadoFacturaToJson(fila)
                 facturas.append(factura)
-            return facturas
+            return jsonify(facturas), 200
         else:
-            return {'mensaje':'El usuario no tiene facturas registradas.'}
-        cur.close()
+            return jsonify({'mensaje':'El usuario no tiene facturas registradas.'}), 409
+        
 
     @staticmethod
     def obtenerFacturaById_Cliente(id_usuario, id_cliente, nroFactura):
@@ -120,9 +127,9 @@ class Factura():
             detalleFactura = []
             for fila in datos:
                 detalleFactura.append(DetalleFactura.detalleFacturaTo_json(fila))
-            return {'encabezado':encabezadoFactura, 'detalle':detalleFactura}
+            return jsonify({'encabezado':encabezadoFactura, 'detalle':detalleFactura}), 200
         else:
-            return {'mensaje':'El usuario no tiene facturas registradas.'}
+            return jsonify({'mensaje':'El usuario no tiene facturas registradas.'}), 409
         cur.close()
 
 class DetalleFactura():

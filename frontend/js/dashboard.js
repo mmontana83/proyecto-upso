@@ -53,14 +53,13 @@ function insertarUsuarioEnHTML(nombre, apellido){
 //Esto es para que al momento de cargar la página se llame a la función insertar UsuarioEnHTML
 document.addEventListener('DOMContentLoaded', insertarUsuarioEnHTML(nombre, apellido));
 
-
 ////////////////////////////////////////////////////////////////////////////////////////////
 function toggleSection(sectionId) {
     var section = document.getElementById(sectionId);
     // Oculta todas las secciones antes de mostrar la seleccionada
     var sections = document.querySelectorAll(".toggle");
-    sections.forEach(function (sec) {
-        sec.classList.add("hidden");
+    sections.forEach(function (section) {
+        section.classList.add("hidden");
     });
     
     // Muestra o oculta la sección actual
@@ -73,8 +72,6 @@ function toggleSection(sectionId) {
 }
 
 ///// FUNCION PARA FILTRAR BUSQUEDAS DE CLIENTES
-
-
 document.addEventListener("keyup", e => {
     if (e.target.matches('#f-busqueda')) {
         const searchTerm = e.target.value.toLowerCase();
@@ -96,27 +93,76 @@ document.addEventListener("keyup", e => {
 
 
 // FUNCION PARA DEVOLVER LOS VALORES DE LA FILA A LOS INPUTS PARA EDITAR----------------
-
-const inputs = document.getElementById('edit-form').querySelectorAll('input')
+const inputs = document.getElementById('edit-form').querySelectorAll('input, select')
 let count = 0;
 
 window.addEventListener("click", (e) => { //el evento es sobre la ventana entera
-    if (e.target.getAttribute("data-bs-target") === "#M-Editar") { 
+    if (e.target.getAttribute("data-bs-target") === "#M-Editar" | e.target.getAttribute("data-bs-target") === "#Factura") { 
       let data = e.target.parentElement.parentElement.children;
-      console.log(data)
-      fillData(data);
+      fillDataCliente(data);
+      inputNombre.value = `${data[1].textContent} ${data[2].textContent} (${data[5].textContent})`;
+      inputCuit.value = data[0].textContent;
+      inputDireccion.value = data[6].textContent;
+    
     }
   
     if (e.target.matches(".btn-secondary" ) | (e.target.matches(".btn-close" )) | (e.target.matches(".modal.fade"))) {
-    count=0
+        count=0
     }
   });
-  const fillData = (data) => {
+
+  const fillDataCliente = (data) => {
     for (let index of inputs) {
-      index.value = data[count].textContent;
-    //   console.log(data[count].textContent);
-      count += 1;
-      
+        if (count == 7){
+            switch(data[count].textContent){
+                case "IVA RESPONSABLE INSCRIPTO":
+                    index.value = 1;
+                    break;
+                case "IVA RESPONSABLE NO INSCRIPTO":
+                    index.value = 2;
+                    break;
+                case "IVA NO RESPOSABLE":
+                    index.value = 3;
+                    break;
+                case "IVA SUJETO EXTERNO":
+                    index.value = 4;
+                    break;
+                case "CONSUMIDOR FINAL":
+                    index.value = 5;
+                    break;
+                case "RESPONSABLE MONOTRIBUTO":
+                    index.value = 6;
+                    break;
+                case "SUJETO NO CATEGORIZADO":
+                    index.value = 7;
+                    break;
+                case "PROVEEDOR DEL EXTERIOR":
+                    index.value = 8;
+                    break;
+                case "CLIENTE DEL EXTERIOR":
+                    index.value = 9;
+                    break;
+                case "IVA LIBERADO - LEY Nº 19.640":
+                    index.value = 10;
+                    break;
+                case "IVA RESPONSABLE INSCRIPTO - AGENTE DE PERCEPCIÓN":
+                    index.value = 11;
+                    break;
+                case "PEQUEÑO CONTRIBUYENTE EVENTUAL":
+                    index.value = 12;
+                    break;
+                case "MONOTRIBUTISTA SOCIAL":
+                    index.value = 13;
+                    break;
+                case "PEQUEÑO CONTRIBUYENTE EVENTUAL SOCIAL":
+                    index.value = 14;
+                    break;
+            }
+        }
+        else{
+            index.value = data[count].textContent;
+            count += 1;
+        }
     }
   };
   ///-------------------------------------------------------------------------
@@ -145,92 +191,21 @@ window.addEventListener("click", (e) => { //el evento es sobre la ventana entera
     })
   })()
 
-/////// --------------------------------------------------
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-////////////////////    CRUD        ///////////////////////////////////////////////////
-
-
-function handleResponse(response)  {
-    if (!response.ok){
-        return Promise.reject({message: "HTTP Code:" + response.status + " - Description:" + response.statusText})
-    }
-    else{
-        return response.json()
-    }
+/////// -----------------TOASTS---------------------------------
+// const toastElList = document.querySelectorAll('.toast')
+// const toastList = [...toastElList].map(toastEl => new bootstrap.Toast(toastEl, option))
+const toastTrigger = document.getElementById('liveToastBtn')
+const toastLiveExample = document.getElementById('liveToast')
+console.log(toastTrigger)
+if (toastTrigger) {
+  const toastBootstrap =  bootstrap.Toast.getOrCreateInstance(toastLiveExample)
+  toastTrigger.addEventListener('click', () => {
+    toastBootstrap.show()
+  })
 }
 
 
-function getAll_Client(){
-    const requestOptions = {
-        method : 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-            'x-access-token': token,
-            'user-id':id_usuario
-        }
-    }
 
-    fetch(`http://127.0.0.1:5000/usuario/${id_usuario}/clientes`, requestOptions)
-        .then( response => handleResponse(response) )
-        .then(
-            (data) => {
-                // console.log(data); 
-                const tableBody = document.getElementById('all-persons');
-                let list = ``;
-                data.forEach(person => {
-                    let fila = 
-                    `<tr id="${person.id}"> 
-                        <td>${person.id_cliente} </td>
-                        <td>${person.nombre}</td>
-                        <td>${person.apellido}</td>
-                        <td>${person.empresa}</td>
-                        <td>${person.telefono}</td>
-                        <td>${person.condicionIVA}</td>
-                        <td>${person.email}</td>
-                        <td>${person.direccion}</td>
-                        <td class= "table-toggle">
-                        <span class="material-symbols-outlined" onclick="toggleSection('section4')" >receipt_long</span>
-                        </td>
-                        <td class= "table-toggle" >
-                        <span data-bs-toggle="modal" data-bs-target="#M-Editar" class="material-symbols-outlined">
-                        manage_accounts</span>
-                        </td>
-                        <td>
-                        <span class="material-symbols-outlined table-togle">delete</span>
-                        </td>
-                    </tr>`;
-                    list += fila;
-                });
-                tableBody.innerHTML = list;
-            }
-        )
-        .catch( (error) => { console.log("Promesa rechazada por" , error)})
-        .finally( () => { 
-            console.log("Promesa finalizada (resuelta o rechazada)");
-        })
-}
+
+
+
