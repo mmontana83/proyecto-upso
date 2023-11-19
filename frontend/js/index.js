@@ -30,7 +30,9 @@ async function login(event) {
     function handleResponse(response)  {
         if (!response.ok){
             
+            //response.json().then(data => console.log(data.message));
             return Promise.reject(response);
+            
             //return Promise.reject({message: "HTTP Code: " + response.status + " - Description: " + response.statusText});          
         }
         else{
@@ -50,9 +52,7 @@ async function login(event) {
             window.location.href = `dashboard.html?id_usuario=${id_usuario}&nombre=${nombre}&apellido=${apellido}&token=${token}`;
         })
         .catch(async error => {
-            
             await error.json().then(er => alert(er.message));
-
         })
         .finally( () => { 
             console.log("Promesa finalizada (resuelta o rechazada)");

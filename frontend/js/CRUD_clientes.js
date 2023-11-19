@@ -122,7 +122,9 @@ function update_Client(){
         .then(response => handleResponse(response))
         .then(
             data => {
+                
                 console.log(data);
+                alert(data.text);
                 cerrarModalCliente("M-Editar");
                 getAll_Clients();
             }
