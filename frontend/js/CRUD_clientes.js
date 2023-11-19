@@ -31,9 +31,9 @@ function getAll_Clients() {
                         <td>${person.id_cliente} </td>
                         <td>${person.nombre}</td>
                         <td>${person.apellido}</td>
-                        <td>${person.empresa}</td>
-                        <td>${person.email}</td>
                         <td>${person.telefono}</td>
+                        <td>${person.email}</td>
+                        <td>${person.empresa}</td>
                         <td>${person.direccion}</td>
                         <td>${person.condicionIVA}</td>
                         <td class= "table-toggle">
