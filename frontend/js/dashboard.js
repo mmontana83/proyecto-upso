@@ -58,8 +58,8 @@ function toggleSection(sectionId) {
     var section = document.getElementById(sectionId);
     // Oculta todas las secciones antes de mostrar la seleccionada
     var sections = document.querySelectorAll(".toggle");
-    sections.forEach(function (sec) {
-        sec.classList.add("hidden");
+    sections.forEach(function (section) {
+        section.classList.add("hidden");
     });
     
     // Muestra o oculta la sección actual
@@ -97,9 +97,13 @@ const inputs = document.getElementById('edit-form').querySelectorAll('input, sel
 let count = 0;
 
 window.addEventListener("click", (e) => { //el evento es sobre la ventana entera
-    if (e.target.getAttribute("data-bs-target") === "#M-Editar") { 
+    if (e.target.getAttribute("data-bs-target") === "#M-Editar" | e.target.getAttribute("data-bs-target") === "#Factura") { 
       let data = e.target.parentElement.parentElement.children;
       fillDataCliente(data);
+      inputNombre.value = `${data[1].textContent} ${data[2].textContent} (${data[5].textContent})`;
+      inputCuit.value = data[0].textContent;
+      inputDireccion.value = data[6].textContent;
+    
     }
   
     if (e.target.matches(".btn-secondary" ) | (e.target.matches(".btn-close" )) | (e.target.matches(".modal.fade"))) {
@@ -187,4 +191,21 @@ window.addEventListener("click", (e) => { //el evento es sobre la ventana entera
     })
   })()
 
-/////// --------------------------------------------------
+/////// -----------------TOASTS---------------------------------
+// const toastElList = document.querySelectorAll('.toast')
+// const toastList = [...toastElList].map(toastEl => new bootstrap.Toast(toastEl, option))
+const toastTrigger = document.getElementById('liveToastBtn')
+const toastLiveExample = document.getElementById('liveToast')
+console.log(toastTrigger)
+if (toastTrigger) {
+  const toastBootstrap =  bootstrap.Toast.getOrCreateInstance(toastLiveExample)
+  toastTrigger.addEventListener('click', () => {
+    toastBootstrap.show()
+  })
+}
+
+
+
+
+
+

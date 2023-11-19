@@ -8,4 +8,4 @@ def login():
         auth = request.authorization
         return Usuario.login()
     except Exception as ex:
-        return jsonify({'mensaje' : str (ex)})
+        return jsonify({'message' : str (ex)})

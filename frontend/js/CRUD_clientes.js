@@ -31,20 +31,20 @@ function getAll_Clients() {
                         <td>${person.id_cliente} </td>
                         <td>${person.nombre}</td>
                         <td>${person.apellido}</td>
-                        <td>${person.empresa}</td>
-                        <td>${person.email}</td>
                         <td>${person.telefono}</td>
+                        <td>${person.email}</td>
+                        <td>${person.empresa}</td>
                         <td>${person.direccion}</td>
                         <td>${person.condicionIVA}</td>
-                        <td class= "table-toggle">
-                        <span class="material-symbols-outlined" onclick="toggleSection('section4')" >receipt_long</span>
+                        <td class= "">
+                        <span class="material-symbols-outlined table-toggle" data-bs-target="#Factura" onclick="toggleSection('section4')" >receipt_long</span>
                         </td>
-                        <td class= "table-toggle" >
-                        <span data-bs-toggle="modal" data-bs-target="#M-Editar" class="material-symbols-outlined">
+                        <td class= "" >
+                        <span data-bs-toggle="modal" data-bs-target="#M-Editar" class="material-symbols-outlined table-toggle">
                         manage_accounts</span>
                         </td>
                         <td>
-                        <span class="material-symbols-outlined table-togle">delete</span>
+                        <span class="material-symbols-outlined table-toggle">delete</span>
                         </td>
                     </tr>`;
                     list += fila;
@@ -124,8 +124,8 @@ function update_Client(){
             data => {
                 
                 console.log(data);
-                alert(data.text);
-                cerrarModalCliente("M-Editar");
+                alert(JSON.stringify(data.mensaje));
+                // cerrarModalCliente("M-Editar");
                 getAll_Clients();
             }
         )
