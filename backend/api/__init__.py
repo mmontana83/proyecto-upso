@@ -11,3 +11,5 @@ import api.routes.Login
 import api.routes.Cliente
 import api.routes.Facturas
 import api.routes.Categorias
+import api.routes.Dashboard
+import api.routes.Productos

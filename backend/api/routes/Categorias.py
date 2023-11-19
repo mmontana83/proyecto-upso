@@ -33,5 +33,8 @@ def mostrarTipoCondicionVenta():
         return jsonify(TipoCondicionVenta.mostrarTipoCondicionVenta())
     except Exception as ex:
         return jsonify({'mensaje':str(ex)})
+    
+
+
 
     

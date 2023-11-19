@@ -24,7 +24,7 @@ class TipoCondicionIVA():
             return listaTipoCondicionIVA
         except Exception as ex:
             return {'mensaje':str(ex)}
-
+        
 class TipoCondicionVenta():
     def __init__(self, json):
         self._id_tipoCondicionVenta = json[0]
