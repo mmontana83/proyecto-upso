@@ -49,7 +49,7 @@ def client_resource(func):
             id_prop = data[0]
             user_id = request.headers['user-id']
             if int(id_prop) != int(user_id):
-                return jsonify({"mensaje": "No tiene permisos para acceder a este recurso"}), 401
+                return jsonify({"message": "No tiene permisos para acceder a este recurso"}), 401
         return func(*args, **kwargs)
     return decorated
 

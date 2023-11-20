@@ -47,7 +47,7 @@ function login(event) {
             
             window.location.href = `dashboard.html?id_usuario=${id_usuario}&nombre=${nombre}&apellido=${apellido}&token=${token}`;
         })
-        .catch(async error => {
+        .catch(error => {
             error.json().then(data => 
                 Swal.fire({
                     icon: "error",

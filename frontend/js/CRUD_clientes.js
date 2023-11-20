@@ -1,13 +1,6 @@
+//Cargo el listado Condicion IVA cuando se carga la pagina.
 document.addEventListener('DOMContentLoaded', cargarTipoCondicionIVA());
 
-function handleResponse(response)  {
-    if (!response.ok){
-        return Promise.reject({message: "HTTP Code: " + response.status + " - Description: " + response.statusText});
-    }
-    else{
-        return response.json();
-    }
-}
 
 function getAll_Clients() {
     const requestOptions = {
@@ -23,7 +16,6 @@ function getAll_Clients() {
         .then(response => handleResponse(response))
         .then(
             (data) => {
-                // console.log(data); 
                 const tableBody = document.getElementById('all-persons');
                 let list = ``;
                 data.forEach(person => {
@@ -52,13 +44,29 @@ function getAll_Clients() {
                 tableBody.innerHTML = list;
             }
         )
-        .catch((error) => { console.log("Promesa rechazada por", error); })
+        .catch(error => {
+            console.log(error.message)
+            // Swal.fire({
+            //     icon: "error",
+            //     text: error.message
+            //   })
+        })
         .finally(() => {
             console.log("Promesa finalizada (resuelta o rechazada)");
         });
 }
 
 function insert_Client(){
+    
+    function handleResponse(response)  {
+        if (!response.ok){
+            return Promise.reject(response);
+        }
+        else{
+            return response.json();
+        }
+    }
+    
     var jsonInsertCliente = {
         "id_cliente": document.getElementById('in-cuit').value,
         "nombre" : document.getElementById('in-nombre').value, 
@@ -81,14 +89,23 @@ function insert_Client(){
 
     fetch(`http://127.0.0.1:5000/usuario/${id_usuario}/cliente`, requestOptions)
         .then(response => handleResponse(response))
-        .then( () => {
+        .then(data => {
+            Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: data.message
+              });
 
-            alert('Cliente insertado con éxito');
-            cerrarModalInsertarCliente("M-Crear");
+            var modal = document.getElementById('M-crear');
+            modal.style.display = 'none';
         })
-        .catch((error) => { 
-            console.log("Promesa rechazada por", error);
-            alert(error.message);
+        .catch(error => {
+            error.json().then(data => 
+                Swal.fire({
+                    icon: "error",
+                    text: data.message
+                  })
+            );
         })
         .finally(() => {
             console.log("Promesa finalizada (resuelta o rechazada)");
@@ -183,8 +200,121 @@ function cargarTipoCondicionIVA(){
     
 }
 
-function cerrarModalCliente(modal){
-    var modal = document.getElementById(modal);
-    modal.style.display = 'none';
+//Validaciones para la Carga de un Cliente
+
+var cuitInput = document.getElementById('in-cuit');
+var nombreInput = document.getElementById('in-nombre');
+var apellidoInput = document.getElementById('in-apellido');
+var empresaInput = document.getElementById('in-empresa');
+var emailInput = document.getElementById('in-email');
+var direccionInput = document.getElementById('in-direccion');
+var condicionIVAInput = document.getElementById('in-condicionIVA');
+
+var mensajeValidacionCUIT = document.getElementById('mensajeValidacionCUIT');
+var mensajeValidacionNombreApellidoEmpresa = document.getElementById('mensajeValidacionNombreApellidoEmpresa');
+var mensajeValidacionEmail = document.getElementById('mensajeValidacionEmail');
+var mensajeValidacionDireccion = document.getElementById('mensajeValidacionDireccion');
+var mensajeValidacionCondicionIVA = document.getElementById('mensajeValidacionCondicionIVA');
+
+var botonConfirmar = document.getElementById('botonConfirmar');
+
+function validarFormulario() {
+    botonConfirmar.disabled = !(validarCUIL() && validarNombreApellidoEmpresa() && validarEmail() && validarDireccion() && validadCondicionIVA());
+
+    if (botonConfirmar.disabled){
+        document.getElementById('M-crear').focus();
+    }
 }
 
+function validarCUIL() {
+    // Verificar si el CUIT tiene 11 dígitos y al menos uno de los campos está completado
+    var cuitValido = cuitInput.value.length === 11 && /^\d+$/.test(cuitInput.value);
+
+    // Verificar si el CUIT tiene 11 dígitos y al menos uno de los campos está completado
+    if (!cuitValido) {
+        // Mostrar mensaje de validación
+        mensajeValidacionCUIT.style.display = 'block';
+        cuitInput.classList.add('is-invalid');
+        return false;
+    } else {
+        mensajeValidacionCUIT.style.display = 'none';
+        cuitInput.classList.remove('is-invalid');
+        return true;
+    }
+}
+
+function validarNombreApellidoEmpresa() {
+    // Verificar si al menos uno de los campos (nombre, apellido, empresa) está completado
+    var identificacionCompletado = (nombreInput.value.trim() !== '' && apellidoInput.value.trim() !== '') || empresaInput.value.trim() !== '';
+
+    if (!identificacionCompletado) {
+        mensajeValidacionNombreApellidoEmpresa.style.display = 'block';
+        nombreInput.classList.add('is-invalid');
+        apellidoInput.classList.add('is-invalid');
+        empresaInput.classList.add('is-invalid');
+        return false;  // Deshabilitar el botón
+    } else {
+        mensajeValidacionNombreApellidoEmpresa.style.display = 'none';
+        nombreInput.classList.remove('is-invalid');
+        apellidoInput.classList.remove('is-invalid');
+        empresaInput.classList.remove('is-invalid');
+        return true;  // Habilitar el botón
+    }
+}
+
+function validarEmail() {
+    // Verificar si el correo electrónico tiene un formato válido
+    var emailValido = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailInput.value);
+
+    // Verificar si el CUIT tiene 11 dígitos y al menos uno de los campos está completado
+    if (!emailValido) {
+        // Mostrar mensaje de validación
+        mensajeValidacionEmail.style.display = 'block';
+        emailInput.classList.add('is-invalid');
+        return false;  // Deshabilitar el botón
+    } else {
+        mensajeValidacionEmail.style.display = 'none';
+        emailInput.classList.remove('is-invalid');
+        return true;  // Habilitar el botón
+    }
+}
+
+function validarDireccion() {
+    var direccionValida = direccionInput.value.trim() !== ''
+
+    if (!direccionValida) {
+        // Mostrar mensaje de validación
+        mensajeValidacionDireccion.style.display = 'block';
+        direccionInput.classList.add('is-invalid');
+        return false;  // Deshabilitar el botón
+    } else {
+        mensajeValidacionDireccion.style.display = 'none';
+        direccionInput.classList.remove('is-invalid');
+        return true;  // Habilitar el botón
+    }
+}
+
+function validadCondicionIVA(){
+    // Verificar si el Domicilio no es vacío
+    var condicionIVAValida = condicionIVAInput.value !== ''
+
+    if (!condicionIVAValida) {
+        // Mostrar mensaje de validación
+        mensajeValidacionCondicionIVA.style.display = 'block';
+        condicionIVAInput.classList.add('is-invalid');
+        return false;  // Deshabilitar el botón
+    } else {
+        mensajeValidacionCondicionIVA.style.display = 'none';
+        condicionIVAInput.classList.remove('is-invalid');
+        return true;  // Habilitar el botón
+    }// Verificar si el Domicilio no es vacío
+}
+
+// Agregar eventos de blur para los campos de entrada
+cuitInput.addEventListener('blur', validarFormulario);
+nombreInput.addEventListener('blur', validarFormulario);
+apellidoInput.addEventListener('blur', validarFormulario);
+empresaInput.addEventListener('blur', validarFormulario);
+emailInput.addEventListener('blur', validarFormulario);
+direccionInput.addEventListener('blur', validarFormulario);
+condicionIVAInput.addEventListener('blur', validarFormulario);
