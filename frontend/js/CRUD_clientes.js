@@ -1,8 +1,16 @@
 //Cargo el listado Condicion IVA cuando se carga la pagina.
 document.addEventListener('DOMContentLoaded', cargarTipoCondicionIVA());
 
-
 function getAll_Clients() {
+    function handleResponse(response)  {
+        if (!response.ok){
+            return Promise.reject(response);
+        }
+        else{
+            return response.json();
+        }
+    }
+    
     const requestOptions = {
         method: 'GET',
         headers: {
@@ -23,9 +31,9 @@ function getAll_Clients() {
                         <td>${person.id_cliente} </td>
                         <td>${person.nombre}</td>
                         <td>${person.apellido}</td>
-                        <td>${person.telefono}</td>
-                        <td>${person.email}</td>
                         <td>${person.empresa}</td>
+                        <td>${person.email}</td>
+                        <td>${person.telefono}</td>
                         <td>${person.direccion}</td>
                         <td>${person.condicionIVA}</td>
                         <td class= "">
@@ -45,11 +53,12 @@ function getAll_Clients() {
             }
         )
         .catch(error => {
-            console.log(error.message)
-            // Swal.fire({
-            //     icon: "error",
-            //     text: error.message
-            //   })
+            error.json().then(data => 
+                Swal.fire({
+                    icon: "error",
+                    text: data.message
+                  })
+            );
         })
         .finally(() => {
             console.log("Promesa finalizada (resuelta o rechazada)");
@@ -113,7 +122,15 @@ function insert_Client(){
 }
 
 function update_Client(){
-
+    
+    function handleResponse(response)  {
+        if (!response.ok){
+            return Promise.reject(response);
+        }
+        else{
+            return response.json();
+        }
+    }
     var id_cliente = document.getElementById('ed-cuit').value;
 
     var jsonUpdateCliente = {
@@ -140,19 +157,41 @@ function update_Client(){
         .then(
             data => {
                 
-                console.log(data);
-                alert(JSON.stringify(data.mensaje));
-                // cerrarModalCliente("M-Editar");
+                Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: data.message
+                  });
+    
+                var modal = document.getElementById('M-Editar');
+                modal.style.display = 'none';
                 getAll_Clients();
             }
         )
-        .catch((error) => { console.log("Promesa rechazada por", error); })
+        .catch(error => {
+            error.json().then(data => 
+                Swal.fire({
+                    icon: "error",
+                    text: data.message
+                  })
+            );
+        })
         .finally(() => {
             console.log("Promesa finalizada (resuelta o rechazada)");
         });
 }
 
 function cargarTipoCondicionIVA(){
+
+    function handleResponse(response)  {
+        if (!response.ok){
+            return Promise.reject(response);
+        }
+        else{
+            return response.json();
+        }
+    }
+
     const requestOptions = {
         method: 'GET',
         headers: {
@@ -193,15 +232,20 @@ function cargarTipoCondicionIVA(){
                 });
             }
         )
-        .catch((error) => { console.log("Promesa rechazada por", error); })
+        .catch(error => {
+            error.json().then(data => 
+                Swal.fire({
+                    icon: "error",
+                    text: data.message
+                  })
+            );
+        })
         .finally(() => {
             console.log("Promesa finalizada (resuelta o rechazada)");
         });
-    
 }
 
 //Validaciones para la Carga de un Cliente
-
 var cuitInput = document.getElementById('in-cuit');
 var nombreInput = document.getElementById('in-nombre');
 var apellidoInput = document.getElementById('in-apellido');
@@ -216,17 +260,9 @@ var mensajeValidacionEmail = document.getElementById('mensajeValidacionEmail');
 var mensajeValidacionDireccion = document.getElementById('mensajeValidacionDireccion');
 var mensajeValidacionCondicionIVA = document.getElementById('mensajeValidacionCondicionIVA');
 
-var botonConfirmar = document.getElementById('botonConfirmar');
+var botonInsertarCliente = document.getElementById('botonInsertarCliente');
 
-function validarFormulario() {
-    botonConfirmar.disabled = !(validarCUIL() && validarNombreApellidoEmpresa() && validarEmail() && validarDireccion() && validadCondicionIVA());
-
-    if (botonConfirmar.disabled){
-        document.getElementById('M-crear').focus();
-    }
-}
-
-function validarCUIL() {
+function validarCUILInsercion() {
     // Verificar si el CUIT tiene 11 dígitos y al menos uno de los campos está completado
     var cuitValido = cuitInput.value.length === 11 && /^\d+$/.test(cuitInput.value);
 
@@ -243,7 +279,7 @@ function validarCUIL() {
     }
 }
 
-function validarNombreApellidoEmpresa() {
+function validarNombreApellidoEmpresaInsercion() {
     // Verificar si al menos uno de los campos (nombre, apellido, empresa) está completado
     var identificacionCompletado = (nombreInput.value.trim() !== '' && apellidoInput.value.trim() !== '') || empresaInput.value.trim() !== '';
 
@@ -262,7 +298,7 @@ function validarNombreApellidoEmpresa() {
     }
 }
 
-function validarEmail() {
+function validarEmailInsercion() {
     // Verificar si el correo electrónico tiene un formato válido
     var emailValido = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailInput.value);
 
@@ -279,7 +315,7 @@ function validarEmail() {
     }
 }
 
-function validarDireccion() {
+function validarDireccionInsercion() {
     var direccionValida = direccionInput.value.trim() !== ''
 
     if (!direccionValida) {
@@ -294,7 +330,7 @@ function validarDireccion() {
     }
 }
 
-function validadCondicionIVA(){
+function validadCondicionIVAInsercion(){
     // Verificar si el Domicilio no es vacío
     var condicionIVAValida = condicionIVAInput.value !== ''
 
@@ -310,11 +346,100 @@ function validadCondicionIVA(){
     }// Verificar si el Domicilio no es vacío
 }
 
+function validarFormularioInsercion() {
+    botonInsertarCliente.disabled = !(validarCUILInsercion() && validarNombreApellidoEmpresaInsercion() && validarEmailInsercion() && validarDireccionInsercion() && validadCondicionIVAInsercion());
+
+    if (botonInsertarCliente.disabled){
+        document.getElementById('M-crear').focus();
+    }
+}
+
 // Agregar eventos de blur para los campos de entrada
-cuitInput.addEventListener('blur', validarFormulario);
-nombreInput.addEventListener('blur', validarFormulario);
-apellidoInput.addEventListener('blur', validarFormulario);
-empresaInput.addEventListener('blur', validarFormulario);
-emailInput.addEventListener('blur', validarFormulario);
-direccionInput.addEventListener('blur', validarFormulario);
-condicionIVAInput.addEventListener('blur', validarFormulario);
+cuitInput.addEventListener('blur', validarFormularioInsercion);
+nombreInput.addEventListener('blur', validarFormularioInsercion);
+apellidoInput.addEventListener('blur', validarFormularioInsercion);
+empresaInput.addEventListener('blur', validarFormularioInsercion);
+emailInput.addEventListener('blur', validarFormularioInsercion);
+direccionInput.addEventListener('blur', validarFormularioInsercion);
+condicionIVAInput.addEventListener('blur', validarFormularioInsercion);
+condicionIVAInput.addEventListener('change', function(){
+    document.getElementById('M-crear').focus();
+});
+
+//Validaciones para la Edición de un Cliente
+var nombreEdicion = document.getElementById('ed-nombre');
+var apellidoEdicion = document.getElementById('ed-apellido');
+var empresaEdicion = document.getElementById('ed-empresa');
+var emailEdicion = document.getElementById('ed-email');
+var direccionEdicion = document.getElementById('ed-direccion');
+
+var mensajeValidacionEdicionNombreApellidoEmpresa = document.getElementById('mensajeValidacionEdicionNombreApellidoEmpresa');
+var mensajeValidacionEdicionEmail = document.getElementById('mensajeValidacionEdicionEmail');
+var mensajeValidacionEdicionDireccion = document.getElementById('mensajeValidacionEdicionDireccion');
+
+var botonEdicionCliente = document.getElementById('botonEdicionCliente');
+
+function validarNombreApellidoEmpresaEdicion() {
+    // Verificar si al menos uno de los campos (nombre, apellido, empresa) está completado
+    var identificacionCompletado = (nombreEdicion.value.trim() !== '' && apellidoEdicion.value.trim() !== '') || empresaEdicion.value.trim() !== '';
+
+    if (!identificacionCompletado) {
+        mensajeValidacionEdicionNombreApellidoEmpresa.style.display = 'block';
+        nombreEdicion.classList.add('is-invalid');
+        apellidoEdicion.classList.add('is-invalid');
+        empresaEdicion.classList.add('is-invalid');
+        return false;  // Deshabilitar el botón
+    } else {
+        mensajeValidacionNombreApellidoEmpresa.style.display = 'none';
+        nombreEdicion.classList.remove('is-invalid');
+        apellidoEdicion.classList.remove('is-invalid');
+        empresaEdicion.classList.remove('is-invalid');
+        return true;  // Habilitar el botón
+    }
+}
+
+function validarEmailEdicion() {
+    // Verificar si el correo electrónico tiene un formato válido
+    var emailValido = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailEdicion.value);
+
+    // Verificar si el CUIT tiene 11 dígitos y al menos uno de los campos está completado
+    if (!emailValido) {
+        // Mostrar mensaje de validación
+        mensajeValidacionEdicionEmail.style.display = 'block';
+        emailEdicion.classList.add('is-invalid');
+        return false;  // Deshabilitar el botón
+    } else {
+        mensajeValidacionEdicionEmail.style.display = 'none';
+        emailEdicion.classList.remove('is-invalid');
+        return true;  // Habilitar el botón
+    }
+}
+
+function validarDireccionEdicion() {
+    var direccionValida = direccionEdicion.value.trim() !== ''
+
+    if (!direccionValida) {
+        // Mostrar mensaje de validación
+        mensajeValidacionEdicionDireccion.style.display = 'block';
+        direccionEdicion.classList.add('is-invalid');
+        return false;  // Deshabilitar el botón
+    } else {
+        mensajeValidacionEdicionDireccion.style.display = 'none';
+        direccionEdicion.classList.remove('is-invalid');
+        return true;  // Habilitar el botón
+    }
+}
+
+function validarFormularioEdicion() {
+    botonEdicionCliente.disabled = !(validarNombreApellidoEmpresaEdicion() && validarEmailEdicion() && validarDireccionEdicion());
+
+    if (botonEdicionCliente.disabled){
+        document.getElementById('M-Editar').focus();
+    }
+}
+
+nombreEdicion.addEventListener('blur', validarFormularioEdicion);
+apellidoEdicion.addEventListener('blur', validarFormularioEdicion);
+empresaEdicion.addEventListener('blur', validarFormularioEdicion);
+emailEdicion.addEventListener('blur', validarFormularioEdicion);
+direccionEdicion.addEventListener('blur', validarFormularioEdicion);

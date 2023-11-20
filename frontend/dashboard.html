@@ -176,9 +176,9 @@
                                 <th class="col"> Cuit </th>
                                 <th class="col d-none d-md-table-cell"> Nombre </th>   
                                 <th class="col"> Apellido </th>
-                                <th class="col"> Telefono </th>
-                                <th class="col"> Email </th>
                                 <th class="col d-none d-md-table-cell"> Empresa </th>
+                                <th class="col"> Email </th>
+                                <th class="col"> Telefono </th>
                                 <th class="col "> Direccion </th>
                                 <th class="col d-none d-md-table-cell"> Condicion IVA </th>
                                 <th class="col"></th>
@@ -542,7 +542,7 @@
             </div>
             <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-            <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" onclick="insert_Client()"" id="botonConfirmar" disabled>Confirmar</button>
+            <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" onclick="insert_Client()"" id="botonInsertarCliente" disabled>Confirmar</button>
             </div>
         </div>
         </div>
@@ -570,32 +570,44 @@
                 <div class="form-floating mb-3">
                     <input type="text" for="validacion" class="form-control" id="ed-nombre" required>
                     <label for="ed-nombre" id="validacion">Nombre</label>
+                    <div id="mensajeValidacionEdicionNombreApellidoEmpresa" class="invalid-feedback">
+                        Complete al menos uno de los campos (Nombre y Apellido o Empresa)
+                    </div>
                   </div>
                 
                 <div class="form-floating mb-3">
                     <input type="text" class="form-control" id="ed-apellido"  required>
                     <label for="ed-apellido">Apellido</label>
+                    <div id="mensajeValidacionEdicionNombreApellidoEmpresa" class="invalid-feedback">
+                        Complete al menos uno de los campos (Nombre y Apellido o Empresa)
+                    </div>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="ed-empresa"  required>
+                    <label for="ed-empresa">Empresa</label>
+                    <div id="mensajeValidacionEdicionNombreApellidoEmpresa" class="invalid-feedback">
+                        Complete al menos uno de los campos (Nombre y Apellido o Empresa)
+                    </div>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="email" class="form-control" id="ed-email"  required>
+                    <label for="ed-email">Email address</label>
+                    <div id="mensajeValidacionEdicionEmail" class="invalid-feedback">
+                        El email ingresado no tiene el formato correcto.
+                    </div>
                 </div>
                 <div class="form-floating mb-3">
                     <input type="text" class="form-control" id="ed-telefono" required>
                     <label for="ed-telefono">Telefono</label>
-                  </div>
-                  
-                  <div class="form-floating mb-3">
-                      <input type="email" class="form-control" id="ed-email"  required>
-                      <label for="ed-email">Email address</label>
-                  </div>
-                
-                <div class="form-floating mb-3">
-                    <input type="text" class="form-control" id="ed-empresa"  required>
-                    <label for="ed-empresa">Empresa</label>
                 </div>
-
                   
-                  <div class="form-floating mb-3">
+                <div class="form-floating mb-3">
                     <input type="text" class="form-control" id="ed-direccion"  required>
                     <label for="ed-direccion">Direccion</label>
-                  </div>
+                    <div id="mensajeValidacionEdicionDireccion" class="invalid-feedback">
+                        Este campo no puede quedar vacío.
+                    </div>
+                </div>
 
                   <div class="form-floating">
                     <select class="form-select" id="ed-condicionIVA" aria-label="Floating label select example">
@@ -606,7 +618,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-          <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" onclick="update_Client()">Guardar Cambios</button>
+          <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" onclick="update_Client()" id="botonEdicionCliente">Guardar Cambios</button>
         </div>
       </div>
     </div>

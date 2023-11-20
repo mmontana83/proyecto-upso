@@ -31,7 +31,7 @@ def token_required(func):
                  return jsonify({"message": "Error de id"}), 401
             
         except Exception as ex:
-            return jsonify({"message": str(ex)}), 401
+            return jsonify({"message": "No tiene permisos para acceder a esta ruta"}), 401
 
         return func(*args, **kwargs)
     return decorated
