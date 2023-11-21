@@ -1,4 +1,4 @@
-async function login(event) {
+function login(event) {
     
     //Evito que se recargue la página
     event.preventDefault();
@@ -29,9 +29,7 @@ async function login(event) {
 
     function handleResponse(response)  {
         if (!response.ok){
-            
             return Promise.reject(response);
-            //return Promise.reject({message: "HTTP Code: " + response.status + " - Description: " + response.statusText});          
         }
         else{
             return response.json();
@@ -49,10 +47,13 @@ async function login(event) {
             
             window.location.href = `dashboard.html?id_usuario=${id_usuario}&nombre=${nombre}&apellido=${apellido}&token=${token}`;
         })
-        .catch(async error => {
-            
-            await error.json().then(er => alert(er.message));
-
+        .catch(error => {
+            error.json().then(data => 
+                Swal.fire({
+                    icon: "error",
+                    text: data.message
+                  })
+            );
         })
         .finally( () => { 
             console.log("Promesa finalizada (resuelta o rechazada)");
