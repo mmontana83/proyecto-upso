@@ -8,37 +8,44 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
   <!-- Agrega la referencia a Chart.js (asegúrate de tenerlo instalado o usa CDN) -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- Se agrega la librería sweetalert2 -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bootstrap-4/bootstrap-4.css">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
 
 <div class="container mt-4">
   <div class="row">
     <!-- Chart 1 -->
-    <div class="col-md-4">
-      <canvas id="chart1" width="400" height="400"></canvas>
+    <div class="col-md-6">
+      <canvas id="Control Stock" width="400" height="400"></canvas>
     </div>
     <!-- Chart 2 -->
-    <div class="col-md-4">
-      <canvas id="chart2" width="400" height="400"></canvas>
+    <div class="col-md-6">
+      <canvas id="Historial de Ventas" width="400" height="400"></canvas>
     </div>
+  </div>
+  
+  <div class="row mt-4">
     <!-- Chart 3 -->
-    <div class="col-md-4">
-      <canvas id="chart3" width="400" height="400"></canvas>
+    <div class="col-md-6">
+      <canvas id="Movimiento de Stock" width="400" height="400"></canvas>
+    </div>
+    <!-- Chart 4 -->
+    <div class="col-md-6">
+      <canvas id="Ranking Ventas por Cliente" width="400" height="400"></canvas>
     </div>
   </div>
 
   <div class="row mt-4">
-    <!-- Chart 4 -->
-    <div class="col-md-4">
-      <canvas id="chart4" width="400" height="400"></canvas>
-    </div>
     <!-- Chart 5 -->
-    <div class="col-md-4">
-      <canvas id="chart5" width="400" height="400"></canvas>
+    <div class="col-md-6">
+      <canvas id="Ranking Ventas por Producto" width="400" height="400"></canvas>
     </div>
     <!-- Chart 6 -->
-    <div class="col-md-4">
-      <canvas id="chart6" width="400" height="400"></canvas>
+    <div class="col-md-6">
+      <canvas id="Ranking Ventas por Servicio" width="400" height="400"></canvas>
     </div>
   </div>
 </div>
