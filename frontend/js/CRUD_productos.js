@@ -40,7 +40,7 @@ function getAll_Product(){
                         manage_accounts</span>
                         </td>
                         <td>
-                        <span class="material-symbols-outlined table-togle">delete</span>
+                        <span class="material-symbols-outlined table-toggle">delete</span>
                         </td>
                     </tr>`;
                     list += fila;
