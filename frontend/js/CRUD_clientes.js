@@ -14,6 +14,7 @@ function getAll_Clients() {
     const requestOptions = {
         method: 'GET',
         headers: {
+            'Accept': '*/*',
             'Content-Type': 'application/json',
             'x-access-token': token,
             'user-id': id_usuario
@@ -44,7 +45,7 @@ function getAll_Clients() {
                         manage_accounts</span>
                         </td>
                         <td>
-                        <span class="material-symbols-outlined table-toggle">delete</span>
+                        <span class="material-symbols-outlined table-toggle" data-bs-target="#EliminarCliente">delete</span>
                         </td>
                     </tr>`;
                     list += fila;
@@ -76,44 +77,134 @@ function insert_Client(){
         }
     }
     
-    var jsonInsertCliente = {
-        "id_cliente": document.getElementById('in-cuit').value,
-        "nombre" : document.getElementById('in-nombre').value, 
-        "apellido" : document.getElementById('in-apellido').value,
-        "empresa" : document.getElementById('in-empresa').value, 
-        "email" : document.getElementById('in-email').value,  
-        "telefono" : document.getElementById('in-telefono').value, 
-        "direccion" : document.getElementById('in-direccion').value, 
-        "id_tipoCondicionIVA" : document.getElementById('in-condicionIVA').value
-    };
-
     const requestOptions = {
-        method: 'POST',
+        method: 'GET',
         headers: {
             'Accept': '*/*',
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(jsonInsertCliente) 
+            'Content-Type': 'application/json',
+            'x-access-token': token,
+            'user-id': id_usuario
+        }
     };
 
-    fetch(`http://127.0.0.1:5000/usuario/${id_usuario}/cliente`, requestOptions)
+    id_cliente = document.getElementById('in-cuit').value;
+    
+    //Primer consulto si existe el cliente
+    fetch(`http://127.0.0.1:5000/usuario/${id_usuario}/cliente/${id_cliente}`, requestOptions)
         .then(response => handleResponse(response))
         .then(data => {
-            Swal.fire({
-                position: "top-end",
-                icon: "success",
-                title: data.message
-              });
-
-            var modal = document.getElementById('M-crear');
-            modal.style.display = 'none';
+            
+            //El cliente existe y esta dado de alta. Por lo tanto no se puede agregar
+            if (data.id_tipoEstado == 1){
+                Swal.fire({
+                    title: "Cliente Existente",
+                    text: `El cliente ${data.cliente} ya existe se encuentra registrado en el sistema`,
+                    icon: "warning",
+                  })
+            }
+            //El cliente existe en la base de datos pero fue borrado "logicamente"
+            else{
+                if (data.id_tipoEstado == 2){
+                    Swal.fire({
+                        title: "Cliente dado de Baja",
+                        text: `El cliente ${data.cliente} ha sido dado de baja.\n¿Quiere darlo de alta nuevamente?`,
+                        icon: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#3085d6",
+                        cancelButtonColor: "#d33",
+                        confirmButtonText: "Sí, darlo de alta nuevamente!",
+                        cancelButtonText: "No"
+                      })
+                      .then((result) => {
+                        if (result.isConfirmed) {
+                            const requestOptions = {
+                                method: 'PUT',
+                                headers: {
+                                    'Accept': '*/*',
+                                    'Content-Type': 'application/json',
+                                    'x-access-token': token,
+                                    'user-id': id_usuario
+                                }
+                            };
+    
+                            fetch(`http://127.0.0.1:5000/usuario/${id_usuario}/cliente/${id_cliente}`, requestOptions)
+                                .then(response => handleResponse(response))
+                                .then( () => {
+                                    Swal.fire({
+                                        title: "Alta!",
+                                        text: `El cliente ${data.cliente} fue dado de alta nuevamente`,
+                                        icon: "success"});
+                                    getAll_Clients();
+                                })
+                                .catch(error => {
+                                    error.json().then(data => 
+                                        Swal.fire({
+                                            icon: "error",
+                                            text: data.message
+                                          })
+                                    );
+                                })
+                                .finally(() => {});
+                        }
+                    })
+                }
+                //El cliente no existe y se agregará a la base de datos.
+                else{
+                    var jsonInsertCliente = {
+                        "id_cliente": document.getElementById('in-cuit').value,
+                        "nombre" : document.getElementById('in-nombre').value, 
+                        "apellido" : document.getElementById('in-apellido').value,
+                        "empresa" : document.getElementById('in-empresa').value, 
+                        "email" : document.getElementById('in-email').value,  
+                        "telefono" : document.getElementById('in-telefono').value, 
+                        "direccion" : document.getElementById('in-direccion').value, 
+                        "id_tipoCondicionIVA" : document.getElementById('in-condicionIVA').value
+                    };
+        
+                    const requestOptions = {
+                        method: 'POST',
+                        headers: {
+                            'Accept': '*/*',
+                            'Content-Type': 'application/json',
+                            'x-access-token': token,
+                            'user-id': id_usuario
+                        },
+                        body: JSON.stringify(jsonInsertCliente) 
+                    };
+        
+                    fetch(`http://127.0.0.1:5000/usuario/${id_usuario}/cliente`, requestOptions)
+                        .then(response => handleResponse(response))
+                        .then(data => {
+                            Swal.fire({
+                                icon: "success",
+                                title: data.message
+                                });
+        
+                            var modal = document.getElementById('M-crear');
+                            modal.style.display = 'none';
+                            getAll_Clients();
+                        })
+                        .catch(error => {
+                            error.json().then(data => 
+                                Swal.fire({
+                                    icon: "error",
+                                    text: data.message
+                                    })
+                            );
+                        })
+                        .finally(() => {
+                            console.log("Promesa finalizada (resuelta o rechazada)");
+                        });
+                }                
+            
+            }
         })
         .catch(error => {
             error.json().then(data => 
                 Swal.fire({
                     icon: "error",
                     text: data.message
-                  })
+                    })
             );
         })
         .finally(() => {
@@ -147,7 +238,9 @@ function update_Client(){
         method: 'POST',
         headers: {
             'Accept': '*/*',
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'x-access-token': token,
+            'user-id': id_usuario
         },
         body: JSON.stringify(jsonUpdateCliente) 
     };
@@ -158,7 +251,6 @@ function update_Client(){
             data => {
                 
                 Swal.fire({
-                    position: "top-end",
                     icon: "success",
                     title: data.message
                   });
@@ -179,6 +271,70 @@ function update_Client(){
         .finally(() => {
             console.log("Promesa finalizada (resuelta o rechazada)");
         });
+}
+
+function delete_Client(data){
+    
+    function handleResponse(response)  {
+        if (!response.ok){
+            return Promise.reject(response);
+        }
+        else{
+            return response.json();
+        }
+    }
+    
+    //Recupero el Id_Cliente
+    id_cliente = data[0].textContent;
+    id_cliente_identificación = `${data[1].textContent} ${data[2].textContent} (${data[3].textContent})`;
+
+    Swal.fire({
+        title: "¡Advertencia - Eliminar Cliente!",
+        text: `¿Está seguro que quieres borrar al cliente ${id_cliente_identificación}?`,
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Sí, borrarlo!",
+        cancelButtonText: "Cancelar"
+      }).then((result) => {
+        if (result.isConfirmed) {
+          
+            const requestOptions = {
+                method: 'DELETE',
+                headers: {
+                    'Accept': '*/*',
+                    'Content-Type': 'application/json',
+                    'x-access-token': token,
+                    'user-id': id_usuario
+                }
+            };
+
+            fetch(`http://127.0.0.1:5000/usuario/${id_usuario}/cliente/${id_cliente}`, requestOptions)
+            .then(response => handleResponse(response))
+            .then(
+                () => {
+                    Swal.fire({
+                        title: "Borrado con Éxito!",
+                        text: `El cliente ${id_cliente_identificación} ha sido borrado`,
+                        icon: "success"
+                    });        
+                    getAll_Clients();
+                }
+            )
+            .catch(error => {
+                error.json().then(data => 
+                    Swal.fire({
+                        icon: "error",
+                        text: data.message
+                    })
+                );
+            })
+            .finally(() => {
+                console.log("Promesa finalizada (resuelta o rechazada)");
+            });
+        }
+    });
 }
 
 function cargarTipoCondicionIVA(){

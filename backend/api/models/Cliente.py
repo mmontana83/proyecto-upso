@@ -142,7 +142,9 @@ class Cliente():
             fila = cur.fetchone()
             
             if fila != None:
-                return jsonify(Cliente.sp_listarClientesByUsuarioToJson(fila)), 200
+                return jsonify(Cliente.sp_obtenerClienteByIdClienteToJson(fila)), 200
+            else: 
+                return jsonify({'Cliente':'', 'id_tipoEstado':''})
         except Exception as ex:
             return jsonify({'message': str(ex)}), 409
 
@@ -157,6 +159,13 @@ class Cliente():
             'telefono': json[5],
             'direccion': json[6],
             'condicionIVA': json[7]
+        }
+    
+    @classmethod
+    def sp_obtenerClienteByIdClienteToJson(self, json):
+        return{
+            'cliente': json[0],
+            'id_tipoEstado': json[1]
         }
 
     

@@ -16,6 +16,8 @@ def get_clientes_by_usuario(id_usuario):
     
 #Registrar un nuevo Cliente
 @app.route('/usuario/<id_usuario>/cliente', methods = ['POST'])
+@token_required
+@user_resources
 def registrar_cliente(id_usuario):
     try:
         #Obtengo el json del front
@@ -33,7 +35,6 @@ def registrar_cliente(id_usuario):
 @app.route('/usuario/<id_usuario>/cliente/<id_cliente>', methods = ['GET'])
 @token_required
 @user_resources
-@client_resource
 def get_cliente_by_id_cliente(id_usuario, id_cliente):
     try:
         return Cliente.obtenerClienteByIdCliente(id_usuario, id_cliente)
@@ -42,6 +43,8 @@ def get_cliente_by_id_cliente(id_usuario, id_cliente):
     
 #Actualizar Cliente
 @app.route('/usuario/<id_usuario>/cliente/<id_cliente>', methods = ['POST'])
+@token_required
+@user_resources
 def actualizar_cliente(id_usuario, id_cliente):
     try:
         #Obtengo el json del front
@@ -58,6 +61,8 @@ def actualizar_cliente(id_usuario, id_cliente):
 
 #Eliminar Cliente (Eliminado Lógico)    
 @app.route('/usuario/<id_usuario>/cliente/<id_cliente>', methods = ['DELETE'])
+@token_required
+@user_resources
 def eliminar_cliente(id_usuario, id_cliente):
     try:
         return Cliente.eliminarCliente(id_cliente, id_usuario)
@@ -66,6 +71,8 @@ def eliminar_cliente(id_usuario, id_cliente):
 
 #Este método es para volver a dar de alta un usuario que fue registrado y eliminado logicamente.    
 @app.route('/usuario/<id_usuario>/cliente/<id_cliente>', methods = ['PUT'])
+@token_required
+@user_resources
 def alta_cliente(id_usuario, id_cliente):
     try:
         return Cliente.altaCliente(id_cliente, id_usuario)
