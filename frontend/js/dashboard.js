@@ -31,6 +31,25 @@ sidebarToggle.addEventListener("click", () => {
         localStorage.setItem("status", "open");
     }
 })
+//o/////////////////////////////////////////////////////////////////////////////////////////7
+    // Función para resetear el formulario en cualquier modal
+    function resetFormulario(modalId) {
+        const formulario = document.querySelector(`${modalId} form`);
+        formulario.reset();
+      }
+    
+      // Agregar un evento que se dispara cuando un modal se muestra
+document.querySelectorAll('.modal').forEach(modal => {
+    modal.addEventListener('shown.bs.modal', function () {
+          // Resetear el formulario específico para cada modal
+        mensajeValidacionCUIT.style.display = 'none';
+        cuitInput.classList.remove('is-invalid');
+        resetFormulario(`#${modal.id}`);
+
+    });
+    });
+
+
 
 // Obtén los valores de los parámetros
 const nombre = obtenerParametroDeConsulta('nombre');
@@ -196,18 +215,6 @@ window.addEventListener("click", (e) => { //el evento es sobre la ventana entera
     })
   })()
 
-/////// -----------------TOASTS---------------------------------
-// const toastElList = document.querySelectorAll('.toast')
-// const toastList = [...toastElList].map(toastEl => new bootstrap.Toast(toastEl, option))
-const toastTrigger = document.getElementById('liveToastBtn')
-const toastLiveExample = document.getElementById('liveToast')
-console.log(toastTrigger)
-if (toastTrigger) {
-  const toastBootstrap =  bootstrap.Toast.getOrCreateInstance(toastLiveExample)
-  toastTrigger.addEventListener('click', () => {
-    toastBootstrap.show()
-  })
-}
 
 
 

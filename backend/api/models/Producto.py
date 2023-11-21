@@ -94,7 +94,6 @@ class Producto:
     
     @staticmethod
     def eliminarProducto(id_usuario, codigoProducto):       
-        print('hola')
 
         try:
             cur = mysql.connection.cursor()            
