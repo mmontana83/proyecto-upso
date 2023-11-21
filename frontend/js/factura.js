@@ -21,9 +21,6 @@ let arregloProductos = [
     {id:4, nombre: "computador", precio: 32.7}
 ];
 
-<<<<<<< HEAD
-///
-=======
 ///// obtenemos la fecha actual en formato "YYYY-MM-DD"
   var fechaActual = new Date().toISOString().split('T')[0];
 
@@ -36,19 +33,52 @@ let arregloProductos = [
 
 //////////////////////////////////////////
 
->>>>>>> f29565120b15eab71e95f9e8ef2bbe4b6609ea57
 // INSERTAMOS LOS OPTIONS DENTRO DEL SELECT CON LOS PRODUCTOS TRAIDOS DE LA BD
 const optionProductos = () => {
-    let options = `<option value="" disabled selected> --Seleccione un producto--</option>`;
-    arregloProductos.forEach((producto) =>{
-        let option = `
-            <option value= "${producto.id}"> ${producto.nombre}</option>
-        `
+    
+    function handleResponse(response)  {
+        if (!response.ok){
+            return Promise.reject(response);
+        }
+        else{
+            return response.json();
+        }
+    }
 
-        options += option
-        
-    })
-    selectDescripcion.innerHTML = options
+    const requestOptions = {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+            // 'x-access-token': token,
+            // 'user-id': id_usuario
+        }
+    };
+    
+    fetch(`http://127.0.0.1:5000/${id_usuario}/productos`, requestOptions)
+        .then(response => handleResponse(response))
+        .then( producto =>  {
+            console.log(producto);
+            let options = `<option value="" disabled selected> --Seleccione un producto--</option>`;
+            arregloProductos.forEach((producto) =>{
+            let option = `
+            <option value= "${producto.id_producto}"> ${producto.producto}</option>
+            `
+
+            options += option
+            })
+            selectDescripcion.innerHTML = options
+        })
+        .catch(error => {
+            error.json().then(data => 
+                Swal.fire({
+                    icon: "error",
+                    text: data.message
+                  })
+            );
+        })
+        .finally(() => {
+            console.log("Promesa finalizada (resuelta o rechazada)");
+        });
 }
 optionProductos()
 
