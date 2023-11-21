@@ -14,14 +14,18 @@
     <!----===== Google fonts  ===== -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    
+    <!-- Se agrega la librería sweetalert2 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bootstrap-4/bootstrap-4.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <title>Admin Dashboard Panel</title>
-
-
 
 </head>
 <body>
     <nav>
         <div class="logo-name table-toggle" id="section5Button" onclick="toggleSection('section5')">
+            <span class="logo_name">PROYECTO</span>
             <div class="logo-image ">
                 <span class="material-symbols-outlined">currency_exchange</span>
             </div>
@@ -172,9 +176,9 @@
                                 <th class="col"> Cuit </th>
                                 <th class="col d-none d-md-table-cell"> Nombre </th>   
                                 <th class="col"> Apellido </th>
-                                <th class="col"> Telefono </th>
-                                <th class="col"> Email </th>
                                 <th class="col d-none d-md-table-cell"> Empresa </th>
+                                <th class="col"> Email </th>
+                                <th class="col"> Telefono </th>
                                 <th class="col "> Direccion </th>
                                 <th class="col d-none d-md-table-cell"> Condicion IVA </th>
                                 <th class="col"></th>
@@ -464,7 +468,7 @@
 
     <!-- POP UP // MODAL-->
 
-    <!-- Modal CREAR -->
+<!-- -----------------------MODAL INSERTAR ------------------------->
     <div class="modal fade" id="M-crear" tabindex="-1" aria-labelledby="modalCrear" aria-hidden="true">
         <div class="modal-dialog">
         <div class="modal-content">
@@ -473,30 +477,45 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="" class="form-floating needs-validation" novalidate>
+                <form action="" class="form-floating needs-validation" novalidate id="Modal-Insertar-Usuario">
                     <div class="form-floating mb-3">
-                        <input type="text" class="form-control" id="in-cuit" placeholder="30234544557"  required>
+                        <input type="text" class="form-control" id="in-cuit" placeholder="Ingrese CUIT/CUIL"  required>
                         <label for="in-cuit">Cuit/Cuil</label>
-                      </div>
+                        <div id="mensajeValidacionCUIT" class="invalid-feedback">
+                            Ingrese un CUIT/CUIL válido (sólo 11 números, sin guiones).
+                        </div>
+                    </div>
     
                     <div class="form-floating mb-3">
                         <input type="text" class="form-control" id="in-nombre" placeholder="Juan" required>
                         <label for="in-nombre">Nombre</label>
+                        <div id="mensajeValidacionNombreApellidoEmpresa" class="invalid-feedback">
+                            Complete al menos uno de los campos (Nombre y Apellido o Empresa)
+                        </div>
                     </div>
                     
                     <div class="form-floating mb-3">
                         <input type="text" class="form-control" id="in-apellido" placeholder="Gonzalez" required>
                         <label for="in-apellido">Apellido</label>
+                        <div id="mensajeValidacionNombreApellidoEmpresa" class="invalid-feedback">
+                            Complete al menos uno de los campos (Nombre y Apellido o Empresa)
+                        </div>
                     </div>
                     
                     <div class="form-floating mb-3">
                         <input type="text" class="form-control" id="in-empresa" placeholder="Coca-cola" required>
                         <label for="in-empresa">Empresa</label>
+                        <div id="mensajeValidacionNombreApellidoEmpresa" class="invalid-feedback">
+                            Complete al menos uno de los campos (Nombre y Apellido o Empresa)
+                        </div>
                     </div>
                     
                     <div class="form-floating mb-3">
                         <input type="email" class="form-control" id="in-email" placeholder="nombre@ejemplo.com" required>
                         <label for="in-email">Email address</label>
+                        <div id="mensajeValidacionEmail" class="invalid-feedback">
+                            El email ingresado no tiene el formato correcto.
+                        </div>
                     </div>
                     
                     <div class="form-floating mb-3">
@@ -507,36 +526,30 @@
                       <div class="form-floating mb-3">
                         <input type="text" class="form-control" id="in-direccion" placeholder="calle 2451" required>
                         <label for="in-direccion">Direccion</label>
+                        <div id="mensajeValidacionDireccion" class="invalid-feedback">
+                            Este campo no puede quedar vacío.
+                        </div>
                       </div>
-    
-                     
+                         
                       <div class="form-floating">
                         <select class="form-select" id="in-condicionIVA" aria-label="Floating label select example">
                             <option selected value=""></option>
                         </select>
                         <label for="in-condicionIVA">Condicion IVA</label>
+                        <div id="mensajeValidacionCondicionIVA" class="invalid-feedback">
+                            Debe seleccionar una opción.
+                        </div>
                       </div>
                 </form>
             </div>
             <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-            <button type="submit" class="btn btn-primary" onclick="insert_Client()" id="liveToastBtn">Confirmar</button>
+            <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" onclick="insert_Client()"" id="botonInsertarCliente" disabled>Confirmar</button>
             </div>
         </div>
         </div>
     </div>
-    <div class="toast-container position-fixed bottom-0 end-0 p-3">
-        <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-          <div class="toast-header text-bg-primary">
-            <!-- <img src="..." class="rounded me-2" alt="..."> -->
-            <strong class="me-auto">Mensaje</strong>
-            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-          </div>
-          <div class="toast-body">
-            Aca tiene que ir el texto segun salga bien o mal
-          </div>
-        </div>
-      </div>
+
 
 
 <!-- -----------------------MODAL EDITAR ------------------------->
@@ -559,32 +572,44 @@
                 <div class="form-floating mb-3">
                     <input type="text" for="validacion" class="form-control" id="ed-nombre" required>
                     <label for="ed-nombre" id="validacion">Nombre</label>
+                    <div id="mensajeValidacionEdicionNombreApellidoEmpresa" class="invalid-feedback">
+                        Complete al menos uno de los campos (Nombre y Apellido o Empresa)
+                    </div>
                   </div>
                 
                 <div class="form-floating mb-3">
                     <input type="text" class="form-control" id="ed-apellido"  required>
                     <label for="ed-apellido">Apellido</label>
+                    <div id="mensajeValidacionEdicionNombreApellidoEmpresa" class="invalid-feedback">
+                        Complete al menos uno de los campos (Nombre y Apellido o Empresa)
+                    </div>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="ed-empresa"  required>
+                    <label for="ed-empresa">Empresa</label>
+                    <div id="mensajeValidacionEdicionNombreApellidoEmpresa" class="invalid-feedback">
+                        Complete al menos uno de los campos (Nombre y Apellido o Empresa)
+                    </div>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="email" class="form-control" id="ed-email"  required>
+                    <label for="ed-email">Email address</label>
+                    <div id="mensajeValidacionEdicionEmail" class="invalid-feedback">
+                        El email ingresado no tiene el formato correcto.
+                    </div>
                 </div>
                 <div class="form-floating mb-3">
                     <input type="text" class="form-control" id="ed-telefono" required>
                     <label for="ed-telefono">Telefono</label>
-                  </div>
-                  
-                  <div class="form-floating mb-3">
-                      <input type="email" class="form-control" id="ed-email"  required>
-                      <label for="ed-email">Email address</label>
-                  </div>
-                
-                <div class="form-floating mb-3">
-                    <input type="text" class="form-control" id="ed-empresa"  required>
-                    <label for="ed-empresa">Empresa</label>
                 </div>
-
                   
-                  <div class="form-floating mb-3">
+                <div class="form-floating mb-3">
                     <input type="text" class="form-control" id="ed-direccion"  required>
                     <label for="ed-direccion">Direccion</label>
-                  </div>
+                    <div id="mensajeValidacionEdicionDireccion" class="invalid-feedback">
+                        Este campo no puede quedar vacío.
+                    </div>
+                </div>
 
                   <div class="form-floating">
                     <select class="form-select" id="ed-condicionIVA" aria-label="Floating label select example">
@@ -595,7 +620,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-          <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" onclick="update_Client()">Guardar Cambios</button>
+          <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" onclick="update_Client()" id="botonEdicionCliente">Guardar Cambios</button>
         </div>
       </div>
     </div>

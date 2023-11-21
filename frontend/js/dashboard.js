@@ -97,15 +97,20 @@ const inputs = document.getElementById('edit-form').querySelectorAll('input, sel
 let count = 0;
 
 window.addEventListener("click", (e) => { //el evento es sobre la ventana entera
-    if (e.target.getAttribute("data-bs-target") === "#M-Editar" | e.target.getAttribute("data-bs-target") === "#Factura") { 
-      let data = e.target.parentElement.parentElement.children;
-      fillDataCliente(data);
-      inputNombre.value = `${data[1].textContent} ${data[2].textContent} (${data[5].textContent})`;
-      inputCuit.value = data[0].textContent;
-      inputDireccion.value = data[6].textContent;
-    
+    if (e.target.getAttribute("data-bs-target") === "#M-Editar" | e.target.getAttribute("data-bs-target") === "#Factura"
+        | e.target.getAttribute("data-bs-target") === "#EliminarCliente") { 
+            
+            let data = e.target.parentElement.parentElement.children;
+            fillDataCliente(data);
+            inputNombre.value = `${data[1].textContent} ${data[2].textContent} (${data[3].textContent})`;
+            inputCuit.value = data[0].textContent;
+            inputDireccion.value = data[6].textContent;
+
+            if (e.target.getAttribute("data-bs-target") === "#EliminarCliente") {
+                delete_Client(data); 
+            }
     }
-  
+      
     if (e.target.matches(".btn-secondary" ) | (e.target.matches(".btn-close" )) | (e.target.matches(".modal.fade"))) {
         count=0
     }
@@ -203,8 +208,6 @@ if (toastTrigger) {
     toastBootstrap.show()
   })
 }
-
-
 
 
 

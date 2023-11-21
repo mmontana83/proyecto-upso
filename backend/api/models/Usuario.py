@@ -52,7 +52,7 @@ class Usuario():
             cur.close()
             
             if data is None:
-                return jsonify({"mensaje": "El usuario es incorrecto o no se haya registrado en el sistema"}),401
+                return jsonify({"message": "El usuario es incorrecto o no se haya registrado en el sistema"}),401
 
             """ Obtengo la contraseña encriptada de la BD y la comparo con la contraseña ingresada por el usuario"""
             pwdEncriptada = data[0]
@@ -62,12 +62,12 @@ class Usuario():
                 data = cur.fetchone()
                 cur.close()
             else:
-                return jsonify({"mensaje":"La contraseña ingresada es incorrecta"}), 401
+                return jsonify({"message":"La contraseña ingresada es incorrecta"}), 401
             
             """ En este paso verifico que el usuario este vigente, es decir, no haya sido eliminado"""
             usuario = Usuario(data)
             if usuario._id_tipoEstado == 2:
-                return jsonify({"mensaje": "El usuario se halla desactivado. Consulte al administrador"}), 402
+                return jsonify({"message": "El usuario se halla desactivado. Consulte al administrador"}), 402
             
             """ El usuario existe en la BD y coincide su contraseña """
             token = jwt.encode({'id_usuario': usuario._id_usuario,
@@ -79,5 +79,5 @@ class Usuario():
             return jsonify(usuarioJson)
         
         except Exception as ex:
-            return {'mensaje': str(ex)},401    
+            return {'message': str(ex)},401    
     
