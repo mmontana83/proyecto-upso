@@ -69,7 +69,7 @@ nav{
     top: 0;
     left: 0;
     height: 100%;
-    width: 210px;
+    width: 170;
     padding: 10px 14px;
     background-color: var(--panel-color);
     border-right: 1px solid var(--border-color);
@@ -206,7 +206,7 @@ body.dark .switch:before{
 
 .dashboard{
     position: relative;
-    left: 210px;
+    left: 175px;
     background-color: var(--panel-color);
     min-height: 100vh;
     width: calc(100% - 250px);
@@ -220,7 +220,7 @@ nav.close ~ .dashboard{
 .dashboard .top{
     position: fixed;
     top: 0;
-    left: 210px;
+    left: 175px;
     display: flex;
     width: calc(100% - 250px);
     justify-content: space-between;
@@ -286,11 +286,11 @@ nav.close ~ .dashboard .top{
     align-items: center;
     margin: 60px 0 30px 0;
 }
-.dash-content .title .actions    {
+.title .actions    {
     display: flex;
     align-items: center;
-    margin: 60px 0 30px 270px;
     cursor: pointer;
+    margin-top: 30px;
 }
 
 .dash-content .title i, .dash-content .title span {
@@ -539,11 +539,11 @@ span .material-symbols-outlined {
         width: calc(100% - 73px);
     }
     nav ~ .dashboard .top{
-        left: 0;
+        left: 310px;
         width: 100%;
     }
     nav.close ~ .dashboard .top{
-        left: 0;
+        left: 310px;
         width: 100%;
     }
 }

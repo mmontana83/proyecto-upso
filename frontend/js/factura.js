@@ -9,6 +9,7 @@ const inputCantidad = document.getElementById('inputCantidad');
 const selectDescripcion = document.getElementById('selectDescripcion');
 const inputPUnitario = document.getElementById('inputPUnitario');
 const inputPTotal = document.getElementById('inputPTotal');
+const inputPTotales = document.getElementById('inputPTotales');
 const cuerpoTabla = document.getElementById('cuerpoTabla');
 const btnGuardar = document.getElementById('btnGuardar');
 
@@ -20,10 +21,25 @@ let arregloProductos = [
     {id:4, nombre: "computador", precio: 32.7}
 ];
 
+<<<<<<< HEAD
 ///
+=======
+///// obtenemos la fecha actual en formato "YYYY-MM-DD"
+  var fechaActual = new Date().toISOString().split('T')[0];
+
+  // Formateo de la fecha actual a "DD/MM/YYYY"
+  var partesFecha = fechaActual.split("-");
+  var fechaFormateada = `${partesFecha[2]}/${partesFecha[1]}/${partesFecha[0]}`;
+
+  // cambiamos el valor del input con la fecha actual
+  inputFecha.value = fechaFormateada;
+
+//////////////////////////////////////////
+
+>>>>>>> f29565120b15eab71e95f9e8ef2bbe4b6609ea57
 // INSERTAMOS LOS OPTIONS DENTRO DEL SELECT CON LOS PRODUCTOS TRAIDOS DE LA BD
 const optionProductos = () => {
-    let options = `<option value="" selected> --Seleccione un producto--</option>`;
+    let options = `<option value="" disabled selected> --Seleccione un producto--</option>`;
     arregloProductos.forEach((producto) =>{
         let option = `
             <option value= "${producto.id}"> ${producto.nombre}</option>
@@ -49,6 +65,7 @@ const getPrecioProductoById = (id) => {
 const redibujarTabla = () => {
     cuerpoTabla.innerHTML = ""
     let filas = ``;
+    let Totales= 0;
     arregloDetalle.forEach((detalle =>{
         let fila = `
         <tr>
@@ -59,8 +76,10 @@ const redibujarTabla = () => {
             <td><button class="btn btn-danger" onclick ="eliminarRegistroById(${detalle.descripcion})" >Eiminar</button></td>
         </tr>`;
         filas += fila;
+        Totales = (+Totales + +detalle.pTotal).toFixed(2)
     }))
     cuerpoTabla.innerHTML = filas;
+    inputPTotales.value = Totales
     // console.log(arregloDetalle);
 }
 
@@ -134,6 +153,7 @@ btnGuardar.onclick = () => {
         nroFactura : inputNroFactura.value,
         direccion : inputDireccion.value,
         fecha : inputFecha.value,
+        total : inputPTotales,
         detalle : arregloDetalle,
     };
     console.log(objFactura)
@@ -164,11 +184,13 @@ selectDescripcion.onchange = () => {
     if (precio) { //si existe precio
         inputPUnitario.value = precio
         calcularPrecioTotal()
+        
     }
 };
 
 const calcularPrecioTotal = ()=> {
     inputPTotal.value = ((+inputCantidad.value) * (+inputPUnitario.value)).toFixed(2)
+    
 }
 ///
 // COLOCAMOS EL PRECIO TOTAL DE MANERA DINAMICA
