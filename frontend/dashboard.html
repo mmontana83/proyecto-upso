@@ -104,7 +104,7 @@
                         <button class="btn btn-primary btn-lg " data-bs-toggle="modal" data-bs-target="#M-crear"> Crear Cliente</button>
                     </div>
                     <div class="col-sm-3">
-                        <button class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#M-productos"> Crear Producto</button>
+                        <button class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#M-InsertarProducto"> Crear Producto</button>
                     </div>
                     <!-- <div class="col-sm-3-3">
                         <button class="btn btn-primary btn-lg" onclick="toggleSection('section4')"> Crear Factura</button>
@@ -202,7 +202,7 @@
                     <div class="title-text">
                         <h2 class="display-6" >PRODUCTOS</h2>
                     </div>
-                    <div class="actions d-inline-flex" data-bs-toggle="modal" data-bs-target="#M-productos">
+                    <div class="actions d-inline-flex" data-bs-toggle="modal" data-bs-target="#M-InsertarProducto">
                         <span class="material-symbols-outlined">add </span>
                         <h4>Agregar Producto</h4>
                     </div>
@@ -219,6 +219,7 @@
                                 <th> Descripcion </th>
                                 <th> Precio </th>
                                 <th> Stock </th>
+                                <th> Tipo </th>
                                 <th> Editar </th>
                                 <th> Eliminar </th>
                             </tr>
@@ -638,7 +639,7 @@
     <!--  CIERRE POP UP // MODAL -->
 <!-- ------------------------------------------------------------ -->
 <!-- -----------------------MODAL INSERTAR  PRODUCTO------------------------->
-<div class="modal fade" id="M-productos" tabindex="-1" aria-labelledby="modalProducto" aria-hidden="true">
+<div class="modal fade" id="M-InsertarProducto" tabindex="-1" aria-labelledby="modalProducto" aria-hidden="true">
     <div class="modal-dialog">
     <div class="modal-content">
         <div class="modal-header">
@@ -648,44 +649,54 @@
         <div class="modal-body">
             <form action="" class="form-floating needs-validation" novalidate id="Modal-Insertar-Producto">
                 <div class="form-floating mb-3">
-                    <input type="text" class="form-control" id="in-idProducto" placeholder="Ingrese ID"  required>
+                    <input type="number"  class="form-control" id="in-idProducto" placeholder="Ingrese ID"  pattern="^[1-9]\d*$" maxlength="6" min="0" required>
                     <label for="in-idProducto">ID</label>
                     <div id="mensajeValidacionIDProducto" class="invalid-feedback">
-                        Ingrese un Codigo válido (sólo 11 números, sin guiones).
+                        Ingrese un Codigo válido (sólo 6 números, sin guiones, sin puntos).
                     </div>
                 </div>
 
                 <div class="form-floating mb-3">
                     <input type="text" class="form-control" id="in-nombreProducto" placeholder="Neumatico" required>
                     <label for="in-nombreProducto">Nombre</label>
-                    <div id="mensajeValidacionNombreDescripcionStock" class="invalid-feedback">
-                        Complete el campo con un nombre valido
+                    <div id="mensajeValidacionNombreDescripcionProducto" class="invalid-feedback">
+                        Este campo no puede queda vacío
                     </div>
                 </div>
                 
                 <div class="form-floating mb-3">
                     <input type="text" class="form-control" id="in-descripcionProducto" placeholder="Bridgestone" required>
                     <label for="in-descripcionProducto">Descripcion</label>
-                    <div id="mensajeValidacionNombreApellidoEmpresa" class="invalid-feedback">
-                        Complete la descripcion
+                    <div id="mensajeValidacionNombreDescripcionProducto" class="invalid-feedback">
+                        Este campo no puede queda vacío
                     </div>
                 </div>
                 
                 <div class="form-floating mb-3">
-                    <input type="email" class="form-control" id="in-precioProducto" placeholder="14.55" required>
+                    <input type="email" class="form-control" id="in-precioProducto" placeholder="14.55" min="0" pattern="\d+" required>
                     <label for="in-precioProducto">Precio</label>
-                    <div id="mensajeValidacionPrecio" class="invalid-feedback">
+                    <div id="mensajeValidacionPrecioProducto" class="invalid-feedback">
                         El numero ingresado no es valido!
                     </div>
                 </div>
 
                 <div class="form-floating mb-3">
-                    <input type="text" class="form-control" id="in-stockProducto" placeholder="231" required>
+                    <input type="number" class="form-control" id="in-stockProducto" placeholder="231" min="0" pattern="^[1-9]\d*$" required>
                     <label for="in-stockProducto">Stock</label>
-                    <div id="mensajeValidacionDireccion" class="invalid-feedback">
-                        Este campo no puede quedar vacío.
+                    <div id="mensajeValidacionStockProducto" class="invalid-feedback">
+                        Debe ingresar un número mayor o igual a 0.
                     </div>
                 </div>
+
+                <div class="form-floating">
+                    <select class="form-select" id="in-tipoProducto" aria-label="Floating label select example">
+                        <option selected value=""></option>
+                    </select>
+                    <label for="in-tipoProducto">Seleccione Tipo Producto</label>
+                    <div id="mensajeValidacionTipoProducto" class="invalid-feedback">
+                        Debe seleccionar una opción.
+                    </div>
+                  </div>
             </form>
         </div>
         <div class="modal-footer">

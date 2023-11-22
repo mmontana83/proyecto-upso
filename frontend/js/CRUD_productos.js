@@ -1,39 +1,23 @@
-const idProducto = document.getElementById('in-idProducto');
-const nombreProducto = document.getElementById('in-nombreProducto');
-const descripcionProducto = document.getElementById('in-descripcionProducto');
-const precioProducto = document.getElementById('in-precioProducto');
-const stockProducto = document.getElementById('in-stockProducto');
+document.addEventListener('DOMContentLoaded', cargarTipoCondicionProducto());
 
+const idProductoInput = document.getElementById('in-idProducto');
+const nombreProductoInput = document.getElementById('in-nombreProducto');
+const descripcionProductoInput = document.getElementById('in-descripcionProducto');
+const precioProductoInput = document.getElementById('in-precioProducto');
+const stockProductoInput = document.getElementById('in-stockProducto');
+const tipoProductoInput = document.getElementById('in-tipoProducto');
 
 let botonInsertarProducto = document.getElementById('botonInsertarProducto');
+
 ////////////////////    CRUD        ///////////////////////////////////////////////////
-
-
-function handleResponse(response)  {
-    if (!response.ok){
-        return Promise.reject({message: "HTTP Code:" + response.status + " - Description:" + response.statusText})
-    }
-    else{
-        return response.json()
-    }
-}
-// function handleResponse(response)  {
-//     if (!response.ok){
-//         return Promise.reject(response);
-//     }
-//     else{
-//         return response.json();
-//     }
-// }
-
 
 function getAll_Product(){
     function handleResponse(response)  {
         if (!response.ok){
-            return Promise.reject({message: "HTTP Code:" + response.status + " - Description:" + response.statusText})
+            return Promise.reject(response);
         }
         else{
-            return response.json()
+            return response.json();
         }
     }
     const requestOptions = {
@@ -48,7 +32,6 @@ function getAll_Product(){
         .then( response => handleResponse(response) )
         .then(
             (data) => {
-                // console.log(data); 
                 const tableBody = document.getElementById('all-products');
                 let list = ``;
                 data.forEach(producto => {
@@ -59,6 +42,7 @@ function getAll_Product(){
                         <td>${producto.descripcion}</td>
                         <td>${producto.precio}</td>
                         <td>${producto.stock}</td>
+                        <td>${producto.tipoProducto}</td>
                         <td class= "table-toggle" >
                         <span data-bs-toggle="modal" data-bs-target="#M-Editar-Prod" class="material-symbols-outlined">
                         manage_accounts</span>
@@ -72,13 +56,18 @@ function getAll_Product(){
                 tableBody.innerHTML = list;
             }
         )
-        .catch( (error) => { console.log("Promesa rechazada por" , error)})
+        .catch(error => {
+            error.json().then(data => 
+                Swal.fire({
+                    icon: "error",
+                    text: data.message
+                    })
+            );
+        })
         .finally( () => { 
             console.log("Promesa finalizada (resuelta o rechazada)");
         })
 }
-
-
 
 function insert_Product(){
     
@@ -89,7 +78,7 @@ function insert_Product(){
         else{
             return response.json();
         }
-    }
+    };
     
     const requestOptions = {
         method: 'GET',
@@ -101,19 +90,18 @@ function insert_Product(){
         }
     };
 
-    id_producto = document.getElementById('in-idProducto').value;
+    codigoProducto = document.getElementById('in-idProducto').value;
     
     //Primer consulto si existe el producto
-    fetch(`http://127.0.0.1:5000/usuario/${id_usuario}/producto/${id_producto}`, requestOptions)
+    fetch(`http://127.0.0.1:5000/usuario/${id_usuario}/producto/${codigoProducto}`, requestOptions)
         .then(response => handleResponse(response))
         .then(data => {
-            console.log(data)
             //El producto existe y esta dado de alta. Por lo tanto no se puede agregar
             if (data.id_tipoEstado == 1){
                 Swal.fire({
                     title: "Producto Existente",
-                    text: `El producto ${data.producto} ya existe se encuentra registrado en el sistema`,
-                    icon: "warning",
+                    text: `El producto ${data.producto} ya existe y se encuentra registrado en el sistema`,
+                    icon: "warning"
                   })
             }
             //El producto existe en la base de datos pero fue borrado "logicamente"
@@ -141,14 +129,14 @@ function insert_Product(){
                                 }
                             };
     
-                            fetch(`http://127.0.0.1:5000/usuario/${id_usuario}/producto/${id_producto}`, requestOptions)
+                            fetch(`http://127.0.0.1:5000/usuario/${id_usuario}/producto/${codigoProducto}`, requestOptions)
                                 .then(response => handleResponse(response))
                                 .then( () => {
                                     Swal.fire({
                                         title: "Alta!",
                                         text: `El producto ${data.producto} fue dado de alta nuevamente`,
                                         icon: "success"});
-                                    getAll_Clients();
+                                    getAll_Product();
                                 })
                                 .catch(error => {
                                     error.json().then(data => 
@@ -165,25 +153,26 @@ function insert_Product(){
                 //El producto no existe y se agregará a la base de datos.
                 else{
                     let jsonInsertProducto = {
-                        "producto" : nombreProducto.value, 
-                        "descripcion" : descripcionProducto.value,
-                        "precio" : precioProducto.value, 
-                        "stock" : stockProducto.value,  
-                        "tipoProducto" : 1,  
-    
+                        "codigoProducto": codigoProducto,
+                        "producto" : nombreProductoInput.value, 
+                        "descripcion" : descripcionProductoInput.value,
+                        "precio" : precioProductoInput.value, 
+                        "stock" : stockProductoInput.value,  
+                        "id_tipoProducto" : tipoProductoInput.value   
                     };
-        
+                    
                     const requestOptions = {
                         method: 'POST',
                         headers: {
                             'Accept': '*/*',
                             'Content-Type': 'application/json',
+                            'x-access-token': token,
                             'user-id': id_usuario
                         },
                         body: JSON.stringify(jsonInsertProducto) 
                     };
         
-                    fetch(`http://127.0.0.1:5000/usuario/${id_usuario}/producto/${id_producto}`, requestOptions)
+                    fetch(`http://127.0.0.1:5000/usuario/${id_usuario}/producto/`, requestOptions)
                         .then(response => handleResponse(response))
                         .then(data => {
                             Swal.fire({
@@ -191,7 +180,7 @@ function insert_Product(){
                                 title: data.message
                                 });
         
-                            let modal = document.getElementById('M-productos');
+                            let modal = document.getElementById('M-InsertarProducto');
                             modal.style.display = 'none';
                             getAll_Product();
                         })
@@ -353,99 +342,106 @@ function delete_Product(data){
 //Validaciones para la Carga de un Producto
 
 let mensajeValidacionIDProducto = document.getElementById('mensajeValidacionIDProducto');
-let mensajeValidacionNombreDescripcionStock = document.getElementById('mensajeValidacionNombreDescripcionStock');
+let mensajeValidacionNombreDescripcionProducto = document.getElementById('mensajeValidacionNombreDescripcionProducto');
 let mensajeValidacionPrecio = document.getElementById('mensajeValidacionPrecio');
-let mensajeValidacionStock = document.getElementById('mensajeValidacionStock');
-
+let mensajeValidacionStockProducto = document.getElementById('mensajeValidacionStockProducto');
+let mensajeValidacionTipoProducto = document.getElementById('mensajeValidacionTipoProducto');
 
 function validarIDProductoInsercion() {
-    // Verificar si el CUIT tiene 11 dígitos y al menos uno de los campos está completado
-    let cuitValido = idProducto.value.length === 6 ;
+    
+    let idProductoValido = idProductoInput.value.length === 6 ;
 
-    // Verificar si el CUIT tiene 11 dígitos y al menos uno de los campos está completado
-    if (!cuitValido) {
+    if (!idProductoValido) {
         // Mostrar mensaje de validación
         mensajeValidacionIDProducto.style.display = 'block';
-        idProducto.classList.add('is-invalid');
+        idProductoInput.classList.add('is-invalid');
         return false;
     } else {
         mensajeValidacionIDProducto.style.display = 'none';
-        idProducto.classList.remove('is-invalid');
+        idProductoInput.classList.remove('is-invalid');
         return true;
     }
 }
 
+function validarNombreDescripcionInsercion() {
+    
+    let nombreDescripcionCompletado = (nombreProductoInput.value.trim() !== '' && descripcionProductoInput.value.trim() !== '');
 
-
-
-function validarNombreDescripcionPrecioInsercion() {
-    // Verificar si al menos uno de los campos (nombre, apellido, empresa) está completado
-    let identificacionCompletado = (nombreProducto.value.trim() !== '' && descripcionProducto.value.trim() !== '') || precioProducto.value.trim() !== '';
-
-    if (!identificacionCompletado) {
-        mensajeValidacionNombreDescripcionStock.style.display = 'block';
-        nombreProducto.classList.add('is-invalid');
-        descripcionProducto.classList.add('is-invalid');
-        precioProducto.classList.add('is-invalid');
+    if (!nombreDescripcionCompletado) {
+        mensajeValidacionNombreDescripcionProducto.style.display = 'block';
+        nombreProductoInput.classList.add('is-invalid');
+        descripcionProductoInput.classList.add('is-invalid');
         return false;  // Deshabilitar el botón
     } else {
-        mensajeValidacionNombreDescripcionStock.style.display = 'none';
-        nombreProducto.classList.remove('is-invalid');
-        descripcionProducto.classList.remove('is-invalid');
-        precioProducto.classList.remove('is-invalid');
+        mensajeValidacionNombreDescripcionProducto.style.display = 'none';
+        nombreProductoInput.classList.remove('is-invalid');
+        descripcionProductoInput.classList.remove('is-invalid');
         return true;  // Habilitar el botón
     }
 }
 
 function validarPrecioInsercion() {
-    // Verificar si el correo electrónico tiene un formato válido
-    // Verificar si el CUIT tiene 11 dígitos y al menos uno de los campos está completado
-    if (!precioProducto.value) {
+
+    let precioProductoCompletado = precioProductoInput.value.trim() !== '';
+
+    if (!precioProductoCompletado) {
         // Mostrar mensaje de validación
-        mensajeValidacionPrecio.style.display = 'block';
-        precioProducto.classList.add('is-invalid');
+        mensajeValidacionPrecioProducto.style.display = 'block';
+        precioProductoInput.classList.add('is-invalid');
         return false;  // Deshabilitar el botón
     } else {
-        mensajeValidacionPrecio.style.display = 'none';
-        precioProducto.classList.remove('is-invalid');
+        mensajeValidacionPrecioProducto.style.display = 'none';
+        precioProductoInput.classList.remove('is-invalid');
         return true;  // Habilitar el botón
     }
 }
 
 function validarStockInsercion() {
-    let stockValido = stockProducto.value !== ''
-    return true
-    // if (!stockValido) {
-    //     // Mostrar mensaje de validación
-    //     mensajeValidacionStock.style.display = 'block';
-    //     stockProducto.classList.add('is-invalid');
-    //     return false;  // Deshabilitar el botón
-    // } else {
-    //     mensajeValidacionStock.style.display = 'none';
-    //     stockProducto.classList.remove('is-invalid');
-    //     return true;  // Habilitar el botón
-    // }
-}
+    
+    let stockValido = stockProductoInput.value.trim() !== '';
 
-
-
-function validarFormularioInsercion() {
-    botonInsertarProducto.disabled = !(validarIDProductoInsercion() && 
-                                       validarNombreDescripcionPrecioInsercion() && 
-                                       validarPrecioInsercion() && 
-                                       validarStockInsercion());
-
-    if (botonInsertarProducto.disabled){
-        document.getElementById('M-productos').focus();
+    if (!stockValido) {
+        // Mostrar mensaje de validación
+        mensajeValidacionStockProducto.style.display = 'block';
+        stockProductoInput.classList.add('is-invalid');
+        return false;  // Deshabilitar el botón
+    } else {
+        mensajeValidacionStockProducto.style.display = 'none';
+        stockProductoInput.classList.remove('is-invalid');
+        return true;  // Habilitar el botón
     }
 }
 
+function validadTipoProductoInsercion(){
+    
+    var tipoProductoValido = tipoProductoInput.value !== ''
+
+    if (!tipoProductoValido) {
+        // Mostrar mensaje de validación
+        mensajeValidacionTipoProducto.style.display = 'block';
+        tipoProductoInput.classList.add('is-invalid');
+        return false;  // Deshabilitar el botón
+    } else {
+        mensajeValidacionTipoProducto.style.display = 'none';
+        tipoProductoInput.classList.remove('is-invalid');
+        return true;  // Habilitar el botón
+    }// Verificar si el Domicilio no es vacío
+}
+
+function validarFormularioInsercion() {
+    botonInsertarProducto.disabled = !(validarIDProductoInsercion() && 
+                                       validarNombreDescripcionInsercion() && 
+                                       validarPrecioInsercion() && 
+                                       validarStockInsercion() &&
+                                       validadTipoProductoInsercion());
+}
+
 // Agregar eventos de blur para los campos de entrada
-idProducto.addEventListener('blur', validarFormularioInsercion);
-nombreProducto.addEventListener('blur', validarFormularioInsercion);
-descripcionProducto.addEventListener('blur', validarFormularioInsercion);
-precioProducto.addEventListener('blur', validarFormularioInsercion);
-stockProducto.addEventListener('blur', validarFormularioInsercion);
+idProductoInput.addEventListener('blur', validarFormularioInsercion);
+nombreProductoInput.addEventListener('blur', validarFormularioInsercion);
+descripcionProductoInput.addEventListener('blur', validarFormularioInsercion);
+precioProductoInput.addEventListener('blur', validarFormularioInsercion);
+stockProductoInput.addEventListener('blur', validarFormularioInsercion);
 
 
 
@@ -528,3 +524,68 @@ stockProducto.addEventListener('blur', validarFormularioInsercion);
 // empresaEdicion.addEventListener('blur', validarFormularioEdicion);
 // emailEdicion.addEventListener('blur', validarFormularioEdicion);
 // direccionEdicion.addEventListener('blur', validarFormularioEdicion);
+
+
+function cargarTipoCondicionProducto(){
+
+    function handleResponse(response)  {
+        if (!response.ok){
+            return Promise.reject(response);
+        }
+        else{
+            return response.json();
+        }
+    }
+
+    const requestOptions = {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'x-access-token': token,
+            'user-id': id_usuario
+        }
+    };
+    
+    fetch(`http://127.0.0.1:5000/dashboard/listarTipoProducto`, requestOptions)
+        .then(response => handleResponse(response))
+        .then(
+            (categorias) => {
+                const selectProductoIN = document.getElementById('in-tipoProducto');
+                //const selectCategoriasED = document.getElementById('ed-condicionIVA');
+                
+                selectProductoIN.innerHTML = '';
+                //selectCategoriasED.innerHTML = '';
+
+                //Creo una opción vacía que se muestra por defecto.
+                const option = document.createElement('option');
+                option.value = "";
+                option.text = "";
+                selectProductoIN.appendChild(option);
+
+                categorias.forEach(categoria => {
+                    const option = document.createElement('option');
+                    option.value = categoria.id_tipoProducto;
+                    option.text = categoria.tipoProducto;
+                    selectProductoIN.appendChild(option);
+                });
+
+                // categorias.forEach(categoria => {
+                //     const option = document.createElement('option');
+                //     option.value = categoria.id_tipoCondicionIVA;
+                //     option.text = categoria.descripcion;
+                //     selectCategoriasED.appendChild(option);
+                // });
+            }
+        )
+        .catch(error => {
+            error.json().then(data => 
+                Swal.fire({
+                    icon: "error",
+                    text: data.message
+                  })
+            );
+        })
+        .finally(() => {
+            console.log("Promesa finalizada (resuelta o rechazada)");
+        });
+}

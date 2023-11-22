@@ -503,7 +503,11 @@ function validadCondicionIVAInsercion(){
 }
 
 function validarFormularioInsercion() {
-    botonInsertarCliente.disabled = !(validarCUILInsercion() && validarNombreApellidoEmpresaInsercion() && validarEmailInsercion() && validarDireccionInsercion() && validadCondicionIVAInsercion());
+    botonInsertarCliente.disabled = !(validarCUILInsercion() && 
+                                    validarNombreApellidoEmpresaInsercion() && 
+                                    validarEmailInsercion() && 
+                                    validarDireccionInsercion() && 
+                                    validadCondicionIVAInsercion());
 
     if (botonInsertarCliente.disabled){
         document.getElementById('M-crear').focus();
