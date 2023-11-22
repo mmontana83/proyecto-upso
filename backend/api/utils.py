@@ -31,7 +31,7 @@ def token_required(func):
                  return jsonify({"message": "Error de id"}), 401
             
         except Exception as ex:
-            return jsonify({"message": str(ex)}), 401
+            return jsonify({"message": "No tiene permisos para acceder a esta ruta"}), 401
 
         return func(*args, **kwargs)
     return decorated
@@ -49,7 +49,7 @@ def client_resource(func):
             id_prop = data[0]
             user_id = request.headers['user-id']
             if int(id_prop) != int(user_id):
-                return jsonify({"mensaje": "No tiene permisos para acceder a este recurso"}), 401
+                return jsonify({"message": "No tiene permisos para acceder a este recurso"}), 401
         return func(*args, **kwargs)
     return decorated
 

@@ -9,6 +9,7 @@ const inputCantidad = document.getElementById('inputCantidad');
 const selectDescripcion = document.getElementById('selectDescripcion');
 const inputPUnitario = document.getElementById('inputPUnitario');
 const inputPTotal = document.getElementById('inputPTotal');
+const inputPTotales = document.getElementById('inputPTotales');
 const cuerpoTabla = document.getElementById('cuerpoTabla');
 const btnGuardar = document.getElementById('btnGuardar');
 
@@ -19,19 +20,65 @@ let arregloProductos = [
     {id:3, nombre: "teclado", precio: 33},
     {id:4, nombre: "computador", precio: 32.7}
 ];
-///
+
+///// obtenemos la fecha actual en formato "YYYY-MM-DD"
+  var fechaActual = new Date().toISOString().split('T')[0];
+
+  // Formateo de la fecha actual a "DD/MM/YYYY"
+  var partesFecha = fechaActual.split("-");
+  var fechaFormateada = `${partesFecha[2]}/${partesFecha[1]}/${partesFecha[0]}`;
+
+  // cambiamos el valor del input con la fecha actual
+  inputFecha.value = fechaFormateada;
+
+//////////////////////////////////////////
+
 // INSERTAMOS LOS OPTIONS DENTRO DEL SELECT CON LOS PRODUCTOS TRAIDOS DE LA BD
 const optionProductos = () => {
-    let options = `<option value="" selected> --Seleccione un producto--</option>`;
-    arregloProductos.forEach((producto) =>{
-        let option = `
-            <option value= "${producto.id}"> ${producto.nombre}</option>
-        `
+    
+    function handleResponse(response)  {
+        if (!response.ok){
+            return Promise.reject(response);
+        }
+        else{
+            return response.json();
+        }
+    }
 
-        options += option
-        
-    })
-    selectDescripcion.innerHTML = options
+    const requestOptions = {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+            // 'x-access-token': token,
+            // 'user-id': id_usuario
+        }
+    };
+    
+    fetch(`http://127.0.0.1:5000/${id_usuario}/productos`, requestOptions)
+        .then(response => handleResponse(response))
+        .then( producto =>  {
+            console.log(producto);
+            let options = `<option value="" disabled selected> --Seleccione un producto--</option>`;
+            arregloProductos.forEach((producto) =>{
+            let option = `
+            <option value= "${producto.id_producto}"> ${producto.producto}</option>
+            `
+
+            options += option
+            })
+            selectDescripcion.innerHTML = options
+        })
+        .catch(error => {
+            error.json().then(data => 
+                Swal.fire({
+                    icon: "error",
+                    text: data.message
+                  })
+            );
+        })
+        .finally(() => {
+            console.log("Promesa finalizada (resuelta o rechazada)");
+        });
 }
 optionProductos()
 
@@ -48,18 +95,21 @@ const getPrecioProductoById = (id) => {
 const redibujarTabla = () => {
     cuerpoTabla.innerHTML = ""
     let filas = ``;
+    let Totales= 0;
     arregloDetalle.forEach((detalle =>{
         let fila = `
         <tr>
-            <td>${detalle.cant}</td>
             <td>${detalle.nombreDescripcion}</td>
+            <td>${detalle.cant}</td>
             <td>${detalle.pUnit}</td>
             <td>${detalle.pTotal}</td>
             <td><button class="btn btn-danger" onclick ="eliminarRegistroById(${detalle.descripcion})" >Eiminar</button></td>
         </tr>`;
         filas += fila;
+        Totales = (+Totales + +detalle.pTotal).toFixed(2)
     }))
     cuerpoTabla.innerHTML = filas;
+    inputPTotales.value = Totales
     // console.log(arregloDetalle);
 }
 
@@ -133,6 +183,7 @@ btnGuardar.onclick = () => {
         nroFactura : inputNroFactura.value,
         direccion : inputDireccion.value,
         fecha : inputFecha.value,
+        total : inputPTotales,
         detalle : arregloDetalle,
     };
     console.log(objFactura)
@@ -163,11 +214,13 @@ selectDescripcion.onchange = () => {
     if (precio) { //si existe precio
         inputPUnitario.value = precio
         calcularPrecioTotal()
+        
     }
 };
 
 const calcularPrecioTotal = ()=> {
     inputPTotal.value = ((+inputCantidad.value) * (+inputPUnitario.value)).toFixed(2)
+    
 }
 ///
 // COLOCAMOS EL PRECIO TOTAL DE MANERA DINAMICA

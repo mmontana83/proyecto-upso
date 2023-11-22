@@ -69,7 +69,7 @@ nav{
     top: 0;
     left: 0;
     height: 100%;
-    width: 210px;
+    width: 170px;
     padding: 10px 14px;
     background-color: var(--panel-color);
     border-right: 1px solid var(--border-color);
@@ -78,10 +78,7 @@ nav{
 nav.close{
     width: 73px;
 }
-nav .logo-name{
-    display: flex;
-    align-items: center;
-}
+
 nav .logo-image{
     display: flex;
     justify-content: center;
@@ -206,7 +203,7 @@ body.dark .switch:before{
 
 .dashboard{
     position: relative;
-    left: 210px;
+    left: 175px;
     background-color: var(--panel-color);
     min-height: 100vh;
     width: calc(100% - 250px);
@@ -220,15 +217,13 @@ nav.close ~ .dashboard{
 .dashboard .top{
     position: fixed;
     top: 0;
-    left: 210px;
+    left: 175px;
     display: flex;
-    width: calc(100% - 250px);
-    justify-content: space-between;
+    /* width: calc(100% - 250px); */
     align-items: center;
     padding: 10px 14px;
     background-color: var(--panel-color);
     transition: var(--tran-05);
-    z-index: 10;
 }
 nav.close ~ .dashboard .top{
     left: 73px;
@@ -250,7 +245,7 @@ nav.close ~ .dashboard .top{
     width: 100%;
     margin: 0 30px;
 }
-.top .search-box input{
+/* .top .search-box input{
     position: absolute;
     border: 1px solid var(--border-color);
     background-color: var(--panel-color);
@@ -262,8 +257,8 @@ nav.close ~ .dashboard .top{
     font-size: 15px;
     font-weight: 400;
     outline: none;
-}
-.top .search-box i{
+} */
+/* .top .search-box i{
     position: absolute;
     left: 15px;
     font-size: 22px;
@@ -271,7 +266,7 @@ nav.close ~ .dashboard .top{
     top: 50%;
     transform: translateY(-50%);
     color: var(--black-light-color);
-}
+} */
 
 .dashboard .dash-content{
     padding-top: 50px;
@@ -286,11 +281,11 @@ nav.close ~ .dashboard .top{
     align-items: center;
     margin: 60px 0 30px 0;
 }
-.dash-content .title .actions    {
+.title .actions    {
     display: flex;
     align-items: center;
-    margin: 60px 0 30px 270px;
     cursor: pointer;
+    margin-top: 30px;
 }
 
 .dash-content .title i, .dash-content .title span {
@@ -389,7 +384,6 @@ span.material-symbols-outlined{
     border: 0;
 }
 .row {
-    box-shadow: -1px 7px 10px rgba(0, 0, 0, 0.2);
     margin-bottom: 5px;
 }
 
@@ -405,33 +399,6 @@ span .material-symbols-outlined {
     display: flex;
     justify-content: space-around;
     font-size: 33px;
-}
-/* .popup {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.7);
-    z-index: 100;
-}
-
-.contenido-popup {
-    background: #fff;
-    width: 80%;
-    max-width: 600px;
-    margin: 2% auto;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-    text-align: center;
-    overflow: scroll;
-} */
-
-#cerrarPopup {
-    margin-top: 20px;
-    cursor: pointer;
 }
 
 .filter{
@@ -452,62 +419,7 @@ span .material-symbols-outlined {
 /* ************************************************************** */
 
 
-@media (max-width: 1000px) {
-    nav{
-        width: 73px;
-    }
-    nav.close{
-        width: 250px;
-    }
-    nav .logo_name{
-        opacity: 0;
-        pointer-events: none;
-    }
-    nav.close .logo_name{
-        opacity: 1;
-        pointer-events: auto;
-    }
-    nav li a .link-name{
-        opacity: 0;
-        pointer-events: none;
-    }
-    nav.close li a .link-name{
-        opacity: 1;
-        pointer-events: auto;
-    }
-    nav ~ .dashboard{
-        left: 73px;
-        width: calc(100% - 73px);
-    }
-    nav.close ~ .dashboard{
-        left: 250px;
-        width: calc(100% - 250px);
-    }
-    nav ~ .dashboard .top{
-        left: 73px;
-        width: calc(100% - 73px);
-    }
-    nav.close ~ .dashboard .top{
-        left: 250px;
-        width: calc(100% - 250px);
-    }
-    .activity .activity-data{
-        overflow-X: scroll;
-    }
-}
-
-@media (max-width: 780px) {
-    .dash-content .boxes .box{
-        width: calc(100% / 2 - 15px);
-        margin-top: 15px;
-    }
-}
-@media (max-width: 560px) {
-    .dash-content .boxes .box{
-        width: 100% ;
-    }
-}
-@media (max-width: 400px) {
+@media (max-width: 480px) {
     nav{
         width: 0px;
     }
@@ -538,12 +450,21 @@ span .material-symbols-outlined {
         left: 73px;
         width: calc(100% - 73px);
     }
-    nav ~ .dashboard .top{
+    .dashboard .top{
         left: 0;
         width: 100%;
+        position: absolute;
+        justify-content: flex-end;
     }
     nav.close ~ .dashboard .top{
         left: 0;
         width: 100%;
+    }
+    .col-sm-3 .text-body-secondary{
+        display:none;
+    }
+
+    .col-sm-3 button {
+        margin-bottom: 10px;
     }
 }

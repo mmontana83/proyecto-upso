@@ -1,6 +1,7 @@
 from api.db.db import mysql
 from flask import request, jsonify
 import re
+from datetime import datetime
 
 class Factura():
     
@@ -57,17 +58,15 @@ class Factura():
     def encabezadoFacturaToJson(fila):
         return{
             'nroFactura': fila[0],
-            'fecha': fila[1],
+            'fecha': datetime.strptime(str(fila[1]), "%Y-%m-%d").strftime("%d-%m-%Y"),
             'tipoFactura': fila[2],
             'id_cliente': fila[3],
-            'nombre': fila[4],
-            'apellido': fila[5],
-            'empresa': fila[6],
-            'direccion': fila[7],
-            'telefono': fila[8],
-            'condicionVenta': fila[9],
-            'condicionIVA': fila[10],
-            'total': fila[11]
+            'razonSocial': fila[4],
+            'direccion': fila[5],
+            'telefono': fila[6],
+            'condicionVenta': fila[7],
+            'condicionIVA': fila[8],
+            'total': fila[9]
         }
     
     @staticmethod
