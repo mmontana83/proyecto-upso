@@ -1,6 +1,4 @@
-//Cargo el listado Condicion IVA cuando se carga la pagina.
-document.addEventListener('DOMContentLoaded', cargarTipoCondicionIVA());
-
+//#region CRUD CLIENTES
 function getAll_Clients() {
     function handleResponse(response)  {
         if (!response.ok){
@@ -336,7 +334,9 @@ function delete_Client(data){
         }
     });
 }
+//#endregion
 
+//#region Carga Dinámica Option Tipo Condicion IVA
 function cargarTipoCondicionIVA(){
 
     function handleResponse(response)  {
@@ -401,7 +401,11 @@ function cargarTipoCondicionIVA(){
         });
 }
 
-//Validaciones para la Carga de un Cliente
+//Evento que se dispara cuando cargo la página para cargar dinámicamente el option Condicion IVA.
+document.addEventListener('DOMContentLoaded', cargarTipoCondicionIVA());
+//#endregion
+
+//#region Validaciones para la Carga de Cliente
 var cuitInput = document.getElementById('in-cuit');
 var nombreInput = document.getElementById('in-nombre');
 var apellidoInput = document.getElementById('in-apellido');
@@ -525,8 +529,9 @@ condicionIVAInput.addEventListener('blur', validarFormularioInsercion);
 condicionIVAInput.addEventListener('change', function(){
     document.getElementById('M-crear').focus();
 });
+//#endregion
 
-//Validaciones para la Edición de un Cliente
+//#region Validaciones para la Edición de un Cliente
 var nombreEdicion = document.getElementById('ed-nombre');
 var apellidoEdicion = document.getElementById('ed-apellido');
 var empresaEdicion = document.getElementById('ed-empresa');
@@ -603,3 +608,4 @@ apellidoEdicion.addEventListener('blur', validarFormularioEdicion);
 empresaEdicion.addEventListener('blur', validarFormularioEdicion);
 emailEdicion.addEventListener('blur', validarFormularioEdicion);
 direccionEdicion.addEventListener('blur', validarFormularioEdicion);
+//#endregion

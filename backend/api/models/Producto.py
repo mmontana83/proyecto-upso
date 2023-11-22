@@ -61,27 +61,18 @@ class Producto:
     def actualizarProducto(json):       
         try:            
             producto = Producto(json)
-            cur = mysql.connection.cursor()            
-            cur.callproc('sp_listarProductoByUsuario', [producto._id_usuario, producto._codigoProducto])
-            fila = cur.fetchone()
-            cur.close()  # Cierra el cursor después de cada consulta
-
-            if fila is None:
-                return jsonify({'message': 'El Producto NO se encuentra en el sistema'}), 409
-            else:
-
-                cur = mysql.connection.cursor()
-                cur.callproc('sp_actualizarProducto', [producto._codigoProducto,
-                                                       producto._producto, 
-                                                       producto._descripcion, 
-                                                       producto._precio, 
-                                                       producto._stock, 
-                                                       producto._id_tipoProducto,
-                                                       producto._id_usuario])
-                mysql.connection.commit()
-                cur.close()
-                return jsonify({'message': 'Producto Actualizado correctamente'}), 200
-
+            print(producto.to_json())
+            cur = mysql.connection.cursor()
+            cur.callproc('sp_actualizarProducto', [producto._codigoProducto,
+                                                producto._producto, 
+                                                producto._descripcion, 
+                                                producto._precio, 
+                                                producto._stock, 
+                                                producto._id_tipoProducto,
+                                                producto._id_usuario])
+            mysql.connection.commit()
+            cur.close()
+            return jsonify({'message': 'Producto Actualizado correctamente'}), 200
         except Exception as ex:
             return jsonify({'message': str(ex)}), 409
         

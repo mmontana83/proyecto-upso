@@ -35,16 +35,50 @@ let arregloProductos = [
 
 // INSERTAMOS LOS OPTIONS DENTRO DEL SELECT CON LOS PRODUCTOS TRAIDOS DE LA BD
 const optionProductos = () => {
-    let options = `<option value="" disabled selected> --Seleccione un producto--</option>`;
-    arregloProductos.forEach((producto) =>{
-        let option = `
-            <option value= "${producto.id}"> ${producto.nombre}</option>
-        `
+    
+    function handleResponse(response)  {
+        if (!response.ok){
+            return Promise.reject(response);
+        }
+        else{
+            return response.json();
+        }
+    }
 
-        options += option
-        
-    })
-    selectDescripcion.innerHTML = options
+    const requestOptions = {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+            // 'x-access-token': token,
+            // 'user-id': id_usuario
+        }
+    };
+    
+    fetch(`http://127.0.0.1:5000/${id_usuario}/productos`, requestOptions)
+        .then(response => handleResponse(response))
+        .then( producto =>  {
+            console.log(producto);
+            let options = `<option value="" disabled selected> --Seleccione un producto--</option>`;
+            arregloProductos.forEach((producto) =>{
+            let option = `
+            <option value= "${producto.id_producto}"> ${producto.producto}</option>
+            `
+
+            options += option
+            })
+            selectDescripcion.innerHTML = options
+        })
+        .catch(error => {
+            error.json().then(data => 
+                Swal.fire({
+                    icon: "error",
+                    text: data.message
+                  })
+            );
+        })
+        .finally(() => {
+            console.log("Promesa finalizada (resuelta o rechazada)");
+        });
 }
 optionProductos()
 
@@ -65,8 +99,8 @@ const redibujarTabla = () => {
     arregloDetalle.forEach((detalle =>{
         let fila = `
         <tr>
-            <td>${detalle.cant}</td>
             <td>${detalle.nombreDescripcion}</td>
+            <td>${detalle.cant}</td>
             <td>${detalle.pUnit}</td>
             <td>${detalle.pTotal}</td>
             <td><button class="btn btn-danger" onclick ="eliminarRegistroById(${detalle.descripcion})" >Eiminar</button></td>

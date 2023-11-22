@@ -6,18 +6,16 @@ const M_inputFecha = document.getElementById("M-inputFecha");
 const M_inputDireccion = document.getElementById("M-inputDireccion");
 const M_inputPTotal = document.getElementById("M-inputPTotal");
 
-function handleResponse(response)  {
-    console.log(response)
-    if (!response.ok){
-        return Promise.reject({message: "HTTP Code:" + response.status + " - Description:" + response.statusText})
-    }
-    else{
-        return response.json()
-    }
-}
-
-
 function getAll_Facturas(){
+    function handleResponse(response)  {
+        if (!response.ok){
+            return Promise.reject(response)
+        }
+        else{
+            return response.json()
+        }
+    }
+
     const requestOptions = {
         method : 'GET',
         headers: {
@@ -30,7 +28,7 @@ function getAll_Facturas(){
         .then( response => handleResponse(response) )
         .then(
             (data) => {
-                // console.log(data); 
+                console.log(data)
                 const tableBody = document.getElementById('all-facturas');
                 let list = ``;
                 data.forEach(factura => {
@@ -38,9 +36,8 @@ function getAll_Facturas(){
                     `<tr id="${factura.id}"> 
                         <td>${factura.nroFactura} </td>
                         <td>${factura.id_cliente}</td>
-                        <td>${factura.apellido}</td>
+                        <td>${factura.razonSocial}</td>
                         <td>${factura.fecha}</td>
-                        <td>${factura.empresa}</td>
                         <td>${factura.tipoFactura}</td>
                         <td>${factura.condicionIVA}</td>
                         <td>${factura.direccion}</td>
@@ -56,14 +53,30 @@ function getAll_Facturas(){
                 tableBody.innerHTML = list;
             }
         )
-        .catch( (error) => { console.log("Promesa rechazada por" , error)})
+        .catch( (error) => { 
+            error.json().then(data => 
+                Swal.fire({
+                    icon: "error",
+                    text: data.message
+                  })
+            );
+        })
         .finally( () => { 
             console.log("Promesa finalizada (resuelta o rechazada)");
         })
 }
 
-
 function getFactura(id_cliente,nroFactura ) {
+    function handleResponse(response)  {
+        console.log(response)
+        if (!response.ok){
+            return Promise.reject(response)
+        }
+        else{
+            return response.json()
+        }
+    }
+
     const requestOptions = {
         method : 'GET',
         headers: {
@@ -91,7 +104,7 @@ function getFactura(id_cliente,nroFactura ) {
                 });
                 tableBody.innerHTML = list;
 
-                M_inputNombre.value = factura.encabezado.nombre
+                M_inputNombre.value = factura.encabezado.razonSocial
                 M_inputCuit.value = factura.encabezado.id_cliente
                 M_inputNroFactura.value = factura.encabezado.nroFactura
                 M_inputFecha.value = factura.encabezado.fecha
