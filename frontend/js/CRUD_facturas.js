@@ -1,9 +1,12 @@
 ////////////////////    CRUD        ///////////////////////////////////////////////////
-const M_inputNombre = document.getElementById("M-inputNombre");
-const M_inputCuit = document.getElementById("M-inputCuit");
 const M_inputNroFactura = document.getElementById("M-inputNroFactura");
-const M_inputFecha = document.getElementById("M-inputFecha");
+const M_inputNombre = document.getElementById("M-inputNombre");
 const M_inputDireccion = document.getElementById("M-inputDireccion");
+const M_inputCuit = document.getElementById("M-inputCuit");
+const M_inputCondicionIVA = document.getElementById("M-inputCondicionIVA");
+const M_inputCondicionVenta = document.getElementById("M-inputCondicionVenta");
+const M_inputTipoFactura = document.getElementById("M-inputTipoFactura");
+const M_inputFecha = document.getElementById("M-inputFecha");
 const M_inputPTotal = document.getElementById("M-inputPTotal");
 
 function getAll_Facturas(){
@@ -28,7 +31,7 @@ function getAll_Facturas(){
         .then( response => handleResponse(response) )
         .then(
             (data) => {
-                console.log(data)
+
                 const tableBody = document.getElementById('all-facturas');
                 let list = ``;
                 data.forEach(factura => {
@@ -39,8 +42,6 @@ function getAll_Facturas(){
                         <td>${factura.razonSocial}</td>
                         <td>${factura.fecha}</td>
                         <td>${factura.tipoFactura}</td>
-                        <td>${factura.condicionIVA}</td>
-                        <td>${factura.direccion}</td>
                         <td>${factura.total}</td>
                         <td>
                         <span onclick="getFactura(${factura.id_cliente},${factura.nroFactura})" class="material-symbols-outlined d-flex justify-content-center table-toggle" data-bs-toggle="modal" data-bs-target="#M-verFactura">
@@ -68,7 +69,7 @@ function getAll_Facturas(){
 
 function getFactura(id_cliente,nroFactura ) {
     function handleResponse(response)  {
-        console.log(response)
+
         if (!response.ok){
             return Promise.reject(response)
         }
@@ -89,7 +90,6 @@ function getFactura(id_cliente,nroFactura ) {
         .then( response => handleResponse(response))
         .then(
             (factura) => {
-                console.log(factura); 
                 const tableBody = document.getElementById('M-tablaFactura');
                 let list = ``;
                 factura.detalle.forEach(detalle => {
@@ -104,11 +104,14 @@ function getFactura(id_cliente,nroFactura ) {
                 });
                 tableBody.innerHTML = list;
 
-                M_inputNombre.value = factura.encabezado.razonSocial
-                M_inputCuit.value = factura.encabezado.id_cliente
                 M_inputNroFactura.value = factura.encabezado.nroFactura
-                M_inputFecha.value = factura.encabezado.fecha
+                M_inputNombre.value = factura.encabezado.razonSocial
                 M_inputDireccion.value = factura.encabezado.direccion
+                M_inputCuit.value = factura.encabezado.id_cliente
+                M_inputCondicionIVA.value = factura.encabezado.condicionIVA
+                M_inputCondicionVenta.value = factura.encabezado.condicionVenta
+                M_inputTipoFactura.value = factura.encabezado.tipoFactura
+                M_inputFecha.value = factura.encabezado.fecha
                 M_inputPTotal.value = factura.encabezado.total
             }
         )

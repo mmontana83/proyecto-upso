@@ -254,8 +254,6 @@
                             <th> Razón Social </th>
                             <th> Fecha </th>
                             <th> Tipo </th>
-                            <th> Cond. IVA </th>
-                            <th> Dirección </th>
                             <th> Total </th>
                             <th> Consultar </th>
                         </tr>
@@ -795,22 +793,6 @@
                             </div> -->
                             <div class="card-body">
                                 <form action="" class="row  " id="M-formCabecera">
-                                    <div class="form-group col-md-4 ">
-                                        <label for="">Apellido y Nombre / Razón Social</label>
-                                        <input 
-                                        disabled
-                                        type="text" 
-                                        class="form-control" 
-                                        id="M-inputNombre">
-                                    </div>
-                                    <div class="form-group col-md-4">
-                                        <label for="">Cuit/Cuil</label>
-                                        <input 
-                                        disabled
-                                        type="text" 
-                                        class="form-control" 
-                                        id="M-inputCuit">
-                                    </div>
                                     <div class="form-group col-md-2">
                                         <label for="">Nro de Factura</label>
                                         <input 
@@ -819,15 +801,16 @@
                                         class="form-control" 
                                         id="M-inputNroFactura">
                                     </div>
-                                    <div class="form-group col-md-2 ">
-                                        <label for="">Fecha</label>
+                                    <div class="form-group col-md-4 ">
+                                        <label for="">Apellido y Nombre / Razón Social</label>
                                         <input 
                                         disabled
                                         type="text" 
-                                        class="form-control"
-                                        id="M-inputFecha">
+                                        class="form-control" 
+                                        id="M-inputNombre">
                                     </div>
-                                    <div class="form-group col-md-4 mt-3">
+
+                                    <div class="form-group col-md-4">
                                         <label for="">Direccion</label>
                                         <input 
                                         disabled
@@ -835,7 +818,49 @@
                                         class="form-control" 
                                         id="M-inputDireccion">
                                     </div>
-                              
+
+                                    <div class="form-group col-md-2">
+                                        <label for="">Cuit/Cuil</label>
+                                        <input 
+                                        disabled
+                                        type="text" 
+                                        class="form-control" 
+                                        id="M-inputCuit">
+                                    </div>
+                                    
+                                    <div class="form-group col-md-4 mt-3">
+                                        <label for="">Condición IVA</label>
+                                        <input 
+                                        disabled
+                                        type="text" 
+                                        class="form-control" 
+                                        id="M-inputCondicionIVA">
+                                    </div>
+
+                                    <div class="form-group col-md-2 mt-3">
+                                        <label for="">Condición de Venta</label>
+                                        <input 
+                                        disabled
+                                        type="text" 
+                                        class="form-control" 
+                                        id="M-inputCondicionVenta">
+                                    </div>
+                                    <div class="form-group col-md-2 mt-3">
+                                        <label for="">Tipo Factura</label>
+                                        <input 
+                                        disabled
+                                        type="text" 
+                                        class="form-control" 
+                                        id="M-inputTipoFactura">
+                                    </div>
+                                    <div class="form-group col-md-2 mt-3">
+                                        <label for="">Fecha</label>
+                                        <input 
+                                        disabled
+                                        type="text" 
+                                        class="form-control"
+                                        id="M-inputFecha">
+                                    </div>
                                     <div class="form-group col-md-2 mt-3">
                                         <label for="">Total</label>
                                         <input 
