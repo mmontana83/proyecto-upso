@@ -58,7 +58,7 @@ function cargarTipoCondicionVenta(){
 
                 categorias.forEach(categoria => {
                     const option = document.createElement('option');
-                    option.value = categoria.id_tipoCondicionIVA;
+                    option.value = categoria.id_tipoCondicionVenta;
                     option.text = categoria.descripcion;
                     inputMetodoPago.appendChild(option);
                 });
