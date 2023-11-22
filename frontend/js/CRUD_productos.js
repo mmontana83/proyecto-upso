@@ -9,6 +9,15 @@ const tipoProductoInput = document.getElementById('in-tipoProducto');
 
 let botonInsertarProducto = document.getElementById('botonInsertarProducto');
 
+const editarIdProducto = document.getElementById('editarIdProducto');
+const editarNombreProducto = document.getElementById('editarNombreProducto');
+const editarDescripcionProducto = document.getElementById('editarDescripcionProducto');
+const editarPrecioProducto = document.getElementById('editarPrecioProducto');
+const editarStockProducto = document.getElementById('editarStockProducto');
+const editarTipoProducto    = document.getElementById('editarTipoProducto');
+
+let botonEditarCliente = document.getElementById('botonEditarProducto');
+
 ////////////////////    CRUD        ///////////////////////////////////////////////////
 
 function getAll_Product(){
@@ -44,7 +53,7 @@ function getAll_Product(){
                         <td>${producto.stock}</td>
                         <td>${producto.tipoProducto}</td>
                         <td class= "table-toggle" >
-                        <span data-bs-toggle="modal" data-bs-target="#M-Editar-Prod" class="material-symbols-outlined">
+                        <span data-bs-toggle="modal" data-bs-target="#M-EditarProducto" class="material-symbols-outlined">
                         manage_accounts</span>
                         </td>
                         <td>
@@ -212,66 +221,67 @@ function insert_Product(){
         });
 }
 
-// function update_Product(){
+function update_Product(){
+ 
+
     
-//     // function handleResponse(response)  {
-//     //     if (!response.ok){
-//     //         return Promise.reject(response);
-//     //     }
-//     //     else{
-//     //         return response.json();
-//     //     }
-//     // }
-//     let id_producto = document.getElementById('ed-cuit').value;
+    // function handleResponse(response)  {
+        //     if (!response.ok){
+            //         return Promise.reject(response);
+    //     }
+    //     else{
+    //         return response.json();
+    //     }
+    // }
+    let id_producto = +editarIdProducto.value;
 
-//     let jsonUpdateProducto = {
-//         "nombre" : document.getElementById('ed-nombre').value, 
-//         "apellido" : document.getElementById('ed-apellido').value,
-//         "empresa" : document.getElementById('ed-empresa').value, 
-//         "email" : document.getElementById('ed-email').value,  
-//         "telefono" : document.getElementById('ed-telefono').value, 
-//         "direccion" : document.getElementById('ed-direccion').value, 
-//         "id_tipoCondicionIVA" : document.getElementById('ed-condicionIVA').value
-//     };
+    let jsonUpdateProducto = {
+        "codigoProducto": id_producto,
+        "producto" : editarNombreProducto.value, 
+        "descripcion" : editarDescripcionProducto.value,
+        "precio" : editarPrecioProducto.value, 
+        "stock" : editarStockProducto.value,  
+        "id_tipoProducto" : editarTipoProducto.value   
+    };
 
-//     const requestOptions = {
-//         method: 'POST',
-//         headers: {
-//             'Accept': '*/*',
-//             'Content-Type': 'application/json',
-//             'x-access-token': token,
-//             'user-id': id_usuario
-//         },
-//         body: JSON.stringify(jsonUpdateProducto) 
-//     };
+    const requestOptions = {
+        method: 'POST',
+        headers: {
+            'Accept': '*/*',
+            'Content-Type': 'application/json',
+            'x-access-token': token,
+            'user-id': id_usuario
+        },
+        body: JSON.stringify(jsonUpdateProducto) 
+    };
 
-//     fetch(`http://127.0.0.1:5000/usuario/${id_usuario}/producto/${id_producto}`, requestOptions)
-//         .then(response => handleResponse(response))
-//         .then(
-//             data => {
+    fetch(`http://127.0.0.1:5000/usuario/${id_usuario}/producto/${id_producto}`, requestOptions)
+        .then(response => handleResponse(response))
+        .then(
+            data => {
                 
-//                 Swal.fire({
-//                     icon: "success",
-//                     title: data.message
-//                   });
+                Swal.fire({
+                    icon: "success",
+                    title: data.message
+                  });
     
-//                 let modal = document.getElementById('M-Editar');
-//                 modal.style.display = 'none';
-//                 getAll_Clients();
-//             }
-//         )
-//         .catch(error => {
-//             error.json().then(data => 
-//                 Swal.fire({
-//                     icon: "error",
-//                     text: data.message
-//                   })
-//             );
-//         })
-//         .finally(() => {
-//             console.log("Promesa finalizada (resuelta o rechazada)");
-//         });
-// }
+                let modal = document.getElementById('M-EditarProducto');
+                modal.style.display = 'none';
+                getAll_Product();
+            }
+        )
+        .catch(error => {
+            error.json().then(data => 
+                Swal.fire({
+                    icon: "error",
+                    text: data.message
+                  })
+            );
+        })
+        .finally(() => {
+            console.log("Promesa finalizada (resuelta o rechazada)");
+        });
+}
 
 function delete_Product(data){
     

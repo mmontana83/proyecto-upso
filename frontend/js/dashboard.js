@@ -40,10 +40,14 @@ sidebarToggle.addEventListener("click", () => {
     
       // Agregar un evento que se dispara cuando un modal se muestra
 document.querySelectorAll('.modal').forEach(modal => {
-    modal.addEventListener('shown.bs.modal', function () {
+    modal.addEventListener('hidden.bs.modal', function () {
           // Resetear el formulario específico para cada modal
         mensajeValidacionCUIT.style.display = 'none';
         cuitInput.classList.remove('is-invalid');
+        idProductoInput.classList.remove('is-invalid');
+        mensajeValidacionIDProducto.style.display = 'none';
+        editarIdProducto.classList.remove('is-invalid');
+        mensajeValidacionIDProducto.style.display = 'none';
         resetFormulario(`#${modal.id}`);
 
     });
@@ -116,7 +120,8 @@ const inputs = document.getElementById('edit-form').querySelectorAll('input, sel
 let count = 0;
 
 window.addEventListener("click", (e) => { //el evento es sobre la ventana entera
-    if (e.target.getAttribute("data-bs-target") === "#M-Editar" | e.target.getAttribute("data-bs-target") === "#Factura"
+    if   (e.target.getAttribute("data-bs-target") === "#M-Editar" 
+        | e.target.getAttribute("data-bs-target") === "#Factura"
         | e.target.getAttribute("data-bs-target") === "#EliminarCliente") { 
             
             let data = e.target.parentElement.parentElement.children;
@@ -129,10 +134,21 @@ window.addEventListener("click", (e) => { //el evento es sobre la ventana entera
                 delete_Client(data); 
             }
     }
+    if (e.target.getAttribute("data-bs-target") === "#M-EditarProducto") {
+        let data = e.target.parentElement.parentElement.children;
+        console.log(data,'holisiw')
+        editarIdProducto.value = data[0].textContent;
+        editarNombreProducto.value = data[1].textContent;
+        editarDescripcionProducto.value = data[2].textContent;
+        editarPrecioProducto.value = data[3].textContent;
+        editarStockProducto.value = data[4].textContent;
+        editarTipoProducto.value = data[5].textContent;
+    }
       
     if (e.target.matches(".btn-secondary" ) | (e.target.matches(".btn-close" )) | (e.target.matches(".modal.fade"))) {
         count=0
     }
+
   });
 
   const fillDataCliente = (data) => {

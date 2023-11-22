@@ -15,11 +15,6 @@ const btnGuardar = document.getElementById('btnGuardar');
 
 let facturas = [];
 let arregloDetalle = []; // Arreglo que se va a usar para enviar la factura a la BD
-let arregloProductos = [
-    {id:2, nombre: "Mouse", precio: 25},
-    {id:3, nombre: "teclado", precio: 33},
-    {id:4, nombre: "computador", precio: 32.7}
-];
 
 ///// obtenemos la fecha actual en formato "YYYY-MM-DD"
   var fechaActual = new Date().toISOString().split('T')[0];

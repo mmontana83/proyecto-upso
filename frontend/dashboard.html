@@ -706,7 +706,78 @@
     </div>
     </div>
 </div>
-<!-- -------------------------------------------------------------------------------- -->
+<!-- ----------------------------------------MODAL EDITAR PRODUCTO---------------------------------------- -->
+<div class="modal fade" id="M-EditarProducto" tabindex="-1" aria-labelledby="modalEditarProducto" aria-hidden="true">
+    <div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+        <h1 class="modal-title fs-5" id="modalEditarProducto">Editar Producto</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form action="" class="form-floating needs-validation" novalidate id="Modal-Editar-Producto">
+
+                <div class="form-floating mb-3">
+                    <input type="text"  class="form-control" id="editarIdProducto" placeholder="Ingrese ID"  pattern="^[1-9]\d*$" maxlength="6" min="0" required>
+                    <label for="editarIdProducto">ID</label>
+                    <div id="mensajeValidacionIDProducto" class="invalid-feedback">
+                        Ingrese un Codigo válido (sólo 6 números, sin guiones, sin puntos).
+                    </div>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="editarNombreProducto" placeholder="Neumatico" required>
+                    <label for="editarNombreProducto">Nombre</label>
+                    <div id="mensajeValidacionNombreDescripcionProducto" class="invalid-feedback">
+                        Este campo no puede queda vacío
+                    </div>
+                </div>
+                
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="editarDescripcionProducto" placeholder="Bridgestone" required>
+                    <label for="editarDescripcionProducto">Descripcion</label>
+                    <div id="mensajeValidacionNombreDescripcionProducto" class="invalid-feedback">
+                        Este campo no puede queda vacío
+                    </div>
+                </div>
+                
+                <div class="form-floating mb-3">
+                    <input type="email" class="form-control" id="editarPrecioProducto" placeholder="14.55" min="0" pattern="\d+" required>
+                    <label for="editarPrecioProducto">Precio</label>
+                    <div id="mensajeValidacionPrecioProducto" class="invalid-feedback">
+                        El numero ingresado no es valido!
+                    </div>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input type="number" class="form-control" id="editarStockProducto" placeholder="231" min="0" pattern="^[1-9]\d*$" required>
+                    <label for="editarStockProducto">Stock</label>
+                    <div id="mensajeValidacionStockProducto" class="invalid-feedback">
+                        Debe ingresar un número mayor o igual a 0.
+                    </div>
+                </div>
+
+                <div class="form-floating">
+                    <select class="form-select" id="editarTipoProducto" aria-label="Floating label select example">
+                        <option selected value=""></option>
+                    </select>
+                    <label for="editarTipoProducto">Seleccione Tipo Producto</label>
+                    <div id="mensajeValidacionTipoProducto" class="invalid-feedback">
+                        Debe seleccionar una opción.
+                    </div>
+                  </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" onclick="update_Product()" id="botonEditarProducto" disabled>Confirmar</button>
+        </div>
+    </div>
+    </div>
+</div>
+<!-- --------------------------------------------------------------- -->
+
+
 
 <!-- -----------------------MODAL FACTURA ------------------------->
     <div class="modal fade" id="M-verFactura" tabindex="-1" aria-labelledby="modalverFactura" aria-hidden="true">
