@@ -254,8 +254,6 @@
                             <th> Razón Social </th>
                             <th> Fecha </th>
                             <th> Tipo </th>
-                            <th> Cond. IVA </th>
-                            <th> Dirección </th>
                             <th> Total </th>
                             <th> Consultar </th>
                         </tr>
@@ -284,8 +282,18 @@
                         </div>
                         <div class="card-body">
                             <form action="" class="row  " id="formCabecera">
-                                <div class="form-group col-md-4 ">
-                                    <label for="">Nombre</label>
+                                <div class="form-group col-md-2">
+                                    <label for="">Nro de Factura</label>
+                                    <input 
+                                    disabled
+                                    required
+                                    type="text" 
+                                    class="form-control" 
+                                    placeholder="002"
+                                    id="inputNroFactura">
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="">Apellido y Nombre / Razón Social</label>
                                     <input
                                     disabled
                                     required
@@ -295,6 +303,16 @@
                                     id="inputNombre">
                                 </div>
                                 <div class="form-group col-md-4">
+                                    <label for="">Dirección</label>
+                                    <input 
+                                    disabled
+                                    required
+                                    type="text" 
+                                    class="form-control" 
+                                    placeholder="Calle colon"
+                                    id="inputDireccion">
+                                </div>
+                                <div class="form-group col-md-2">
                                     <label for="">Cuit/Cuil</label>
                                     <input 
                                     disabled
@@ -304,39 +322,23 @@
                                     placeholder="2035523553" 
                                     id="inputCuit">
                                 </div>
-                                <div class="form-group col-md-4">
-                                    <label for="">Numero de Factura</label>
-                                    <input 
-                                    disabled
-                                    required
-                                    type="text" 
-                                    class="form-control" 
-                                    placeholder="002"
-                                    id="inputNroFactura">
-                                </div>
+                                
                                 <div class="form-group col-md-4 mt-3">
-                                    <label for="">Direccion</label>
-                                    <input 
-                                    disabled
-                                    required
-                                    type="text" 
-                                    class="form-control" 
-                                    placeholder="Calle colon"
-                                    id="inputDireccion">
-                                </div>
-                                <div class="form-group col-md-4 mt-3">
-                                    <label for="">Metodo de Pago</label>
-                                    <select class="form-select" >
-                                       <option disabled selected value>--Seleccione una opción--</option>
-                                       <option value="1">Contado</option>
-                                       <option value="2">Tarjeta de Debito</option>
-                                       <option value="3">Tarjeta de Credito</option>
-                                       <option value="4">Cuenta Corriente</option>
-                                       <option value="5">Cheque</option>
-                                       <option value="6">Ticket</option>
+                                    <label for="">Método de Pago</label>
+                                    <select class="form-select" id="inputMetodoPago">
                                     </select>
                                 </div>
+                                
                                 <div class="form-group col-md-4 mt-3">
+                                    <label for="">Tipo de Comprobante</label>
+                                    <select class="form-select" id="inputTipoComprobante">
+                                    </select>
+                                </div>
+                                
+                                <div class="form-group col-md-2">
+                                </div>
+
+                                <div class="form-group col-md-2 mt-3">
                                     <label for="">Fecha</label>
                                     <input 
                                     disabled
@@ -417,8 +419,8 @@
                     <table class="table text-center">
                         <thead>
                             <tr>
-                                <th>Cantidad</th>
                                 <th>Descripcion</th>
+                                <th>Cantidad</th>
                                 <th>P. Unitario</th>
                                 <th>P. Total</th>
                                 <th>Acciones</th>
@@ -795,22 +797,6 @@
                             </div> -->
                             <div class="card-body">
                                 <form action="" class="row  " id="M-formCabecera">
-                                    <div class="form-group col-md-4 ">
-                                        <label for="">Nombre</label>
-                                        <input 
-                                        disabled
-                                        type="text" 
-                                        class="form-control" 
-                                        id="M-inputNombre">
-                                    </div>
-                                    <div class="form-group col-md-4">
-                                        <label for="">Cuit/Cuil</label>
-                                        <input 
-                                        disabled
-                                        type="text" 
-                                        class="form-control" 
-                                        id="M-inputCuit">
-                                    </div>
                                     <div class="form-group col-md-2">
                                         <label for="">Nro de Factura</label>
                                         <input 
@@ -819,15 +805,16 @@
                                         class="form-control" 
                                         id="M-inputNroFactura">
                                     </div>
-                                    <div class="form-group col-md-2 ">
-                                        <label for="">Fecha</label>
+                                    <div class="form-group col-md-4 ">
+                                        <label for="">Apellido y Nombre / Razón Social</label>
                                         <input 
                                         disabled
                                         type="text" 
-                                        class="form-control"
-                                        id="M-inputFecha">
+                                        class="form-control" 
+                                        id="M-inputNombre">
                                     </div>
-                                    <div class="form-group col-md-4 mt-3">
+
+                                    <div class="form-group col-md-4">
                                         <label for="">Direccion</label>
                                         <input 
                                         disabled
@@ -835,7 +822,49 @@
                                         class="form-control" 
                                         id="M-inputDireccion">
                                     </div>
-                              
+
+                                    <div class="form-group col-md-2">
+                                        <label for="">Cuit/Cuil</label>
+                                        <input 
+                                        disabled
+                                        type="text" 
+                                        class="form-control" 
+                                        id="M-inputCuit">
+                                    </div>
+                                    
+                                    <div class="form-group col-md-4 mt-3">
+                                        <label for="">Condición IVA</label>
+                                        <input 
+                                        disabled
+                                        type="text" 
+                                        class="form-control" 
+                                        id="M-inputCondicionIVA">
+                                    </div>
+
+                                    <div class="form-group col-md-2 mt-3">
+                                        <label for="">Condición de Venta</label>
+                                        <input 
+                                        disabled
+                                        type="text" 
+                                        class="form-control" 
+                                        id="M-inputCondicionVenta">
+                                    </div>
+                                    <div class="form-group col-md-2 mt-3">
+                                        <label for="">Tipo Comprobante</label>
+                                        <input 
+                                        disabled
+                                        type="text" 
+                                        class="form-control" 
+                                        id="M-inputTipoComprobante">
+                                    </div>
+                                    <div class="form-group col-md-2 mt-3">
+                                        <label for="">Fecha</label>
+                                        <input 
+                                        disabled
+                                        type="text" 
+                                        class="form-control"
+                                        id="M-inputFecha">
+                                    </div>
                                     <div class="form-group col-md-2 mt-3">
                                         <label for="">Total</label>
                                         <input 

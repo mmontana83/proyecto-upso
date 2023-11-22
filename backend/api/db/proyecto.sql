@@ -2,9 +2,9 @@ CREATE DATABASE  IF NOT EXISTS `proyecto` /*!40100 DEFAULT CHARACTER SET utf8mb4
 USE `proyecto`;
 -- MySQL dump 10.13  Distrib 8.0.34, for Win64 (x86_64)
 --
--- Host: 192.168.0.254    Database: proyecto
+-- Host: 127.0.0.1    Database: proyecto
 -- ------------------------------------------------------
--- Server version	8.0.35-0ubuntu0.22.04.1
+-- Server version	8.0.35
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -51,7 +51,7 @@ CREATE TABLE `clientes` (
 
 LOCK TABLES `clientes` WRITE;
 /*!40000 ALTER TABLE `clientes` DISABLE KEYS */;
-INSERT INTO `clientes` VALUES ('12246549873','Roberto Julián','Carlos','RJC Computación','stisrlpa@gmail.com','2932224455','Murature 1234',4,1,'20302022731'),('20110336209','Antonio','Montaña','','antonio@gmail.com','2932454545','ATEPAM 1 CASA 44',1,1,'23302022739'),('20139570910','Walter Rubén','Bozzo','Bozzo Construcciones','wrbozzo@gmail.com','2932444555','Uriburu 1357',3,2,'24302022737'),('23183214579','Rosa','Gonzalez','Rosita Pastelería','rositapasteles@gmail.com','2932447788','Bº CENTENARIO CASA 44',5,1,'20302022731'),('23491199983','Laura','Gonzalez','Panadería Anocheciendo','panaderiaamanacer@gmail.com','2932556677','Paso 2044',2,2,'23302022739'),('23551234563','Rodrigo','Forte','STI S.R.L COMPUTACIÓN','stisrlpa@gmail.com','2932224455','Murature 1234',4,1,'23302022739'),('23668931023','Carla','Rueda','Fashion Nails','fnails@gmail.com','2195566778','Colón 123, Bahía Blanca',2,1,'24302022737'),('23668931331','Roberto','Martinez','Calzado Sport','sportcalzadospa@gmail.com','2932444666','Colón 123, Punta Alta',1,1,'24302022737'),('24123654889','Norma','Martínez',NULL,'normamartinez@gmail.com','2932455444','Uriburu 758',5,1,'23302022739'),('24234569878','José Bruno','Canceso','Las ligas Mayores S.R.L','ligas@gmail.com','2932445557','Paso 2332',8,2,'20302022731'),('24367894360','','','La Carlota Rectificaciones','carlotarect@gmail.com','011288371098','Florida 443',1,1,'24302022737'),('25789457891','null','null','Clínica Salud Mental','saludmentalpa@gmail.com','2932457897','Murature 688',1,1,'20302022731'),('30627393713','','','Dirección de Cultura y Educación (Bajo Hondo)','essa1coronesrosales@abc.gob.ar','2392491114','C. 8 - Victoria Llanos, Bajo Hondo',4,1,'23302022739'),('30681157375',NULL,NULL,'Hospital Eva Perón','evaperon@gmail.com','2932422955','Uriburu 650',1,1,'20302022731'),('30999018447','','','Ministerio de Seguridad (Punta Alta)','estacionpuntaalta@gmail.com','2932421444','Murature 572',3,1,'23302022739'),('78126543215','Juan Manuel','Martinez','Casa Martinez','casamartinezpa@gmail.com','2932456987','Irigoyen 457',1,1,'20302022731'),('95124568798','Lucrecia','Martinez','Lu Deco ART','ludeco@gmail.com','29326456987','Av. Alem 2344',6,1,'20302022731');
+INSERT INTO `clientes` VALUES ('12246549873','Roberto Julián','Carlos','RJC Computación','stisrlpa@gmail.com','2932224455','Murature 1233',4,2,'20302022731'),('20110336209','Antonio','Montaña','','antonio@gmail.com','2932454545','ATEPAM 1 CASA 44',1,1,'23302022739'),('20139570910','Walter Rubén','Bozzo','Bozzo Construcciones','wrbozzo@gmail.com','2932444555','Uriburu 1357',3,2,'24302022737'),('23183214579','Rosa','Gonzalez','Rosita Pastelería','rositapasteles@gmail.com','2932447788','Bº CENTENARIO CASA 44',5,1,'20302022731'),('23491199983','Laura','Gonzalez','Panadería Anocheciendo','panaderiaamanacer@gmail.com','2932556677','Paso 2044',2,2,'23302022739'),('23551234563','Rodrigo','Forte','STI S.R.L COMPUTACIÓN','stisrlpa@gmail.com','2932224455','Murature 1234',4,1,'23302022739'),('23668931023','Carla','Rueda','Fashion Nails','fnails@gmail.com','2195566778','Colón 123, Bahía Blanca',2,1,'24302022737'),('23668931331','Roberto','Martinez','Calzado Sport','sportcalzadospa@gmail.com','2932444666','Colón 123, Punta Alta',1,1,'24302022737'),('24123654889','Norma','Martínez',NULL,'normamartinez@gmail.com','2932455444','Uriburu 758',5,1,'23302022739'),('24234569878','José Bruno','Canceso','Las ligas Mayores S.R.L','ligas@gmail.com','2932445557','Paso 2332',8,2,'20302022731'),('24367894360','','','La Carlota Rectificaciones','carlotarect@gmail.com','011288371098','Florida 443',1,1,'24302022737'),('25789457891','null','null','Clínica Salud Mental','saludmentalpa@gmail.com','2932457897','Murature 688',1,1,'20302022731'),('30627393713','','','Dirección de Cultura y Educación (Bajo Hondo)','essa1coronesrosales@abc.gob.ar','2392491114','C. 8 - Victoria Llanos, Bajo Hondo',4,1,'23302022739'),('30681157375',NULL,NULL,'Hospital Eva Perón','evaperon@gmail.com','2932422955','Uriburu 650',1,1,'20302022731'),('30999018447','','','Ministerio de Seguridad (Punta Alta)','estacionpuntaalta@gmail.com','2932421444','Murature 572',3,1,'23302022739'),('78126543215','Juan Manuel','Martinez','Casa Martinez','casamartinezpa@gmail.com','2932456987','Irigoyen 457',1,1,'20302022731'),('95124568798','Lucrecia','Martinez','Lu Deco ART','ludeco@gmail.com','29326456987','Av. Alem 2344',6,1,'20302022731');
 /*!40000 ALTER TABLE `clientes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -193,7 +193,7 @@ CREATE TABLE `productos` (
 
 LOCK TABLES `productos` WRITE;
 /*!40000 ALTER TABLE `productos` DISABLE KEYS */;
-INSERT INTO `productos` VALUES (1,123456,'NEUMATICOS','bridgestone',50.20,4,1,1,'23302022739'),(2,134567,'BUJÍA NAFTERA','BUJÍA',6500.00,50,1,2,'23302022739'),(3,145678,'BUJÍA DIESEL','BUJÍA',7988.00,4,1,1,'23302022739'),(4,145645,'ACEITE MOTOR 15W40','ACEITE MOTOR MÁS CARITO',37880.00,25,1,2,'23302022739'),(5,156456,'SERVICE AUTOMOTOR','SERVICE QUE SE REALIZA CADA 10.000 KM',18000.00,0,2,1,'23302022739'),(6,148457,'AFINACIÓN','AFINACIÓN',15000.00,0,2,1,'23302022739'),(7,254874,'GASAS','Rollo de 100m.',3000.00,50,1,1,'20302022731'),(8,254856,'JERINGA X 10ml','Jeringa apta para visitas.',175.00,100,1,1,'20302022731'),(9,258746,'NEBULIZADOR','No incluye máscara.',7800.00,3,1,1,'20302022731'),(10,245477,'VACUNACION A DOMICILIO','No incluye viáticos.',3000.00,0,2,1,'20302022731'),(11,254545,'MEDICION PRESION','',500.00,0,2,1,'20302022731'),(15,198765,'Neumaticos','fate',100.00,10,1,1,'23302022739'),(16,198762,'Neumaticos','continental',100.00,10,1,1,'23302022739'),(17,198764,'Neumaticos','michelin',250.00,100,1,1,'23302022739'),(18,198763,'Neumaticos','yacohama',250.00,100,1,1,'23302022739'),(19,198767,'Neumsasasaticos','yacohama',250.00,100,1,2,'23302022739'),(20,198769,'NEUMATICOS','TWISTER',250.00,100,1,2,'23302022739'),(21,198770,'NEUMATICOS','PINOCHO',250.00,100,1,1,'23302022739'),(22,198771,'NEUMATICOS','LAMOROCHA',250.00,100,1,1,'23302022739'),(23,145648,'ACEITE MOTOR 25W40','ACEITE PARA MOTORES FUNDIDOS',45000.00,5,1,1,'23302022739'),(24,654987,'Purificador','Este producto sirve para purificar el aire',45777.00,2,1,1,'20302022731'),(25,256987,'Purificador','Purificador de Aire',45500.00,3,1,1,'23302022739'),(26,123123,'Purificador','Este producto sirve para purificar el aire',45777.00,3,1,1,'20302022731'),(27,321321,'Bivaporuc','Para la descongestión',3500.00,2,1,1,'20302022731'),(28,999888,'Novalgina','por 900ml',7880.00,3,1,1,'20302022731'),(29,788777,'TosoTos','Para la tos!',3500.00,34,1,1,'20302022731');
+INSERT INTO `productos` VALUES (1,123456,'NEUMATICOS','bridgestone',50.20,4,1,1,'23302022739'),(2,134567,'BUJÍA NAFTERA','BUJÍA',6500.00,50,1,2,'23302022739'),(3,145678,'BUJÍA DIESEL','BUJÍA',7988.00,4,1,1,'23302022739'),(4,145645,'ACEITE MOTOR 15W40','ACEITE MOTOR MÁS CARITO',37880.00,25,1,2,'23302022739'),(5,156456,'SERVICE AUTOMOTOR','SERVICE QUE SE REALIZA CADA 10.000 KM',18000.00,0,2,1,'23302022739'),(6,148457,'AFINACIÓN','AFINACIÓN',15000.00,0,2,1,'23302022739'),(7,254874,'GASAS','Rollo de 100m.',3000.00,50,1,1,'20302022731'),(8,254856,'JERINGA X 10ml','Jeringa apta para visitas.',175.00,100,1,1,'20302022731'),(9,258746,'NEBULIZADOR','No incluye máscara.',7800.00,3,1,1,'20302022731'),(10,245477,'VACUNACION A DOMICILIO','No incluye viáticos.',3000.00,0,2,1,'20302022731'),(11,254545,'MEDICION PRESION','',500.00,0,2,1,'20302022731'),(15,198765,'Neumaticos','fate',100.00,10,1,1,'23302022739'),(16,198762,'Neumaticos','continental',100.00,10,1,1,'23302022739'),(17,198764,'Neumaticos','michelin',250.00,100,1,1,'23302022739'),(18,198763,'Neumaticos','yacohama',250.00,100,1,1,'23302022739'),(19,198767,'Neumsasasaticos','yacohama',250.00,100,1,2,'23302022739'),(20,198769,'NEUMATICOS','TWISTER',250.00,100,1,2,'23302022739'),(21,198770,'NEUMATICOS','PINOCHO',250.00,100,1,1,'23302022739'),(22,198771,'NEUMATICOS','LAMOROCHA',250.00,100,1,1,'23302022739'),(23,145648,'ACEITE MOTOR 25W40','ACEITE PARA MOTORES FUNDIDOS',45000.00,5,1,1,'23302022739'),(24,654987,'Purificador','Este producto sirve para purificar el aire',45777.00,2,1,1,'20302022731'),(25,256987,'Purificador','Purificador de Aire',45500.00,3,1,1,'23302022739'),(26,123123,'Purificador','Este producto sirve para purificar el aire',45777.00,3,1,1,'20302022731'),(27,321321,'Bivaporuc','Para la descongestión nasal',4400.00,15,1,1,'20302022731'),(28,999888,'Novalgina','por 900ml',7880.00,3,1,2,'20302022731'),(29,788777,'TosoTos','Para la Tos y el catarro!',600.00,5,1,2,'20302022731');
 /*!40000 ALTER TABLE `productos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -379,11 +379,11 @@ DELIMITER ;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb3 */ ;
-/*!50003 SET character_set_results = utf8mb3 */ ;
-/*!50003 SET collation_connection  = utf8mb3_general_ci */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'NO_AUTO_VALUE_ON_ZERO' */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE DEFINER=`proyecto`@`%` PROCEDURE `sp_actualizarProducto`(
     in p_codigoProducto int,
@@ -396,11 +396,12 @@ CREATE DEFINER=`proyecto`@`%` PROCEDURE `sp_actualizarProducto`(
 )
 BEGIN   
     UPDATE productos
-    SET producto = p_producto, 
+    SET 
+		producto = p_producto, 
         descripcion = p_descripcion, 
         precio = p_precio, 
         stock = p_stock, 
-        id_tipoProducto = p_id_tipoProducto
+        id_tipoProducto = p_id_tipoProducto        
     WHERE id_usuario = p_id_usuario 
     AND codigoProducto = p_codigoProducto;
 END ;;
@@ -1157,4 +1158,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-11-21 22:26:26
+-- Dump completed on 2023-11-22 16:27:28

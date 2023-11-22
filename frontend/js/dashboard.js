@@ -141,7 +141,7 @@ window.addEventListener("click", (e) => { //el evento es sobre la ventana entera
 
   });
 
-  const fillDataCliente = (data) => {
+const fillDataCliente = (data) => {
     for (let index of inputs) {
         if (count == 7){
             switch(data[count].textContent){

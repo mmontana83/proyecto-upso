@@ -1,17 +1,143 @@
+//#region Const para la cabecera de la Factura
 const formCabecera = document.getElementById('formCabecera')
-const inputNombre = document.getElementById('inputNombre');
-const inputCuit = document.getElementById('inputCuit');
 const inputNroFactura = document.getElementById('inputNroFactura');
+const inputNombre = document.getElementById('inputNombre');
 const inputDireccion = document.getElementById('inputDireccion');
+const inputCuit = document.getElementById('inputCuit');
+const inputMetodoPago = document.getElementById('inputMetodoPago');
+const inputTipoComprobante = document.getElementById('inputTipoComprobante');
 const inputFecha = document.getElementById('inputFecha');
+//#endregion
+
+//#region Const para el Detalle de la factura
 const formDetalle = document.getElementById('formDetalle');
-const inputCantidad = document.getElementById('inputCantidad');
 const selectDescripcion = document.getElementById('selectDescripcion');
+const inputCantidad = document.getElementById('inputCantidad');
 const inputPUnitario = document.getElementById('inputPUnitario');
 const inputPTotal = document.getElementById('inputPTotal');
 const inputPTotales = document.getElementById('inputPTotales');
 const cuerpoTabla = document.getElementById('cuerpoTabla');
 const btnGuardar = document.getElementById('btnGuardar');
+//#endregion
+
+
+//#region Carga Dinámica Option Tipo Condicion IVA
+function cargarTipoCondicionVenta(){
+    function handleResponse(response)  {
+        if (!response.ok){
+            return Promise.reject(response);
+        }
+        else{
+            return response.json();
+        }
+    }
+
+    const requestOptions = {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'x-access-token': token,
+            'user-id': id_usuario
+        }
+    };
+    
+    fetch(`http://127.0.0.1:5000/dashboard/listarTipoCondicionVenta`, requestOptions)
+        .then(response => handleResponse(response))
+        .then(
+            (categorias) => {
+                
+                inputMetodoPago.innerHTML = '';
+
+                //Creo una opción vacía que se muestra por defecto.
+                const option = document.createElement('option');
+                option.value = "";
+                option.text = "--Seleccione una opción--";
+                option.setAttribute('disabled', true);
+                option.setAttribute('selected', true);
+                inputMetodoPago.appendChild(option);
+
+                categorias.forEach(categoria => {
+                    const option = document.createElement('option');
+                    option.value = categoria.id_tipoCondicionIVA;
+                    option.text = categoria.descripcion;
+                    inputMetodoPago.appendChild(option);
+                });
+            }
+        )
+        .catch(error => {
+            error.json().then(data => 
+                Swal.fire({
+                    icon: "error",
+                    text: data.message
+                  })
+            );
+        })
+        .finally(() => {
+            console.log("Promesa finalizada (resuelta o rechazada)");
+        });
+}
+
+function cargarTipoComprobante(){
+
+    function handleResponse(response)  {
+        if (!response.ok){
+            return Promise.reject(response);
+        }
+        else{
+            return response.json();
+        }
+    }
+
+    const requestOptions = {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'x-access-token': token,
+            'user-id': id_usuario
+        }
+    };
+    
+    fetch(`http://127.0.0.1:5000/dashboard/listarTipoFactura`, requestOptions)
+        .then(response => handleResponse(response))
+        .then(
+            (categorias) => {
+                
+                inputTipoComprobante.innerHTML = '';
+
+                //Creo una opción vacía que se muestra por defecto.
+                const option = document.createElement('option');
+                option.value = "";
+                option.text = "--Seleccione una opción--";
+                option.setAttribute('disabled', true);
+                option.setAttribute('selected', true);
+                inputTipoComprobante.appendChild(option);
+
+                categorias.forEach(categoria => {
+                    const option = document.createElement('option');
+                    option.value = categoria.id_tipoFactura;
+                    option.text = categoria.tipoFactura;
+                    inputTipoComprobante.appendChild(option);
+                });
+            }
+        )
+        .catch(error => {
+            error.json().then(data => 
+                Swal.fire({
+                    icon: "error",
+                    text: data.message
+                  })
+            );
+        })
+        .finally(() => {
+            console.log("Promesa finalizada (resuelta o rechazada)");
+        });
+}
+
+//Evento que se dispara cuando cargo la página para cargar dinámicamente el option Condicion IVA.
+document.addEventListener('DOMContentLoaded', cargarTipoComprobante());
+document.addEventListener('DOMContentLoaded', cargarTipoCondicionVenta());
+//#endregion
+
 
 let facturas = [];
 let arregloDetalle = []; // Arreglo que se va a usar para enviar la factura a la BD
