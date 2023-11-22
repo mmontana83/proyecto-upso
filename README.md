@@ -1,5 +1,14 @@
 # API RESTful implementada con Python + Flask + MYSQL
 
+### Grupo Nº 27
+Integrantes:
+- Lich Cristian
+- Montaña Martin
+- Sanchez Gerónimo
+- Weinzettel Eduardo
+
+### Desarrollo del Proyecto
+
 1. Crear directorio de proyecto (PROYECTO)
 
 2. Crear entorno virtual    **py -3 -m venv .venv**

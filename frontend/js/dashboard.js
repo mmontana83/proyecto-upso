@@ -32,6 +32,45 @@ sidebarToggle.addEventListener("click", () => {
     }
 })
 
+function toggleSection(sectionId) {
+    var section = document.getElementById(sectionId);
+    // Oculta todas las secciones antes de mostrar la seleccionada
+    var sections = document.querySelectorAll(".toggle");
+    sections.forEach(function (section) {
+        section.classList.add("hidden");
+    });
+    
+    // Muestra o oculta la sección actual
+    if (section.classList.contains("hidden")) {
+        section.classList.remove("hidden");
+    } else {
+        section.classList.add("hidden");
+    }
+}
+
+//#region Función para resetear el formulario en cualquier modal
+function resetFormulario(modalId) {
+    const formulario = document.querySelector(`${modalId} form`);
+    formulario.reset();
+}
+//#endregion
+
+//#region Agregar un evento que se dispara cuando un modal se muestra. Es para limpiar las advertencias
+document.querySelectorAll('.modal').forEach(modal => {
+    modal.addEventListener('hidden.bs.modal', function () {
+          // Resetear el formulario específico para cada modal
+        mensajeValidacionCUIT.style.display = 'none';
+        cuitInput.classList.remove('is-invalid');
+        idProductoInput.classList.remove('is-invalid');
+        mensajeValidacionIDProducto.style.display = 'none';
+        idProductoEdit.classList.remove('is-invalid');
+        mensajeValidacionEdicionIDProducto.style.display = 'none';
+        resetFormulario(`#${modal.id}`);
+    });
+});
+//#endregion
+
+//#region En esta sección trabajo con los parámetros de entrada del index (Usuario, Token)
 // Obtén los valores de los parámetros
 const nombre = obtenerParametroDeConsulta('nombre');
 const apellido = obtenerParametroDeConsulta('apellido');
@@ -52,52 +91,15 @@ function insertarUsuarioEnHTML(nombre, apellido){
 
 //Esto es para que al momento de cargar la página se llame a la función insertar UsuarioEnHTML
 document.addEventListener('DOMContentLoaded', insertarUsuarioEnHTML(nombre, apellido));
+//#endregion
 
-////////////////////////////////////////////////////////////////////////////////////////////
-function toggleSection(sectionId) {
-    var section = document.getElementById(sectionId);
-    // Oculta todas las secciones antes de mostrar la seleccionada
-    var sections = document.querySelectorAll(".toggle");
-    sections.forEach(function (section) {
-        section.classList.add("hidden");
-    });
-    
-    // Muestra o oculta la sección actual
-    if (section.classList.contains("hidden")) {
-        section.classList.remove("hidden");
-    } else {
-        section.classList.add("hidden");
-    }
-
-}
-
-///// FUNCION PARA FILTRAR BUSQUEDAS DE CLIENTES
-document.addEventListener("keyup", e => {
-    if (e.target.matches('#f-busqueda')) {
-        const searchTerm = e.target.value.toLowerCase();
-        const tableRows = document.querySelectorAll('table tr'); // Selector para las filas de la tabla
-
-        tableRows.forEach((fila) => {
-            const rowData = fila.textContent.toLowerCase();
-            if (rowData.includes(searchTerm)) {
-                fila.classList.remove('filter');
-            } else {
-                fila.classList.add('filter');
-            }
-        });
-    }
-});
-
-
-/////_----------------------------
-
-
-// FUNCION PARA DEVOLVER LOS VALORES DE LA FILA A LOS INPUTS PARA EDITAR----------------
+//#region FUNCION PARA DEVOLVER LOS VALORES DE LA FILA A LOS INPUTS PARA EDITAR----------------
 const inputs = document.getElementById('edit-form').querySelectorAll('input, select')
 let count = 0;
 
 window.addEventListener("click", (e) => { //el evento es sobre la ventana entera
-    if (e.target.getAttribute("data-bs-target") === "#M-Editar" | e.target.getAttribute("data-bs-target") === "#Factura"
+    if   (e.target.getAttribute("data-bs-target") === "#M-Editar" 
+        | e.target.getAttribute("data-bs-target") === "#Factura"
         | e.target.getAttribute("data-bs-target") === "#EliminarCliente") { 
             
             let data = e.target.parentElement.parentElement.children;
@@ -110,10 +112,33 @@ window.addEventListener("click", (e) => { //el evento es sobre la ventana entera
                 delete_Client(data); 
             }
     }
-      
+    if (e.target.getAttribute("data-bs-target") === "#M-EditarProducto" |
+    e.target.getAttribute("data-bs-target") === "#EliminarProducto" ) {
+        let data = e.target.parentElement.parentElement.children;
+
+        idProductoEdit.value = data[0].textContent.trim();
+        nombreProductoEdit.value = data[1].textContent;
+        descripcionProductoEdit.value = data[2].textContent;
+        precioProductoEdit.value = data[3].textContent;
+        stockProductoEdit.value = data[4].textContent;
+        switch(data[5].textContent){
+            case "PRODUCTO":
+                tipoProductoEdit.value = 1;
+                break;
+            case "SERVICIO":
+                tipoProductoEdit.value = 2;
+                break;
+        }
+
+        if (e.target.getAttribute("data-bs-target") === "#EliminarProducto") {
+            delete_Product(data); 
+        }
+    }
+
     if (e.target.matches(".btn-secondary" ) | (e.target.matches(".btn-close" )) | (e.target.matches(".modal.fade"))) {
         count=0
     }
+
   });
 
 const fillDataCliente = (data) => {
@@ -169,58 +194,23 @@ const fillDataCliente = (data) => {
             count += 1;
         }
     }
-};
+  };
+//#endregion
 
+//#region Función para Filtrar la Búsqueda de Clientes y Productos
+document.addEventListener("keyup", e => {
+    if (e.target.matches('#f-busqueda')) {
+        const searchTerm = e.target.value.toLowerCase();
+        const tableRows = document.querySelectorAll('table tr'); // Selector para las filas de la tabla
 
-window.addEventListener("click", (e) => { //el evento es sobre la ventana entera
-    if (e.target.getAttribute("data-bs-target") === "#M-Editar") { 
-      let data = e.target.parentElement.parentElement.children;
-      fillDataCliente(data);
+        tableRows.forEach((fila) => {
+            const rowData = fila.textContent.toLowerCase();
+            if (rowData.includes(searchTerm)) {
+                fila.classList.remove('filter');
+            } else {
+                fila.classList.add('filter');
+            }
+        });
     }
-  
-    if (e.target.matches(".btn-secondary" ) | (e.target.matches(".btn-close" )) | (e.target.matches(".modal.fade"))) {
-        count=0
-    }
-  });
-  ///-------------------------------------------------------------------------
- 
-
-
-  /////// CONTROL DE BOOTSTRAP SOBRE CAMPOS VACIOS---------------------
-
-// Example starter JavaScript for disabling form submissions if there are invalid fields
-(() => {
-    'use strict'
-  
-    // Fetch all the forms we want to apply custom Bootstrap validation styles to
-    const forms = document.querySelectorAll('.needs-validation')
-  
-    // Loop over them and prevent submission
-    Array.from(forms).forEach(form => {
-      form.addEventListener('submit', event => {
-        if (!form.checkValidity()) {
-          event.preventDefault()
-          event.stopPropagation()
-        }
-  
-        form.classList.add('was-validated')
-      }, false)
-    })
-  })()
-
-/////// -----------------TOASTS---------------------------------
-// const toastElList = document.querySelectorAll('.toast')
-// const toastList = [...toastElList].map(toastEl => new bootstrap.Toast(toastEl, option))
-const toastTrigger = document.getElementById('liveToastBtn')
-const toastLiveExample = document.getElementById('liveToast')
-console.log(toastTrigger)
-if (toastTrigger) {
-  const toastBootstrap =  bootstrap.Toast.getOrCreateInstance(toastLiveExample)
-  toastTrigger.addEventListener('click', () => {
-    toastBootstrap.show()
-  })
-}
-
-
-
-
+});
+//#endregion

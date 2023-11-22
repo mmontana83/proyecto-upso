@@ -28,6 +28,7 @@ function getAll_Facturas(){
         .then( response => handleResponse(response) )
         .then(
             (data) => {
+                console.log(data)
                 const tableBody = document.getElementById('all-facturas');
                 let list = ``;
                 data.forEach(factura => {

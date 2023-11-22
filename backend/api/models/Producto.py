@@ -27,10 +27,10 @@ class Producto:
 
     @staticmethod
     def insertarProductoByUsuario(json): 
-        print(json)      
     
         try:
             producto = Producto(json)
+            
             cur = mysql.connection.cursor()            
             cur.callproc('sp_listarProductoByUsuario', [producto._id_usuario, producto._codigoProducto])
             fila = cur.fetchone()
@@ -47,12 +47,12 @@ class Producto:
                                                      producto._id_usuario])
                 mysql.connection.commit()
                 cur.close()
-                return jsonify({'mensaje': 'Producto Insertado con Éxito'}), 200
+                return jsonify({'message': 'Producto Insertado con Éxito'}), 200
             else:
-                return jsonify({'mensaje': 'El Producto ya se encuentra agregado en el sistema'}), 409
+                return jsonify({'message': 'El Producto ya se encuentra agregado en el sistema'}), 200
 
         except Exception as ex:
-            return {'mensaje': str(ex)}  
+            return {'message': str(ex)}  
                 
     # --------------------------------------- Actualizar producto ------------------------------
     # ------------------------------------------ funciona ok ---------------------------------
@@ -61,29 +61,20 @@ class Producto:
     def actualizarProducto(json):       
         try:            
             producto = Producto(json)
-            cur = mysql.connection.cursor()            
-            cur.callproc('sp_listarProductoByUsuario', [producto._id_usuario, producto._codigoProducto])
-            fila = cur.fetchone()
-            cur.close()  # Cierra el cursor después de cada consulta
-
-            if fila is None:
-                return jsonify({'mensaje': 'El Producto NO se encuentra en el sistema'}), 409
-            else:
-
-                cur = mysql.connection.cursor()
-                cur.callproc('sp_actualizarProducto', [producto._codigoProducto,
-                                                       producto._producto, 
-                                                       producto._descripcion, 
-                                                       producto._precio, 
-                                                       producto._stock, 
-                                                       producto._id_tipoProducto,
-                                                       producto._id_usuario])
-                mysql.connection.commit()
-                cur.close()
-                return jsonify({'mensaje': 'Producto Actualizado correctamente'}), 200
-
+            print(producto.to_json())
+            cur = mysql.connection.cursor()
+            cur.callproc('sp_actualizarProducto', [producto._codigoProducto,
+                                                producto._producto, 
+                                                producto._descripcion, 
+                                                producto._precio, 
+                                                producto._stock, 
+                                                producto._id_tipoProducto,
+                                                producto._id_usuario])
+            mysql.connection.commit()
+            cur.close()
+            return jsonify({'message': 'Producto Actualizado correctamente'}), 200
         except Exception as ex:
-            return jsonify({'mensaje': str(ex)}), 409
+            return jsonify({'message': str(ex)}), 409
         
     # --------------------------------- fin Actualziar producto -------------------------------
 
@@ -94,7 +85,6 @@ class Producto:
     
     @staticmethod
     def eliminarProducto(id_usuario, codigoProducto):       
-        print('hola')
 
         try:
             cur = mysql.connection.cursor()            
@@ -103,15 +93,15 @@ class Producto:
             cur.close()  # Cierra el cursor después de cada consulta
 
             if fila is None:                
-                return jsonify({'mensaje': 'Producto No se encuentra en el sistema'}), 409
+                return jsonify({'message': 'Producto No se encuentra en el sistema'}), 409
             else:
                 cur = mysql.connection.cursor()
                 cur.callproc('sp_eliminarProducto', [id_usuario, codigoProducto])
                 mysql.connection.commit()
                 cur.close()
-                return jsonify({'mensaje':'Producto Eliminado con Éxito'}), 200
+                return jsonify({'message':'Producto Eliminado con Éxito'}), 200
         except Exception as ex:
-            return jsonify({'mensaje': str(ex)}), 409
+            return jsonify({'message': str(ex)}), 409
 
 # --------------------------------- fin eliminar producto -------------------------------        
 
@@ -124,31 +114,12 @@ class Producto:
     def altaProductoByUsuario(id_usuario, codigoProducto):
         try:
             cur = mysql.connection.cursor()
-
-            # Primera consulta
-            cur.callproc('sp_listarProductoByUsuario', [id_usuario, codigoProducto])
-            fila = cur.fetchone()
-            cur.close()  # Cierra el cursor después de la primera consulta
-
-            if fila is None:
-                cur = mysql.connection.cursor()
-
-                # Segunda consulta
-                cur.callproc('sp_altaProducto', [id_usuario, codigoProducto])
-                mysql.connection.commit()
-
-                # Manejo de múltiples conjuntos de resultados
-                while cur.nextset():
-                    pass
-
-                cur.close()
-                return jsonify({'mensaje': 'Producto agregado nuevamente con Éxito'}), 200
-            
-            else:
-                return jsonify({'mensaje': 'Producto ya se encuentra en el Sistema y fué dado de alta nuevamente.'}), 200
-            
+            cur.callproc('sp_altaProducto', [id_usuario, codigoProducto])
+            mysql.connection.commit()
+            cur.close()
+            return jsonify({'message': 'Producto agregado nuevamente con Éxito'}), 200
         except Exception as ex:
-                return jsonify({'mensaje': str(ex)}), 409
+                return jsonify({'message': str(ex)}), 409
 
 # ------------------------------- fin alta prodcucto by usuario ---------------------
 
@@ -170,11 +141,12 @@ class Producto:
                 for fila in datos:
                     producto = Producto.listarProductosToJson(fila)
                     productos.append(producto)
+                
                 return jsonify(productos), 200
             else:
-                return jsonify({'mensaje': 'Productos no encontrado'}), 409
+                return jsonify({'message': 'Productos no encontrado'}), 409
         except Exception as ex:
-            return jsonify({'mensaje': str(ex)}), 409
+            return jsonify({'message': str(ex)}), 409
         
 # ------------------------------ fin obtener Productos Usuario ---------------------------
         
@@ -190,22 +162,34 @@ class Producto:
             cur = mysql.connection.cursor()
             cur.callproc('sp_listarProductoByUsuario', [id_usuario, codigoProducto])
             fila = cur.fetchone()
-
+            print(fila)
             if fila is not None:   
-                producto = Producto.listarProductosToJson(fila)
+                producto = Producto.listarProductoToJson(fila)
                 return jsonify(producto), 200
             else:
-                return jsonify({'mensaje': 'Productos no encontrado'}), 409
+                return jsonify({'Cliente':'', 'id_tipoEstado':''})
         except Exception as ex:
-            return jsonify({'mensaje': str(ex)}), 409
+            return jsonify({'message': str(ex)}), 409
         
 # --------------- fin obtener un determinado productode un determinado usuario -------------
 
 
 
-        
     @classmethod
-    def listarProductosToJson(cls, json):
+    def listarProductoToJson(self, json):
+        return {
+            'id_producto': json[0],
+            'codigoProducto':json[1],
+            'producto': json[2],
+            'descripcion': json[3],
+            'precio': json[4],
+            'stock': json[5],
+            'id_tipoProducto': json[6],
+            'id_tipoEstado': json[7]
+        }
+
+    @classmethod
+    def listarProductosToJson(self, json):
 
         """
             convencion de documentacion PEP 257
@@ -244,65 +228,6 @@ class Producto:
             'producto': json[2],
             'descripcion': json[3],
             'precio': json[4],
-            'stock': json[6],
-            'tipoproducto': json[6]
+            'stock': json[5],
+            'tipoProducto': json[6]
         }
-
-""" Constructor __init__:
-
-Este es el constructor de la clase Producto. Se utiliza para inicializar las propiedades de un objeto Producto cuando se crea una nueva 
-instancia de la clase.
-Los parámetros que recibe el constructor son: id_producto, producto, descripcion, precio, stock, id_tipoProducto e id_usuario.
-Cada uno de estos parámetros se asigna a las propiedades correspondientes de la instancia del objeto Producto precedidas por un guion 
-bajo (por ejemplo, self._id_producto = id_producto).
-Estos atributos representan información sobre un producto, como su identificación, nombre, descripción, precio, stock, tipo de producto 
-y el usuario asociado.
-
-Método to_json:
-
-Este método se utiliza para convertir un objeto Producto en un formato JSON, lo que facilita su representación y transmisión de datos.
-Retorna un diccionario JSON que contiene todas las propiedades del objeto `Producto, utilizando las claves como nombres de propiedad y 
-los valores correspondientes.
-Este método es útil cuando se necesita enviar información de productos a través de una API web o almacenarla en una base de datos en 
-formato JSON.
-En resumen, esta clase Producto se utiliza para representar productos con sus atributos asociados, y proporciona un método para 
-convertir estos objetos en formato JSON, lo que es comúnmente útil en aplicaciones web y sistemas que manejan información de productos. 
-
-
-__init__ como constructor:
-
-El método __init__ es especial en Python y se llama automáticamente cuando se crea una nueva instancia de una clase.
-Su propósito principal es inicializar los atributos de la instancia con valores iniciales, como los argumentos pasados al crear un objeto.
-Al llamar a __init__, se configuran las propiedades del objeto con los valores iniciales que se proporcionan al crear la instancia. 
-Esto es lo que se llama "construir" o "inicializar" el objeto.
-to_json como método:
-
-to_json es un método que convierte un objeto en un formato específico, en este caso, un objeto JSON.
-Este método no se llama automáticamente cuando se crea una instancia; en su lugar, se llama explícitamente cuando se necesita 
-convertir el objeto en JSON.
-El nombre to_json es descriptivo y sugiere que este método tiene la función de convertir el objeto en una representación JSON.
-
-
-El parámetro self en los métodos de una clase en Python es una convención que se utiliza para referirse al objeto en sí mismo, es decir, 
-a la instancia de la clase sobre la cual se está ejecutando el método. No es una palabra clave especial, y podrías usar cualquier 
-otro nombre en lugar de self, pero es una práctica estándar y altamente recomendada utilizar self para este propósito.
-
-Cuando defines un método en una clase y declaras self como su primer parámetro, estás permitiendo que el método acceda y manipule los 
-atributos y métodos de la instancia de la clase en la que se llama. Esto es lo que permite que los métodos trabajen con datos 
-específicos de la instancia y realicen operaciones en función de esos datos.
-
-
-class MiClase:
-    def __init__(self, atributo):
-        self.atributo = atributo
-
-    def mi_metodo(self):
-        print(f"Valor del atributo: {self.atributo}")
-
-# Crear una instancia de la clase
-objeto = MiClase("Ejemplo")
-
-# Llamar al método
-objeto.mi_metodo()
-
-"""
