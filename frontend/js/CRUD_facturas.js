@@ -5,7 +5,7 @@ const M_inputDireccion = document.getElementById("M-inputDireccion");
 const M_inputCuit = document.getElementById("M-inputCuit");
 const M_inputCondicionIVA = document.getElementById("M-inputCondicionIVA");
 const M_inputCondicionVenta = document.getElementById("M-inputCondicionVenta");
-const M_inputTipoFactura = document.getElementById("M-inputTipoFactura");
+const M_inputTipoComprobante = document.getElementById("M-inputTipoComprobante");
 const M_inputFecha = document.getElementById("M-inputFecha");
 const M_inputPTotal = document.getElementById("M-inputPTotal");
 
@@ -110,7 +110,7 @@ function getFactura(id_cliente,nroFactura ) {
                 M_inputCuit.value = factura.encabezado.id_cliente
                 M_inputCondicionIVA.value = factura.encabezado.condicionIVA
                 M_inputCondicionVenta.value = factura.encabezado.condicionVenta
-                M_inputTipoFactura.value = factura.encabezado.tipoFactura
+                M_inputTipoComprobante.value = factura.encabezado.tipoFactura
                 M_inputFecha.value = factura.encabezado.fecha
                 M_inputPTotal.value = factura.encabezado.total
             }
