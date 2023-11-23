@@ -16,7 +16,7 @@ def actualizar_producto(id_usuario, codigoProducto):
 
         return Producto.actualizarProducto(json)
     except Exception as ex:
-        return jsonify({'mensaje': str(ex)})
+        return jsonify({'message': str(ex)})
     
 # ----------------------------------- fin  --------------------------------------   
  
@@ -32,7 +32,7 @@ def post_alta_producto_by_usuario(id_usuario, codigoProducto):
     try:
         return Producto.altaProductoByUsuario(id_usuario, codigoProducto)
     except Exception as ex:
-        return jsonify({'mensaje': str(ex)}), 409
+        return jsonify({'message': str(ex)}), 409
     
 # -------------------------------- fin alta prodcucto by usuario -----------------
 
@@ -49,7 +49,7 @@ def get_producto_by_id_usuario(id_usuario, codigoProducto):
     try:        
         return Producto.obtenerProductoByUsuario(id_usuario, codigoProducto)
     except Exception as ex:
-        return jsonify({'mensaje': str(ex)}), 409
+        return jsonify({'message': str(ex)}), 409
     
 # ------------------------------- fin obtener producto por usuario ----------------
     
@@ -65,7 +65,7 @@ def get_productos_by_id_usuario(id_usuario):
     try:
         return Producto.obtenerProductosByUsuario(id_usuario)
     except Exception as ex:
-        return jsonify({'mensaje': str(ex)}), 409
+        return jsonify({'message': str(ex)}), 409
     
 # ------------------------------ fin metodo --------------------------------
 
@@ -83,7 +83,7 @@ def eliminar_producto(id_usuario, codigoProducto):
     try:
         return Producto.eliminarProducto(id_usuario, codigoProducto)
     except Exception as ex:
-        return jsonify({'mensaje': str(ex)}), 409
+        return jsonify({'message': str(ex)}), 409
     
 # ----------------------------------- fin Eliminar  -----------------
 
@@ -96,4 +96,4 @@ def insertar_producto(id_usuario):
 
         return Producto.insertarProductoByUsuario(json)
     except Exception as ex:
-        return jsonify({'mensaje': str(ex)})
+        return jsonify({'message': str(ex)})

@@ -2,16 +2,18 @@ from api.db.db import mysql
 from flask import request, jsonify
 import re
 from datetime import datetime
+from decimal import Decimal
+from datetime import datetime
 
 class Factura():
     
     def __init__(self, json):
-        self._id_cliente = json['id_cliente']        
-        self._id_usuario = json['id_usuario']
-        self._fecha = json['fecha']
-        self._total = json['total']
-        self._id_tipoFactura = json['id_tipoFactura']
-        self._id_condicionVenta = json['id_condicionVenta']
+        self._id_cliente = json['id_cliente'].strip()        
+        self._id_usuario = json['id_usuario'].strip()
+        self._fecha = datetime.strptime(json['fecha'], "%d/%m/%Y")
+        self._total = Decimal(json['total'])
+        self._id_tipoFactura = int(json['id_tipoFactura'])
+        self._id_condicionVenta = int(json['id_condicionVenta'])
     
     def to_json(self):
         return {
@@ -28,10 +30,10 @@ class Factura():
         try:            
             #Creo un objeto que representa el encabezado de la factura a partir del json del request
             encabezadoFactura = Factura(jsonEncabezadoFactura)
-
+            
             #Calculo el monto total de la factura
             totalFactura = DetalleFactura.obtenerTotalFactura(jsonDetalleFactura)
-
+            
             # Inserto el encabezado de la factura en le BD
             cur = mysql.connection.cursor()
             cur.callproc('sp_insertarFactura', [encabezadoFactura._id_cliente, encabezadoFactura._id_usuario, encabezadoFactura._fecha,
@@ -41,19 +43,20 @@ class Factura():
             mysql.connection.commit()
             cur.close()
             
+            
             cur = mysql.connection.cursor()
             #Agrego cada fila del detalle de la factura a la BD
             for fila in jsonDetalleFactura:
                 detalleFactura = DetalleFactura(fila)
                 cur.callproc('sp_insertarFacturaDetalle', [encabezadoFactura._id_cliente, encabezadoFactura._id_usuario, detalleFactura._id_producto,
                                                        detalleFactura._cantidad, detalleFactura._precio])
-            
+           
             #Confirmo los cambios
             mysql.connection.commit()
             cur.close()
-            return jsonify({'Mensaje':'Factura Creada con Éxito'}), 200
+            return jsonify({'message':'Factura Creada con Éxito'}), 200
         except Exception as ex:
-            return jsonify({'mensaje':str(ex)}), 409
+            return jsonify({'message':str(ex)}), 409
         
     def encabezadoFacturaToJson(fila):
         return{
@@ -83,7 +86,7 @@ class Factura():
                 facturas.append(factura)
             return jsonify(facturas), 200
         else:
-            return jsonify({'mensaje':'El usuario no tiene facturas registradas.'}), 409
+            return jsonify({'message':'El usuario no tiene facturas registradas.'}), 409
         
 
     @staticmethod
@@ -100,7 +103,7 @@ class Factura():
                 facturas.append(factura)
             return jsonify(facturas), 200
         else:
-            return jsonify({'mensaje':'El usuario no tiene facturas registradas.'}), 409
+            return jsonify({'message':'El usuario no tiene facturas registradas.'}), 409
         
 
     @staticmethod
@@ -114,7 +117,7 @@ class Factura():
         if len(datos) != 0:
             encabezadoFactura = Factura.encabezadoFacturaToJson(datos)
         else:
-            return {'mensaje':'El usuario no tiene facturas registradas.'}
+            return {'message':'El usuario no tiene facturas registradas.'}
         cur.close()
 
         #Luego obtengo el detalle de la factura
@@ -128,15 +131,15 @@ class Factura():
                 detalleFactura.append(DetalleFactura.detalleFacturaTo_json(fila))
             return jsonify({'encabezado':encabezadoFactura, 'detalle':detalleFactura}), 200
         else:
-            return jsonify({'mensaje':'El usuario no tiene facturas registradas.'}), 409
+            return jsonify({'message':'El usuario no tiene facturas registradas.'}), 409
         cur.close()
 
 class DetalleFactura():
     
     def __init__(self, json):
-        self._id_producto = json['id_producto']
-        self._cantidad = json['cantidad']
-        self._precio = json['precio']        
+        self._id_producto = int(json['id_producto'].strip())
+        self._cantidad = int(json['cantidad'].strip())
+        self._precio = Decimal(json['precio'].strip())
     
     def to_json(self):
         return{
@@ -157,7 +160,7 @@ class DetalleFactura():
                 total += int(detalle['cantidad'])*float(detalle['precio'])
             return total
         except Exception as ex:
-            return {'mensaje':str(ex)}
+            return {'message':str(ex)}
      
     @staticmethod
     def detalleFacturaTo_json(json):
@@ -167,3 +170,4 @@ class DetalleFactura():
             'precio': json[2],
             'precioTotal': json[3]
         }
+    

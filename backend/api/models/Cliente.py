@@ -5,15 +5,15 @@ import re
 class Cliente():
 
     def __init__(self, json):
-        self._id_cliente = json['id_cliente']
-        self._nombre = json['nombre']
-        self._apellido = json['apellido']
-        self._empresa = json['empresa']
-        self._email = json['email']
-        self._telefono = json['telefono']
-        self._direccion = json['direccion']
-        self._id_tipoCondicionIVA = json['id_tipoCondicionIVA']
-        self._id_usuario = json['id_usuario']
+        self._id_cliente = json['id_cliente'].strip()
+        self._nombre = json['nombre'].strip()
+        self._apellido = json['apellido'].strip()
+        self._empresa = json['empresa'].strip()
+        self._email = json['email'].strip()
+        self._telefono = json['telefono'].strip()
+        self._direccion = json['direccion'].strip()
+        self._id_tipoCondicionIVA = int(json['id_tipoCondicionIVA'].strip())
+        self._id_usuario = json['id_usuario'].strip()
     
     def to_json(self):
         return {

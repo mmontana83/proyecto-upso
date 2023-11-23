@@ -1,16 +1,17 @@
 from api.db.db import mysql
-from flask import request, jsonify
+from flask import jsonify
+from decimal import Decimal
 
 class Producto:   
 
     def __init__(self, json):       
-        self._codigoProducto = json['codigoProducto']
-        self._producto = json['producto']
-        self._descripcion = json['descripcion']
-        self._precio = json['precio']
-        self._stock = json['stock']
-        self._id_tipoProducto = json['id_tipoProducto']
-        self._id_usuario = json['id_usuario']
+        self._codigoProducto = int(json['codigoProducto'])
+        self._producto = json['producto'].strip()
+        self._descripcion = json['descripcion'].strip()
+        self._precio = Decimal(json['precio'])
+        self._stock = int(json['stock'])
+        self._id_tipoProducto = int(json['id_tipoProducto'])
+        self._id_usuario = json['id_usuario'].strip()
 
     def to_json(self):
         

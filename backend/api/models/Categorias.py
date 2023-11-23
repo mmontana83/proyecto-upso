@@ -23,7 +23,7 @@ class TipoCondicionIVA():
                 listaTipoCondicionIVA.append(TipoCondicionIVA.to_json(fila))
             return listaTipoCondicionIVA
         except Exception as ex:
-            return {'mensaje':str(ex)}
+            return {'message':str(ex)}
         
 class TipoCondicionVenta():
     def __init__(self, json):
@@ -48,7 +48,7 @@ class TipoCondicionVenta():
                 listaTipoCondicionVenta.append(TipoCondicionVenta.to_json(fila))
             return listaTipoCondicionVenta
         except Exception as ex:
-             return {'mensaje':str(ex)}
+             return {'message':str(ex)}
     
 class TipoFactura():
     def __init__(self, json):
@@ -73,7 +73,7 @@ class TipoFactura():
                 listaTipoFactura.append(TipoFactura.to_json(fila))
             return listaTipoFactura
         except Exception as ex:
-            return {'mensaje':str(ex)}
+            return {'message':str(ex)}
 
 class TipoProducto():
     def __init__(self, json):
@@ -98,4 +98,4 @@ class TipoProducto():
                 listaTipoProducto.append(TipoProducto.to_json(fila))
             return listaTipoProducto
         except Exception as ex:
-            return {'mensaje':str(ex)}
+            return {'message':str(ex)}

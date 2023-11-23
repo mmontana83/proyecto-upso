@@ -98,9 +98,28 @@ window.addEventListener("click", (e) => { //el evento es sobre la ventana entera
             
             let data = e.target.parentElement.parentElement.children;
             fillDataCliente(data);
-            inputNombre.value = `${data[1].textContent} ${data[2].textContent} (${data[3].textContent})`;
-            inputCuit.value = data[0].textContent;
+
+            // En esta sección cargo los datos de la nueva factura
+            
+            const razonSocial = (data) => {
+                if (data[1].textContent === '' && data[2].textContent === ''){
+                    return data[3].textContent
+                }
+                else
+                {
+                    if (data[3].textContent === ""){
+                        return `${data[2].textContent} ${data[1].textContent}`
+                    }
+                    else{
+                        return `${data[2].textContent} ${data[1].textContent} (${data[3].textContent})`
+                    }
+                }
+            };
+
+            inputNombre.value = razonSocial(data);
             inputDireccion.value = data[6].textContent;
+            inputCondicionIVA.value = data[7].textContent;
+            inputCuit.value = data[0].textContent;
 
             if (e.target.getAttribute("data-bs-target") === "#EliminarCliente") {
                 delete_Client(data); 

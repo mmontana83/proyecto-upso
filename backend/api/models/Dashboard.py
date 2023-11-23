@@ -62,9 +62,9 @@ class Dashboard():
                 
                 return controlStock
             else:
-                return {'mensaje':'Control de Stock Vacío'}                        
+                return {'message':'Control de Stock Vacío'}                        
         except Exception as ex:
-            return {'mensaje': str(ex)}
+            return {'message': str(ex)}
     
     @staticmethod
     def historialVentas(id_usuario):
@@ -81,9 +81,9 @@ class Dashboard():
                 
                 return historialVentas
             else:
-                return {'mensaje':'Historial de Ventas Vacío'}                        
+                return {'message':'Historial de Ventas Vacío'}                        
         except Exception as ex:
-            return {'mensaje': str(ex)}
+            return {'message': str(ex)}
         
     @staticmethod
     def movimientoStock(id_usuario):
@@ -100,9 +100,9 @@ class Dashboard():
                 
                 return movimientoStock
             else:
-                return {'mensaje':'Movimiento de Stock Vacío'}                        
+                return {'message':'Movimiento de Stock Vacío'}                        
         except Exception as ex:
-            return {'mensaje': str(ex)}
+            return {'message': str(ex)}
         
     @staticmethod
     def rankingVentasByCliente(id_usuario):
@@ -119,9 +119,9 @@ class Dashboard():
                 
                 return ventasByCliente
             else:
-                return {'mensaje':'Ranking de Ventas por Cliente Vacío'}                        
+                return {'message':'Ranking de Ventas por Cliente Vacío'}                        
         except Exception as ex:
-            return {'mensaje': str(ex)}
+            return {'message': str(ex)}
         
     @staticmethod
     def rankingVentasByProducto(id_usuario):
@@ -138,9 +138,9 @@ class Dashboard():
                 
                 return ventasByProducto
             else:
-                return {'mensaje':'Ranking de Ventas por Producto Vacío'}                        
+                return {'message':'Ranking de Ventas por Producto Vacío'}                        
         except Exception as ex:
-            return {'mensaje': str(ex)}
+            return {'message': str(ex)}
         
     @staticmethod
     def rankingVentasByServicio(id_usuario):
@@ -157,6 +157,6 @@ class Dashboard():
                 
                 return ventasByServicio
             else:
-                return {'mensaje':'Ranking de Ventas por Servicio Vacío'}                        
+                return {'message':'Ranking de Ventas por Servicio Vacío'}                        
         except Exception as ex:
-            return {'mensaje': str(ex)}
+            return {'message': str(ex)}

@@ -26,11 +26,40 @@ function getAll_Clients() {
                 const tableBody = document.getElementById('all-persons');
                 let list = ``;
                 data.forEach(person => {
+                    const nombre = (person) => {
+                        if (person.nombre === null)
+                        {
+                            return ""
+                        }
+                        else{
+                            return person.nombre
+                        }
+                    };
+
+                    const apellido = (person) => {
+                        if (person.apellido === null)
+                        {
+                            return ""
+                        }
+                        else{
+                            return person.apellido
+                        }
+                    };
+
+                    const empresa = (person) => {
+                        if (person.empresa === null)
+                        {
+                            return ""
+                        }
+                        else{
+                            return person.empresa
+                        }
+                    };
                     let fila = `<tr id="${person.id}"> 
                         <td>${person.id_cliente} </td>
-                        <td>${person.nombre}</td>
-                        <td>${person.apellido}</td>
-                        <td>${person.empresa}</td>
+                        <td>${nombre(person)}</td>
+                        <td>${apellido(person)}</td>
+                        <td>${empresa(person)}</td>
                         <td>${person.email}</td>
                         <td>${person.telefono}</td>
                         <td>${person.direccion}</td>
@@ -52,12 +81,13 @@ function getAll_Clients() {
             }
         )
         .catch(error => {
-            error.json().then(data => 
-                Swal.fire({
-                    icon: "error",
-                    text: data.message
-                  })
-            );
+            // error.json().then(data => 
+            //     Swal.fire({
+            //         icon: "error",
+            //         text: data.message
+            //       })
+            //);
+            console.error(error);
         })
         .finally(() => {
             console.log("Promesa finalizada (resuelta o rechazada)");
@@ -490,7 +520,7 @@ function validarDireccionInsercion() {
     }
 }
 
-function validadCondicionIVAInsercion(){
+function validarCondicionIVAInsercion(){
     // Verificar si el Domicilio no es vacío
     var condicionIVAValida = condicionIVAInput.value !== ''
 
@@ -511,7 +541,7 @@ function validarFormularioInsercion() {
                                     validarNombreApellidoEmpresaInsercion() && 
                                     validarEmailInsercion() && 
                                     validarDireccionInsercion() && 
-                                    validadCondicionIVAInsercion());
+                                    validarCondicionIVAInsercion());
 
     if (botonInsertarCliente.disabled){
         document.getElementById('M-crear').focus();

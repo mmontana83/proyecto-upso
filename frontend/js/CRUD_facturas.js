@@ -67,7 +67,7 @@ function getAll_Facturas(){
         })
 }
 
-function getFactura(id_cliente,nroFactura ) {
+function getFactura(id_cliente, nroFactura) {
     function handleResponse(response)  {
 
         if (!response.ok){
@@ -119,4 +119,48 @@ function getFactura(id_cliente,nroFactura ) {
         .finally( () => { 
             console.log("Promesa finalizada (resuelta o rechazada)");
         })
+}
+
+function insertFactura(id_cliente, factura){
+    
+    function handleResponse(response)  {
+        if (!response.ok){
+            return Promise.reject(response);
+        }
+        else{
+            return response.json();
+        }
+    }
+    
+    const requestOptions = {
+        method: 'POST',
+        headers: {
+            'Accept': '*/*',
+            'Content-Type': 'application/json'
+            // 'x-access-token': token,
+            // 'user-id': id_usuario
+        },
+        body: JSON.stringify(factura) 
+    };
+
+    fetch(`http://127.0.0.1:5000/usuario/${id_usuario}/cliente/${id_cliente}/factura`, requestOptions)
+        .then(response => handleResponse(response))
+        .then(data => {
+            Swal.fire({
+                icon: "success",
+                title: data.message
+                });
+        })
+        .catch(error => {
+            // error.json().then(data => 
+            //     Swal.fire({
+            //         icon: "error",
+            //         text: data.message
+            //         })
+            // );
+            console.error(error)
+        })
+        .finally(() => {
+            console.log("Promesa finalizada (resuelta o rechazada)");
+        });
 }
