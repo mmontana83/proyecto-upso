@@ -1,8 +1,6 @@
-# SISTEMA DE FACTURACION 
-# BACKEND
-## API RESTful implementada con Python + Flask + MYSQL
-# FRONTEND
-## SINGLE PAGE APPLICATION HECHO EN HTML + BOOTRSTRAP v5.3 + CSS + JAVASCRIPT + SWEETALERT.JS
+## SISTEMA DE FACTURACION 
+### BACKEND --- API RESTful implementada con Python + Flask + MYSQL
+### FRONTEND --- SINGLE PAGE APPLICATION HECHO EN HTML + BOOTRSTRAP v5.3 + CSS + JAVASCRIPT + SWEETALERT.JS
 
 
 ### Grupo Nº 27
@@ -49,12 +47,12 @@ Integrantes:
 		* /PROYECTO/backend/endpointments.txt
 
   		* /PROYECTO/frontend
-    			+ /PROYECTO/frontend/img
+			+ /PROYECTO/frontend/img
     			+ /PROYECTO/frontend/js
-      				*/PROYECTO/frontend/js/CRUD_clientes.js
-      			+/PROYECTO/frontend/styles
-      		*/PROYECTO/frontend/dashboard.html
-      		*/PROYECTO/frontend/index.html
+      				* /PROYECTO/frontend/js/CRUD_clientes.js
+      			+ /PROYECTO/frontend/styles
+      		* /PROYECTO/frontend/dashboard.html
+      		* /PROYECTO/frontend/index.html
 ---
 
 ## Explicación:
