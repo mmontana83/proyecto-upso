@@ -72,16 +72,10 @@ document.querySelectorAll('.modal').forEach(modal => {
 
 //#region En esta sección trabajo con los parámetros de entrada del index (Usuario, Token)
 // Obtén los valores de los parámetros
-const nombre = obtenerParametroDeConsulta('nombre');
-const apellido = obtenerParametroDeConsulta('apellido');
-const id_usuario = obtenerParametroDeConsulta('id_usuario');
-const token = obtenerParametroDeConsulta('token');
-
-// Obtención de los datos del login
-function obtenerParametroDeConsulta(parametro) {
-    const urlParams = new URLSearchParams(window.location.search);
-    return urlParams.get(parametro);
-}
+const id_usuario = sessionStorage.getItem("id_usuario");
+const nombre = sessionStorage.getItem("nombre");
+const apellido = sessionStorage.getItem("apellido");
+const token = sessionStorage.getItem("token");
 
 const usuario = document.getElementById("usuario")
 

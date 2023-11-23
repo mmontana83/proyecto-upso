@@ -1,3 +1,5 @@
+
+
 function login(event) {
     
     //Evito que se recargue la página
@@ -40,12 +42,13 @@ function login(event) {
     fetch(apiUrl, requestOptions)
         .then(response => handleResponse(response))
         .then(userData => {
-            const id_usuario = encodeURIComponent(userData.id_usuario);
-            const nombre = encodeURIComponent(userData.nombre);
-            const apellido = encodeURIComponent(userData.apellido);
-            const token = encodeURIComponent(userData.token);
-            
-            window.location.href = `dashboard.html?id_usuario=${id_usuario}&nombre=${nombre}&apellido=${apellido}&token=${token}`;
+            sessionStorage.setItem("id_usuario", userData.id_usuario);
+            sessionStorage.setItem("nombre", userData.nombre);
+            sessionStorage.setItem("apellido", userData.apellido);
+            sessionStorage.setItem("token", userData.token);
+
+            window.location.href = "dashboard.html";
+
         })
         .catch(error => {
             error.json().then(data => 
