@@ -142,12 +142,12 @@ function insert_Product() {
                 //El producto no existe y se agregará a la base de datos.
                 else {
                     let jsonInsertProducto = {
-                        "codigoProducto": codigoProducto,
+                        "codigoProducto": +codigoProducto,
                         "producto": nombreProductoInput.value,
                         "descripcion": descripcionProductoInput.value,
-                        "precio": precioProductoInput.value,
-                        "stock": stockProductoInput.value,
-                        "id_tipoProducto": tipoProductoInput.value
+                        "precio": +precioProductoInput.value,
+                        "stock": +stockProductoInput.value,
+                        "id_tipoProducto": +tipoProductoInput.value
                     };
 
                     const requestOptions = {
