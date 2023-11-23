@@ -360,7 +360,9 @@ function cargarTipoCondicionProducto() {
                 //Creo una opción vacía que se muestra por defecto.
                 const option = document.createElement('option');
                 option.value = "";
-                option.text = "";
+                option.text = "--Seleccione una opción--";
+                option.setAttribute('disabled', true);
+                option.setAttribute('selected', true);
                 selectProductoIN.appendChild(option);
 
                 categorias.forEach(categoria => {
@@ -506,6 +508,11 @@ nombreProductoInput.addEventListener('blur', validarFormularioProductoInsercion)
 descripcionProductoInput.addEventListener('blur', validarFormularioProductoInsercion);
 precioProductoInput.addEventListener('blur', validarFormularioProductoInsercion);
 stockProductoInput.addEventListener('blur', validarFormularioProductoInsercion);
+tipoProductoInput.addEventListener('blur', validarFormularioProductoInsercion);
+tipoProductoInput.addEventListener('change', function(){
+    document.querySelector('button.btn.btn-secondary').focus();
+});
+
 //#endregion
 
 //#region Validaciones para la Edición de un Producto

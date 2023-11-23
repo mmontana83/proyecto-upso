@@ -282,16 +282,6 @@
                         </div>
                         <div class="card-body">
                             <form action="" class="row  " id="formCabecera">
-                                <div class="form-group col-md-2">
-                                    <label for="">Nro de Factura</label>
-                                    <input 
-                                    disabled
-                                    required
-                                    type="text" 
-                                    class="form-control" 
-                                    placeholder="002"
-                                    id="inputNroFactura">
-                                </div>
                                 <div class="form-group col-md-4">
                                     <label for="">Apellido y Nombre / Razón Social</label>
                                     <input
@@ -309,10 +299,39 @@
                                     required
                                     type="text" 
                                     class="form-control" 
-                                    placeholder="Calle colon"
+                                    placeholder="Colón 2143"
                                     id="inputDireccion">
                                 </div>
-                                <div class="form-group col-md-2">
+                                <div class="form-group col-md-4">
+                                    <label for="">Condición IVA</label>
+                                    <input 
+                                    disabled
+                                    required
+                                    type="text" 
+                                    class="form-control" 
+                                    placeholder="RESPONSABLE INSCRIPTO"
+                                    id="inputCondicionIVA">
+                                </div>
+                                
+                                <div class="form-group col-md-4 mt-3">
+                                    <label for="">Método de Pago</label>
+                                    <select class="form-select" id="inputMetodoPago">
+                                    </select>
+                                    <div id="mensajeValidacionFacturaNuevaMetodoPago" class="invalid-feedback">
+                                        Debe seleccionar una opción!
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group col-md-4 mt-3">
+                                    <label for="">Tipo de Comprobante</label>
+                                    <select class="form-select" id="inputTipoComprobante">
+                                    </select>
+                                    <div id="mensajeValidacionFacturaNuevaTipoComprobante" class="invalid-feedback">
+                                        Debe seleccionar una opción!
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group col-md-2 mt-3">
                                     <label for="">Cuit/Cuil</label>
                                     <input 
                                     disabled
@@ -321,21 +340,6 @@
                                     class="form-control" 
                                     placeholder="2035523553" 
                                     id="inputCuit">
-                                </div>
-                                
-                                <div class="form-group col-md-4 mt-3">
-                                    <label for="">Método de Pago</label>
-                                    <select class="form-select" id="inputMetodoPago">
-                                    </select>
-                                </div>
-                                
-                                <div class="form-group col-md-4 mt-3">
-                                    <label for="">Tipo de Comprobante</label>
-                                    <select class="form-select" id="inputTipoComprobante">
-                                    </select>
-                                </div>
-                                
-                                <div class="form-group col-md-2">
                                 </div>
 
                                 <div class="form-group col-md-2 mt-3">
@@ -360,9 +364,8 @@
                         <div class="card-body">
                             <form action="" class="row " id="formDetalle">
                                 <div class="form-group col-md-5">
-                                    <label for="">Descripcion</label>
+                                    <label for="">Producto</label>
                                     <select class="form-select" id="selectDescripcion">
-                                       <!-- aca van colocados los options con los productos de manera dinamica -->
                                     </select>
                                 </div>
                                 <div class="form-group col-md-2">
@@ -398,7 +401,7 @@
                     </div>
                 </div>
                 <div class="col-md-4 mt-4">
-                    <button class="btn btn-dark btn-lg" id="btnGuardar" type="submit">Guardar Factura</button>
+                    <button class="btn btn-dark btn-lg" id="btnGuardarFactura" type="submit" disabled>Guardar Factura</button>
                 </div>
                 <div class="form-group col-md-3 mt-3">
                     <label for="">P. Total</label>
@@ -419,7 +422,7 @@
                     <table class="table text-center">
                         <thead>
                             <tr>
-                                <th>Descripcion</th>
+                                <th>Producto (Descripción)</th>
                                 <th>Cantidad</th>
                                 <th>P. Unitario</th>
                                 <th>P. Total</th>
