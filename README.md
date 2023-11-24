@@ -1,4 +1,18 @@
-# API RESTful implementada con Python + Flask + MYSQL
+## SISTEMA DE FACTURACION 
+### BACKEND --- API RESTful implementada con Python + Flask + MYSQL
+### FRONTEND --- SINGLE PAGE APPLICATION HECHO EN HTML + BOOTRSTRAP v5.3 + CSS + JAVASCRIPT + SWEETALERT.JS
+
+
+### Grupo Nº 27
+Integrantes:
+- Lich Cristian
+- Montaña Martin
+- Sanchez Gerónimo
+- Weinzettel Eduardo
+
+### Desarrollo del Proyecto
+
+## BACKEND
 
 1. Crear directorio de proyecto (PROYECTO)
 
@@ -17,17 +31,28 @@
 
 6. Crear estructura de directorios
 	* /PROYECTO
-		* /PROYECTO/api
-			+ /PROYECTO/api/routes
-				* /PROYECTO/api/routes/client.py
-			+ /PROYECTO/api/models
-				* /PROYECTO/api/models/client.py
-			+ /PROYECTO/api/db
-				* /PROYECTO/api/db/dp.py
-			+ /PROYECTO/api/__init__.py
-			+ /PROYECTO/api/utils.py
-		* /PROYECTO/main.py
-		* /PROYECTO/requirements.txt
+		* /PROYECTO/backend/api
+			+ /PROYECTO/backend/api/routes
+				* /PROYECTO/backend/api/routes/client.py
+			+ /PROYECTO/backend/api/models
+				* /PROYECTO/backend/api/models/client.py
+			+ /PROYECTO/backend/api/db
+				* /PROYECTO/backend/api/db/dp.py
+			+ /PROYECTO/backend/api/thunder-collection
+			+ /PROYECTO/backend/api/__init__.py
+			+ /PROYECTO/backend/api/utils.py
+			+ /PROYECTO/backend/api/PWGenerator.py
+		* /PROYECTO/backend/main.py
+		* /PROYECTO/backend/requirements.txt
+		* /PROYECTO/backend/endpointments.txt
+
+  		* /PROYECTO/frontend
+			+ /PROYECTO/frontend/img
+    			+ /PROYECTO/frontend/js
+      				* /PROYECTO/frontend/js/CRUD_clientes.js
+      			+ /PROYECTO/frontend/styles
+      		* /PROYECTO/frontend/dashboard.html
+      		* /PROYECTO/frontend/index.html
 ---
 
 ## Explicación:
@@ -46,12 +71,19 @@ Es el punto de inicio de la aplicación, su función es importar el objeto app y
 ---
 	
 ### Directorios 
-+ /api organiza la estructura interna de la aplicación.
-+ /api/routes contiene todos los archivos relacionados con las creaciones de rutas, cada uno agrupando las rutas referidas a un mismo recurso.
-+ /api/models contiene todos los archivos relacionados con las definiciones de clases, principalmente para facilitar el formateo de datos desde la BD en formato JSON.
-+ /api/db contiene lo relacionado a la configuración y conección a la BD.
++ /backend carpeta principal donde se concentra la logica del proyecto
++ /backend/api organiza la estructura interna de la aplicación.
++ /backend/api/routes contiene todos los archivos relacionados con las creaciones de rutas, cada uno agrupando las rutas referidas a un mismo recurso.
++ /backend/api/models contiene todos los archivos relacionados con las definiciones de clases, principalmente para facilitar el formateo de datos desde la BD en formato JSON.
++ /backend/api/db contiene lo relacionado a la configuración y conección a la BD.
 
++ /frontend carpeta principal donde se organiza los archivos HTML, CSS y Javascript
++ /frontend/js contiene los archivos necesarios para realizar los fetch al back y aplicar el dinamismo al sitio web
++ /frontend/styles contiene las hojas de estilo del sitio
++ /frontend- se encuentran los archivos HTML
+  
 ---
+## GUIA EXPLICATIVA
 
 ### Archivos
 **api/_\_init_\_.py** crea el objeto app como una instancia de Flask, incorpora CORS y configura la clave secreta de la aplicación. También debe importar todas las rutas para cada recurso.

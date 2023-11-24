@@ -6,7 +6,7 @@ from api.models.Producto import Producto
 # ---------- Atualizacion/Modificacion de un producto by usuario -------------------
 # ------------------------------------anda ok --------------------------------------
 
-@app.route('/usuario/<id_usuario>/producto/<codigoProducto>', methods=['PUT'])
+@app.route('/usuario/<id_usuario>/producto/<codigoProducto>', methods=['POST'])
 def actualizar_producto(id_usuario, codigoProducto):
     try:       
         json = request.get_json()
@@ -16,7 +16,7 @@ def actualizar_producto(id_usuario, codigoProducto):
 
         return Producto.actualizarProducto(json)
     except Exception as ex:
-        return jsonify({'mensaje': str(ex)})
+        return jsonify({'message': str(ex)})
     
 # ----------------------------------- fin  --------------------------------------   
  
@@ -27,12 +27,12 @@ def actualizar_producto(id_usuario, codigoProducto):
 # Alta de un producto, los produtos en esta tabla se les cambia de estado, es decir
 # no se hace el borrado logico, se les cambia de estado: 1 es ACTIVO, 2 es BAJA
 
-@app.route('/usuario/<id_usuario>/producto/<codigoProducto>', methods=['PATCH'])
+@app.route('/usuario/<id_usuario>/producto/<codigoProducto>', methods=['PUT'])
 def post_alta_producto_by_usuario(id_usuario, codigoProducto):
     try:
         return Producto.altaProductoByUsuario(id_usuario, codigoProducto)
     except Exception as ex:
-        return jsonify({'mensaje': str(ex)}), 409
+        return jsonify({'message': str(ex)}), 409
     
 # -------------------------------- fin alta prodcucto by usuario -----------------
 
@@ -49,7 +49,7 @@ def get_producto_by_id_usuario(id_usuario, codigoProducto):
     try:        
         return Producto.obtenerProductoByUsuario(id_usuario, codigoProducto)
     except Exception as ex:
-        return jsonify({'mensaje': str(ex)}), 409
+        return jsonify({'message': str(ex)}), 409
     
 # ------------------------------- fin obtener producto por usuario ----------------
     
@@ -65,7 +65,7 @@ def get_productos_by_id_usuario(id_usuario):
     try:
         return Producto.obtenerProductosByUsuario(id_usuario)
     except Exception as ex:
-        return jsonify({'mensaje': str(ex)}), 409
+        return jsonify({'message': str(ex)}), 409
     
 # ------------------------------ fin metodo --------------------------------
 
@@ -83,18 +83,17 @@ def eliminar_producto(id_usuario, codigoProducto):
     try:
         return Producto.eliminarProducto(id_usuario, codigoProducto)
     except Exception as ex:
-        return jsonify({'mensaje': str(ex)}), 409
+        return jsonify({'message': str(ex)}), 409
     
 # ----------------------------------- fin Eliminar  -----------------
 
 
-@app.route('/usuario/<id_usuario>/producto/<codigoProducto>', methods = ['POST'])
-def insertar_producto(id_usuario, codigoProducto):
+@app.route('/usuario/<id_usuario>/producto/', methods = ['POST'])
+def insertar_producto(id_usuario):
     try:
         json = request.get_json()      
         json['id_usuario'] = id_usuario
-        json['codigoProducto'] = codigoProducto
 
         return Producto.insertarProductoByUsuario(json)
     except Exception as ex:
-        return jsonify({'mensaje': str(ex)})
+        return jsonify({'message': str(ex)})

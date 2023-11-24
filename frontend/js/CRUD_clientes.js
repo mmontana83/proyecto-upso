@@ -1,6 +1,4 @@
-//Cargo el listado Condicion IVA cuando se carga la pagina.
-document.addEventListener('DOMContentLoaded', cargarTipoCondicionIVA());
-
+//#region CRUD CLIENTES
 function getAll_Clients() {
     function handleResponse(response)  {
         if (!response.ok){
@@ -28,11 +26,40 @@ function getAll_Clients() {
                 const tableBody = document.getElementById('all-persons');
                 let list = ``;
                 data.forEach(person => {
+                    const nombre = (person) => {
+                        if (person.nombre === null || person.nombre === "null")
+                        {
+                            return ""
+                        }
+                        else{
+                            return person.nombre
+                        }
+                    };
+
+                    const apellido = (person) => {
+                        if (person.apellido === null || person.apellido === "null")
+                        {
+                            return ""
+                        }
+                        else{
+                            return person.apellido
+                        }
+                    };
+
+                    const empresa = (person) => {
+                        if (person.empresa === null || person.empresa === "null")
+                        {
+                            return ""
+                        }
+                        else{
+                            return person.empresa
+                        }
+                    };
                     let fila = `<tr id="${person.id}"> 
                         <td>${person.id_cliente} </td>
-                        <td>${person.nombre}</td>
-                        <td>${person.apellido}</td>
-                        <td>${person.empresa}</td>
+                        <td>${nombre(person)}</td>
+                        <td>${apellido(person)}</td>
+                        <td>${empresa(person)}</td>
                         <td>${person.email}</td>
                         <td>${person.telefono}</td>
                         <td>${person.direccion}</td>
@@ -54,12 +81,13 @@ function getAll_Clients() {
             }
         )
         .catch(error => {
-            error.json().then(data => 
-                Swal.fire({
-                    icon: "error",
-                    text: data.message
-                  })
-            );
+            // error.json().then(data => 
+            //     Swal.fire({
+            //         icon: "error",
+            //         text: data.message
+            //       })
+            //);
+            console.error(error);
         })
         .finally(() => {
             console.log("Promesa finalizada (resuelta o rechazada)");
@@ -336,7 +364,9 @@ function delete_Client(data){
         }
     });
 }
+//#endregion
 
+//#region Carga Dinámica Option Tipo Condicion IVA
 function cargarTipoCondicionIVA(){
 
     function handleResponse(response)  {
@@ -401,7 +431,11 @@ function cargarTipoCondicionIVA(){
         });
 }
 
-//Validaciones para la Carga de un Cliente
+//Evento que se dispara cuando cargo la página para cargar dinámicamente el option Condicion IVA.
+document.addEventListener('DOMContentLoaded', cargarTipoCondicionIVA());
+//#endregion
+
+//#region Validaciones para la Carga de Cliente
 var cuitInput = document.getElementById('in-cuit');
 var nombreInput = document.getElementById('in-nombre');
 var apellidoInput = document.getElementById('in-apellido');
@@ -486,7 +520,7 @@ function validarDireccionInsercion() {
     }
 }
 
-function validadCondicionIVAInsercion(){
+function validarCondicionIVAInsercion(){
     // Verificar si el Domicilio no es vacío
     var condicionIVAValida = condicionIVAInput.value !== ''
 
@@ -503,7 +537,11 @@ function validadCondicionIVAInsercion(){
 }
 
 function validarFormularioInsercion() {
-    botonInsertarCliente.disabled = !(validarCUILInsercion() && validarNombreApellidoEmpresaInsercion() && validarEmailInsercion() && validarDireccionInsercion() && validadCondicionIVAInsercion());
+    botonInsertarCliente.disabled = !(validarCUILInsercion() && 
+                                    validarNombreApellidoEmpresaInsercion() && 
+                                    validarEmailInsercion() && 
+                                    validarDireccionInsercion() && 
+                                    validarCondicionIVAInsercion());
 
     if (botonInsertarCliente.disabled){
         document.getElementById('M-crear').focus();
@@ -521,8 +559,9 @@ condicionIVAInput.addEventListener('blur', validarFormularioInsercion);
 condicionIVAInput.addEventListener('change', function(){
     document.getElementById('M-crear').focus();
 });
+//#endregion
 
-//Validaciones para la Edición de un Cliente
+//#region Validaciones para la Edición de un Cliente
 var nombreEdicion = document.getElementById('ed-nombre');
 var apellidoEdicion = document.getElementById('ed-apellido');
 var empresaEdicion = document.getElementById('ed-empresa');
@@ -599,3 +638,4 @@ apellidoEdicion.addEventListener('blur', validarFormularioEdicion);
 empresaEdicion.addEventListener('blur', validarFormularioEdicion);
 emailEdicion.addEventListener('blur', validarFormularioEdicion);
 direccionEdicion.addEventListener('blur', validarFormularioEdicion);
+//#endregion
