@@ -6,7 +6,7 @@
 // rankingVentasServicio();
 
 document.addEventListener("DOMContentLoaded", ventasTotales);
-document.addEventListener("DOMContentLoaded", clientesTotales);
+document.addEventListener("DOMContentLoaded", clientesActivos);
 document.addEventListener("DOMContentLoaded", controlStock);
 
 
@@ -611,7 +611,7 @@ function ventasTotales(){
         });
 }
 
-function clientesTotales(){
+function clientesActivos(){
   function handleResponse(response)  {
     if (!response.ok){
         return Promise.reject(response);
@@ -630,11 +630,11 @@ function clientesTotales(){
         }
     };
     
-    fetch(`http://127.0.0.1:5000/usuario/20302022731/dashboard/clientesTotales`, requestOptions)
+    fetch(`http://127.0.0.1:5000/usuario/20302022731/dashboard/clientesActivos`, requestOptions)
         .then(response => handleResponse(response))
         .then(data => {
-          const clientesTotales = document.getElementById("dashboard-clientesTotales");
-          clientesTotales.textContent = `${data.ClientesTotales}`;
+          const clientesTotales = document.getElementById("dashboard-clientesActivos");
+          clientesTotales.textContent = `${data.ClientesActivos}`;
         })
         .catch((error) => { 
           error.json().then(data => 

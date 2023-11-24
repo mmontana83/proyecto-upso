@@ -52,9 +52,9 @@ class Dashboard():
             'VentasTotales': data[0]
         }
     
-    def clientesTotalesToJson(data):
+    def clientesActivosToJson(data):
         return{
-            'ClientesTotales': data[0]
+            'ClientesActivos': data[0]
         }
     
     @staticmethod
@@ -186,14 +186,14 @@ class Dashboard():
             return {'message': str(ex)}
 
     @staticmethod
-    def clientesTotales(id_usuario):
+    def clientesActivos(id_usuario):
         try:
             cur = mysql.connection.cursor()
-            cur.callproc('sp_dashboard_clientesTotales', [id_usuario,])
+            cur.callproc('sp_dashboard_clientesActivos', [id_usuario,])
             data = cur.fetchone()
             
             if len(data) != 0:
-                return Dashboard.clientesTotalesToJson(data)
+                return Dashboard.clientesActivosToJson(data)
             else:
                 return {'message':'No Tiene Clientes'}   
         except Exception as ex:
