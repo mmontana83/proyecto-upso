@@ -43,3 +43,17 @@ def get_rankingVentasByServicio(id_usuario):
         return jsonify(Dashboard.rankingVentasByServicio(id_usuario))
     except Exception as ex:
         return jsonify({'message':str(ex)})
+    
+@app.route('/usuario/<id_usuario>/dashboard/ventasTotales', methods = ['GET'])
+def get_ventasTotales(id_usuario):
+    try:
+        return jsonify(Dashboard.ventasTotales(id_usuario))
+    except Exception as ex:
+        return jsonify({'message':str(ex)})
+    
+@app.route('/usuario/<id_usuario>/dashboard/clientesTotales', methods = ['GET'])
+def get_clientesTotales(id_usuario):
+    try:
+        return jsonify(Dashboard.clientesTotales(id_usuario))
+    except Exception as ex:
+        return jsonify({'message':str(ex)})

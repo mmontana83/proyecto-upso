@@ -1,9 +1,14 @@
-controlStock();
-historialVentas();
-movimientoStock();
-rankingVentasCliente();
-rankingVentasProducto();
-rankingVentasServicio();
+// controlStock();
+// historialVentas();
+// movimientoStock();
+// rankingVentasCliente();
+// rankingVentasProducto();
+// rankingVentasServicio();
+
+document.addEventListener("DOMContentLoaded", ventasTotales);
+document.addEventListener("DOMContentLoaded", clientesTotales);
+document.addEventListener("DOMContentLoaded", controlStock);
+
 
 function controlStock() {
   
@@ -554,6 +559,83 @@ function rankingVentasServicio() {
               //});
             }
         )
+        .catch((error) => { 
+          error.json().then(data => 
+            Swal.fire({
+                icon: "error",
+                text: data.message
+              })
+          );
+        })
+        .finally(() => {
+            console.log("Promesa finalizada (resuelta o rechazada)");
+        });
+}
+
+function ventasTotales(){
+  function handleResponse(response)  {
+    if (!response.ok){
+        return Promise.reject(response);
+    }
+    else{
+        return response.json();
+    }
+  };
+
+  const requestOptions = {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+            // 'x-access-token': token,
+            // 'user-id': id_usuario
+        }
+    };
+    
+    //fetch(`127.0.0.1:5000/usuario/${id_usuario}/dashboard/controlStock`, requestOptions)
+    fetch(`http://127.0.0.1:5000/usuario/20302022731/dashboard/ventasTotales`, requestOptions)
+        .then(response => handleResponse(response))
+        .then(data => {
+          const ventasTotales = document.getElementById("dashboard-ventasTotales");
+          ventasTotales.textContent = `$ ${data.VentasTotales}`;
+        })
+        .catch((error) => { 
+          error.json().then(data => 
+            Swal.fire({
+                icon: "error",
+                text: data.message
+              })
+          );
+        })
+        .finally(() => {
+            console.log("Promesa finalizada (resuelta o rechazada)");
+        });
+}
+
+function clientesTotales(){
+  function handleResponse(response)  {
+    if (!response.ok){
+        return Promise.reject(response);
+    }
+    else{
+        return response.json();
+    }
+  };
+
+  const requestOptions = {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+            // 'x-access-token': token,
+            // 'user-id': id_usuario
+        }
+    };
+    
+    fetch(`http://127.0.0.1:5000/usuario/20302022731/dashboard/clientesTotales`, requestOptions)
+        .then(response => handleResponse(response))
+        .then(data => {
+          const clientesTotales = document.getElementById("dashboard-clientesTotales");
+          clientesTotales.textContent = `${data.ClientesTotales}`;
+        })
         .catch((error) => { 
           error.json().then(data => 
             Swal.fire({

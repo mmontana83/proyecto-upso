@@ -46,6 +46,16 @@ class Dashboard():
             'Servicio': data[0],
             'Venta': data[1]
         }
+
+    def ventasTotalesToJson(data):
+        return{
+            'VentasTotales': data[0]
+        }
+    
+    def clientesTotalesToJson(data):
+        return{
+            'ClientesTotales': data[0]
+        }
     
     @staticmethod
     def controlStock(id_usuario):
@@ -158,5 +168,33 @@ class Dashboard():
                 return ventasByServicio
             else:
                 return {'message':'Ranking de Ventas por Servicio Vacío'}                        
+        except Exception as ex:
+            return {'message': str(ex)}
+        
+    @staticmethod
+    def ventasTotales(id_usuario):
+        try:
+            cur = mysql.connection.cursor()
+            cur.callproc('sp_dashboard_ventasTotales', [id_usuario,])
+            data = cur.fetchone()
+            
+            if len(data) != 0:
+                return Dashboard.ventasTotalesToJson(data)
+            else:
+                return {'message':'No tiene Ventas'}   
+        except Exception as ex:
+            return {'message': str(ex)}
+
+    @staticmethod
+    def clientesTotales(id_usuario):
+        try:
+            cur = mysql.connection.cursor()
+            cur.callproc('sp_dashboard_clientesTotales', [id_usuario,])
+            data = cur.fetchone()
+            
+            if len(data) != 0:
+                return Dashboard.clientesTotalesToJson(data)
+            else:
+                return {'message':'No Tiene Clientes'}   
         except Exception as ex:
             return {'message': str(ex)}
