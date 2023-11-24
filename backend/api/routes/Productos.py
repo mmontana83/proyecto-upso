@@ -1,5 +1,6 @@
 from api import app
 from flask import request, jsonify
+from api.utils import token_required, user_resources
 from api.db.db import mysql
 from api.models.Producto import Producto
 
@@ -7,6 +8,8 @@ from api.models.Producto import Producto
 # ------------------------------------anda ok --------------------------------------
 
 @app.route('/usuario/<id_usuario>/producto/<codigoProducto>', methods=['POST'])
+@token_required
+@user_resources
 def actualizar_producto(id_usuario, codigoProducto):
     try:       
         json = request.get_json()
@@ -28,6 +31,8 @@ def actualizar_producto(id_usuario, codigoProducto):
 # no se hace el borrado logico, se les cambia de estado: 1 es ACTIVO, 2 es BAJA
 
 @app.route('/usuario/<id_usuario>/producto/<codigoProducto>', methods=['PUT'])
+@token_required
+@user_resources
 def post_alta_producto_by_usuario(id_usuario, codigoProducto):
     try:
         return Producto.altaProductoByUsuario(id_usuario, codigoProducto)
@@ -45,6 +50,8 @@ def post_alta_producto_by_usuario(id_usuario, codigoProducto):
 # --------- este metodo obtiene los productos de un usuario en particular -----------
 
 @app.route('/usuario/<id_usuario>/producto/<codigoProducto>', methods=['GET'])
+@token_required
+@user_resources
 def get_producto_by_id_usuario(id_usuario, codigoProducto):
     try:        
         return Producto.obtenerProductoByUsuario(id_usuario, codigoProducto)
@@ -60,6 +67,8 @@ def get_producto_by_id_usuario(id_usuario, codigoProducto):
 # ----------------------------- NO ANDA ------------------------------------------
 
 @app.route('/usuario/<id_usuario>/productos', methods=['GET'])
+@token_required
+@user_resources
 def get_productos_by_id_usuario(id_usuario):
 
     try:
@@ -79,6 +88,8 @@ def get_productos_by_id_usuario(id_usuario):
 
 
 @app.route('/usuario/<id_usuario>/producto/<codigoProducto>', methods=['DELETE'])
+@token_required
+@user_resources
 def eliminar_producto(id_usuario, codigoProducto):    
     try:
         return Producto.eliminarProducto(id_usuario, codigoProducto)
@@ -89,6 +100,8 @@ def eliminar_producto(id_usuario, codigoProducto):
 
 
 @app.route('/usuario/<id_usuario>/producto/', methods = ['POST'])
+@token_required
+@user_resources
 def insertar_producto(id_usuario):
     try:
         json = request.get_json()      

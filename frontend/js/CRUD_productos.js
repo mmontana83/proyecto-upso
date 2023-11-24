@@ -11,7 +11,9 @@ function getAll_Product() {
     const requestOptions = {
         method: 'GET',
         headers: {
+            'Accept': '*/*',
             'Content-Type': 'application/json',
+            'x-access-token': token,
             'user-id': id_usuario
         }
     }

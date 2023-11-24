@@ -6,6 +6,8 @@ from api.models.Factura import Factura
 
 #Obtengo todas las facturas de un usuario
 @app.route('/usuario/<id_usuario>/facturas', methods = ['GET'])
+@token_required
+@user_resources
 def get_facturas_by_usuario(id_usuario):
     try:
         return Factura.obtenerFacturasById_Usuario(id_usuario)
@@ -14,6 +16,8 @@ def get_facturas_by_usuario(id_usuario):
     
 #Obtengo todas las facturas de un cliente
 @app.route('/usuario/<id_usuario>/cliente/<id_cliente>/factura', methods = ['GET'])
+@token_required
+@user_resources
 def get_facturas_by_cliente(id_usuario, id_cliente):
     try:
         return Factura.obtenerFacturasById_Cliente(id_usuario, id_cliente)
@@ -22,6 +26,8 @@ def get_facturas_by_cliente(id_usuario, id_cliente):
     
 #Inserto una factura nueva. Debo recibir en json el encabezado y detalle
 @app.route('/usuario/<id_usuario>/cliente/<id_cliente>/factura', methods = ['POST'])
+@token_required
+@user_resources
 def insertarFactura(id_usuario, id_cliente):
     try:
         #Obtengo el json del request
@@ -40,9 +46,10 @@ def insertarFactura(id_usuario, id_cliente):
 
 #Obtengo una única factura de un cliente en particular
 @app.route('/usuario/<id_usuario>/cliente/<id_cliente>/factura/<nroFactura>', methods = ['GET'])
+@token_required
+@user_resources
 def get_factura_by_cliente(id_usuario, id_cliente, nroFactura):
     try:
         return Factura.obtenerFacturaById_Cliente(id_usuario, id_cliente, nroFactura)
     except Exception as ex:
         return jsonify({'message':str(ex)}), 409
-    
