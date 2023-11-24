@@ -147,18 +147,29 @@ function insertFactura(id_cliente, factura){
         .then(response => handleResponse(response))
         .then(data => {
             Swal.fire({
+                title: "Factura Nueva",
+                text: `La factura fue generada con éxito.`,
                 icon: "success",
-                title: data.message
-                });
+                showCancelButton: false,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Aceptar"
+              })
+              .then((result) => {
+                if (result.isConfirmed) {
+                    getAll_Facturas();
+                    toggleSection('section6');
+                }
+            });
+            
         })
         .catch(error => {
-            // error.json().then(data => 
-            //     Swal.fire({
-            //         icon: "error",
-            //         text: data.message
-            //         })
-            // );
-            console.error(error)
+            error.json().then(data => 
+                Swal.fire({
+                    icon: "error",
+                    text: data.message
+                    })
+            );
         })
         .finally(() => {
             console.log("Promesa finalizada (resuelta o rechazada)");

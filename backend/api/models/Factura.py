@@ -60,7 +60,7 @@ class Factura():
         
     def encabezadoFacturaToJson(fila):
         return{
-            'nroFactura': fila[0],
+            'nroFactura': int(fila[0]),
             'fecha': datetime.strptime(str(fila[1]), "%Y-%m-%d").strftime("%d-%m-%Y"),
             'tipoFactura': fila[2],
             'id_cliente': fila[3],
@@ -75,7 +75,7 @@ class Factura():
     @staticmethod
     def obtenerFacturasById_Usuario(id_usuario):
         cur = mysql.connection.cursor()
-        cur.callproc('sp_obtenerFacturasById_Usuario', [id_usuario,])
+        cur.callproc('sp_obtenerFacturasById_Usuario', [id_usuario.strip(),])
         datos = cur.fetchall()
         cur.close()
 
@@ -88,7 +88,6 @@ class Factura():
         else:
             return jsonify({'message':'El usuario no tiene facturas registradas.'}), 409
         
-
     @staticmethod
     def obtenerFacturasById_Cliente(id_usuario, id_cliente):
         cur = mysql.connection.cursor()
@@ -105,13 +104,11 @@ class Factura():
         else:
             return jsonify({'message':'El usuario no tiene facturas registradas.'}), 409
         
-
     @staticmethod
     def obtenerFacturaById_Cliente(id_usuario, id_cliente, nroFactura):
-        
         #Primero obtengo el encabezado de la factura
         cur = mysql.connection.cursor()
-        cur.callproc('sp_obtenerFacturaByCliente', [id_usuario, id_cliente,nroFactura])
+        cur.callproc('sp_obtenerFacturaByCliente', [id_usuario.strip(), id_cliente.strip(),int(nroFactura)])
         datos = cur.fetchone()
         
         if len(datos) != 0:
@@ -122,9 +119,9 @@ class Factura():
 
         #Luego obtengo el detalle de la factura
         cur = mysql.connection.cursor()
-        cur.callproc('sp_obtenerDetalleFactura', [id_usuario,id_cliente,nroFactura])
+        cur.callproc('sp_obtenerDetalleFactura', [id_usuario.strip(), id_cliente.strip(),int(nroFactura)])
         datos = cur.fetchall()
-
+        
         if len(datos) != 0:
             detalleFactura = []
             for fila in datos:

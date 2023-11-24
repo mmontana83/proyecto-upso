@@ -341,8 +341,6 @@ btnGuardarFactura.onclick = () => {
     }
 
     insertFactura(inputCuit.value.trim(), objFactura);
-    getAll_Facturas();
-    toggleSection('section6');
 
     facturas.push(objFactura); // enviamos el objeto al arreglo "facturas"
 
