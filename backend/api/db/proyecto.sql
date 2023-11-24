@@ -193,7 +193,7 @@ CREATE TABLE `productos` (
 
 LOCK TABLES `productos` WRITE;
 /*!40000 ALTER TABLE `productos` DISABLE KEYS */;
-INSERT INTO `productos` VALUES (1,123456,'NEUMATICOS','bridgestone',50.20,4,1,1,'23302022739'),(2,134567,'BUJÍA NAFTERA','BUJÍA',6500.00,50,1,2,'23302022739'),(3,145678,'BUJÍA DIESEL','BUJÍA',7988.00,4,1,1,'23302022739'),(4,145645,'ACEITE MOTOR 15W40','ACEITE MOTOR MÁS CARITO',37880.00,25,1,2,'23302022739'),(5,156456,'SERVICE AUTOMOTOR','SERVICE QUE SE REALIZA CADA 10.000 KM',18000.00,0,2,1,'23302022739'),(6,148457,'AFINACIÓN','AFINACIÓN',15000.00,0,2,1,'23302022739'),(7,254874,'GASAS','Rollo de 100m.',3000.00,50,1,1,'20302022731'),(8,254856,'JERINGA X 10ml','Jeringa apta para visitas.',175.00,100,1,1,'20302022731'),(9,258746,'NEBULIZADOR','No incluye máscara.',7800.00,3,1,1,'20302022731'),(10,245477,'VACUNACION A DOMICILIO','No incluye viáticos.',3000.00,0,2,1,'20302022731'),(11,254545,'MEDICION PRESION','',500.00,0,2,1,'20302022731'),(15,198765,'Neumaticos','fate',100.00,10,1,1,'23302022739'),(16,198762,'Neumaticos','continental',100.00,10,1,1,'23302022739'),(17,198764,'Neumaticos','michelin',250.00,100,1,1,'23302022739'),(18,198763,'Neumaticos','yacohama',250.00,100,1,1,'23302022739'),(19,198767,'Neumsasasaticos','yacohama',250.00,100,1,2,'23302022739'),(20,198769,'NEUMATICOS','TWISTER',250.00,100,1,2,'23302022739'),(21,198770,'NEUMATICOS','PINOCHO',250.00,100,1,1,'23302022739'),(22,198771,'NEUMATICOS','LAMOROCHA',250.00,100,1,1,'23302022739'),(23,145648,'ACEITE MOTOR 25W40','ACEITE PARA MOTORES FUNDIDOS',45000.00,5,1,1,'23302022739'),(24,654987,'Purificador','Este producto sirve para purificar el aire',45777.00,2,1,1,'20302022731'),(25,256987,'Purificador','Purificador de Aire',45500.00,3,1,1,'23302022739'),(26,123123,'Purificador','Este producto sirve para purificar el aire',45777.00,3,1,1,'20302022731'),(27,321321,'Bivaporuc','Para la descongestión nasal',4400.00,15,1,1,'20302022731'),(28,999888,'Novalgina','por 900ml',7880.00,3,1,2,'20302022731'),(29,788777,'TosoTos','Para la Tos y el catarro!',600.00,5,1,2,'20302022731');
+INSERT INTO `productos` VALUES (1,123456,'NEUMATICOS','bridgestone',50.20,4,1,1,'23302022739'),(2,134567,'BUJÍA NAFTERA','BUJÍA',6500.00,50,1,2,'23302022739'),(3,145678,'BUJÍA DIESEL','BUJÍA',7988.00,4,1,1,'23302022739'),(4,145645,'ACEITE MOTOR 15W40','ACEITE MOTOR MÁS CARITO',37880.00,25,1,2,'23302022739'),(5,156456,'SERVICE AUTOMOTOR','SERVICE QUE SE REALIZA CADA 10.000 KM',18000.00,0,2,1,'23302022739'),(6,148457,'AFINACIÓN','AFINACIÓN',15000.00,0,2,1,'23302022739'),(7,254874,'GASAS','Rollo de 100m.',3000.00,50,1,1,'20302022731'),(8,254856,'JERINGA X 10ml','Jeringa apta para visitas.',175.00,100,1,1,'20302022731'),(9,258746,'NEBULIZADOR','No incluye máscara.',7800.00,3,1,1,'20302022731'),(10,245477,'VACUNACION A DOMICILIO','No incluye viáticos.',3000.00,0,2,1,'20302022731'),(11,254545,'MEDICION PRESION','',500.00,0,2,1,'20302022731'),(15,198765,'Neumaticos','fate',100.00,10,1,1,'23302022739'),(16,198762,'Neumaticos','continental',100.00,10,1,1,'23302022739'),(17,198764,'Neumaticos','michelin',250.00,100,1,1,'23302022739'),(18,198763,'Neumaticos','yacohama',250.00,100,1,1,'23302022739'),(19,198767,'Neumsasasaticos','yacohama',250.00,100,1,2,'23302022739'),(20,198769,'NEUMATICOS','TWISTER',250.00,100,1,2,'23302022739'),(21,198770,'NEUMATICOS','PINOCHO',250.00,100,1,1,'23302022739'),(22,198771,'NEUMATICOS','LAMOROCHA',250.00,100,1,1,'23302022739'),(23,145648,'ACEITE MOTOR 25W40','ACEITE PARA MOTORES FUNDIDOS',45000.00,5,1,1,'23302022739'),(24,654987,'Purificador','Este producto sirve para purificar el aire',45777.00,2,1,1,'20302022731'),(25,256987,'Purificador','Purificador de Aire',45500.00,3,1,1,'23302022739'),(26,123123,'Purificador','Este producto sirve para purificar el aire',45777.00,3,1,1,'20302022731'),(27,321321,'Vick Vaporub','Para la descongestión nasal',3700.00,15,1,1,'20302022731'),(28,999888,'Novalgina','por 900ml',7880.00,3,1,2,'20302022731'),(29,788777,'TosoTos','Para la Tos y el catarro!',600.00,5,1,2,'20302022731');
 /*!40000 ALTER TABLE `productos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -455,6 +455,27 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_dashboard_clientesTotales` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`proyecto`@`%` PROCEDURE `sp_dashboard_clientesTotales`(in p_id_usuario varchar(11))
+BEGIN
+	SELECT count(id_cliente) as ClientesTotales 
+	from clientes
+	where id_usuario = p_id_usuario;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `sp_dashboard_controlStock` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -512,7 +533,8 @@ DELIMITER ;;
 CREATE DEFINER=`proyecto`@`%` PROCEDURE `sp_dashboard_movimientoStock`(in p_id_usuario varchar(11))
 BEGIN
 SELECT productos.producto as Producto, movimiento as Movimiento, fecha as Fecha, 
-controlstock.precio as Precio, concat(clientes.nombre,' ',clientes.apellido,' - ', clientes.empresa) as Cliente,
+controlstock.precio as Precio, IF ((clientes.nombre IS NULL OR clientes.nombre = "" OR clientes.nombre = "null") OR (clientes.apellido IS NULL OR clientes.apellido = "" OR clientes.apellido = "null"), clientes.empresa,
+		IF ((clientes.empresa is NULL or clientes.empresa = "" or clientes.empresa="null"), concat(clientes.apellido, ' ', clientes.nombre), concat(clientes.apellido, ' ', clientes.nombre, ' (', clientes.empresa, ')'))) AS Cliente,
  nrofactura as Factura
 FROM controlstock
 INNER JOIN productos ON productos.id_producto = controlstock.id_producto
@@ -537,7 +559,8 @@ DELIMITER ;
 DELIMITER ;;
 CREATE DEFINER=`proyecto`@`%` PROCEDURE `sp_dashboard_rankingVentasByCliente`(in p_id_usuario varchar(11))
 BEGIN
-	SELECT concat(clientes.nombre,' ', clientes.apellido, ' - ', clientes.empresa) as Cliente, sum(factura.total) as Venta 
+	SELECT IF ((clientes.nombre IS NULL OR clientes.nombre = "" OR clientes.nombre = "null") OR (clientes.apellido IS NULL OR clientes.apellido = "" OR clientes.apellido = "null"), clientes.empresa,
+		IF ((clientes.empresa is NULL or clientes.empresa = "" or clientes.empresa="null"), concat(clientes.apellido, ' ', clientes.nombre), concat(clientes.apellido, ' ', clientes.nombre, ' (', clientes.empresa, ')'))) AS Cliente,  sum(factura.total) as Venta 
     FROM factura
     INNER JOIN clientes on factura.id_cliente = clientes.id_cliente
     WHERE factura.id_usuario = p_id_usuario
@@ -588,6 +611,27 @@ SELECT productos.producto as Servicio, sum(detallefactura.precioTotal) as Venta
 	INNER JOIN productos on detallefactura.id_producto = productos.id_producto
     WHERE detallefactura.id_usuario = p_id_usuario and productos.id_tipoProducto = '2' 
     GROUP BY productos.producto;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_dashboard_ventasTotales` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`proyecto`@`%` PROCEDURE `sp_dashboard_ventasTotales`(in p_id_usuario varchar(11))
+BEGIN
+	SELECT sum(total) as VentasTotales 
+	from factura
+	where id_usuario = p_id_usuario;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -1075,8 +1119,8 @@ DELIMITER ;
 DELIMITER ;;
 CREATE DEFINER=`proyecto`@`%` PROCEDURE `sp_obtenerFacturasByCliente`(in p_id_usuario varchar(11), in p_id_cliente varchar(11))
 BEGIN
-	SELECT factura.nroFactura, factura.fecha, tipofactura.tipofactura, clientes.id_cliente,  concat(clientes.nombre, ' ', clientes.apellido, 
-		   ' (',clientes.empresa,')') as razonSocial, clientes.direccion, clientes.telefono, tipocondicionventa.descripcion as condicionVenta, 
+	SELECT factura.nroFactura, factura.fecha, tipofactura.tipofactura, clientes.id_cliente,  IF ((clientes.nombre IS NULL OR clientes.nombre = "" OR clientes.nombre = "null") OR (clientes.apellido IS NULL OR clientes.apellido = "" OR clientes.apellido = "null"), clientes.empresa,
+		IF ((clientes.empresa is NULL or clientes.empresa = "" or clientes.empresa="null"), concat(clientes.apellido, ' ', clientes.nombre), concat(clientes.apellido, ' ', clientes.nombre, ' (', clientes.empresa, ')'))) AS razonSocial, clientes.direccion, clientes.telefono, tipocondicionventa.descripcion as condicionVenta, 
            tipocondicioniva.descripcion as condicionIVA, factura.total
 		FROM factura
 		INNER JOIN clientes on factura.id_cliente = clientes.id_cliente
@@ -1190,4 +1234,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-11-24 12:55:20
+-- Dump completed on 2023-11-24 16:19:10
