@@ -27,7 +27,7 @@ function getAll_Clients() {
                 let list = ``;
                 data.forEach(person => {
                     const nombre = (person) => {
-                        if (person.nombre === null)
+                        if (person.nombre === null || person.nombre === "null")
                         {
                             return ""
                         }
@@ -37,7 +37,7 @@ function getAll_Clients() {
                     };
 
                     const apellido = (person) => {
-                        if (person.apellido === null)
+                        if (person.apellido === null || person.apellido === "null")
                         {
                             return ""
                         }
@@ -47,7 +47,7 @@ function getAll_Clients() {
                     };
 
                     const empresa = (person) => {
-                        if (person.empresa === null)
+                        if (person.empresa === null || person.empresa === "null")
                         {
                             return ""
                         }

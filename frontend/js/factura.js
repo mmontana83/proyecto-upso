@@ -193,28 +193,34 @@ function cargarListadoProductosFacturaNueva(){
         });
 }
 
+function setFechaActualFacturaNueva(){
+  flatpickr("input[type=date]", {
+    minDate: new Date().fp_incr(-10),
+    maxDate: new Date().fp_incr(6),  // 6 días hacia adelante
+    dateFormat: "d-m-Y",
+    defaultDate: "today",
+    locale: "es",
+    showMonths: 1,
+    disable: [
+      function(date) {
+        // Función para deshabilitar días fuera del rango
+        return (date < new Date().fp_incr(-10)) || (date > new Date().fp_incr(6));
+      }
+    ]
+  });
+}
+
 //Evento que se dispara cuando cargo la página para cargar dinámicamente el option Condicion IVA.
 document.addEventListener('DOMContentLoaded', cargarTipoComprobante());
 document.addEventListener('DOMContentLoaded', cargarTipoCondicionVenta());
 document.addEventListener('DOMContentLoaded', cargarListadoProductosFacturaNueva());
+document.addEventListener('DOMContentLoaded', setFechaActualFacturaNueva());
 //#endregion
 
 
 let facturas = [];
 let arregloDetalle = []; // Arreglo que se va a usar para enviar la factura a la BD
 let arregloProductos = [];
-
-///// obtenemos la fecha actual en formato "YYYY-MM-DD"
-var fechaActual = new Date().toISOString().split('T')[0];
-
-// Formateo de la fecha actual a "DD/MM/YYYY"
-var partesFecha = fechaActual.split("-");
-var fechaFormateada = `${partesFecha[2]}/${partesFecha[1]}/${partesFecha[0]}`;
-
-// cambiamos el valor del input con la fecha actual
-inputFecha.value = fechaFormateada;
-
-//////////////////////////////////////////
 
 ///
 const getPrecioProductoById = (id) => {

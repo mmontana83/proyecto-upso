@@ -1,3 +1,5 @@
+
+
 // Esto lo obtuvimos de la plantilla de BS
 const body = document.querySelector("body"),
       modeToggle = body.querySelector(".mode-toggle");
@@ -120,7 +122,8 @@ window.addEventListener("click", (e) => { //el evento es sobre la ventana entera
             inputDireccion.value = data[6].textContent;
             inputCondicionIVA.value = data[7].textContent;
             inputCuit.value = data[0].textContent;
-
+            //inputFecha.value = new Date().toISOString().split('T')[0];
+            
             if (e.target.getAttribute("data-bs-target") === "#EliminarCliente") {
                 delete_Client(data); 
             }
