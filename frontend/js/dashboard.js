@@ -104,6 +104,14 @@ window.addEventListener("click", (e) => { //el evento es sobre la ventana entera
             // En esta sección cargo los datos de la nueva factura
             
             const razonSocial = (data) => {
+                //Reinicio la factura cada vez que la invoco
+                arregloDetalle = []
+                formCabecera.reset();
+                formDetalle.reset();
+                redibujarTabla();
+
+                inputFecha.value = new Date().toLocaleDateString('en-GB'); //Esto lo hice para que me muestre el formato d-m-Y
+
                 if (data[1].textContent === '' && data[2].textContent === ''){
                     return data[3].textContent
                 }
@@ -116,13 +124,15 @@ window.addEventListener("click", (e) => { //el evento es sobre la ventana entera
                         return `${data[2].textContent} ${data[1].textContent} (${data[3].textContent})`
                     }
                 }
+
+                
             };
 
             inputNombre.value = razonSocial(data);
             inputDireccion.value = data[6].textContent;
             inputCondicionIVA.value = data[7].textContent;
             inputCuit.value = data[0].textContent;
-            //inputFecha.value = new Date().toISOString().split('T')[0];
+            
             
             if (e.target.getAttribute("data-bs-target") === "#EliminarCliente") {
                 delete_Client(data); 

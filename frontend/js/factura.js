@@ -217,7 +217,11 @@ document.addEventListener('DOMContentLoaded', cargarListadoProductosFacturaNueva
 document.addEventListener('DOMContentLoaded', setFechaActualFacturaNueva());
 //#endregion
 
-
+//#region Validación de la cantidad de unidades a vender de acuerdo al stock
+function validadCantidadStock(input){
+    console.log(selectDescripcion.selectedOptions[0].textContent)
+}
+//#endregion
 let facturas = [];
 let arregloDetalle = []; // Arreglo que se va a usar para enviar la factura a la BD
 let arregloProductos = [];
@@ -249,7 +253,6 @@ const redibujarTabla = () => {
     }))
     cuerpoTabla.innerHTML = filas;
     inputPTotales.value = Totales
-    // console.log(arregloDetalle);
 }
 
 const eliminarRegistroById = (id) => {
@@ -442,6 +445,7 @@ inputTipoComprobante.addEventListener('change', function(){
 });
 
 selectDescripcion.addEventListener('change', function(){
+    inputCantidad.disabled = false;
     document.querySelector('input#inputCantidad.form-control').focus();
 });
       
