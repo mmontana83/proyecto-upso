@@ -163,7 +163,7 @@ class Producto:
             cur = mysql.connection.cursor()
             cur.callproc('sp_obtenerProductosByUsuario', [id_usuario, codigoProducto])
             fila = cur.fetchone()
-            print(fila)
+            
             if fila is not None:   
                 producto = Producto.obtenerProductosByUsuarioToJson(fila)
                 return jsonify(producto), 200
@@ -174,7 +174,21 @@ class Producto:
         
 # --------------- fin obtener un determinado productode un determinado usuario -------------
 
-
+    @staticmethod
+    def obtenerStockPorProducto(id_usuario, codigoProducto):
+        
+        try:
+            cur = mysql.connection.cursor()
+            cur.callproc('sp_obtenerStockPorProducto', [id_usuario, codigoProducto])
+            fila = cur.fetchone()
+            
+            if fila is not None:   
+                stock = Producto.obtenerStockPorProductoToJson(fila)
+                return jsonify(stock), 200
+            else:
+                return jsonify({'Cliente':'', 'id_tipoEstado':''})
+        except Exception as ex:
+            return jsonify({'message': str(ex)}), 409
 
     @classmethod
     def obtenerProductosByUsuarioToJson(self, json):
@@ -231,4 +245,10 @@ class Producto:
             'precio': json[4],
             'stock': json[5],
             'tipoProducto': json[6]
+        }
+    
+    @classmethod
+    def obtenerStockPorProductoToJson(self, json):
+        return {
+            'stock': json[0]
         }

@@ -110,3 +110,13 @@ def insertar_producto(id_usuario):
         return Producto.insertarProductoByUsuario(json)
     except Exception as ex:
         return jsonify({'message': str(ex)})
+    
+
+@app.route('/usuario/<id_usuario>/producto/<codigoProducto>/stock', methods=['GET'])
+@token_required
+@user_resources
+def get_stock_by_codigoProducto(id_usuario, codigoProducto):
+    try:
+        return Producto.obtenerStockPorProducto(id_usuario, codigoProducto)
+    except Exception as ex:
+        return jsonify({'message': str(ex)}), 409
