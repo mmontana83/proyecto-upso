@@ -134,7 +134,7 @@ class Producto:
         
         try:
             cur = mysql.connection.cursor()
-            cur.callproc('sp_listarProductosByUsuario', [id_usuario])
+            cur.callproc('sp_obtenerProductosByUsuario', [id_usuario])
             datos = cur.fetchall()
             
             if len(datos) != 0:
@@ -161,7 +161,7 @@ class Producto:
         
         try:
             cur = mysql.connection.cursor()
-            cur.callproc('sp_listarProductoByUsuario', [id_usuario, codigoProducto])
+            cur.callproc('sp_obtenerProductosByUsuario', [id_usuario, codigoProducto])
             fila = cur.fetchone()
             print(fila)
             if fila is not None:   

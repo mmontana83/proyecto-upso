@@ -220,6 +220,7 @@ document.addEventListener('DOMContentLoaded', setFechaActualFacturaNueva());
 //#region Validación de la cantidad de unidades a vender de acuerdo al stock
 function validadCantidadStock(input){
     console.log(selectDescripcion.selectedOptions[0].textContent)
+    console.log(selectDescripcion.selectedOptions[0].value)
 }
 //#endregion
 let facturas = [];
