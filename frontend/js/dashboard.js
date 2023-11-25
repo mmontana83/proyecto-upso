@@ -105,6 +105,7 @@ window.addEventListener("click", (e) => { //el evento es sobre la ventana entera
 
         document.getElementById('labelBuscarClienteFactura').style.visibility = 'visible';
         document.getElementById('f-busquedaClienteParaFacturar').style.visibility = 'visible';
+        document.getElementById('f-busquedaClienteParaFacturar').value = '';
 
         inputFecha.value = new Date().toLocaleDateString('en-GB'); //Esto lo hice para que me muestre el formato d-m-Y
         getAll_Clients();
