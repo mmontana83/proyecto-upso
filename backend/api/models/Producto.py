@@ -140,7 +140,7 @@ class Producto:
             if len(datos) != 0:
                 productos = []
                 for fila in datos:
-                    producto = Producto.listarProductosToJson(fila)
+                    producto = Producto.obtenerProductosByUsuarioToJson(fila)
                     productos.append(producto)
                 
                 return jsonify(productos), 200
@@ -165,7 +165,7 @@ class Producto:
             fila = cur.fetchone()
             print(fila)
             if fila is not None:   
-                producto = Producto.listarProductoToJson(fila)
+                producto = Producto.obtenerProductosByUsuarioToJson(fila)
                 return jsonify(producto), 200
             else:
                 return jsonify({'Cliente':'', 'id_tipoEstado':''})
@@ -177,7 +177,7 @@ class Producto:
 
 
     @classmethod
-    def listarProductoToJson(self, json):
+    def obtenerProductosByUsuarioToJson(self, json):
         return {
             'id_producto': json[0],
             'codigoProducto':json[1],
@@ -190,7 +190,7 @@ class Producto:
         }
 
     @classmethod
-    def listarProductosToJson(self, json):
+    def obtenerProductosByUsuarioToJson(self, json):
 
         """
             convencion de documentacion PEP 257
