@@ -1,3 +1,5 @@
+let listaClientes;
+
 //#region CRUD CLIENTES
 function getAll_Clients() {
     function handleResponse(response)  {
@@ -22,10 +24,11 @@ function getAll_Clients() {
     fetch(`http://127.0.0.1:5000/usuario/${id_usuario}/cliente`, requestOptions)
         .then(response => handleResponse(response))
         .then(
-            (data) => {
+            (dataClientes) => {
+                listaClientes = dataClientes;
                 const tableBody = document.getElementById('all-persons');
                 let list = ``;
-                data.forEach(person => {
+                dataClientes.forEach(person => {
                     const nombre = (person) => {
                         if (person.nombre === null || person.nombre === "null")
                         {
@@ -65,7 +68,7 @@ function getAll_Clients() {
                         <td>${person.direccion}</td>
                         <td>${person.condicionIVA}</td>
                         <td class= "">
-                        <span class="material-symbols-outlined table-toggle" data-bs-target="#Factura" onclick="toggleSection('section4')" >receipt_long</span>
+                        <span class="material-symbols-outlined table-toggle" data-bs-target="#CrearFacturaDesdeCliente" onclick="toggleSection('section4')">receipt_long</span>
                         </td>
                         <td class= "" >
                         <span data-bs-toggle="modal" data-bs-target="#M-Editar" class="material-symbols-outlined table-toggle">

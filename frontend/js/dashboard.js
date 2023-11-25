@@ -94,54 +94,74 @@ const inputs = document.getElementById('edit-form').querySelectorAll('input, sel
 let count = 0;
 
 window.addEventListener("click", (e) => { //el evento es sobre la ventana entera
-    if   (e.target.getAttribute("data-bs-target") === "#M-Editar" 
-        | e.target.getAttribute("data-bs-target") === "#Factura"
-        | e.target.getAttribute("data-bs-target") === "#EliminarCliente") { 
-            
-            let data = e.target.parentElement.parentElement.children;
-            fillDataCliente(data);
+    if (e.target.getAttribute("data-bs-target") === "#CrearFacturaDesdePanel" || 
+        e.target.getAttribute("data-bs-target") === "#CrearFacturaDesdeListado"){
+        
+        //Reinicio la factura cada vez que la invoco
+        arregloDetalle = []
+        formCabecera.reset();
+        formDetalle.reset();
+        redibujarTabla();
 
-            // En esta sección cargo los datos de la nueva factura
-            
-            const razonSocial = (data) => {
-                //Reinicio la factura cada vez que la invoco
-                arregloDetalle = []
-                formCabecera.reset();
-                formDetalle.reset();
-                redibujarTabla();
+        document.getElementById('labelBuscarClienteFactura').style.visibility = 'visible';
+        document.getElementById('f-busquedaClienteParaFacturar').style.visibility = 'visible';
 
-                inputFecha.value = new Date().toLocaleDateString('en-GB'); //Esto lo hice para que me muestre el formato d-m-Y
+        inputFecha.value = new Date().toLocaleDateString('en-GB'); //Esto lo hice para que me muestre el formato d-m-Y
+        getAll_Clients();
 
-                if (data[1].textContent === '' && data[2].textContent === ''){
-                    return data[3].textContent
-                }
-                else
-                {
-                    if (data[3].textContent === ""){
-                        return `${data[2].textContent} ${data[1].textContent}`
-                    }
-                    else{
-                        return `${data[2].textContent} ${data[1].textContent} (${data[3].textContent})`
-                    }
-                }
-
-                
-            };
-
-            inputNombre.value = razonSocial(data);
-            inputDireccion.value = data[6].textContent;
-            inputCondicionIVA.value = data[7].textContent;
-            inputCuit.value = data[0].textContent;
-            
-            
-            if (e.target.getAttribute("data-bs-target") === "#EliminarCliente") {
-                delete_Client(data); 
-            }
+        return;
     }
-    if (e.target.getAttribute("data-bs-target") === "#M-EditarProducto" |
-    e.target.getAttribute("data-bs-target") === "#EliminarProducto" ) {
-        let data = e.target.parentElement.parentElement.children;
 
+    let data = e.target.parentElement.parentElement.children;
+    
+    if (e.target.getAttribute("data-bs-target") === "#M-Editar"){
+        fillDataCliente(data);
+        return;
+    }
+
+    
+
+    if (e.target.getAttribute("data-bs-target") === "#CrearFacturaDesdeCliente"){
+        //Reinicio la factura cada vez que la invoco
+        arregloDetalle = []
+        formCabecera.reset();
+        formDetalle.reset();
+        redibujarTabla();    
+        
+        fillDataCliente(data);            
+
+        document.getElementById('labelBuscarClienteFactura').style.visibility = 'hidden';
+        document.getElementById('f-busquedaClienteParaFacturar').style.visibility = 'hidden';
+
+        const razonSocial = (data) => {
+            if (data[1].textContent === '' && data[2].textContent === ''){
+                return data[3].textContent
+            }
+            else
+            {
+                if (data[3].textContent === ""){
+                    return `${data[2].textContent} ${data[1].textContent}`
+                }
+                else{
+                    return `${data[2].textContent} ${data[1].textContent} (${data[3].textContent})`
+                }
+            }
+        };
+
+        inputNombre.value = razonSocial(data);
+        inputDireccion.value = data[6].textContent;
+        inputCondicionIVA.value = data[7].textContent;
+        inputCuit.value = data[0].textContent;
+        inputFecha.value = new Date().toLocaleDateString('en-GB'); //Esto lo hice para que me muestre el formato d-m-Y
+        return;
+    }
+
+    if (e.target.getAttribute("data-bs-target") === "#EliminarCliente") {
+        delete_Client(data); 
+        return;
+    }
+
+    if (e.target.getAttribute("data-bs-target") === "#M-EditarProducto") {
         idProductoEdit.value = data[0].textContent.trim();
         nombreProductoEdit.value = data[1].textContent;
         descripcionProductoEdit.value = data[2].textContent;
@@ -155,16 +175,17 @@ window.addEventListener("click", (e) => { //el evento es sobre la ventana entera
                 tipoProductoEdit.value = 2;
                 break;
         }
+        return;
+    }
 
-        if (e.target.getAttribute("data-bs-target") === "#EliminarProducto") {
-            delete_Product(data); 
-        }
+    if (e.target.getAttribute("data-bs-target") === "#EliminarProducto") {
+        delete_Product(data);
+        return;
     }
 
     if (e.target.matches(".btn-secondary" ) | (e.target.matches(".btn-close" )) | (e.target.matches(".modal.fade"))) {
         count=0
     }
-
   });
 
 const fillDataCliente = (data) => {
@@ -228,7 +249,7 @@ document.addEventListener("keyup", e => {
     if (e.target.matches('#f-busqueda')) {
         const searchTerm = e.target.value.toLowerCase();
         const tableRows = document.querySelectorAll('table tr'); // Selector para las filas de la tabla
-
+        
         tableRows.forEach((fila) => {
             const rowData = fila.textContent.toLowerCase();
             if (rowData.includes(searchTerm)) {
@@ -237,6 +258,42 @@ document.addEventListener("keyup", e => {
                 fila.classList.add('filter');
             }
         });
+    }
+});
+
+
+//#region Función para Filtrar la Búsqueda de Clientes y Productos
+document.addEventListener("keyup", e => {
+    if (e.target.matches('#f-busquedaClienteParaFacturar')) {
+        const searchTerm = e.target.value.toLowerCase();
+
+        const data = listaClientes.filter(cliente => cliente.id_cliente.includes(searchTerm) || cliente.empresa.toLowerCase().includes(searchTerm));
+
+        if (data.length === 0 || searchTerm === ''){
+            inputNombre.value = ''
+            inputDireccion.value = ''
+            inputCondicionIVA.value = ''
+            inputCuit.value = ''
+        }
+        else{
+            if ((data[0].nombre === '' || data[0].nombre === 'null' || data[0].nombre === null) && 
+                (data[0].apellido === '' || data[0].apellido === 'null' || data[0].apellido === null)){
+                inputNombre.value = data[0].empresa
+            }
+            else
+            {
+                if (data[0].empresa === "" || data[0].empresa === "null" || data[0].empresa === null){
+                    inputNombre.value = `${data[0].apellido} ${data[0].nombre}`
+                }
+                else{
+                    inputNombre.value = `${data[0].apellido} ${data[0].nombre} (${data[0].empresa})`
+                }
+            }
+
+            inputDireccion.value = data[0].direccion;
+            inputCondicionIVA.valule = data[0].condicionIVA;
+            inputCuit.value = data[0].id_cliente;
+        }
     }
 });
 //#endregion

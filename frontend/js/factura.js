@@ -8,7 +8,6 @@ const inputCuit = document.getElementById('inputCuit');
 const inputMetodoPago = document.getElementById('inputMetodoPago');
 const inputTipoComprobante = document.getElementById('inputTipoComprobante');
 const inputFecha = document.getElementById('inputFecha');
-
 //#endregion
 
 //#region Const para el Detalle de la factura
@@ -21,7 +20,6 @@ const inputPTotales = document.getElementById('inputPTotales');
 const cuerpoTabla = document.getElementById('cuerpoTabla');
 const btnGuardarFactura = document.getElementById('btnGuardarFactura');
 //#endregion
-
 
 //#region Carga Dinámica Option Tipo Condicion IVA - Tipo Comprobante - Listado de Productos
 function cargarTipoCondicionVenta(){

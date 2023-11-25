@@ -118,7 +118,7 @@
                         <button class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#M-InsertarProducto"> Crear Producto</button>
                     </div>
                     <div class="col-sm-3">
-                        <button class="btn btn-primary btn-lg" onclick="toggleSection('section4')"> Crear Factura</button>
+                        <button class="btn btn-primary btn-lg" onclick="toggleSection('section4')" data-bs-target="#CrearFacturaDesdePanel" > Crear Factura</button>
                     </div> 
                 </div>
                 
@@ -441,15 +441,15 @@
         <div class="conteiner-fluid">
          <div id="section6" class="activity hidden toggle">
             <div class="title">
-                <div class="title-text">    
-                    <!-- <span class="material-symbols-outlined">inventory</span> -->
-                    <h2 class="display-6" >Facturas</h2>
+                <div class="title-text">
+                    <h2 class="display-6" >FACTURAS</h2>
                 </div>
-                <!-- <div class="actions" onclick="toggleSection('section4')" >
-                    <span class="material-symbols-outlined" >person_add</span>
-                    <h3>Crear Factura</h3>
-                </div> -->
+                <div class="actions d-inline-flex">
+                    <span class="material-symbols-outlined" onclick="toggleSection('section4')" data-bs-target="#CrearFacturaDesdeListado">inventory</span>
+                    <h4>Crear Factura</h4>
+                </div>
             </div>
+
             <div class="table-responsive">
                 <table class="table table-hover">
                     <thead>
@@ -474,9 +474,13 @@
         <!-- ***************** CREACIÓN DE FACTURAS ******************* -->
         <div id="section4" class="activity hidden toggle container-fluid mt-2">
             <div class="title">
-                <span class="material-symbols-outlined">inventory</span>
+                <!-- <span class="material-symbols-outlined">inventory</span> -->
                 <h2 class="display-6" >Factura</h2>
+
+                <label for="" class="form-label mt-3" id="labelBuscarClienteFactura">Buscar Cliente</label>
+                <input class="form-control form-control-lg" type="search" id="f-busquedaClienteParaFacturar" placeholder="Ingresa tu busqueda...">
             </div>
+            
 
             <section class="row ">
                 <div class="col">

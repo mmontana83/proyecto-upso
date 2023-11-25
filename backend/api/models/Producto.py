@@ -33,7 +33,7 @@ class Producto:
             producto = Producto(json)
             
             cur = mysql.connection.cursor()            
-            cur.callproc('sp_listarProductoByUsuario', [producto._id_usuario, producto._codigoProducto])
+            cur.callproc('sp_obtenerProductoByUsuario', [producto._id_usuario, producto._codigoProducto])
             fila = cur.fetchone()
             cur.close()  # Cierra el cursor después de cada consulta
 
@@ -89,7 +89,7 @@ class Producto:
 
         try:
             cur = mysql.connection.cursor()            
-            cur.callproc('sp_listarProductoByUsuario', [id_usuario, codigoProducto])
+            cur.callproc('sp_obtenerProductoByUsuario', [id_usuario, codigoProducto])
             fila = cur.fetchone()
             cur.close()  # Cierra el cursor después de cada consulta
 
