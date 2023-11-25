@@ -93,6 +93,7 @@ function cargarTipoComprobante(){
     const requestOptions = {
         method: 'GET',
         headers: {
+            'Accept': '*/*',
             'Content-Type': 'application/json',
             'x-access-token': token,
             'user-id': id_usuario
@@ -149,6 +150,7 @@ function cargarListadoProductosFacturaNueva(){
     const requestOptions = {
         method: 'GET',
         headers: {
+            'Accept': '*/*',
             'Content-Type': 'application/json',
             'x-access-token': token,
             'user-id': id_usuario
@@ -219,10 +221,64 @@ document.addEventListener('DOMContentLoaded', setFechaActualFacturaNueva());
 
 //#region Validación de la cantidad de unidades a vender de acuerdo al stock
 function validadCantidadStock(input){
-    console.log(selectDescripcion.selectedOptions[0].textContent)
-    console.log(selectDescripcion.selectedOptions[0].value)
+    function handleResponse(response)  {
+        if (!response.ok){
+            return Promise.reject(response);
+        }
+        else{
+            return response.json();
+        }
+    }
+
+    const requestOptions = {
+        method: 'GET',
+        headers: {
+            'Accept': '*/*',
+            'Content-Type': 'application/json',
+            'x-access-token': token,
+            'user-id': id_usuario
+        }
+    };
+    
+    fetch(`http://127.0.0.1:5000/usuario/${id_usuario}/producto/${selectDescripcion.selectedOptions[0].value}/stock`, requestOptions)
+        .then(response => handleResponse(response))
+        .then(
+            (data) => {
+                
+                if (data.id_tipoProducto === 1){
+                    inputCantidad.setAttribute('max', data.stock)
+                    if (inputCantidad.value > data.stock){
+                        if (data.stock === 1){
+                            Swal.fire({
+                                icon: "error",
+                                text: `Hay solo ${data.stock} unidad en stock del producto ${selectDescripcion.selectedOptions[0].innerHTML.replace(/\([^)]*\)/g, '')}`
+                            })
+                        }
+                        else{
+                            Swal.fire({
+                                icon: "error",
+                                text: `Hay solo ${data.stock} unidades en stock del producto ${selectDescripcion.selectedOptions[0].textContent}`
+                            })
+                        }
+                    }
+                }                
+            }
+        )
+        .catch(error => {
+            error.json().then(data => 
+                Swal.fire({
+                    icon: "error",
+                    text: data.message
+                  })
+            );
+        })
+        .finally(() => {
+            console.log("Promesa finalizada (resuelta o rechazada)");
+        });
 }
 //#endregion
+
+//#region Manipulación de la factura y su detalle
 let facturas = [];
 let arregloDetalle = []; // Arreglo que se va a usar para enviar la factura a la BD
 let arregloProductos = [];
@@ -233,8 +289,6 @@ const getPrecioProductoById = (id) => {
     return objProd ? objProd.precio : undefined;   // Si se encuentra un objeto con el 'id' proporcionado, devolvemos el valor de la propiedad 'precio'; de lo contrario, devolvemos undefined.
 };
 
-
-///
 // SE AGREGAN LAS FILAS A LAS TABLAS CON LA INFO DE LOS PROD
 const redibujarTabla = () => {
     cuerpoTabla.innerHTML = ""
@@ -392,7 +446,7 @@ const calcularPrecioTotal = ()=> {
 inputCantidad.onchange = () => {
     calcularPrecioTotal()
 }
-
+//#endregion
 
 //#region Validación para la creación de una factura
 var mensajeValidacionFacturaNuevaMetodoPago = document.getElementById('mensajeValidacionFacturaNuevaMetodoPago');
