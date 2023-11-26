@@ -364,18 +364,18 @@
                     <div class="title-text">
                         <h2 class="display-6" >CLIENTES</h2>
                     </div>
-                    <div class="actions d-inline-flex" data-bs-toggle="modal" data-bs-target="#M-crear">
+                    <div class="align-items-center mt-5 btn btn-secondary d-inline-flex" data-bs-toggle="modal" data-bs-target="#M-crear">
                         <span class="material-symbols-outlined" >person_add</span>
                         <h4>Agregar cliente</h4>
                     </div>
                 </div>
 
-                <label for="" class="form-label mt-4">Buscar Cliente</label>
+                <label for="" class="form-label mt-3">Buscar Cliente</label>
                 <input class="form-control form-control-lg" type="search" id="f-busqueda" placeholder="Ingresa tu busqueda...">
 
 
                 <div class="table-responsive">
-                    <table class="table table-striped table-hover text-center">
+                    <table class="mt-5 table table-striped table-hover text-center">
                         <thead>
                             <tr >
                                 <th class="col"> Cuit </th>
@@ -405,7 +405,7 @@
                     <div class="title-text">
                         <h2 class="display-6" >PRODUCTOS</h2>
                     </div>
-                    <div class="actions d-inline-flex" data-bs-toggle="modal" data-bs-target="#M-InsertarProducto">
+                    <div class="align-items-center mt-5 btn btn-secondary d-inline-flex" data-bs-toggle="modal" data-bs-target="#M-InsertarProducto">
                         <span class="material-symbols-outlined">add </span>
                         <h4>Agregar Producto</h4>
                     </div>
@@ -442,14 +442,16 @@
                 <div class="title-text">
                     <h2 class="display-6" >FACTURAS</h2>
                 </div>
-                <div class="actions d-inline-flex">
+                <div class="align-items-center mt-5 btn btn-secondary d-inline-flex">
                     <span class="material-symbols-outlined" onclick="toggleSection('section4')" data-bs-target="#CrearFacturaDesdeListado">inventory</span>
                     <h4>Crear Factura</h4>
                 </div>
             </div>
+            <label for="" class="form-label mt-3">Buscar Factura</label>
+            <input class="form-control form-control-lg" type="search" id="f-busqueda" placeholder="Ingresa tu busqueda...">
 
             <div class="table-responsive">
-                <table class="table table-hover">
+                <table class="table table-striped table-hover text-center mt-5">
                     <thead>
                         <tr >
                             <th> Nro Fact. </th>
