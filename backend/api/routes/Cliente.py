@@ -35,6 +35,7 @@ def registrar_cliente(id_usuario):
 @app.route('/usuario/<id_usuario>/cliente/<id_cliente>', methods = ['GET'])
 @token_required
 @user_resources
+@client_resource
 def get_cliente_by_id_cliente(id_usuario, id_cliente):
     try:
         return Cliente.obtenerClienteByIdCliente(id_usuario, id_cliente)
@@ -45,6 +46,7 @@ def get_cliente_by_id_cliente(id_usuario, id_cliente):
 @app.route('/usuario/<id_usuario>/cliente/<id_cliente>', methods = ['POST'])
 @token_required
 @user_resources
+@client_resource
 def actualizar_cliente(id_usuario, id_cliente):
     try:
         #Obtengo el json del front
@@ -63,6 +65,7 @@ def actualizar_cliente(id_usuario, id_cliente):
 @app.route('/usuario/<id_usuario>/cliente/<id_cliente>', methods = ['DELETE'])
 @token_required
 @user_resources
+@client_resource
 def eliminar_cliente(id_usuario, id_cliente):
     try:
         return Cliente.eliminarCliente(id_cliente, id_usuario)
@@ -73,6 +76,7 @@ def eliminar_cliente(id_usuario, id_cliente):
 @app.route('/usuario/<id_usuario>/cliente/<id_cliente>', methods = ['PUT'])
 @token_required
 @user_resources
+@client_resource
 def alta_cliente(id_usuario, id_cliente):
     try:
         return Cliente.altaCliente(id_cliente, id_usuario)

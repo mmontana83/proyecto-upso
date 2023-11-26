@@ -33,7 +33,7 @@ class Producto:
             producto = Producto(json)
             
             cur = mysql.connection.cursor()            
-            cur.callproc('sp_listarProductoByUsuario', [producto._id_usuario, producto._codigoProducto])
+            cur.callproc('sp_obtenerProductoByUsuario', [producto._id_usuario, producto._codigoProducto])
             fila = cur.fetchone()
             cur.close()  # Cierra el cursor después de cada consulta
 
@@ -89,7 +89,7 @@ class Producto:
 
         try:
             cur = mysql.connection.cursor()            
-            cur.callproc('sp_listarProductoByUsuario', [id_usuario, codigoProducto])
+            cur.callproc('sp_obtenerProductoByUsuario', [id_usuario, codigoProducto])
             fila = cur.fetchone()
             cur.close()  # Cierra el cursor después de cada consulta
 
@@ -134,13 +134,13 @@ class Producto:
         
         try:
             cur = mysql.connection.cursor()
-            cur.callproc('sp_listarProductosByUsuario', [id_usuario])
+            cur.callproc('sp_obtenerProductosByUsuario', [id_usuario])
             datos = cur.fetchall()
             
             if len(datos) != 0:
                 productos = []
                 for fila in datos:
-                    producto = Producto.listarProductosToJson(fila)
+                    producto = Producto.obtenerProductosByUsuarioToJson(fila)
                     productos.append(producto)
                 
                 return jsonify(productos), 200
@@ -160,12 +160,14 @@ class Producto:
     def obtenerProductoByUsuario(id_usuario, codigoProducto):
         
         try:
+            print(id_usuario)
+            print(codigoProducto)
             cur = mysql.connection.cursor()
-            cur.callproc('sp_listarProductoByUsuario', [id_usuario, codigoProducto])
+            cur.callproc('sp_obtenerProductosByUsuario', [id_usuario, codigoProducto])
             fila = cur.fetchone()
-            print(fila)
+            
             if fila is not None:   
-                producto = Producto.listarProductoToJson(fila)
+                producto = Producto.obtenerProductosByUsuarioToJson(fila)
                 return jsonify(producto), 200
             else:
                 return jsonify({'Cliente':'', 'id_tipoEstado':''})
@@ -174,10 +176,23 @@ class Producto:
         
 # --------------- fin obtener un determinado productode un determinado usuario -------------
 
-
+    @staticmethod
+    def obtenerStockPorProducto(id_usuario, codigoProducto):
+        try:
+            cur = mysql.connection.cursor()
+            cur.callproc('sp_obtenerStockPorProducto', [id_usuario, codigoProducto])
+            fila = cur.fetchone()
+            
+            if fila is not None:   
+                stock = Producto.obtenerStockPorProductoToJson(fila)
+                return jsonify(stock), 200
+            else:
+                return jsonify({'stock':'0'})
+        except Exception as ex:
+            return jsonify({'message': str(ex)}), 409
 
     @classmethod
-    def listarProductoToJson(self, json):
+    def obtenerProductosByUsuarioToJson(self, json):
         return {
             'id_producto': json[0],
             'codigoProducto':json[1],
@@ -190,7 +205,7 @@ class Producto:
         }
 
     @classmethod
-    def listarProductosToJson(self, json):
+    def obtenerProductosByUsuarioToJson(self, json):
 
         """
             convencion de documentacion PEP 257
@@ -231,4 +246,11 @@ class Producto:
             'precio': json[4],
             'stock': json[5],
             'tipoProducto': json[6]
+        }
+    
+    @classmethod
+    def obtenerStockPorProductoToJson(self, json):
+        return {
+            'stock': int(json[0]),
+            'id_tipoProducto': int(json[1])
         }

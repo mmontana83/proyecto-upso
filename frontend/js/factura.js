@@ -8,7 +8,6 @@ const inputCuit = document.getElementById('inputCuit');
 const inputMetodoPago = document.getElementById('inputMetodoPago');
 const inputTipoComprobante = document.getElementById('inputTipoComprobante');
 const inputFecha = document.getElementById('inputFecha');
-
 //#endregion
 
 //#region Const para el Detalle de la factura
@@ -21,7 +20,6 @@ const inputPTotales = document.getElementById('inputPTotales');
 const cuerpoTabla = document.getElementById('cuerpoTabla');
 const btnGuardarFactura = document.getElementById('btnGuardarFactura');
 //#endregion
-
 
 //#region Carga Dinámica Option Tipo Condicion IVA - Tipo Comprobante - Listado de Productos
 function cargarTipoCondicionVenta(){
@@ -93,6 +91,7 @@ function cargarTipoComprobante(){
     const requestOptions = {
         method: 'GET',
         headers: {
+            'Accept': '*/*',
             'Content-Type': 'application/json',
             'x-access-token': token,
             'user-id': id_usuario
@@ -149,6 +148,7 @@ function cargarListadoProductosFacturaNueva(){
     const requestOptions = {
         method: 'GET',
         headers: {
+            'Accept': '*/*',
             'Content-Type': 'application/json',
             'x-access-token': token,
             'user-id': id_usuario
@@ -217,7 +217,66 @@ document.addEventListener('DOMContentLoaded', cargarListadoProductosFacturaNueva
 document.addEventListener('DOMContentLoaded', setFechaActualFacturaNueva());
 //#endregion
 
+//#region Validación de la cantidad de unidades a vender de acuerdo al stock
+function validadCantidadStock(input){
+    function handleResponse(response)  {
+        if (!response.ok){
+            return Promise.reject(response);
+        }
+        else{
+            return response.json();
+        }
+    }
 
+    const requestOptions = {
+        method: 'GET',
+        headers: {
+            'Accept': '*/*',
+            'Content-Type': 'application/json',
+            'x-access-token': token,
+            'user-id': id_usuario
+        }
+    };
+    
+    fetch(`http://127.0.0.1:5000/usuario/${id_usuario}/producto/${selectDescripcion.selectedOptions[0].value}/stock`, requestOptions)
+        .then(response => handleResponse(response))
+        .then(
+            (data) => {
+                
+                if (data.id_tipoProducto === 1){
+                    inputCantidad.setAttribute('max', data.stock)
+                    if (inputCantidad.value > data.stock){
+                        if (data.stock === 1){
+                            Swal.fire({
+                                icon: "error",
+                                text: `Hay solo ${data.stock} unidad en stock del producto ${selectDescripcion.selectedOptions[0].innerHTML.replace(/\([^)]*\)/g, '')}`
+                            })
+                        }
+                        else{
+                            Swal.fire({
+                                icon: "error",
+                                text: `Hay solo ${data.stock} unidades en stock del producto ${selectDescripcion.selectedOptions[0].textContent}`
+                            })
+                        }
+                    }
+                }                
+            }
+        )
+        .catch(error => {
+            error.json().then(data => 
+                Swal.fire({
+                    icon: "error",
+                    text: data.message
+                  })
+            );
+        })
+        .finally(() => {
+            console.log("Promesa finalizada (resuelta o rechazada)");
+        });
+}
+//#endregion
+
+//#region Manipulación de la factura y su detalle
 let facturas = [];
 let arregloDetalle = []; // Arreglo que se va a usar para enviar la factura a la BD
 let arregloProductos = [];
@@ -228,8 +287,6 @@ const getPrecioProductoById = (id) => {
     return objProd ? objProd.precio : undefined;   // Si se encuentra un objeto con el 'id' proporcionado, devolvemos el valor de la propiedad 'precio'; de lo contrario, devolvemos undefined.
 };
 
-
-///
 // SE AGREGAN LAS FILAS A LAS TABLAS CON LA INFO DE LOS PROD
 const redibujarTabla = () => {
     cuerpoTabla.innerHTML = ""
@@ -249,7 +306,6 @@ const redibujarTabla = () => {
     }))
     cuerpoTabla.innerHTML = filas;
     inputPTotales.value = Totales
-    // console.log(arregloDetalle);
 }
 
 const eliminarRegistroById = (id) => {
@@ -388,7 +444,7 @@ const calcularPrecioTotal = ()=> {
 inputCantidad.onchange = () => {
     calcularPrecioTotal()
 }
-
+//#endregion
 
 //#region Validación para la creación de una factura
 var mensajeValidacionFacturaNuevaMetodoPago = document.getElementById('mensajeValidacionFacturaNuevaMetodoPago');
@@ -442,6 +498,7 @@ inputTipoComprobante.addEventListener('change', function(){
 });
 
 selectDescripcion.addEventListener('change', function(){
+    inputCantidad.disabled = false;
     document.querySelector('input#inputCantidad.form-control').focus();
 });
       

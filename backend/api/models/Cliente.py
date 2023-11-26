@@ -120,13 +120,13 @@ class Cliente():
     def obtenerClientesByUsuario(id_usuario):
         try:
             cur = mysql.connection.cursor()
-            cur.callproc('sp_listarClientesByUsuario',[id_usuario])
+            cur.callproc('sp_obtenerClientesByUsuario',[id_usuario])
             datos = cur.fetchall()
 
             if len(datos) != 0:
                 clientes = []
                 for fila in datos:
-                    cliente = Cliente.sp_listarClientesByUsuarioToJson(fila)
+                    cliente = Cliente.sp_obtenerClientesByUsuarioToJson(fila)
                     clientes.append(cliente)
                 return jsonify(clientes), 200
             else:
@@ -149,7 +149,7 @@ class Cliente():
             return jsonify({'message': str(ex)}), 409
 
     @classmethod
-    def sp_listarClientesByUsuarioToJson(self, json):
+    def sp_obtenerClientesByUsuarioToJson(self, json):
         return{
             'id_cliente': json[0],
             'nombre': json[1],

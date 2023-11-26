@@ -22,9 +22,10 @@ function getAll_Facturas(){
     const requestOptions = {
         method : 'GET',
         headers: {
+            'Accept': '*/*',
             'Content-Type': 'application/json',
-            'user-id':id_usuario
-        }
+            'x-access-token': token,
+            'user-id': id_usuario        }
     }
 
     fetch(`http://127.0.0.1:5000/usuario/${id_usuario}/facturas`, requestOptions)
@@ -81,8 +82,10 @@ function getFactura(id_cliente, nroFactura) {
     const requestOptions = {
         method : 'GET',
         headers: {
+            'Accept': '*/*',
             'Content-Type': 'application/json',
-            'user-id':id_usuario
+            'x-access-token': token,
+            'user-id': id_usuario
         }
     }
 
@@ -136,9 +139,9 @@ function insertFactura(id_cliente, factura){
         method: 'POST',
         headers: {
             'Accept': '*/*',
-            'Content-Type': 'application/json'
-            // 'x-access-token': token,
-            // 'user-id': id_usuario
+            'Content-Type': 'application/json',
+            'x-access-token': token,
+            'user-id': id_usuario
         },
         body: JSON.stringify(factura) 
     };
