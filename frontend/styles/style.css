@@ -85,11 +85,10 @@ nav .logo-image{
     min-width: 45px;
 }
 
-nav .logo-name .logo_name{
+nav .logo-name {
     font-size: 22px;
     font-weight: 600;
     color: var(--text-color);
-    margin-left: 14px;
     transition: var(--tran-05);
 }
 nav.close .logo_name{
