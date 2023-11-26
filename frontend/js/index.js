@@ -38,7 +38,7 @@ function login(event) {
         }
     }
 
-    // Hacer la solicitud fetch
+    // Hacer la solicitud fetch y guardo en el sessionStorage
     fetch(apiUrl, requestOptions)
         .then(response => handleResponse(response))
         .then(userData => {
