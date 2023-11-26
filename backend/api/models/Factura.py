@@ -10,7 +10,7 @@ class Factura():
     def __init__(self, json):
         self._id_cliente = json['id_cliente'].strip()        
         self._id_usuario = json['id_usuario'].strip()
-        self._fecha = datetime.strptime(json['fecha'], "%d-%m-%Y")
+        self._fecha = datetime.strptime(json['fecha'], "%d/%m/%Y")
         self._total = Decimal(json['total'])
         self._id_tipoFactura = int(json['id_tipoFactura'])
         self._id_condicionVenta = int(json['id_condicionVenta'])
