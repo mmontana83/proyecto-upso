@@ -1,5 +1,3 @@
-
-
 function login(event) {
     
     //Evito que se recargue la página
@@ -38,7 +36,7 @@ function login(event) {
         }
     }
 
-    // Hacer la solicitud fetch
+    // Hacer la solicitud fetch y guardo en el sessionStorage
     fetch(apiUrl, requestOptions)
         .then(response => handleResponse(response))
         .then(userData => {
@@ -61,4 +59,15 @@ function login(event) {
         .finally( () => { 
             console.log("Promesa finalizada (resuelta o rechazada)");
         })
+};
+
+function logout(){
+    // Eliminar el token y el id del usuario del almacenamiento
+    sessionStorage.removeItem("id_usuario");
+    sessionStorage.removeItem("nombre");
+    sessionStorage.removeItem("apellido");
+    sessionStorage.removeItem("token");
+
+    // Redirigir al usuario a la página de inicio de sesión
+    window.location.href = "index.html";
 };

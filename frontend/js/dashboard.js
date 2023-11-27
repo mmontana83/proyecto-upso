@@ -1,5 +1,3 @@
-
-
 // Esto lo obtuvimos de la plantilla de BS
 const body = document.querySelector("body"),
       modeToggle = body.querySelector(".mode-toggle");
@@ -263,7 +261,7 @@ document.addEventListener("keyup", e => {
 });
 
 
-//#region Función para Filtrar la Búsqueda de Clientes y Productos
+//#region Función para Filtrar la creaciónd de la factura
 document.addEventListener("keyup", e => {
     if (e.target.matches('#f-busquedaClienteParaFacturar')) {
         const searchTerm = e.target.value.toLowerCase();
