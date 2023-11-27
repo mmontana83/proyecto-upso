@@ -34,11 +34,9 @@
 <body>
     <nav>
         <div class="logo-name table-toggle" id="section5Button" onclick="toggleSection('section5')">
-            <span class="logo_name">PROYECTO</span>
             <div class="logo-image ">
-                <span class="material-symbols-outlined">currency_exchange</span>
+                <img src="img/F.png" style="width: 40px;" alt="">
             </div>
-            <!-- <span class="logo_name">PROYECTO</span> -->
         </div>
 
         <div class="menu-items">
@@ -65,7 +63,7 @@
             </ul>
             
             <ul class="logout-mode">
-                <li><a href="#" >
+                <li><a href="#" type = "submit" onclick="logout()">
                     <i class="uil uil-signout"></i>
                     <span class="link-name">Logout</span>
                 </a></li>
@@ -93,7 +91,7 @@
         <div class="top">
             <i class="uil uil-bars sidebar-toggle"></i>
         </div>
-        
+       
         <!-- ***************** MENU ******************* -->
         <div class="conteiner-fluid mt-5">
 
@@ -232,7 +230,7 @@
                             <!--Graph Card-->
                             <div class="bg-white border-transparent rounded-lg shadow-xl">
                                 <div class="bg-gradient-to-b from-gray-300 to-gray-100 uppercase text-gray-800 border-b-2 border-gray-300 rounded-tl-lg rounded-tr-lg p-2">
-                                    <h class="font-bold uppercase text-gray-600">Control de Stock</h>
+                                    <h3 class="font-bold uppercase text-gray-600">Control de Stock</h3>
                                 </div>
                                 <div class="p-5">
                                     <canvas id="Control Stock" class="chartjs" width="undefined" height="100"></canvas>
@@ -366,18 +364,18 @@
                     <div class="title-text">
                         <h2 class="display-6" >CLIENTES</h2>
                     </div>
-                    <div class="actions d-inline-flex" data-bs-toggle="modal" data-bs-target="#M-crear">
+                    <div class="align-items-center mt-5 btn btn-secondary d-inline-flex" data-bs-toggle="modal" data-bs-target="#M-crear">
                         <span class="material-symbols-outlined" >person_add</span>
                         <h4>Agregar cliente</h4>
                     </div>
                 </div>
 
-                <label for="" class="form-label mt-4">Buscar Cliente</label>
+                <label for="" class="form-label mt-3">Buscar Cliente</label>
                 <input class="form-control form-control-lg" type="search" id="f-busqueda" placeholder="Ingresa tu busqueda...">
 
 
                 <div class="table-responsive">
-                    <table class="table table-striped table-hover text-center">
+                    <table class="mt-5 table table-striped table-hover text-center">
                         <thead>
                             <tr >
                                 <th class="col"> Cuit </th>
@@ -407,7 +405,7 @@
                     <div class="title-text">
                         <h2 class="display-6" >PRODUCTOS</h2>
                     </div>
-                    <div class="actions d-inline-flex" data-bs-toggle="modal" data-bs-target="#M-InsertarProducto">
+                    <div class="align-items-center mt-5 btn btn-secondary d-inline-flex" data-bs-toggle="modal" data-bs-target="#M-InsertarProducto">
                         <span class="material-symbols-outlined">add </span>
                         <h4>Agregar Producto</h4>
                     </div>
@@ -444,14 +442,16 @@
                 <div class="title-text">
                     <h2 class="display-6" >FACTURAS</h2>
                 </div>
-                <div class="actions d-inline-flex">
+                <div class="align-items-center mt-5 btn btn-secondary d-inline-flex">
                     <span class="material-symbols-outlined" onclick="toggleSection('section4')" data-bs-target="#CrearFacturaDesdeListado">inventory</span>
                     <h4>Crear Factura</h4>
                 </div>
             </div>
+            <label for="" class="form-label mt-3">Buscar Factura</label>
+            <input class="form-control form-control-lg" type="search" id="f-busqueda" placeholder="Ingresa tu busqueda...">
 
             <div class="table-responsive">
-                <table class="table table-hover">
+                <table class="table table-striped table-hover text-center mt-5">
                     <thead>
                         <tr >
                             <th> Nro Fact. </th>
@@ -1120,6 +1120,7 @@
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr@4.6.6/dist/l10n/es.js"></script>
 
+    <script src="./js/index.js"></script>
     <script src="./js/dashboard.js"></script>
     <script src="./js/factura.js"></script>
     <script src="./js/tablero.js"></script>
