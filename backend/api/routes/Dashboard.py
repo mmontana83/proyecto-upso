@@ -51,6 +51,13 @@ def get_ventasTotales(id_usuario):
     except Exception as ex:
         return jsonify({'message':str(ex)})
     
+@app.route('/usuario/<id_usuario>/dashboard/ventasTotalesMesActual', methods = ['GET'])
+def get_ventasTotalesMesActual(id_usuario):
+    try:
+        return jsonify(Dashboard.ventasTotalesMesActual(id_usuario))
+    except Exception as ex:
+        return jsonify({'message':str(ex)})
+    
 @app.route('/usuario/<id_usuario>/dashboard/clientesActivos', methods = ['GET'])
 def get_clientesActivos(id_usuario):
     try:

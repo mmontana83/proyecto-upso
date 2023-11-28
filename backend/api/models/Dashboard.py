@@ -1,6 +1,7 @@
 from api.db.db import mysql
 from flask import jsonify
 from datetime import datetime
+import json
 
 class Dashboard():
     
@@ -15,9 +16,16 @@ class Dashboard():
     
     def historialVentasToJson(data):
         return {
-            'Año': data[0],
-            'Mes': data[1],
-            'Ventas': data[2]
+            data[0]: {
+                'Mes': data[1],
+                'Ventas': data[2],
+                'Crecimiento': data[3],
+                'PorcentajeCrecimiento': data[4]
+            }
+            
+            # 'Año': data[0],
+            # 'Mes': data[1],
+            # 'Ventas': data[2]
         }
     
     def movimientoStockToJson(data):
@@ -53,6 +61,11 @@ class Dashboard():
             'VentasTotales': data[0]
         }
     
+    def ventasTotalesMesActualToJson(data):
+        return{
+            'VentasTotalesMesActual': data[0]
+        }
+    
     def clientesActivosToJson(data):
         return{
             'ClientesActivos': data[0]
@@ -83,14 +96,30 @@ class Dashboard():
             
             cur = mysql.connection.cursor()
             cur.callproc('sp_dashboard_historialVentas', [id_usuario,])
+            #Esta línea se usa para probar
+            #cur.callproc('sp_dashboard_historialVentasTest')
             data = cur.fetchall()
-            
+
             if len(data) != 0:
-                historialVentas = []
-                for fila in data:
-                    historialVentas.append(Dashboard.historialVentasToJson(fila))
+                organized_data = {}
+                for item in data:
+                    año, mes, venta = item
+                    if año not in organized_data:
+                        organized_data[año] = []
+                    organized_data[año].append({
+                        "Mes": mes,
+                        "Venta": venta
+                    })
+                #json_data = json.dumps(organized_data, indent=2)
+                return organized_data
+                return json_data
+
+            # if len(data) != 0:
+            #     historialVentas = []
+            #     for fila in data:
+            #         historialVentas.append(Dashboard.historialVentasToJson(fila))
                 
-                return historialVentas
+            #     return historialVentas
             else:
                 return {'message':'Historial de Ventas Vacío'}                        
         except Exception as ex:
@@ -181,6 +210,20 @@ class Dashboard():
             
             if len(data) != 0:
                 return Dashboard.ventasTotalesToJson(data)
+            else:
+                return {'message':'No tiene Ventas'}   
+        except Exception as ex:
+            return {'message': str(ex)}
+        
+    @staticmethod
+    def ventasTotalesMesActual(id_usuario):
+        try:
+            cur = mysql.connection.cursor()
+            cur.callproc('sp_dashboard_ventasTotalesMesActual', [id_usuario,])
+            data = cur.fetchone()
+            
+            if len(data) != 0:
+                return Dashboard.ventasTotalesMesActualToJson(data)
             else:
                 return {'message':'No tiene Ventas'}   
         except Exception as ex:

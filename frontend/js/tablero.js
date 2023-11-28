@@ -1,13 +1,20 @@
-controlStock();
-historialVentas();
-movimientoStock();
-rankingVentasCliente();
-rankingVentasProducto();
-rankingVentasServicio();
+// controlStock();
+// historialVentas();
+// movimientoStock();
+// rankingVentasCliente();
+// rankingVentasProducto();
+// rankingVentasServicio();
 
-document.addEventListener("DOMContentLoaded", ventasTotales);
-document.addEventListener("DOMContentLoaded", clientesActivos);
+
 document.addEventListener("DOMContentLoaded", controlStock);
+document.addEventListener("DOMContentLoaded", movimientoStock);
+document.addEventListener("DOMContentLoaded", historialVentas);
+document.addEventListener("DOMContentLoaded", rankingVentasCliente);
+document.addEventListener("DOMContentLoaded", rankingVentasProducto);
+document.addEventListener("DOMContentLoaded", rankingVentasServicio);
+document.addEventListener("DOMContentLoaded", ventasTotales);
+document.addEventListener("DOMContentLoaded", ventasTotalesMesActual);
+document.addEventListener("DOMContentLoaded", clientesActivos);
 
 function controlStock() {
   
@@ -178,45 +185,43 @@ function historialVentas() {
         .then(response => handleResponse(response))
         .then(
             (object) => {
+              //Preparo el dataset para crear el chart.
+              // años representa cada línea
+              // datasets va a contener las ventas por año
+              años = Object.keys(object)
 
-              var years = [];
-              var labels = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
-              var data = [];
+              var datasets = [];
 
-              // for (var i = 0; i < object.length; i++){
-              //   years.push(object[i].Año)
-              //   labels.push(obtenerNombreDelMes(object[i].Mes));
-              //   data.push(object[i].Ventas);
-              // }
+              for (var i=0; i<años.length; i++){
+                var año = años[i];
+                var data = Object.values(object)[i];
+                console.log(data[0].Mes)
+
+                var ventas = [0,0,0,0,0,0,0,0,0,0,0,0];
+
+                for (var j=0; j<data.length; j++){
+                  if (data[j].Mes === null){
+                    ventas[data[j].Mes - 1] = 0;
+                  }else{
+                    ventas[data[j].Mes - 1] = data[j].Venta
+                  }
+                }
                 
+                datasets.push({
+                  label: año.toString(),
+                  data: ventas
+                });
+              }
+             
+              var labels = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+
+
               var ctx2 = document.getElementById('chartjsHistorialVentas').getContext('2d');
-
-              // var datasets = Object.keys(object).map(function(Año) {
-              //   return {
-              //     label: 'Ventas ' + Año,
-              //     data: object[Año],
-              //     fill: false
-              //   }
-              // });
-
               var chart2 = new Chart(ctx2, {
                 type: 'line',
                 data: {
                   labels: labels,
-                  datasets: [
-                    {
-                      label: 'Ventas 2021',
-                      data: [1239,4233,4235,2332,8778,7866,12933,11002,15443,23221,32443,11232]
-                    },
-                    {
-                      label: 'Ventas 2022',
-                      data: [12239,43233,14235,23342,83778,78266,1233,11022,16443,22221,62443,13232]
-                    },
-                    {
-                      label: 'Ventas 2023',
-                      data: [12393,42333,42135,12332,84778,74866,42933,13002,45443,33221]
-                    }
-                  ]
+                  datasets: datasets
                 },
                 options: {
                   scales: {
@@ -231,15 +236,16 @@ function historialVentas() {
                   }
                 }
               });
-            }
+             }
         )
         .catch((error) => { 
-          error.json().then(data => 
-            Swal.fire({
-                icon: "error",
-                text: data.message
-              })
-          );
+          // error.json().then(data => 
+          //   Swal.fire({
+          //       icon: "error",
+          //       text: data.message
+          //     })
+          // );
+          console.error(error)
         })
         .finally(() => {
             console.log("Promesa finalizada (resuelta o rechazada)");
@@ -501,6 +507,45 @@ function ventasTotales(){
         .then(data => {
           const ventasTotales = document.getElementById("dashboard-ventasTotales");
           ventasTotales.textContent = `$ ${data.VentasTotales}`;
+        })
+        .catch((error) => { 
+          error.json().then(data => 
+            Swal.fire({
+                icon: "error",
+                text: data.message
+              })
+          );
+        })
+        .finally(() => {
+            console.log("Promesa finalizada (resuelta o rechazada)");
+        });
+}
+
+function ventasTotalesMesActual(){
+  function handleResponse(response)  {
+    if (!response.ok){
+        return Promise.reject(response);
+    }
+    else{
+        return response.json();
+    }
+  };
+
+  const requestOptions = {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+            // 'x-access-token': token,
+            // 'user-id': id_usuario
+        }
+    };
+    
+    //fetch(`127.0.0.1:5000/usuario/${id_usuario}/dashboard/controlStock`, requestOptions)
+    fetch(`http://127.0.0.1:5000/usuario/20302022731/dashboard/ventasTotalesMesActual`, requestOptions)
+        .then(response => handleResponse(response))
+        .then(data => {
+          const ventasTotalesMesActual = document.getElementById("dashboard-ventasTotalesMesActual");
+          ventasTotalesMesActual.textContent = `$ ${data.VentasTotalesMesActual}`;
         })
         .catch((error) => { 
           error.json().then(data => 

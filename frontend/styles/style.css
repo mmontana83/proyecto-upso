@@ -406,13 +406,22 @@ span .material-symbols-outlined {
     order: 1;
 }
 
+/* ************************************************************** */
+.bg-c-blue {
+    background: linear-gradient(45deg,#4099ff,#73b4ff);
+}
 
+.bg-c-green {
+    background: linear-gradient(45deg,#2ed8b6,#59e0c5);
+}
 
+.bg-c-yellow {
+    background: linear-gradient(45deg,#FFB64D,#ffcb80);
+}
 
-
-
-
-
+.bg-c-red {
+    background: linear-gradient(45deg,#d64418,#ffcb80);
+}
 
 
 /* ************************************************************** */
