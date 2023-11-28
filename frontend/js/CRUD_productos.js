@@ -1,5 +1,5 @@
 //#region CRUD PRODUCTOS
-function getAll_Product() {
+async function getAll_Product() {
     function handleResponse(response) {
         if (!response.ok) {
             return Promise.reject(response);
@@ -18,7 +18,7 @@ function getAll_Product() {
         }
     }
 
-    fetch(`http://127.0.0.1:5000/usuario/${id_usuario}/productos`, requestOptions)
+    await fetch(`http://127.0.0.1:5000/usuario/${id_usuario}/productos`, requestOptions)
         .then(response => handleResponse(response))
         .then(
             (data) => {
@@ -59,7 +59,7 @@ function getAll_Product() {
         })
 }
 
-function insert_Product() {
+async function insert_Product() {
 
     function handleResponse(response) {
         if (!response.ok) {
@@ -83,9 +83,9 @@ function insert_Product() {
     codigoProducto = document.getElementById('in-idProducto').value;
 
     //Primer consulto si existe el producto
-    fetch(`http://127.0.0.1:5000/usuario/${id_usuario}/producto/${codigoProducto}`, requestOptions)
+    await fetch(`http://127.0.0.1:5000/usuario/${id_usuario}/producto/${codigoProducto}`, requestOptions)
         .then(response => handleResponse(response))
-        .then(data => {
+        .then(async (data) => {
             //El producto existe y esta dado de alta. Por lo tanto no se puede agregar
             if (data.id_tipoEstado == 1) {
                 Swal.fire({
@@ -107,7 +107,7 @@ function insert_Product() {
                         confirmButtonText: "Sí, darlo de alta nuevamente!",
                         cancelButtonText: "No"
                     })
-                        .then((result) => {
+                        .then(async (result) => {
                             if (result.isConfirmed) {
                                 const requestOptions = {
                                     method: 'PUT',
@@ -119,7 +119,7 @@ function insert_Product() {
                                     }
                                 };
 
-                                fetch(`http://127.0.0.1:5000/usuario/${id_usuario}/producto/${codigoProducto}`, requestOptions)
+                                await fetch(`http://127.0.0.1:5000/usuario/${id_usuario}/producto/${codigoProducto}`, requestOptions)
                                     .then(response => handleResponse(response))
                                     .then(() => {
                                         Swal.fire({
@@ -128,6 +128,7 @@ function insert_Product() {
                                             icon: "success"
                                         });
                                         getAll_Product();
+                                        actualizarDashboardProductos();
                                     })
                                     .catch(error => {
                                         error.json().then(data =>
@@ -163,7 +164,7 @@ function insert_Product() {
                         body: JSON.stringify(jsonInsertProducto)
                     };
 
-                    fetch(`http://127.0.0.1:5000/usuario/${id_usuario}/producto/`, requestOptions)
+                    await fetch(`http://127.0.0.1:5000/usuario/${id_usuario}/producto/`, requestOptions)
                         .then(response => handleResponse(response))
                         .then(data => {
                             Swal.fire({
@@ -174,6 +175,7 @@ function insert_Product() {
                             let modal = document.getElementById('M-InsertarProducto');
                             modal.style.display = 'none';
                             getAll_Product();
+                            actualizarDashboardProductos();
                         })
                         .catch(error => {
                             error.json().then(data =>
@@ -203,7 +205,7 @@ function insert_Product() {
         });
 }
 
-function update_Product() {
+async function update_Product() {
 
     function handleResponse(response) {
         if (!response.ok) {
@@ -235,7 +237,7 @@ function update_Product() {
         body: JSON.stringify(jsonUpdateProducto)
     };
 
-    fetch(`http://127.0.0.1:5000/usuario/${id_usuario}/producto/${id_producto}`, requestOptions)
+    await fetch(`http://127.0.0.1:5000/usuario/${id_usuario}/producto/${id_producto}`, requestOptions)
         .then(response => handleResponse(response))
         .then(
             data => {
@@ -263,7 +265,7 @@ function update_Product() {
         });
 }
 
-function delete_Product(data) {
+async function delete_Product(data) {
 
     function handleResponse(response)  {
         if (!response.ok){
@@ -287,7 +289,7 @@ function delete_Product(data) {
         cancelButtonColor: "#d33",
         confirmButtonText: "Sí, borrarlo!",
         cancelButtonText: "Cancelar"
-    }).then((result) => {
+    }).then(async (result) => {
         if (result.isConfirmed) {
 
             const requestOptions = {
@@ -300,7 +302,7 @@ function delete_Product(data) {
                 }
             };
 
-            fetch(`http://127.0.0.1:5000/usuario/${id_usuario}/producto/${id_producto}`, requestOptions)
+            await fetch(`http://127.0.0.1:5000/usuario/${id_usuario}/producto/${id_producto}`, requestOptions)
                 .then(response => handleResponse(response))
                 .then(
                     () => {
@@ -310,6 +312,7 @@ function delete_Product(data) {
                             icon: "success"
                         });
                         getAll_Product();
+                        actualizarDashboardProductos();
                     }
                 )
                 .catch(error => {
@@ -329,7 +332,7 @@ function delete_Product(data) {
 //#endregion
 
 //#region  Carga dinámica Option del tipo de producto (Producto o Servicio)
-function cargarTipoCondicionProducto() {
+async function cargarTipoCondicionProducto() {
 
     function handleResponse(response) {
         if (!response.ok) {
@@ -349,7 +352,7 @@ function cargarTipoCondicionProducto() {
         }
     };
 
-    fetch(`http://127.0.0.1:5000/dashboard/listarTipoProducto`, requestOptions)
+    await fetch(`http://127.0.0.1:5000/dashboard/listarTipoProducto`, requestOptions)
         .then(response => handleResponse(response))
         .then(
             (categorias) => {

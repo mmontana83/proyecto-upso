@@ -9,7 +9,7 @@ const M_inputTipoComprobante = document.getElementById("M-inputTipoComprobante")
 const M_inputFecha = document.getElementById("M-inputFecha");
 const M_inputPTotal = document.getElementById("M-inputPTotal");
 
-function getAll_Facturas(){
+async function getAll_Facturas(){
     function handleResponse(response)  {
         if (!response.ok){
             return Promise.reject(response)
@@ -28,7 +28,7 @@ function getAll_Facturas(){
             'user-id': id_usuario        }
     }
 
-    fetch(`http://127.0.0.1:5000/usuario/${id_usuario}/facturas`, requestOptions)
+    await fetch(`http://127.0.0.1:5000/usuario/${id_usuario}/facturas`, requestOptions)
         .then( response => handleResponse(response) )
         .then(
             (data) => {
@@ -68,7 +68,7 @@ function getAll_Facturas(){
         })
 }
 
-function getFactura(id_cliente, nroFactura) {
+async function getFactura(id_cliente, nroFactura) {
     function handleResponse(response)  {
 
         if (!response.ok){
@@ -89,7 +89,7 @@ function getFactura(id_cliente, nroFactura) {
         }
     }
 
-    fetch(`http://127.0.0.1:5000//usuario/${id_usuario}/cliente/${id_cliente}/factura/${nroFactura}`, requestOptions)
+    await fetch(`http://127.0.0.1:5000//usuario/${id_usuario}/cliente/${id_cliente}/factura/${nroFactura}`, requestOptions)
         .then( response => handleResponse(response))
         .then(
             (factura) => {
@@ -124,7 +124,7 @@ function getFactura(id_cliente, nroFactura) {
         })
 }
 
-function insertFactura(id_cliente, factura){
+async function insertFactura(id_cliente, factura){
     
     function handleResponse(response)  {
         if (!response.ok){
@@ -146,7 +146,7 @@ function insertFactura(id_cliente, factura){
         body: JSON.stringify(factura) 
     };
 
-    fetch(`http://127.0.0.1:5000/usuario/${id_usuario}/cliente/${id_cliente}/factura`, requestOptions)
+    await fetch(`http://127.0.0.1:5000/usuario/${id_usuario}/cliente/${id_cliente}/factura`, requestOptions)
         .then(response => handleResponse(response))
         .then(data => {
             Swal.fire({
@@ -162,6 +162,7 @@ function insertFactura(id_cliente, factura){
                 if (result.isConfirmed) {
                     getAll_Facturas();
                     toggleSection('section6');
+                    actualizarDashboardVentas();
                 }
             });
             

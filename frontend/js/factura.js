@@ -197,7 +197,7 @@ function setFechaActualFacturaNueva(){
   flatpickr("input[type=date]", {
     minDate: new Date().fp_incr(-10),
     maxDate: new Date().fp_incr(6),  // 6 días hacia adelante
-    dateFormat: "d-m-Y",
+    dateFormat: "d/m/Y",
     defaultDate: "today",
     locale: "es",
     showMonths: 1,

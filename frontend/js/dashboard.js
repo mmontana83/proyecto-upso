@@ -105,7 +105,7 @@ window.addEventListener("click", (e) => { //el evento es sobre la ventana entera
         document.getElementById('f-busquedaClienteParaFacturar').style.visibility = 'visible';
         document.getElementById('f-busquedaClienteParaFacturar').value = '';
 
-        inputFecha.value = new Date().toLocaleDateString('en-GB'); //Esto lo hice para que me muestre el formato d-m-Y
+        inputFecha.value = new Date().toLocaleDateString('en-GB',{ day: '2-digit', month: '2-digit', year: 'numeric' }); //Esto lo hice para que me muestre el formato d-m-Y
         getAll_Clients();
 
         return;
@@ -151,7 +151,7 @@ window.addEventListener("click", (e) => { //el evento es sobre la ventana entera
         inputDireccion.value = data[6].textContent;
         inputCondicionIVA.value = data[7].textContent;
         inputCuit.value = data[0].textContent;
-        inputFecha.value = new Date().toLocaleDateString('en-GB'); //Esto lo hice para que me muestre el formato d-m-Y
+        inputFecha.value = new Date().toLocaleDateString('en-GB',{ day: '2-digit', month: '2-digit', year: 'numeric' }); //Esto lo hice para que me muestre el formato d-m-Y
         return;
     }
 

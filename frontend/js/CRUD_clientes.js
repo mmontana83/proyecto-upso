@@ -166,6 +166,7 @@ function insert_Client(){
                                         text: `El cliente ${data.cliente} fue dado de alta nuevamente`,
                                         icon: "success"});
                                     getAll_Clients();
+                                    actualizarDashboardClientes();
                                 })
                                 .catch(error => {
                                     error.json().then(data => 
@@ -214,6 +215,7 @@ function insert_Client(){
                             var modal = document.getElementById('M-crear');
                             modal.style.display = 'none';
                             getAll_Clients();
+                            actualizarDashboardClientes();
                         })
                         .catch(error => {
                             error.json().then(data => 
@@ -351,6 +353,7 @@ function delete_Client(data){
                         icon: "success"
                     });        
                     getAll_Clients();
+                    actualizarDashboardClientes();
                 }
             )
             .catch(error => {
