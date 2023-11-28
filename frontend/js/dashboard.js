@@ -92,8 +92,9 @@ const inputs = document.getElementById('edit-form').querySelectorAll('input, sel
 let count = 0;
 
 window.addEventListener("click", (e) => { //el evento es sobre la ventana entera
-    if (e.target.getAttribute("data-bs-target") === "#CrearFacturaDesdePanel" || 
-        e.target.getAttribute("data-bs-target") === "#CrearFacturaDesdeListado"){
+    if (e.target.getAttribute("data-bs-target") === "#CrearFacturaDesdePanel" ||
+        e.target.getAttribute("data-bs-target") === "#CrearFacturaDesdeListado"||
+        e.target.getAttribute("data-bs-target") === "#CrearFacturaDesdeListadobtn"){
         
         //Reinicio la factura cada vez que la invoco
         arregloDetalle = []
