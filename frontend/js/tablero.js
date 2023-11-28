@@ -1,14 +1,13 @@
-// controlStock();
-// historialVentas();
-// movimientoStock();
-// rankingVentasCliente();
-// rankingVentasProducto();
-// rankingVentasServicio();
+controlStock();
+historialVentas();
+movimientoStock();
+rankingVentasCliente();
+rankingVentasProducto();
+rankingVentasServicio();
 
 document.addEventListener("DOMContentLoaded", ventasTotales);
 document.addEventListener("DOMContentLoaded", clientesActivos);
 document.addEventListener("DOMContentLoaded", controlStock);
-
 
 function controlStock() {
   
@@ -43,8 +42,14 @@ function controlStock() {
                 labels.push(object[i].Producto);
                 data.push(object[i].Stock);
               }
-                
-              var ctx1 = document.getElementById('Control Stock').getContext('2d');
+              
+              var existingChart = Chart.getChart("chartjsControlStock");
+
+              if (existingChart) {
+                existingChart.destroy();
+              }
+
+              var ctx1 = document.getElementById('chartjsControlStock').getContext('2d');
               var chart1 = new Chart(ctx1, {
                 type: 'bar',
                 data: {
@@ -60,13 +65,65 @@ function controlStock() {
                       beginAtZero: true
                     }
                   },
+                  responsive: true,
                   plugins: {
                     title: {
-                      display: true,
-                      text: 'Stock de Productos'
+                      display: false                      
+                    },
+                    legend:{
+                      display: false
                     }
                   }
                 }
+              });
+            }
+        )
+        .catch((error) => { 
+          // error.json().then(data => 
+          //   Swal.fire({
+          //       icon: "error",
+          //       text: data.message
+          //     })
+          // );
+          console.log(error);
+        })
+        .finally(() => {
+            console.log("Promesa finalizada (resuelta o rechazada)");
+        });
+}
+
+function movimientoStock() {
+  
+  function handleResponse(response)  {
+    if (!response.ok){
+        return Promise.reject(response);
+    }
+    else{
+        return response.json();
+    }
+  };
+
+  const requestOptions = {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+            // 'x-access-token': token,
+            // 'user-id': id_usuario
+        }
+    };
+    
+    //fetch(`127.0.0.1:5000/usuario/${id_usuario}/dashboard/controlStock`, requestOptions)
+    fetch(`http://127.0.0.1:5000/usuario/20302022731/dashboard/movimientoStock`, requestOptions)
+        .then(response => handleResponse(response))
+        .then(
+          (dataMovimientoStock) => {
+
+              var miTablaMovimientoStock = $('#tablaStockMovimiento').DataTable();
+
+              //Agrego las filas a la tabla
+              dataMovimientoStock.forEach(producto => {
+                const fila = [producto.Producto,producto.Movimiento, producto.Fecha, producto.Precio, producto.Cliente, producto.Factura]
+                miTablaMovimientoStock.row.add(fila).draw();
               });
             }
         )
@@ -132,7 +189,7 @@ function historialVentas() {
               //   data.push(object[i].Ventas);
               // }
                 
-              var ctx2 = document.getElementById('Historial de Ventas').getContext('2d');
+              var ctx2 = document.getElementById('chartjsHistorialVentas').getContext('2d');
 
               // var datasets = Object.keys(object).map(function(Año) {
               //   return {
@@ -169,146 +226,11 @@ function historialVentas() {
                   },
                   plugins: {
                     title: {
-                      display: true,
-                      text: 'Historial de Ventas'
+                      display: false
                     }
                   }
                 }
               });
-
-              // var ctx2 = document.getElementById('Historial de Ventas').getContext('2d');
-              // var chart2 = new Chart(ctx2, {
-              //   type: 'bar',
-              //   data: {
-              //     labels: labels,
-              //     datasets: [{
-              //       label: 'Cantidad',
-              //       data: data
-              //     }]
-              //   },
-              //   options: {
-              //     scales: {
-              //       y: {
-              //         beginAtZero: true
-              //       }
-              //     },
-              //     plugins: {
-              //       title: {
-              //         display: true,
-              //         text: 'Historial de Ventas'
-              //       }
-              //     }
-              //   }
-              // });
-            }
-        )
-        .catch((error) => { 
-          error.json().then(data => 
-            Swal.fire({
-                icon: "error",
-                text: data.message
-              })
-          );
-        })
-        .finally(() => {
-            console.log("Promesa finalizada (resuelta o rechazada)");
-        });
-}
-
-function movimientoStock() {
-  
-  function handleResponse(response)  {
-    if (!response.ok){
-        return Promise.reject(response);
-    }
-    else{
-        return response.json();
-    }
-  };
-
-  const requestOptions = {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json'
-            // 'x-access-token': token,
-            // 'user-id': id_usuario
-        }
-    };
-    
-    //fetch(`127.0.0.1:5000/usuario/${id_usuario}/dashboard/controlStock`, requestOptions)
-    fetch(`http://127.0.0.1:5000/usuario/20302022731/dashboard/movimientoStock`, requestOptions)
-        .then(response => handleResponse(response))
-        .then(
-            (object) => {
-
-              var labels = [];
-              var data = [];
-
-              for (var i = 0; i < object.length; i++){
-                labels.push(object[i].Producto);
-                data.push(object[i].Fecha);
-              }
-              
-              var ctx3 = document.getElementById('Movimiento de Stock').getContext('2d');
-              var chart3 = new Chart(ctx3, {
-                type: 'bar',
-                data: {
-                  labels: ['11-12-2023', '12-12-2023', '13-12-2023'],
-                  datasets: [
-                  {
-                    label: 'Jeringas',
-                    data: [12,18,-5]
-                  },
-                  {
-                    label: 'Remedios',
-                    data: [-15,20,-4]
-                  },
-                  {
-                    label: 'Perfumes',
-                    data: [-1,3,-2]
-                  }
-
-                  ]
-                },
-                options: {
-                  scales: {
-                    y: {
-                      beginAtZero: true
-                    }
-                  },
-                  plugins: {
-                    title: {
-                      display: true,
-                      text: 'Movimiento de Stock'
-                    }
-                  }
-                }
-              });
-              
-              // var ctx3 = document.getElementById('Movimiento de Stock').getContext('2d');
-              // var chart3 = new Chart(ctx3, {
-              //   type: 'bar',
-              //   data: {
-              //     labels: labels,
-              //     datasets: [{
-              //       label: 'Stock',
-              //       data: data
-              //     }]
-              //   },
-              //   options: {
-              //     scales: {
-              //       y: {
-              //         beginAtZero: true
-              //       }
-              //     },
-              //     plugins: {
-              //       title: {
-              //         display: true,
-              //         text: 'Movimiento de Stock'
-              //       }
-              //     }
-              //   }
-              // });
             }
         )
         .catch((error) => { 
@@ -358,14 +280,13 @@ function rankingVentasCliente() {
                 data.push(object[i].Venta);
               }
                 
-              var ctx4 = document.getElementById('Ranking Ventas por Cliente').getContext('2d');
+              var ctx4 = document.getElementById('chartjsRankingVentasPorCliente').getContext('2d');
               var chart4 = new Chart(ctx4, {
-                type: 'bar',
+                type: "bar",
                 data: {
                   labels: labels,
                   datasets: [{
-                    label: 'Venta',
-                    data: data
+                    data: data                    
                   }]
                 },
                 options: {
@@ -375,10 +296,13 @@ function rankingVentasCliente() {
                       beginAtZero: true
                     }
                   },
+                  responsive: true,
                   plugins: {
                     title: {
-                      display: true,
-                      text: 'Ranking de Ventas por Cliente'
+                      display: false                      
+                    },
+                    legend:{
+                      display: false
                     }
                   }
                 }
@@ -432,13 +356,13 @@ function rankingVentasProducto() {
                 data.push(object[i].Venta);
               }
                 
-              var ctx5 = document.getElementById('Ranking Ventas por Producto').getContext('2d');
+              var ctx5 = document.getElementById('chartjsRankingVentasPorProducto').getContext('2d');
               var chart5 = new Chart(ctx5, {
                 type: 'bar',
                 data: {
                   labels: labels,
                   datasets: [{
-                    label: 'Venta',
+                    label: labels,
                     data: data
                   }]
                 },
@@ -449,10 +373,13 @@ function rankingVentasProducto() {
                       beginAtZero: true
                     }
                   },
+                  responsive: true,
                   plugins: {
                     title: {
-                      display: true,
-                      text: 'Ranking de Ventas por Producto'
+                      display: false                      
+                    },
+                    legend:{
+                      display: false
                     }
                   }
                 }
@@ -506,14 +433,14 @@ function rankingVentasServicio() {
                 data.push(object[i].Venta);
               }
                 
-              var ctx6 = document.getElementById('Ranking Ventas por Servicio').getContext('2d');
+              var ctx6 = document.getElementById('chartjsRankingVentasPorServicio').getContext('2d');
               var chart6 = new Chart(ctx6, {
                 type: 'bar',
                 data: {
-                  labels: ['VACUNACIÓN A DOMICILIO', 'MEDICIÓN DE PRESIÓN'],
+                  labels: labels,
                   datasets: [{
                     label: 'Venta',
-                    data: [456667.56, 34223.34]
+                    data: data
                   }]
                 },
                 options: {
@@ -523,40 +450,17 @@ function rankingVentasServicio() {
                       beginAtZero: true
                     }
                   },
+                  responsive: true,
                   plugins: {
                     title: {
-                      display: true,
-                      text: 'Ranking de Ventas por Servicio'
+                      display: false                      
+                    },
+                    legend:{
+                      display: false
                     }
                   }
                 }
               });
-
-              // Esto es lo que recibo de la base de datos
-              // var ctx6 = document.getElementById('Ranking Ventas por Servicio').getContext('2d');
-              // var chart6 = new Chart(ctx6, {
-              //   type: 'bar',
-              //   data: {
-              //     labels: labels,
-              //     datasets: [{
-              //       label: 'Venta',
-              //       data: data
-              //     }]
-              //   },
-              //   options: {
-              //     scales: {
-              //       y: {
-              //         beginAtZero: true
-              //       }
-              //     },
-              //     plugins: {
-              //       title: {
-              //         display: true,
-              //         text: 'Ranking de Ventas por Servicio'
-              //       }
-              //     }
-              //   }
-              //});
             }
         )
         .catch((error) => { 
@@ -648,3 +552,18 @@ function clientesActivos(){
             console.log("Promesa finalizada (resuelta o rechazada)");
         });
 }
+
+//#region Script para iniciliar la tabla de movimiento de stock
+$(document).ready(function() {
+  $('#tablaStockMovimiento').DataTable({
+    paging: true,           // Habilita la paginación
+    pageLength: 10,         // Establece la cantidad de registros por página
+    language: {
+      url: 'https://cdn.datatables.net/plug-ins/1.10.25/i18n/Spanish.json'
+    },
+    columnDefs: [
+      { className: "text-center", targets: "_all" }
+    ] 
+  });
+});
+//#endregion
