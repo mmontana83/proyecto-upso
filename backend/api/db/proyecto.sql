@@ -2,9 +2,9 @@ CREATE DATABASE  IF NOT EXISTS `proyecto` /*!40100 DEFAULT CHARACTER SET utf8mb4
 USE `proyecto`;
 -- MySQL dump 10.13  Distrib 8.0.34, for Win64 (x86_64)
 --
--- Host: 192.168.0.254    Database: proyecto
+-- Host: 127.0.0.1    Database: proyecto
 -- ------------------------------------------------------
--- Server version	8.0.35-0ubuntu0.22.04.1
+-- Server version	8.0.35
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -157,6 +157,30 @@ LOCK TABLES `factura` WRITE;
 /*!40000 ALTER TABLE `factura` DISABLE KEYS */;
 INSERT INTO `factura` VALUES (1,'23183214579','20302022731','2023-11-24',95954.00,3,1),(2,'25789457891','20302022731','2023-11-24',317500.00,1,1),(3,'78126543215','20302022731','2023-11-26',8750.00,1,1),(4,'78126543215','20302022731','2023-11-27',9000.00,1,1);
 /*!40000 ALTER TABLE `factura` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `historialventastest`
+--
+
+DROP TABLE IF EXISTS `historialventastest`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `historialventastest` (
+  `Año` int DEFAULT NULL,
+  `Mes` int DEFAULT NULL,
+  `Venta` decimal(10,2) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `historialventastest`
+--
+
+LOCK TABLES `historialventastest` WRITE;
+/*!40000 ALTER TABLE `historialventastest` DISABLE KEYS */;
+INSERT INTO `historialventastest` VALUES (2020,1,450330.00),(2020,2,544888.00),(2020,3,534999.00),(2020,4,650334.00),(2020,5,666334.00),(2020,6,733844.00),(2020,7,690888.00),(2020,8,875999.00),(2020,9,899877.00),(2020,10,950000.00),(2020,11,989444.00),(2020,12,988232.00),(2021,1,465330.00),(2021,2,559888.00),(2021,3,549999.00),(2021,4,665334.00),(2021,5,681334.00),(2021,6,748844.00),(2021,7,705888.00),(2021,8,890999.00),(2021,9,914877.00),(2021,10,965000.00),(2021,11,1004444.00),(2021,12,1003232.00),(2022,1,1200223.00),(2022,2,1100223.00),(2022,3,2348229.00),(2022,4,2447382.00),(2022,5,2458847.00),(2022,6,2894884.00),(2022,7,2998381.00),(2022,8,3123111.00),(2022,9,3657488.00),(2022,10,3629909.00),(2022,11,2600393.00),(2022,12,3782281.00),(2023,1,4783822.00),(2023,2,4899334.00),(2023,3,4992232.00),(2023,4,5029381.00),(2023,5,5482911.00),(2023,6,5224421.00),(2023,7,6890021.00),(2023,8,6982283.00),(2023,9,6972811.00),(2023,10,7322323.00),(2023,11,6987753.00);
+/*!40000 ALTER TABLE `historialventastest` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -544,6 +568,25 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_dashboard_historialVentasTest` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`proyecto`@`%` PROCEDURE `sp_dashboard_historialVentasTest`()
+BEGIN
+	Select * from historialventastest;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `sp_dashboard_movimientoStock` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -660,6 +703,29 @@ BEGIN
 	SELECT sum(total) as VentasTotales 
 	from factura
 	where id_usuario = p_id_usuario;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_dashboard_ventasTotalesMesActual` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`proyecto`@`%` PROCEDURE `sp_dashboard_ventasTotalesMesActual`(in p_id_usuario varchar(11))
+BEGIN
+SELECT sum(total) as VentasTotalesMesActual 
+	from factura
+	where id_usuario = p_id_usuario
+    AND YEAR(fecha) = YEAR(CURRENT_DATE)
+  AND MONTH(fecha) = MONTH(CURRENT_DATE);
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -1266,4 +1332,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-11-28  0:31:44
+-- Dump completed on 2023-11-28 14:57:06
