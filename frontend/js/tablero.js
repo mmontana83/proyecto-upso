@@ -627,15 +627,24 @@ function actualizarDashboardClientes(){
 //     })
 //   }
 // }
+
 //#region Script para iniciliar la tabla de movimiento de stock
+// Espera a que el documento HTML esté completamente cargado antes de ejecutar el código
 $(document).ready(function() {
+  // Inicializa la tabla con DataTables
   $('#tablaStockMovimiento').DataTable({
+    // Configuración de paginación
     paging: true,           // Habilita la paginación
     pageLength: 10,         // Establece la cantidad de registros por página
+
+    // Configuración del idioma para DataTables (en este caso, español)
     language: {
       url: 'https://cdn.datatables.net/plug-ins/1.10.25/i18n/Spanish.json'
     },
+
+    // Configuración de las columnas
     columnDefs: [
+      // Aplica la clase "text-center" a todas las columnas
       { className: "text-center", targets: "_all" }
     ] 
   });
