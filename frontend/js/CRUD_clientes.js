@@ -255,6 +255,7 @@ function update_Client(){
             return response.json();
         }
     }
+    
     var id_cliente = document.getElementById('ed-cuit').value;
 
     var jsonUpdateCliente = {

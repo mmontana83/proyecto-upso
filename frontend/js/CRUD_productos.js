@@ -1,5 +1,5 @@
 //#region CRUD PRODUCTOS
-async function getAll_Product() {
+function getAll_Product() {
     function handleResponse(response) {
         if (!response.ok) {
             return Promise.reject(response);
@@ -18,10 +18,11 @@ async function getAll_Product() {
         }
     }
 
-    await fetch(`http://127.0.0.1:5000/usuario/${id_usuario}/productos`, requestOptions)
+    fetch(`http://127.0.0.1:5000/usuario/${id_usuario}/productos`, requestOptions)
         .then(response => handleResponse(response))
         .then(
             (data) => {
+                console.log(data)
                 const tableBody = document.getElementById('all-products');
                 let list = ``;
                 data.forEach(producto => {
@@ -32,7 +33,7 @@ async function getAll_Product() {
                         <td>${producto.descripcion}</td>
                         <td>${producto.precio}</td>
                         <td>${producto.stock}</td>
-                        <td>${producto.tipoProducto}</td>
+                        <td>${producto.id_tipoProducto}</td>
                         <td class= "table-toggle" >
                         <span data-bs-toggle="modal" data-bs-target="#M-EditarProducto" class="material-symbols-outlined">
                         manage_accounts</span>
@@ -59,7 +60,7 @@ async function getAll_Product() {
         })
 }
 
-async function insert_Product() {
+function insert_Product() {
 
     function handleResponse(response) {
         if (!response.ok) {
@@ -83,9 +84,9 @@ async function insert_Product() {
     codigoProducto = document.getElementById('in-idProducto').value;
 
     //Primer consulto si existe el producto
-    await fetch(`http://127.0.0.1:5000/usuario/${id_usuario}/producto/${codigoProducto}`, requestOptions)
+    fetch(`http://127.0.0.1:5000/usuario/${id_usuario}/producto/${codigoProducto}`, requestOptions)
         .then(response => handleResponse(response))
-        .then(async (data) => {
+        .then( (data) => {
             //El producto existe y esta dado de alta. Por lo tanto no se puede agregar
             if (data.id_tipoEstado == 1) {
                 Swal.fire({
@@ -107,7 +108,7 @@ async function insert_Product() {
                         confirmButtonText: "Sí, darlo de alta nuevamente!",
                         cancelButtonText: "No"
                     })
-                        .then(async (result) => {
+                        .then((result) => {
                             if (result.isConfirmed) {
                                 const requestOptions = {
                                     method: 'PUT',
@@ -119,7 +120,7 @@ async function insert_Product() {
                                     }
                                 };
 
-                                await fetch(`http://127.0.0.1:5000/usuario/${id_usuario}/producto/${codigoProducto}`, requestOptions)
+                                fetch(`http://127.0.0.1:5000/usuario/${id_usuario}/producto/${codigoProducto}`, requestOptions)
                                     .then(response => handleResponse(response))
                                     .then(() => {
                                         Swal.fire({
@@ -164,7 +165,7 @@ async function insert_Product() {
                         body: JSON.stringify(jsonInsertProducto)
                     };
 
-                    await fetch(`http://127.0.0.1:5000/usuario/${id_usuario}/producto/`, requestOptions)
+                    fetch(`http://127.0.0.1:5000/usuario/${id_usuario}/producto/`, requestOptions)
                         .then(response => handleResponse(response))
                         .then(data => {
                             Swal.fire({
@@ -205,7 +206,7 @@ async function insert_Product() {
         });
 }
 
-async function update_Product() {
+function update_Product() {
 
     function handleResponse(response) {
         if (!response.ok) {
@@ -237,7 +238,7 @@ async function update_Product() {
         body: JSON.stringify(jsonUpdateProducto)
     };
 
-    await fetch(`http://127.0.0.1:5000/usuario/${id_usuario}/producto/${id_producto}`, requestOptions)
+    fetch(`http://127.0.0.1:5000/usuario/${id_usuario}/producto/${id_producto}`, requestOptions)
         .then(response => handleResponse(response))
         .then(
             data => {
@@ -265,7 +266,7 @@ async function update_Product() {
         });
 }
 
-async function delete_Product(data) {
+function delete_Product(data) {
 
     function handleResponse(response)  {
         if (!response.ok){
@@ -289,7 +290,7 @@ async function delete_Product(data) {
         cancelButtonColor: "#d33",
         confirmButtonText: "Sí, borrarlo!",
         cancelButtonText: "Cancelar"
-    }).then(async (result) => {
+    }).then( (result) => {
         if (result.isConfirmed) {
 
             const requestOptions = {
@@ -302,7 +303,7 @@ async function delete_Product(data) {
                 }
             };
 
-            await fetch(`http://127.0.0.1:5000/usuario/${id_usuario}/producto/${id_producto}`, requestOptions)
+            fetch(`http://127.0.0.1:5000/usuario/${id_usuario}/producto/${id_producto}`, requestOptions)
                 .then(response => handleResponse(response))
                 .then(
                     () => {
@@ -332,7 +333,7 @@ async function delete_Product(data) {
 //#endregion
 
 //#region  Carga dinámica Option del tipo de producto (Producto o Servicio)
-async function cargarTipoCondicionProducto() {
+function cargarTipoCondicionProducto() {
 
     function handleResponse(response) {
         if (!response.ok) {
@@ -352,7 +353,7 @@ async function cargarTipoCondicionProducto() {
         }
     };
 
-    await fetch(`http://127.0.0.1:5000/dashboard/listarTipoProducto`, requestOptions)
+    fetch(`http://127.0.0.1:5000/dashboard/listarTipoProducto`, requestOptions)
         .then(response => handleResponse(response))
         .then(
             (categorias) => {

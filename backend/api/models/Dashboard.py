@@ -22,10 +22,6 @@ class Dashboard():
                 'Crecimiento': data[3],
                 'PorcentajeCrecimiento': data[4]
             }
-            
-            # 'Año': data[0],
-            # 'Mes': data[1],
-            # 'Ventas': data[2]
         }
     
     def movimientoStockToJson(data):
@@ -95,7 +91,8 @@ class Dashboard():
         try:
             
             cur = mysql.connection.cursor()
-            cur.callproc('sp_dashboard_historialVentas', [id_usuario,])
+            #cur.callproc('sp_dashboard_historialVentas', [id_usuario,])
+            
             #Esta línea se usa para probar
             #cur.callproc('sp_dashboard_historialVentasTest')
             data = cur.fetchall()

@@ -1,4 +1,4 @@
-async function login(event) {
+function login(event) {
     
     //Evito que se recargue la página
     event.preventDefault();
@@ -37,7 +37,7 @@ async function login(event) {
     }
 
     // Hacer la solicitud fetch y guardo en el sessionStorage
-    await fetch(apiUrl, requestOptions)
+    fetch(apiUrl, requestOptions)
         .then(response => handleResponse(response))
         .then(userData => {
             sessionStorage.setItem("id_usuario", userData.id_usuario);
