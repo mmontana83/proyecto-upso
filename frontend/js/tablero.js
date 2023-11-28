@@ -603,6 +603,30 @@ function actualizarDashboardProductos(){
 function actualizarDashboardClientes(){
   clientesActivos();
 }
+
+// Esta función se utilizará para que el usuario pueda solicitar asistencia técnica
+// function solicitarAsistencia(){
+//   // Obtener el valor del campo de texto
+//   var mensaje = document.getElementById('incidente').value;
+
+//   // Verificar que el mensaje no esté vacío
+//   if (mensaje.trim() !== '') {
+
+//     encabezadoMensaje = `El usuario ID: ${sessionStorage.getItem("id_usuario")} - ${sessionStorage.getItem("nombre")} ${sessionStorage.getItem("apellido")}
+//     solicita asistencia.\nMensaje: `;
+
+//     // Crear el enlace para enviar por WhatsApp
+//     var link = 'https://api.whatsapp.com/send?phone=+5492932614608&text=' + encodeURIComponent(encabezadoMensaje + mensaje);
+
+//     // Abrir la ventana de WhatsApp en una nueva pestaña
+//     window.open(link, '_blank');
+//   } else {
+//     Swal.fire({
+//       icon: "error",
+//       text: 'Por favor, ingresa un mensaje antes de enviarlo.'
+//     })
+//   }
+// }
 //#region Script para iniciliar la tabla de movimiento de stock
 $(document).ready(function() {
   $('#tablaStockMovimiento').DataTable({
