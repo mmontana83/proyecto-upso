@@ -22,9 +22,9 @@ function controlStock() {
   const requestOptions = {
         method: 'GET',
         headers: {
-            'Content-Type': 'application/json'
-            // 'x-access-token': token,
-            // 'user-id': id_usuario
+            'Content-Type': 'application/json',
+            'x-access-token': token,
+            'user-id': id_usuario
         }
     };
     
@@ -78,13 +78,12 @@ function controlStock() {
             }
         )
         .catch((error) => { 
-          // error.json().then(data => 
-          //   Swal.fire({
-          //       icon: "error",
-          //       text: data.message
-          //     })
-          // );
-          console.log(error);
+          error.json().then(data => 
+            Swal.fire({
+                icon: "error",
+                text: data.message
+              })
+          );
         })
         .finally(() => {
             console.log("Promesa finalizada (resuelta o rechazada)");
@@ -105,9 +104,9 @@ function movimientoStock() {
   const requestOptions = {
         method: 'GET',
         headers: {
-            'Content-Type': 'application/json'
-            // 'x-access-token': token,
-            // 'user-id': id_usuario
+            'Content-Type': 'application/json',
+            'x-access-token': token,
+            'user-id': id_usuario
         }
     };
     
@@ -169,9 +168,9 @@ function historialVentas() {
   const requestOptions = {
         method: 'GET',
         headers: {
-            'Content-Type': 'application/json'
-            // 'x-access-token': token,
-            // 'user-id': id_usuario
+            'Content-Type': 'application/json',
+            'x-access-token': token,
+            'user-id': id_usuario
         }
     };
     
@@ -258,9 +257,9 @@ function rankingVentasCliente() {
   const requestOptions = {
         method: 'GET',
         headers: {
-            'Content-Type': 'application/json'
-            // 'x-access-token': token,
-            // 'user-id': id_usuario
+            'Content-Type': 'application/json',
+            'x-access-token': token,
+            'user-id': id_usuario
         }
     };
     
@@ -334,9 +333,9 @@ function rankingVentasProducto() {
   const requestOptions = {
         method: 'GET',
         headers: {
-            'Content-Type': 'application/json'
-            // 'x-access-token': token,
-            // 'user-id': id_usuario
+            'Content-Type': 'application/json',
+            'x-access-token': token,
+            'user-id': id_usuario
         }
     };
     
@@ -410,9 +409,9 @@ function rankingVentasServicio() {
   const requestOptions = {
         method: 'GET',
         headers: {
-            'Content-Type': 'application/json'
-            // 'x-access-token': token,
-            // 'user-id': id_usuario
+            'Content-Type': 'application/json',
+            'x-access-token': token,
+            'user-id': id_usuario
         }
     };
     
@@ -485,9 +484,9 @@ function ventasTotales(){
   const requestOptions = {
         method: 'GET',
         headers: {
-            'Content-Type': 'application/json'
-            // 'x-access-token': token,
-            // 'user-id': id_usuario
+            'Content-Type': 'application/json',
+            'x-access-token': token,
+            'user-id': id_usuario
         }
     };
     
@@ -523,9 +522,9 @@ function ventasTotalesMesActual(){
   const requestOptions = {
         method: 'GET',
         headers: {
-            'Content-Type': 'application/json'
-            // 'x-access-token': token,
-            // 'user-id': id_usuario
+            'Content-Type': 'application/json',
+            'x-access-token': token,
+            'user-id': id_usuario
         }
     };
     
@@ -561,9 +560,9 @@ function clientesActivos(){
   const requestOptions = {
         method: 'GET',
         headers: {
-            'Content-Type': 'application/json'
-            // 'x-access-token': token,
-            // 'user-id': id_usuario
+            'Content-Type': 'application/json',
+            'x-access-token': token,
+            'user-id': id_usuario
         }
     };
     

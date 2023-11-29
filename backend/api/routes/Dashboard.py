@@ -1,8 +1,10 @@
 from api import app
-from flask import request, jsonify
+from flask import jsonify
 from api.models.Dashboard import Dashboard
+from api.utils import token_required
 
 @app.route('/usuario/<id_usuario>/dashboard/controlStock', methods = ['GET'])
+@token_required
 def get_controlStock(id_usuario):
     try:
         return jsonify(Dashboard.controlStock(id_usuario))
@@ -10,6 +12,7 @@ def get_controlStock(id_usuario):
         return jsonify({'message':str(ex)})
     
 @app.route('/usuario/<id_usuario>/dashboard/historialVentas', methods = ['GET'])
+@token_required
 def get_historialVentas(id_usuario):
     try:
         return jsonify(Dashboard.historialVentas(id_usuario))
@@ -18,6 +21,7 @@ def get_historialVentas(id_usuario):
 
 # Obtener Movimiento de Stock
 @app.route('/usuario/<id_usuario>/dashboard/movimientoStock', methods=['GET'])
+@token_required
 def get_movimientoStock(id_usuario):
     """
     Obtiene información sobre el movimiento de stock para un usuario específico.
@@ -36,6 +40,7 @@ def get_movimientoStock(id_usuario):
 
 # Obtener Ranking de Ventas por Cliente
 @app.route('/usuario/<id_usuario>/dashboard/rankingVentasByCliente', methods=['GET'])
+@token_required
 def get_rankingVentasByCliente(id_usuario):
     """
     Obtiene el ranking de ventas por cliente para un usuario específico.
@@ -54,6 +59,7 @@ def get_rankingVentasByCliente(id_usuario):
 
 # Obtener Ranking de Ventas por Producto
 @app.route('/usuario/<id_usuario>/dashboard/rankingVentasByProducto', methods=['GET'])
+@token_required
 def get_rankingVentasByProducto(id_usuario):
     """
     Obtiene el ranking de ventas por producto para un usuario específico.
@@ -71,6 +77,7 @@ def get_rankingVentasByProducto(id_usuario):
         return jsonify({'message': str(ex)})
 
 @app.route('/usuario/<id_usuario>/dashboard/rankingVentasByServicio', methods = ['GET'])
+@token_required
 def get_rankingVentasByServicio(id_usuario):
     try:
         return jsonify(Dashboard.rankingVentasByServicio(id_usuario))
@@ -79,6 +86,7 @@ def get_rankingVentasByServicio(id_usuario):
     
 # Obtener Ventas Totales
 @app.route('/usuario/<id_usuario>/dashboard/ventasTotales', methods=['GET'])
+@token_required
 def get_ventasTotales(id_usuario):
     """
     Obtiene información sobre las ventas totales para un usuario específico.

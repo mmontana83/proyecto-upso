@@ -644,7 +644,7 @@
             <div class="modal-body">
                 <form action="" class="form-floating needs-validation" novalidate id="Modal-Insertar-Usuario">
                     <div class="form-floating mb-3">
-                        <input type="text" class="form-control" id="in-cuit" placeholder="Ingrese CUIT/CUIL"  required>
+                        <input type="text" class="form-control" id="in-cuit" oninput="this.value = this.value.replace(/[^0-9]/g, '');" maxlength="11" placeholder="Ingrese CUIT/CUIL"  required>
                         <label for="in-cuit">Cuit/Cuil</label>
                         <div id="mensajeValidacionCUIT" class="invalid-feedback">
                             Ingrese un CUIT/CUIL válido (sólo 11 números, sin guiones).
@@ -730,12 +730,12 @@
             <form action="" class="form-floating needs-validation" novalidate id="edit-form" >
 
                 <div class="form-floating mb-3">
-                    <input type="text" class="form-control" disabled id="ed-cuit"  required>
+                    <input type="text" class="form-control" disabled id="ed-cuit"  required tabindex="1">
                     <label for="ed-cuit">Cuit/Cuil</label>
                   </div>
 
                 <div class="form-floating mb-3">
-                    <input type="text" for="validacion" class="form-control" id="ed-nombre" required>
+                    <input type="text" for="validacion" class="form-control" id="ed-nombre" required tabindex="2">
                     <label for="ed-nombre" id="validacion">Nombre</label>
                     <div id="mensajeValidacionEdicionNombreApellidoEmpresa" class="invalid-feedback">
                         Complete al menos uno de los campos (Nombre y Apellido o Empresa)
@@ -743,33 +743,33 @@
                   </div>
                 
                 <div class="form-floating mb-3">
-                    <input type="text" class="form-control" id="ed-apellido"  required>
+                    <input type="text" class="form-control" id="ed-apellido"  required tabindex="3">
                     <label for="ed-apellido">Apellido</label>
                     <div id="mensajeValidacionEdicionNombreApellidoEmpresa" class="invalid-feedback">
                         Complete al menos uno de los campos (Nombre y Apellido o Empresa)
                     </div>
                 </div>
                 <div class="form-floating mb-3">
-                    <input type="text" class="form-control" id="ed-empresa"  required>
+                    <input type="text" class="form-control" id="ed-empresa"  required tabindex="4">
                     <label for="ed-empresa">Empresa</label>
                     <div id="mensajeValidacionEdicionNombreApellidoEmpresa" class="invalid-feedback">
                         Complete al menos uno de los campos (Nombre y Apellido o Empresa)
                     </div>
                 </div>
                 <div class="form-floating mb-3">
-                    <input type="email" class="form-control" id="ed-email"  required>
+                    <input type="email" class="form-control" id="ed-email"  required tabindex="5">
                     <label for="ed-email">Email address</label>
                     <div id="mensajeValidacionEdicionEmail" class="invalid-feedback">
                         El email ingresado no tiene el formato correcto.
                     </div>
                 </div>
                 <div class="form-floating mb-3">
-                    <input type="text" class="form-control" id="ed-telefono" required>
+                    <input type="text" class="form-control" id="ed-telefono" required tabindex="6">
                     <label for="ed-telefono">Telefono</label>
                 </div>
                   
                 <div class="form-floating mb-3">
-                    <input type="text" class="form-control" id="ed-direccion"  required>
+                    <input type="text" class="form-control" id="ed-direccion"  required tabindex="7">
                     <label for="ed-direccion">Direccion</label>
                     <div id="mensajeValidacionEdicionDireccion" class="invalid-feedback">
                         Este campo no puede quedar vacío.
@@ -777,7 +777,7 @@
                 </div>
 
                   <div class="form-floating">
-                    <select class="form-select" id="ed-condicionIVA" aria-label="Floating label select example">
+                    <select class="form-select" id="ed-condicionIVA" aria-label="Floating label select example" tabindex="8">
                     </select>
                     <label for="ed-condicionIVA">Condicion IVA</label>
                   </div>
@@ -803,7 +803,7 @@
         <div class="modal-body">
             <form action="" class="form-floating needs-validation" novalidate id="Modal-Insertar-Producto">
                 <div class="form-floating mb-3">
-                    <input type="text"  class="form-control" id="in-idProducto" placeholder="Ingrese ID"  pattern="^[1-9]\d{5}$" maxlength="6" min="0" required>
+                    <input type="text"  class="form-control" id="in-idProducto" placeholder="Ingrese ID"  maxlength="6" min="0" required oninput="this.value = this.value.replace(/[^0-9]/g, '');">
                     <label for="in-idProducto">ID</label>
                     <div id="mensajeValidacionIDProducto" class="invalid-feedback">
                         Ingrese un Codigo válido (sólo 6 números, sin guiones, sin puntos).

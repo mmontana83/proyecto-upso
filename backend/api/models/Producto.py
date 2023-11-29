@@ -318,7 +318,7 @@ class Producto:
             cur = mysql.connection.cursor()
 
             # Llamar al procedimiento almacenado 'sp_obtenerProductosByUsuario' con los parámetros del usuario y código del producto
-            cur.callproc('sp_obtenerProductosByUsuario', [id_usuario, codigoProducto])
+            cur.callproc('sp_obtenerProductoByUsuario', [id_usuario, codigoProducto])
 
             # Obtener la primera fila del resultado
             fila = cur.fetchone()

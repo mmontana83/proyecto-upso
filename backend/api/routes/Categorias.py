@@ -1,6 +1,9 @@
 # Importa la instancia de la aplicación 'app' desde el módulo 'api'
 from api import app
 
+# Importa funciones y recursos útiles desde 'api.utils' y otros módulos
+from api.utils import token_required
+
 # Importa la función 'jsonify' desde el módulo 'flask'
 from flask import jsonify
 
@@ -9,6 +12,7 @@ from api.models.Categorias import TipoCondicionIVA, TipoCondicionVenta, TipoFact
 
 # Define una ruta para obtener la categoría 'Tipo Condición IVA'
 @app.route('/dashboard/listarTipoCondicionIVA', methods=['GET'])
+@token_required
 def mostrarTipoCondicionIVA():
     """
     Obtiene la lista de la categoría 'Tipo Condición IVA'.
@@ -22,13 +26,14 @@ def mostrarTipoCondicionIVA():
     """
     try:
         # Llama al método 'mostrarTipoCondicionIVA' del modelo 'TipoCondicionIVA' y devuelve el resultado como JSON
-        return jsonify(TipoCondicionIVA.mostrarTipoCondicionIVA())
+        return TipoCondicionIVA.mostrarTipoCondicionIVA()
     except Exception as ex:
         # Si hay una excepción, devuelve un mensaje de error como JSON
         return jsonify({'message': str(ex)})
 
 # Define una ruta para obtener la categoría 'Tipo Factura'
 @app.route('/dashboard/listarTipoFactura', methods=['GET'])
+@token_required
 def mostrarTipoFactura():
     """
     Obtiene la lista de la categoría 'Tipo Factura'.
@@ -42,13 +47,14 @@ def mostrarTipoFactura():
     """
     try:
         # Llama al método 'mostrarTipoFactura' del modelo 'TipoFactura' y devuelve el resultado como JSON
-        return jsonify(TipoFactura.mostrarTipoFactura())
+        return TipoFactura.mostrarTipoFactura()
     except Exception as ex:
         # Si hay una excepción, devuelve un mensaje de error como JSON
         return jsonify({'message': str(ex)})
 
 # Define una ruta para obtener la categoría 'Tipo Producto'
 @app.route('/dashboard/listarTipoProducto', methods=['GET'])
+@token_required
 def mostrarTipoProducto():
     """
     Obtiene la lista de la categoría 'Tipo Producto'.
@@ -62,13 +68,14 @@ def mostrarTipoProducto():
     """
     try:
         # Llama al método 'mostrarTipoProducto' del modelo 'TipoProducto' y devuelve el resultado como JSON
-        return jsonify(TipoProducto.mostrarTipoProducto())
+        return TipoProducto.mostrarTipoProducto()
     except Exception as ex:
         # Si hay una excepción, devuelve un mensaje de error como JSON
         return jsonify({'message': str(ex)})
 
 # Define una ruta para obtener la categoría 'Tipo Condición Venta'
 @app.route('/dashboard/listarTipoCondicionVenta', methods=['GET'])
+@token_required
 def mostrarTipoCondicionVenta():
     """
     Obtiene la lista de la categoría 'Tipo Condición Venta'.
@@ -82,7 +89,7 @@ def mostrarTipoCondicionVenta():
     """
     try:
         # Llama al método 'mostrarTipoCondicionVenta' del modelo 'TipoCondicionVenta' y devuelve el resultado como JSON
-        return jsonify(TipoCondicionVenta.mostrarTipoCondicionVenta())
+        return TipoCondicionVenta.mostrarTipoCondicionVenta()
     except Exception as ex:
         # Si hay una excepción, devuelve un mensaje de error como JSON
         return jsonify({'message': str(ex)})

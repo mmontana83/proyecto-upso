@@ -25,7 +25,7 @@ def get_facturas_by_usuario(id_usuario):
     - 409 Conflict: En caso de error, se proporciona un mensaje de error en formato JSON.
     """
     try:
-        return jsonify(Factura.obtenerFacturasById_Usuario(id_usuario))
+        return Factura.obtenerFacturasById_Usuario(id_usuario)
     except Exception as ex:
         return jsonify({'message': str(ex)}), 409
 
@@ -46,7 +46,7 @@ def get_facturas_by_cliente(id_usuario, id_cliente):
     - 409 Conflict: En caso de error, se proporciona un mensaje de error en formato JSON.
     """
     try:
-        return jsonify(Factura.obtenerFacturasById_Cliente(id_usuario, id_cliente))
+        return Factura.obtenerFacturasById_Cliente(id_usuario, id_cliente)
     except Exception as ex:
         return jsonify({'message': str(ex)}), 409
 
@@ -103,7 +103,7 @@ def get_factura_by_cliente(id_usuario, id_cliente, nroFactura):
     - 409 Conflict: En caso de error, se proporciona un mensaje de error en formato JSON.
     """
     try:
-        return jsonify(Factura.obtenerFacturaById_Cliente(id_usuario, id_cliente, nroFactura))
+        return Factura.obtenerFacturaById_Cliente(id_usuario, id_cliente, nroFactura)
     except Exception as ex:
         # Si hay una excepción, devuelve un mensaje de error como JSON y un código de estado 409 (Conflict)
         return jsonify({'message': str(ex)}), 409

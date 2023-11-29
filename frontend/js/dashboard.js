@@ -1,3 +1,20 @@
+//#region En esta sección trabajo con los parámetros de entrada del index (Usuario, Token)
+// Obtén los valores de los parámetros
+const id_usuario = sessionStorage.getItem("id_usuario");
+const nombre = sessionStorage.getItem("nombre");
+const apellido = sessionStorage.getItem("apellido");
+const token = sessionStorage.getItem("token");
+
+const usuario = document.getElementById("usuario")
+
+function insertarUsuarioEnHTML(nombre, apellido){
+    usuario.innerText = `Bienvenido ${nombre} ${apellido}`
+}
+
+//Esto es para que al momento de cargar la página se llame a la función insertar UsuarioEnHTML
+document.addEventListener('DOMContentLoaded', insertarUsuarioEnHTML(nombre, apellido));
+//#endregion
+
 // Esto lo obtuvimos de la plantilla de BS
 const body = document.querySelector("body"),
       modeToggle = body.querySelector(".mode-toggle");
@@ -70,22 +87,6 @@ document.querySelectorAll('.modal').forEach(modal => {
 });
 //#endregion
 
-//#region En esta sección trabajo con los parámetros de entrada del index (Usuario, Token)
-// Obtén los valores de los parámetros
-const id_usuario = sessionStorage.getItem("id_usuario");
-const nombre = sessionStorage.getItem("nombre");
-const apellido = sessionStorage.getItem("apellido");
-const token = sessionStorage.getItem("token");
-
-const usuario = document.getElementById("usuario")
-
-function insertarUsuarioEnHTML(nombre, apellido){
-    usuario.innerText = `Bienvenido ${nombre} ${apellido}`
-}
-
-//Esto es para que al momento de cargar la página se llame a la función insertar UsuarioEnHTML
-document.addEventListener('DOMContentLoaded', insertarUsuarioEnHTML(nombre, apellido));
-//#endregion
 
 //#region FUNCION PARA DEVOLVER LOS VALORES DE LA FILA A LOS INPUTS PARA EDITAR----------------
 const inputs = document.getElementById('edit-form').querySelectorAll('input, select')
@@ -243,24 +244,6 @@ const fillDataCliente = (data) => {
     }
   };
 //#endregion
-
-//#region Función para Filtrar la Búsqueda de Clientes y Productos
-document.addEventListener("keyup", e => {
-    if (e.target.matches('#f-busqueda')) {
-        const searchTerm = e.target.value.toLowerCase();
-        const tableRows = document.querySelectorAll('table tr'); // Selector para las filas de la tabla
-        
-        tableRows.forEach((fila) => {
-            const rowData = fila.textContent.toLowerCase();
-            if (rowData.includes(searchTerm)) {
-                fila.classList.remove('filter');
-            } else {
-                fila.classList.add('filter');
-            }
-        });
-    }
-});
-
 
 //#region Función para Filtrar la creaciónd de la factura
 document.addEventListener("keyup", e => {

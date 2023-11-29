@@ -25,14 +25,14 @@ function getAll_Facturas(){
             'Accept': '*/*',
             'Content-Type': 'application/json',
             'x-access-token': token,
-            'user-id': id_usuario        }
+            'user-id': id_usuario       
+        }
     }
 
     fetch(`http://127.0.0.1:5000/usuario/${id_usuario}/facturas`, requestOptions)
         .then( response => handleResponse(response) )
         .then(
             (data) => {
-
                 let miTablaFacturas = $('#tablaFacturas').DataTable();
 
                 miTablaFacturas.clear();
@@ -47,11 +47,6 @@ function getAll_Facturas(){
                     miTablaFacturas.row.add(fila).draw();
                 });
             }
-            // ila.push(`<td>
-            //         <span onclick="getFactura(${factura.id_cliente},${factura.nroFactura})" class="material-symbols-outlined d-flex justify-content-center table-toggle" data-bs-toggle="modal" data-bs-target="#M-verFactura">
-            //         visibility
-            //         </span>
-            //         </td>`)
         )
         .catch( (error) => { 
             error.json().then(data => 

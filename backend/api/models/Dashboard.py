@@ -213,7 +213,7 @@ class Dashboard():
             #cur.callproc('sp_dashboard_historialVentas', [id_usuario,])
             
             #Esta línea se usa para probar
-            #cur.callproc('sp_dashboard_historialVentasTest')
+            cur.callproc('sp_dashboard_historialVentasTest')
             data = cur.fetchall()
 
             if len(data) != 0:

@@ -23,8 +23,8 @@ class TipoCondicionIVA:
         - Diccionario JSON con los atributos de TipoCondicionIVA.
         """
         return {
-            'id_tipoCondicionIVA': self._id_tipoCondicionIVA,
-            'descripcion': self._descripcion
+            'id_tipoCondicionIVA': self[0],
+            'descripcion': self[1]
         }
 
     @staticmethod
@@ -71,8 +71,8 @@ class TipoCondicionVenta:
         - Diccionario JSON con los atributos de TipoCondicionVenta.
         """
         return {
-            'id_tipoCondicionVenta': self._id_tipoCondicionVenta,
-            'descripcion': self._descripcion
+            'id_tipoCondicionVenta': self[0],
+            'descripcion': self[1]
         }
 
     @staticmethod
@@ -119,8 +119,8 @@ class TipoFactura:
         - Diccionario JSON con los atributos de TipoFactura.
         """
         return {
-            'id_tipoFactura': self._id_tipoFactura,
-            'tipoFactura': self._tipoFactura
+            'id_tipoFactura': self[0],
+            'tipoFactura': self[1]
         }
 
     @staticmethod
@@ -167,8 +167,8 @@ class TipoProducto:
         - Diccionario JSON con los atributos de TipoProducto.
         """
         return {
-            'id_tipoProducto': self._id_tipoProducto,
-            'tipoProducto': self._tipoProducto
+            'id_tipoProducto': self[0],
+            'tipoProducto': self[1]
         }
 
     @staticmethod
