@@ -24,8 +24,9 @@ def get_clientes_by_usuario(id_usuario):
     - 200 OK: Retorna la lista de clientes en formato JSON.
     - 409 Conflict: En caso de error, se proporciona un mensaje de error en formato JSON.
     """
+
     try:
-        return jsonify(Cliente.obtenerClientesByUsuario(id_usuario))
+        return Cliente.obtenerClientesByUsuario(id_usuario)
     except Exception as ex:
         return jsonify({'message': str(ex)}), 409
 
@@ -77,7 +78,7 @@ def get_cliente_by_id_cliente(id_usuario, id_cliente):
     - 409 Conflict: En caso de error, se proporciona un mensaje de error en formato JSON.
     """
     try:
-        return jsonify(Cliente.obtenerClienteByIdCliente(id_usuario, id_cliente))
+        return Cliente.obtenerClienteByIdCliente(id_usuario, id_cliente)
     except Exception as ex:
         return jsonify({'message': str(ex)}), 409
 

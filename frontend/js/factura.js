@@ -447,12 +447,12 @@ inputCantidad.onchange = () => {
 //#endregion
 
 //#region Validación para la creación de una factura
-var mensajeValidacionFacturaNuevaMetodoPago = document.getElementById('mensajeValidacionFacturaNuevaMetodoPago');
-var mensajeValidacionFacturaNuevaTipoComprobante = document.getElementById('mensajeValidacionFacturaNuevaTipoComprobante');
+let mensajeValidacionFacturaNuevaMetodoPago = document.getElementById('mensajeValidacionFacturaNuevaMetodoPago');
+let mensajeValidacionFacturaNuevaTipoComprobante = document.getElementById('mensajeValidacionFacturaNuevaTipoComprobante');
 
 function validarMetodoPago(){
     // Verificar si el Domicilio no es vacío
-    var condicionMetodoPago = inputMetodoPago.value !== ''
+    let condicionMetodoPago = inputMetodoPago.value !== ''
 
     if (!condicionMetodoPago) {
         // Mostrar mensaje de validación

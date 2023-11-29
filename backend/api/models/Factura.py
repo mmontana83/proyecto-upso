@@ -124,7 +124,7 @@ class Factura():
             for fila in datos:
                 factura = Factura.encabezadoFacturaToJson(fila)
                 facturas.append(factura)
-            return jsonify(facturas), 200
+            return facturas, 200
         else:
             return jsonify({'message':'El usuario no tiene facturas registradas.'}), 409
         
@@ -150,7 +150,7 @@ class Factura():
             for fila in datos:
                 factura = Factura.encabezadoFacturaToJson(fila)
                 facturas.append(factura)
-            return jsonify(facturas), 200
+            return facturas, 200
         else:
             return jsonify({'message':'El usuario no tiene facturas registradas.'}), 409
         
@@ -187,7 +187,7 @@ class Factura():
             detalleFactura = []
             for fila in datos:
                 detalleFactura.append(DetalleFactura.detalleFacturaTo_json(fila))
-            return jsonify({'encabezado':encabezadoFactura, 'detalle':detalleFactura}), 200
+            return {'encabezado':encabezadoFactura, 'detalle':detalleFactura}, 200
         else:
             return jsonify({'message':'El usuario no tiene facturas registradas.'}), 409
         cur.close()

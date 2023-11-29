@@ -84,12 +84,7 @@ class Cliente():
                 return jsonify({'message': 'El Id del Producto debe ser un número'}), 409
 
             # Validación del Email
-            expresion_regular = r"(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|" \
-                                "\"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*\")" \
-                                "@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|" \
-                                "\[(?:(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]))\.){3}(?:(2(5[0-5]|[0-4][0-9])|" \
-                                "1[0-9][0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|" \
-                                "\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])"
+            expresion_regular = r"(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|\"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]))\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])"
             if re.match(expresion_regular, cliente._email) is None:
                 return jsonify({'message': 'El email no tiene formato correcto'}), 409
 
@@ -194,7 +189,7 @@ class Cliente():
         """
         try:
             cur = mysql.connection.cursor()
-            cur.callproc('sp_obtenerClientesByUsuario', [id_usuario])
+            cur.callproc('sp_obtenerClientesByUsuario',[id_usuario])
             datos = cur.fetchall()
 
             if len(datos) != 0:
@@ -204,9 +199,10 @@ class Cliente():
                     clientes.append(cliente)
                 return jsonify(clientes), 200
             else:
-                return jsonify({'message': 'No tiene clientes registrados'}), 409
+                return jsonify({'message':'No tiene clientes registrados'}), 409
         except Exception as ex:
             return jsonify({'message': str(ex)}), 409
+
 
     @staticmethod
     def obtenerClienteByIdCliente(id_usuario, id_cliente):
@@ -226,15 +222,15 @@ class Cliente():
             fila = cur.fetchone()
 
             if fila is not None:
-                return jsonify(Cliente.sp_obtenerClienteByIdClienteToJson(fila)), 200
+                return Cliente.sp_obtenerClienteByIdClienteToJson(fila), 200
             else:
                 return jsonify({'Cliente': '', 'id_tipoEstado': ''})
         except Exception as ex:
             return jsonify({'message': str(ex)}), 409
 
     @classmethod
-    def sp_obtenerClientesByUsuarioToJson(cls, json):
-        return {
+    def sp_obtenerClientesByUsuarioToJson(self, json):
+        return{
             'id_cliente': json[0],
             'nombre': json[1],
             'apellido': json[2],
@@ -246,8 +242,8 @@ class Cliente():
         }
 
     @classmethod
-    def sp_obtenerClienteByIdClienteToJson(cls, json):
-        return {
+    def sp_obtenerClienteByIdClienteToJson(self, json):
+        return{
             'cliente': json[0],
             'id_tipoEstado': json[1]
         }
