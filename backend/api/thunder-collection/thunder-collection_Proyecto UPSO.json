@@ -1,7 +1,7 @@
 {
     "client": "Thunder Client",
     "collectionName": "Proyecto UPSO",
-    "dateExported": "2023-11-29T18:54:43.481Z",
+    "dateExported": "2023-11-29T21:07:18.051Z",
     "version": "1.1",
     "folders": [
         {
@@ -57,7 +57,7 @@
             "method": "GET",
             "sortNum": 10000,
             "created": "2023-11-19T17:48:31.255Z",
-            "modified": "2023-11-29T14:22:52.952Z",
+            "modified": "2023-11-29T19:49:47.574Z",
             "headers": [
                 {
                     "name": "user-id",
@@ -65,7 +65,7 @@
                 },
                 {
                     "name": "x-access-token",
-                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c3VhcmlvIjoiMjAzMDIwMjI3MzEiLCJleHAiOjE3MDEyNzEwMTl9.BOf-wtNcSSTpro-pv5-djWZ-TC8Vb6Tkk5VzoCuifBI"
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c3VhcmlvIjoiMjAzMDIwMjI3MzEiLCJleHAiOjE3MDEyOTMzMTh9.FjvS4WNxmGOWA85SBvnE8-HTrx3xxrH83c4loHLhre4"
                 }
             ],
             "params": [],
@@ -101,7 +101,7 @@
             "method": "GET",
             "sortNum": 20000,
             "created": "2023-11-19T17:48:31.257Z",
-            "modified": "2023-11-29T14:30:40.174Z",
+            "modified": "2023-11-29T19:49:35.685Z",
             "headers": [
                 {
                     "name": "user-id",
@@ -109,7 +109,30 @@
                 },
                 {
                     "name": "x-access-token",
-                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c3VhcmlvIjoiMjAzMDIwMjI3MzEiLCJleHAiOjE3MDEyNzEwMTl9.BOf-wtNcSSTpro-pv5-djWZ-TC8Vb6Tkk5VzoCuifBI"
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c3VhcmlvIjoiMjAzMDIwMjI3MzEiLCJleHAiOjE3MDEyOTMzMTh9.FjvS4WNxmGOWA85SBvnE8-HTrx3xxrH83c4loHLhre4"
+                }
+            ],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "ba5f666c-503b-406e-909f-7de0f41a0098",
+            "colId": "15eb39ab-4468-496b-8361-a6e279efaf80",
+            "containerId": "03ce1594-097e-41f8-ae1f-29a16a0d776c",
+            "name": "Obtener Estado Cliente por Usuario",
+            "url": "127.0.0.1:5000/usuario/20302022731/cliente/12246549873/estado",
+            "method": "GET",
+            "sortNum": 25000,
+            "created": "2023-11-29T19:48:14.673Z",
+            "modified": "2023-11-29T19:48:47.191Z",
+            "headers": [
+                {
+                    "name": "user-id",
+                    "value": "20302022731"
+                },
+                {
+                    "name": "x-access-token",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c3VhcmlvIjoiMjAzMDIwMjI3MzEiLCJleHAiOjE3MDEyOTMzMTh9.FjvS4WNxmGOWA85SBvnE8-HTrx3xxrH83c4loHLhre4"
                 }
             ],
             "params": [],

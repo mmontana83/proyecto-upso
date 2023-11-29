@@ -51,7 +51,7 @@ CREATE TABLE `clientes` (
 
 LOCK TABLES `clientes` WRITE;
 /*!40000 ALTER TABLE `clientes` DISABLE KEYS */;
-INSERT INTO `clientes` VALUES ('12246549873','Roberto Julián','Carlos','RJC Computación','stisrlpa@gmail.com','2932224455','Murature 1',4,2,'20302022731'),('20110336209','Antonio','Montaña','','antonio@gmail.com','2932454545','ATEPAM 1 CASA 44',1,1,'23302022739'),('20139570910','Walter Rubén','Bozzo','Bozzo Construcciones','wrbozzo@gmail.com','2932444555','Uriburu 1357',3,2,'24302022737'),('23183214579','Rosa','Gonzalez','Rosita Pastelería','rositapasteles@gmail.com','2932447788','Bº CENTENARIO CASA 44',5,2,'20302022731'),('23491199983','Laura','Gonzalez','Panadería Anocheciendo','panaderiaamanacer@gmail.com','2932556677','Paso 2044',2,2,'23302022739'),('23551234563','Rodrigo','Forte','STI S.R.L COMPUTACIÓN','stisrlpa@gmail.com','2932224455','Murature 1234',4,1,'23302022739'),('23668931023','Carla','Rueda','Fashion Nails','fnails@gmail.com','2195566778','Colón 123, Bahía Blanca',2,1,'24302022737'),('23668931331','Roberto','Martinez','Calzado Sport','sportcalzadospa@gmail.com','2932444666','Colón 123, Punta Alta',1,1,'24302022737'),('24123654889','Norma','Martínez',NULL,'normamartinez@gmail.com','2932455444','Uriburu 758',5,1,'23302022739'),('24234569878','José Bruno','Canceso','Las ligas Mayores S.R.L','ligas@gmail.com','2932445557','Paso 2332',8,2,'20302022731'),('24367894360','','','La Carlota Rectificaciones','carlotarect@gmail.com','011288371098','Florida 443',1,1,'24302022737'),('25789457891','null','null','Clínica Salud Mental','saludmentalpa@gmail.com','2932457897','Murature 688',1,1,'20302022731'),('30627393713','','','Dirección de Cultura y Educación (Bajo Hondo)','essa1coronesrosales@abc.gob.ar','2392491114','C. 8 - Victoria Llanos, Bajo Hondo',4,1,'23302022739'),('30681157375',NULL,NULL,'Hospital Eva Perón','evaperon@gmail.com','2932422955','Uriburu 650',1,1,'20302022731'),('30999018447','','','Ministerio de Seguridad (Punta Alta)','estacionpuntaalta@gmail.com','2932421444','Murature 572',3,1,'23302022739'),('78126543215','Juan Manuel','Martinez','Casa Martinez','casamartinezpa@gmail.com','2932456987','Irigoyen 457',1,1,'20302022731'),('95124568798','Lucrecia','Martinez','Lu Deco ART','ludeco@gmail.com','29326456987','Av. Alem 2344',6,1,'20302022731');
+INSERT INTO `clientes` VALUES ('12246549873','Roberto Julián','Carlos','RJC Computación','stisrlpa@gmail.com','2932224455','Murature 1',4,2,'20302022731'),('20110336209','Antonio','Montaña','','antonio@gmail.com','2932454545','ATEPAM 1 CASA 44',1,1,'23302022739'),('20139570910','Walter Rubén','Bozzo','Bozzo Construcciones','wrbozzo@gmail.com','2932444555','Uriburu 1357',3,2,'24302022737'),('23183214579','Rosa','Gonzalez','Rosita Pastelería','rositapasteles@gmail.com','2932447788','Bº CENTENARIO CASA 44',5,1,'20302022731'),('23491199983','Laura','Gonzalez','Panadería Anocheciendo','panaderiaamanacer@gmail.com','2932556677','Paso 2044',2,2,'23302022739'),('23551234563','Rodrigo','Forte','STI S.R.L COMPUTACIÓN','stisrlpa@gmail.com','2932224455','Murature 1234',4,1,'23302022739'),('23668931023','Carla','Rueda','Fashion Nails','fnails@gmail.com','2195566778','Colón 123, Bahía Blanca',2,1,'24302022737'),('23668931331','Roberto','Martinez','Calzado Sport','sportcalzadospa@gmail.com','2932444666','Colón 123, Punta Alta',1,1,'24302022737'),('24123654889','Norma','Martínez',NULL,'normamartinez@gmail.com','2932455444','Uriburu 758',5,1,'23302022739'),('24234569878','José Bruno','Canceso','Las ligas Mayores S.R.L','ligas@gmail.com','2932445557','Paso 2332',8,2,'20302022731'),('24241966642','Marta','Murua','','martitamurua@gmail.com','2932410902','Chacabuco 54',13,1,'20302022731'),('24367894360','','','La Carlota Rectificaciones','carlotarect@gmail.com','011288371098','Florida 443',1,1,'24302022737'),('25789457891','null','null','Clínica Salud Mental','saludmentalpa@gmail.com','2932457897','Murature 688',1,1,'20302022731'),('30627393713','','','Dirección de Cultura y Educación (Bajo Hondo)','essa1coronesrosales@abc.gob.ar','2392491114','C. 8 - Victoria Llanos, Bajo Hondo',4,1,'23302022739'),('30681157375',NULL,NULL,'Hospital Eva Perón','evaperon@gmail.com','2932422955','Uriburu 650',1,1,'20302022731'),('30999018447','','','Ministerio de Seguridad (Punta Alta)','estacionpuntaalta@gmail.com','2932421444','Murature 572',3,1,'23302022739'),('78126543215','Juan Manuel','Martinez','Casa Martinez','casamartinezpa@gmail.com','2932456987','Irigoyen 457',1,1,'20302022731'),('95124568798','Lucrecia','Martinez','Lu Deco ART','ludeco@gmail.com','29326456987','Av. Alem 2344',6,1,'20302022731');
 /*!40000 ALTER TABLE `clientes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -76,7 +76,7 @@ CREATE TABLE `controlstock` (
   KEY `cs_ibfk_4_idx` (`id_usuario`),
   CONSTRAINT `cs_ibfk_1` FOREIGN KEY (`id_producto`) REFERENCES `productos` (`id_producto`),
   CONSTRAINT `cs_ibfk_2` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id_usuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -85,7 +85,7 @@ CREATE TABLE `controlstock` (
 
 LOCK TABLES `controlstock` WRITE;
 /*!40000 ALTER TABLE `controlstock` DISABLE KEYS */;
-INSERT INTO `controlstock` VALUES (12,24,-2,'2023-11-24 00:00:00',91554.00,'23183214579',1,'20302022731'),(13,27,-1,'2023-11-24 00:00:00',4400.00,'23183214579',1,'20302022731'),(14,7,-100,'2023-11-24 00:00:00',300000.00,'25789457891',2,'20302022731'),(15,8,-100,'2023-11-24 00:00:00',17500.00,'25789457891',2,'20302022731'),(16,8,-50,'2023-11-26 00:00:00',8750.00,'78126543215',3,'20302022731');
+INSERT INTO `controlstock` VALUES (12,24,-2,'2023-11-24 00:00:00',91554.00,'23183214579',1,'20302022731'),(13,27,-1,'2023-11-24 00:00:00',4400.00,'23183214579',1,'20302022731'),(14,7,-100,'2023-11-24 00:00:00',300000.00,'25789457891',2,'20302022731'),(15,8,-100,'2023-11-24 00:00:00',17500.00,'25789457891',2,'20302022731'),(16,8,-50,'2023-11-26 00:00:00',8750.00,'78126543215',3,'20302022731'),(17,9,-2,'2023-11-28 00:00:00',15600.00,'78126543215',5,'20302022731'),(18,9,-1,'2023-12-01 00:00:00',7800.00,'95124568798',6,'20302022731'),(19,8,-3,'2023-12-01 00:00:00',525.00,'95124568798',6,'20302022731'),(20,7,-21,'2023-12-02 00:00:00',63000.00,'25789457891',7,'20302022731'),(21,30,45,'2023-11-29 15:49:42',4500.00,NULL,NULL,'20302022731');
 /*!40000 ALTER TABLE `controlstock` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -110,7 +110,7 @@ CREATE TABLE `detallefactura` (
   KEY `detallefactura_ibfk_1_idx` (`nroFactura`,`id_cliente`,`id_usuario`),
   CONSTRAINT `detallefactura_ibfk_1` FOREIGN KEY (`nroFactura`, `id_cliente`, `id_usuario`) REFERENCES `factura` (`nroFactura`, `id_cliente`, `id_usuario`),
   CONSTRAINT `detallefactura_ibfk_2` FOREIGN KEY (`id_producto`) REFERENCES `productos` (`id_producto`)
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -119,7 +119,7 @@ CREATE TABLE `detallefactura` (
 
 LOCK TABLES `detallefactura` WRITE;
 /*!40000 ALTER TABLE `detallefactura` DISABLE KEYS */;
-INSERT INTO `detallefactura` VALUES (18,1,'23183214579','20302022731',24,2,45777.00,91554.00),(19,1,'23183214579','20302022731',27,1,4400.00,4400.00),(20,2,'25789457891','20302022731',7,100,3000.00,300000.00),(21,2,'25789457891','20302022731',8,100,175.00,17500.00),(22,3,'78126543215','20302022731',8,50,175.00,8750.00),(23,4,'78126543215','20302022731',10,3,3000.00,9000.00);
+INSERT INTO `detallefactura` VALUES (18,1,'23183214579','20302022731',24,2,45777.00,91554.00),(19,1,'23183214579','20302022731',27,1,4400.00,4400.00),(20,2,'25789457891','20302022731',7,100,3000.00,300000.00),(21,2,'25789457891','20302022731',8,100,175.00,17500.00),(22,3,'78126543215','20302022731',8,50,175.00,8750.00),(23,4,'78126543215','20302022731',10,3,3000.00,9000.00),(24,5,'78126543215','20302022731',9,2,7800.00,15600.00),(25,6,'95124568798','20302022731',9,1,7800.00,7800.00),(26,6,'95124568798','20302022731',8,3,175.00,525.00),(27,7,'25789457891','20302022731',7,21,3000.00,63000.00),(28,8,'30681157375','20302022731',11,50,500.00,25000.00);
 /*!40000 ALTER TABLE `detallefactura` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -155,7 +155,7 @@ CREATE TABLE `factura` (
 
 LOCK TABLES `factura` WRITE;
 /*!40000 ALTER TABLE `factura` DISABLE KEYS */;
-INSERT INTO `factura` VALUES (1,'23183214579','20302022731','2023-11-24',95954.00,3,1),(2,'25789457891','20302022731','2023-11-24',317500.00,1,1),(3,'78126543215','20302022731','2023-11-26',8750.00,1,1),(4,'78126543215','20302022731','2023-11-27',9000.00,1,1);
+INSERT INTO `factura` VALUES (1,'23183214579','20302022731','2023-11-24',95954.00,3,1),(2,'25789457891','20302022731','2023-11-24',317500.00,1,1),(3,'78126543215','20302022731','2023-11-26',8750.00,1,1),(4,'78126543215','20302022731','2023-11-27',9000.00,1,1),(5,'78126543215','20302022731','2023-11-28',15600.00,1,1),(6,'95124568798','20302022731','2023-12-01',8325.00,6,5),(7,'25789457891','20302022731','2023-12-02',63000.00,4,1),(8,'30681157375','20302022731','2023-12-02',25000.00,1,1);
 /*!40000 ALTER TABLE `factura` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -208,7 +208,7 @@ CREATE TABLE `productos` (
   CONSTRAINT `productos_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id_usuario`),
   CONSTRAINT `tipoestado_ibfk_1` FOREIGN KEY (`id_tipoEstado`) REFERENCES `tipoestado` (`id_tipoestado`),
   CONSTRAINT `tipoproducto_ibfk_1` FOREIGN KEY (`id_tipoProducto`) REFERENCES `tipoproducto` (`id_tipoProducto`)
-) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -217,7 +217,7 @@ CREATE TABLE `productos` (
 
 LOCK TABLES `productos` WRITE;
 /*!40000 ALTER TABLE `productos` DISABLE KEYS */;
-INSERT INTO `productos` VALUES (1,123456,'NEUMATICOS','bridgestone',50.20,-6,1,1,'23302022739'),(2,134567,'BUJÍA NAFTERA','BUJÍA',6500.00,50,1,2,'23302022739'),(3,145678,'BUJÍA DIESEL','BUJÍA',7988.00,4,1,1,'23302022739'),(4,145645,'ACEITE MOTOR 15W40','ACEITE MOTOR MÁS CARITO',37880.00,25,1,2,'23302022739'),(5,156456,'SERVICE AUTOMOTOR','SERVICE QUE SE REALIZA CADA 10.000 KM',18000.00,0,2,1,'23302022739'),(6,148457,'AFINACIÓN','AFINACIÓN',15000.00,0,2,1,'23302022739'),(7,254874,'GASAS','Rollo de 100m.',3000.00,50,1,1,'20302022731'),(8,254856,'JERINGA X 10ml','Jeringa apta para visitas.',175.00,50,1,1,'20302022731'),(9,258746,'NEBULIZADOR','No incluye máscara.',7800.00,3,1,1,'20302022731'),(10,245477,'VACUNACION A DOMICILIO','No incluye viáticos.',3000.00,-3,2,1,'20302022731'),(11,254545,'MEDICION PRESION','',500.00,0,2,1,'20302022731'),(15,198765,'Neumaticos','fate',100.00,10,1,1,'23302022739'),(16,198762,'Neumaticos','continental',100.00,10,1,1,'23302022739'),(17,198764,'Neumaticos','michelin',250.00,100,1,1,'23302022739'),(18,198763,'Neumaticos','yacohama',250.00,100,1,1,'23302022739'),(19,198767,'Neumsasasaticos','yacohama',250.00,100,1,2,'23302022739'),(20,198769,'NEUMATICOS','TWISTER',250.00,100,1,2,'23302022739'),(21,198770,'NEUMATICOS','PINOCHO',250.00,100,1,1,'23302022739'),(22,198771,'NEUMATICOS','LAMOROCHA',250.00,100,1,1,'23302022739'),(23,145648,'ACEITE MOTOR 25W40','ACEITE PARA MOTORES FUNDIDOS',45000.00,5,1,1,'23302022739'),(24,654987,'Purificador','Este producto sirve para purificar el aire',45777.00,2,1,1,'20302022731'),(25,256987,'Purificador','Purificador de Aire',45500.00,3,1,1,'23302022739'),(26,123123,'Purificador','Este producto sirve para purificar el aire',45777.00,3,1,1,'20302022731'),(27,321321,'Vick Vaporub','Para la descongestión nasal',3700.00,15,1,2,'20302022731'),(28,999888,'Novalgina','por 900ml',7880.00,3,1,2,'20302022731'),(29,788777,'TosoTos','Para la Tos y el catarro!',600.00,5,1,2,'20302022731');
+INSERT INTO `productos` VALUES (1,123456,'NEUMATICOS','bridgestone',50.20,-6,1,1,'23302022739'),(2,134567,'BUJÍA NAFTERA','BUJÍA',6500.00,50,1,2,'23302022739'),(3,145678,'BUJÍA DIESEL','BUJÍA',7988.00,4,1,1,'23302022739'),(4,145645,'ACEITE MOTOR 15W40','ACEITE MOTOR MÁS CARITO',37880.00,25,1,2,'23302022739'),(5,156456,'SERVICE AUTOMOTOR','SERVICE QUE SE REALIZA CADA 10.000 KM',18000.00,0,2,1,'23302022739'),(6,148457,'AFINACIÓN','AFINACIÓN',15000.00,0,2,1,'23302022739'),(7,254874,'GASAS','Rollo de 100m.',3000.00,29,1,1,'20302022731'),(8,254856,'JERINGA X 10ml','Jeringa apta para visitas.',175.00,47,1,1,'20302022731'),(9,258746,'NEBULIZADOR','No incluye máscara.',7800.00,0,1,1,'20302022731'),(10,245477,'VACUNACION A DOMICILIO','No incluye viáticos.',3000.00,-3,2,1,'20302022731'),(11,254545,'MEDICION PRESION','',500.00,-50,2,1,'20302022731'),(15,198765,'Neumaticos','fate',100.00,10,1,1,'23302022739'),(16,198762,'Neumaticos','continental',100.00,10,1,1,'23302022739'),(17,198764,'Neumaticos','michelin',250.00,100,1,1,'23302022739'),(18,198763,'Neumaticos','yacohama',250.00,100,1,1,'23302022739'),(19,198767,'Neumsasasaticos','yacohama',250.00,100,1,2,'23302022739'),(20,198769,'NEUMATICOS','TWISTER',250.00,100,1,2,'23302022739'),(21,198770,'NEUMATICOS','PINOCHO',250.00,100,1,1,'23302022739'),(22,198771,'NEUMATICOS','LAMOROCHA',250.00,100,1,1,'23302022739'),(23,145648,'ACEITE MOTOR 25W40','ACEITE PARA MOTORES FUNDIDOS',45000.00,5,1,1,'23302022739'),(24,654987,'Purificador','Este producto sirve para purificar el aire',45777.00,2,1,1,'20302022731'),(25,256987,'Purificador','Purificador de Aire',45500.00,3,1,1,'23302022739'),(26,123123,'Purificador','Este producto sirve para purificar el aire',45777.00,3,1,1,'20302022731'),(27,321321,'Vick Vaporub','Para la descongestión nasal',3700.00,15,1,2,'20302022731'),(28,999888,'Novalgina','por 900ml',7880.00,3,1,2,'20302022731'),(29,788777,'TosoTos','Para la Tos y el catarro!',600.00,5,1,2,'20302022731'),(30,232312,'Salbutamol','En aerosol',4500.00,45,1,1,'20302022731');
 /*!40000 ALTER TABLE `productos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -561,7 +561,7 @@ SELECT year(fecha) as Año, month(fecha) as Mes, sum(total) as Ventas
 from factura
 where id_usuario = p_id_usuario
 group by Mes, Año
-order by Año, Mes LIMIT 7;
+order by Año, Mes;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -605,8 +605,7 @@ controlstock.precio as Precio, IF ((clientes.nombre IS NULL OR clientes.nombre =
  nrofactura as Factura
 FROM controlstock
 INNER JOIN productos ON productos.id_producto = controlstock.id_producto
-INNER JOIN clientes ON clientes.id_cliente = controlstock.id_cliente
-INNER JOIN usuarios ON usuarios.id_usuario = controlstock.id_usuario
+LEFT JOIN clientes ON clientes.id_cliente = controlstock.id_cliente
 WHERE controlstock.id_usuario = p_id_usuario and productos.id_tipoProducto = 1
 ORDER BY Fecha DESC;
 END ;;
@@ -1042,7 +1041,7 @@ DELIMITER ;
 DELIMITER ;;
 CREATE DEFINER=`proyecto`@`%` PROCEDURE `sp_obtenerClienteById_Cliente`(in p_id_usuario varchar(11), in p_id_cliente varchar(11))
 BEGIN
-	SELECT CONCAT(clientes.nombre,' ',clientes.apellido, ' (',clientes.empresa,')') as Cliente, clientes.id_tipoEstado
+	SELECT id_cliente, nombre, apellido, empresa, email, telefono, direccion, id_tipoCondicionIVA as condicionIVA, id_tipoEstado as Estado
     FROM clientes
     WHERE clientes.id_usuario = p_id_usuario AND clientes.id_cliente = p_id_cliente;
 END ;;
@@ -1089,6 +1088,39 @@ BEGIN
 		FROM proyecto.detallefactura
 	INNER JOIN productos ON detallefactura.id_producto = productos.id_producto
 	WHERE detallefactura.id_usuario = p_id_usuario AND detallefactura.id_cliente = p_id_cliente AND detallefactura.nroFactura = p_nroFactura;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_obtenerEstadoClienteById_Cliente` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`proyecto`@`%` PROCEDURE `sp_obtenerEstadoClienteById_Cliente`(in p_id_usuario varchar(11), in p_id_cliente varchar(11))
+BEGIN
+	DECLARE cliente VARCHAR(255);
+    
+    -- Formateo el campo razonSocial
+    SELECT 
+        CASE 
+			WHEN (clientes.nombre is NULL or clientes.nombre = "" or clientes.nombre = "null") AND (clientes.apellido is NULL or clientes.apellido="" or clientes.apellido="null") THEN clientes.empresa
+			WHEN (clientes.empresa is NULL or clientes.empresa = "" or clientes.empresa="null") then concat(clientes.apellido, ' ', clientes.nombre)
+            ELSE concat(clientes.apellido, ' ', clientes.nombre, ' (', clientes.empresa, ')')
+		END
+	INTO cliente
+	FROM clientes WHERE clientes.id_usuario = p_id_usuario AND clientes.id_cliente = p_id_cliente;
+
+	SELECT cliente, clientes.id_tipoEstado
+    FROM clientes
+    WHERE clientes.id_usuario = p_id_usuario AND clientes.id_cliente = p_id_cliente;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -1332,4 +1364,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-11-28 14:57:06
+-- Dump completed on 2023-11-29 18:06:21

@@ -606,8 +606,7 @@ precioProductoEdit.addEventListener('blur', validarFormularioProductoEdicion);
 stockProductoEdit.addEventListener('blur', validarFormularioProductoEdicion);
 //#endregion
 
-
-// Espera a que el documento HTML esté completamente cargado antes de ejecutar el código
+//#region Configuración del DataTable Productos
 $(document).ready(function() {
     // Inicializa la tabla con DataTables
     miTablaProductos = $('#tablaProductos').DataTable({
@@ -631,3 +630,4 @@ $(document).ready(function() {
         ] 
     });
  });
+ //#endregion

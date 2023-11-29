@@ -110,7 +110,7 @@ function insert_Client(){
     const id_cliente = document.getElementById('in-cuit').value;
     
     //Primer consulto si existe el cliente
-    fetch(`http://127.0.0.1:5000/usuario/${id_usuario}/cliente/${id_cliente}`, requestOptions)
+    fetch(`http://127.0.0.1:5000/usuario/${id_usuario}/cliente/${id_cliente}/estado`, requestOptions)
         .then(response => handleResponse(response))
         .then(data => {
             
@@ -637,7 +637,7 @@ emailEdicion.addEventListener('blur', validarFormularioEdicion);
 direccionEdicion.addEventListener('blur', validarFormularioEdicion);
 //#endregion
 
-// Espera a que el documento HTML esté completamente cargado antes de ejecutar el código
+//#region Configuración del DataTable Clientes
 $(document).ready(function() {
     // Inicializa la tabla con DataTables
     miTablaclientes = $('#tablaClientes').DataTable({
@@ -660,3 +660,4 @@ $(document).ready(function() {
         ] 
     });
  });
+ //#endregion

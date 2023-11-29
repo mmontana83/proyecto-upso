@@ -173,7 +173,7 @@ function insertFactura(id_cliente, factura){
         });
 }
 
-// Espera a que el documento HTML esté completamente cargado antes de ejecutar el código
+//#region Configuración del DataTable Facturas
 $(document).ready(function() {
     // Inicializa la tabla con DataTables
     miTablafacturas = $('#tablaFacturas').DataTable({
@@ -196,3 +196,4 @@ $(document).ready(function() {
         ] 
     });
  });
+ //#endregion

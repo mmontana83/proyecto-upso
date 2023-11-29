@@ -227,6 +227,30 @@ class Cliente():
                 return jsonify({'Cliente': '', 'id_tipoEstado': ''})
         except Exception as ex:
             return jsonify({'message': str(ex)}), 409
+        
+    @staticmethod
+    def obtenerEstadoClienteByIdCliente(id_usuario, id_cliente):
+        """
+        Obtiene los detalles de un cliente por su ID.
+
+        Parámetros:
+        - id_usuario: ID del usuario al que pertenece el cliente.
+        - id_cliente: ID del cliente.
+
+        Retorna:
+        - Detalles del cliente en formato JSON.
+        """
+        try:
+            cur = mysql.connection.cursor()
+            cur.callproc('sp_obtenerEstadoClienteById_Cliente', [id_usuario, id_cliente])
+            fila = cur.fetchone()
+
+            if fila is not None:
+                return Cliente.sp_obtenerEstadoClienteByIdClienteToJson(fila), 200
+            else:
+                return jsonify({'Cliente': '', 'id_tipoEstado': ''})
+        except Exception as ex:
+            return jsonify({'message': str(ex)}), 409
 
     @classmethod
     def sp_obtenerClientesByUsuarioToJson(self, json):
@@ -243,6 +267,20 @@ class Cliente():
 
     @classmethod
     def sp_obtenerClienteByIdClienteToJson(self, json):
+        return{
+            'id_cliente': json[0],
+            'nombre': json[1],
+            'apellido': json[2],
+            'empresa': json[3],
+            'email': json[4],
+            'telefono': json[5],
+            'direccion': json[6],
+            'condicionIVA': json[7],
+            'estado': json[8]
+        }
+    
+    @classmethod
+    def sp_obtenerEstadoClienteByIdClienteToJson(self, json):
         return{
             'cliente': json[0],
             'id_tipoEstado': json[1]

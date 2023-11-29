@@ -161,4 +161,24 @@ def alta_cliente(id_usuario, id_cliente):
     except Exception as ex:
         return jsonify({'message': str(ex)}), 409
 
+# Ruta para obtener el estado de un cliente en particular (Alta o Eliminado lógicamente)
+@app.route('/usuario/<id_usuario>/cliente/<id_cliente>/estado', methods=['GET'])
+@token_required
+@user_resources
+@client_resource
+def get_estadocliente_by_id_cliente(id_usuario, id_cliente):
+    """
+    Obtiene los datos de un cliente específico para un usuario determinado.
 
+    Parámetros de Ruta:
+    - id_usuario: Identificador único del usuario.
+    - id_cliente: Identificador único del cliente.
+
+    Respuestas:
+    - 200 OK: Retorna los datos del cliente en formato JSON.
+    - 409 Conflict: En caso de error, se proporciona un mensaje de error en formato JSON.
+    """
+    try:
+        return Cliente.obtenerClienteByIdCliente(id_usuario, id_cliente)
+    except Exception as ex:
+        return jsonify({'message': str(ex)}), 409
