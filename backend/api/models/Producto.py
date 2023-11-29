@@ -137,11 +137,8 @@ class Producto:
         try:
             # Crear un objeto Producto a partir de un objeto JSON
             producto = Producto(json)
-<<<<<<< HEAD
 
             # Crear un cursor para realizar operaciones en la base de datos
-=======
->>>>>>> 0ac24b6d377507abf3e4502904366d02310aac49
             cur = mysql.connection.cursor()
 
             # Llamar al procedimiento almacenado 'sp_actualizarProducto' con los atributos actualizados del producto
@@ -319,7 +316,6 @@ class Producto:
         try:
             # Crear un cursor para realizar operaciones en la base de datos
             cur = mysql.connection.cursor()
-<<<<<<< HEAD
 
             # Llamar al procedimiento almacenado 'sp_obtenerProductosByUsuario' con los parámetros del usuario y código del producto
             cur.callproc('sp_obtenerProductosByUsuario', [id_usuario, codigoProducto])
@@ -336,13 +332,6 @@ class Producto:
                 producto = Producto.obtenerProductosByUsuarioToJson(fila)
 
                 # Devolver una respuesta JSON con el producto y código 200
-=======
-            cur.callproc('sp_obtenerProductoByUsuario', [id_usuario, codigoProducto])
-            fila = cur.fetchone()
-            
-            if fila is not None:   
-                producto = Producto.obtenerProductoByUsuarioToJson(fila)
->>>>>>> 0ac24b6d377507abf3e4502904366d02310aac49
                 return jsonify(producto), 200
             else:
                 # Devolver una respuesta JSON con valores predeterminados y código 200
@@ -409,9 +398,6 @@ class Producto:
         }
 
     @classmethod
-<<<<<<< HEAD
-    def obtenerProductosByUsuarioToJson(self, json):        
-=======
     def obtenerProductoByUsuarioToJson(self, json):
 
         """
@@ -444,7 +430,6 @@ class Producto:
                     'tipoproducto': 'Tipo A'
                 }
         """
->>>>>>> 0ac24b6d377507abf3e4502904366d02310aac49
 
         return {
             'id_producto': json[0],
