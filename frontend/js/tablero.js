@@ -34,22 +34,22 @@ function controlStock() {
         .then(
             (object) => {
 
-              var labels = [];
-              var data = [];
+              let labels = [];
+              let data = [];
 
-              for (var i = 0; i < object.length; i++){
+              for (let i = 0; i < object.length; i++){
                 labels.push(object[i].Producto);
                 data.push(object[i].Stock);
               }
               
-              var existingChart = Chart.getChart("chartjsControlStock");
+              let existingChart = Chart.getChart("chartjsControlStock");
 
               if (existingChart) {
                 existingChart.destroy();
               }
 
-              var ctx1 = document.getElementById('chartjsControlStock').getContext('2d');
-              var chart1 = new Chart(ctx1, {
+              let ctx1 = document.getElementById('chartjsControlStock').getContext('2d');
+              let chart1 = new Chart(ctx1, {
                 type: 'bar',
                 data: {
                   labels: labels,
@@ -117,7 +117,10 @@ function movimientoStock() {
         .then(
           (dataMovimientoStock) => {
 
-              var miTablaMovimientoStock = $('#tablaStockMovimiento').DataTable();
+              let miTablaMovimientoStock = $('#tablaStockMovimiento').DataTable();
+              
+              //Limpio la tabla para poder recargarla nuevamente.
+              miTablaMovimientoStock.clear();
 
               //Agrego las filas a la tabla
               dataMovimientoStock.forEach(producto => {
@@ -142,7 +145,7 @@ function movimientoStock() {
 function historialVentas() {
   
   function obtenerNombreDelMes(numeroMes) {
-    var meses = [
+    let meses = [
       "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
       "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
     ];
@@ -181,15 +184,15 @@ function historialVentas() {
               // datasets va a contener las ventas por año
               años = Object.keys(object)
 
-              var datasets = [];
+              let datasets = [];
 
-              for (var i=0; i<años.length; i++){
-                var año = años[i];
-                var data = Object.values(object)[i];
+              for (let i=0; i<años.length; i++){
+                let año = años[i];
+                let data = Object.values(object)[i];
 
-                var ventas = [0,0,0,0,0,0,0,0,0,0,0,0];
+                let ventas = [0,0,0,0,0,0,0,0,0,0,0,0];
 
-                for (var j=0; j<data.length; j++){
+                for (let j=0; j<data.length; j++){
                   if (data[j].Mes === null){
                     ventas[data[j].Mes - 1] = 0;
                   }else{
@@ -203,11 +206,11 @@ function historialVentas() {
                 });
               }
              
-              var labels = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+              let labels = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
 
 
-              var ctx2 = document.getElementById('chartjsHistorialVentas').getContext('2d');
-              var chart2 = new Chart(ctx2, {
+              let ctx2 = document.getElementById('chartjsHistorialVentas').getContext('2d');
+              let chart2 = new Chart(ctx2, {
                 type: 'line',
                 data: {
                   labels: labels,
@@ -229,13 +232,12 @@ function historialVentas() {
              }
         )
         .catch((error) => { 
-          // error.json().then(data => 
-          //   Swal.fire({
-          //       icon: "error",
-          //       text: data.message
-          //     })
-          // );
-          console.error(error)
+          error.json().then(data => 
+            Swal.fire({
+                icon: "error",
+                text: data.message
+              })
+          );
         })
         .finally(() => {
             console.log("Promesa finalizada (resuelta o rechazada)");
@@ -268,16 +270,16 @@ function rankingVentasCliente() {
         .then(
             (object) => {
 
-              var labels = [];
-              var data = [];
+              let labels = [];
+              let data = [];
 
-              for (var i = 0; i < object.length; i++){
+              for (let i = 0; i < object.length; i++){
                 labels.push(object[i].Cliente);
                 data.push(object[i].Venta);
               }
                 
-              var ctx4 = document.getElementById('chartjsRankingVentasPorCliente').getContext('2d');
-              var chart4 = new Chart(ctx4, {
+              let ctx4 = document.getElementById('chartjsRankingVentasPorCliente').getContext('2d');
+              let chart4 = new Chart(ctx4, {
                 type: "bar",
                 data: {
                   labels: labels,
@@ -343,16 +345,16 @@ function rankingVentasProducto() {
         .then(
             (object) => {
 
-              var labels = [];
-              var data = [];
+              let labels = [];
+              let data = [];
 
-              for (var i = 0; i < object.length; i++){
+              for (let i = 0; i < object.length; i++){
                 labels.push(object[i].Producto);
                 data.push(object[i].Venta);
               }
                 
-              var ctx5 = document.getElementById('chartjsRankingVentasPorProducto').getContext('2d');
-              var chart5 = new Chart(ctx5, {
+              let ctx5 = document.getElementById('chartjsRankingVentasPorProducto').getContext('2d');
+              let chart5 = new Chart(ctx5, {
                 type: 'bar',
                 data: {
                   labels: labels,
@@ -419,16 +421,16 @@ function rankingVentasServicio() {
         .then(
             (object) => {
 
-              var labels = [];
-              var data = [];
+              let labels = [];
+              let data = [];
 
-              for (var i = 0; i < object.length; i++){
+              for (let i = 0; i < object.length; i++){
                 labels.push(object[i].Servicio);
                 data.push(object[i].Venta);
               }
                 
-              var ctx6 = document.getElementById('chartjsRankingVentasPorServicio').getContext('2d');
-              var chart6 = new Chart(ctx6, {
+              let ctx6 = document.getElementById('chartjsRankingVentasPorServicio').getContext('2d');
+              let chart6 = new Chart(ctx6, {
                 type: 'bar',
                 data: {
                   labels: labels,
@@ -607,7 +609,7 @@ function actualizarDashboardClientes(){
 // Esta función se utilizará para que el usuario pueda solicitar asistencia técnica
 // function solicitarAsistencia(){
 //   // Obtener el valor del campo de texto
-//   var mensaje = document.getElementById('incidente').value;
+//   let mensaje = document.getElementById('incidente').value;
 
 //   // Verificar que el mensaje no esté vacío
 //   if (mensaje.trim() !== '') {
@@ -616,7 +618,7 @@ function actualizarDashboardClientes(){
 //     solicita asistencia.\nMensaje: `;
 
 //     // Crear el enlace para enviar por WhatsApp
-//     var link = 'https://api.whatsapp.com/send?phone=+5492932614608&text=' + encodeURIComponent(encabezadoMensaje + mensaje);
+//     let link = 'https://api.whatsapp.com/send?phone=+5492932614608&text=' + encodeURIComponent(encabezadoMensaje + mensaje);
 
 //     // Abrir la ventana de WhatsApp en una nueva pestaña
 //     window.open(link, '_blank');

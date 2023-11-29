@@ -22,29 +22,18 @@ function getAll_Product() {
         .then(response => handleResponse(response))
         .then(
             (data) => {
-                console.log(data)
-                const tableBody = document.getElementById('all-products');
-                let list = ``;
+
+                let miTablaProductos = $('#tablaProductos').DataTable();
+
+                miTablaProductos.clear();
+              
+                //Agrego las filas a la tabla
                 data.forEach(producto => {
-                    let fila =
-                        `<tr id="${producto.id}"> 
-                        <td>${producto.codigoProducto} </td>
-                        <td>${producto.producto}</td>
-                        <td>${producto.descripcion}</td>
-                        <td>${producto.precio}</td>
-                        <td>${producto.stock}</td>
-                        <td>${producto.id_tipoProducto}</td>
-                        <td class= "table-toggle" >
-                        <span data-bs-toggle="modal" data-bs-target="#M-EditarProducto" class="material-symbols-outlined">
-                        manage_accounts</span>
-                        </td>
-                        <td>
-                        <span class="material-symbols-outlined table-toggle" data-bs-target="#EliminarProducto">delete</span>
-                        </td>
-                    </tr>`;
-                    list += fila;
+                    const fila = [producto.codigoProducto,producto.producto, producto.descripcion, producto.precio, producto.stock, producto.id_tipoProducto];
+                    fila.push(`<td class= "table-toggle" ><span data-bs-toggle="modal" data-bs-target="#M-EditarProducto" class="material-symbols-outlined">manage_accounts</span></td>`)
+                    fila.push(`<td> <span class="material-symbols-outlined table-toggle" data-bs-target="#EliminarProducto">delete</span></td>`)
+                    miTablaProductos.row.add(fila).draw();
                 });
-                tableBody.innerHTML = list;
             }
         )
         .catch(error => {
@@ -486,7 +475,7 @@ function validarStockInsercion() {
 
 function validadTipoProductoInsercion() {
 
-    var tipoProductoValido = tipoProductoInput.value !== ''
+    let tipoProductoValido = tipoProductoInput.value !== ''
 
     if (!tipoProductoValido) {
         // Mostrar mensaje de validación
@@ -616,3 +605,29 @@ descripcionProductoEdit.addEventListener('blur', validarFormularioProductoEdicio
 precioProductoEdit.addEventListener('blur', validarFormularioProductoEdicion);
 stockProductoEdit.addEventListener('blur', validarFormularioProductoEdicion);
 //#endregion
+
+
+// Espera a que el documento HTML esté completamente cargado antes de ejecutar el código
+$(document).ready(function() {
+    // Inicializa la tabla con DataTables
+    miTablaProductos = $('#tablaProductos').DataTable({
+        // Configuración de paginación
+        paging: true,           // Habilita la paginación
+        pageLength: 10,         // Establece la cantidad de registros por página
+    
+        // Configuración del idioma para DataTables (en este caso, español)
+        language: {
+        url: 'https://cdn.datatables.net/plug-ins/1.10.25/i18n/Spanish.json'
+        },
+    
+        // Configuración de las columnas
+        columnDefs: [
+        // Aplica la clase "text-center" a todas las columnas
+        { className: "text-center", targets: "_all" },
+        
+        // Deshabilita ordenamiento para la quinta y sexta columna
+        { "orderable": false, "targets": [6,7] }
+         
+        ] 
+    });
+ });

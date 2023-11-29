@@ -26,9 +26,14 @@ function getAll_Clients() {
         .then(
             (dataClientes) => {
                 listaClientes = dataClientes;
-                const tableBody = document.getElementById('all-persons');
-                let list = ``;
-                dataClientes.forEach(person => {
+
+                let miTablaClientes = $('#tablaClientes').DataTable();
+
+                miTablaClientes.clear();
+              
+                //Agrego las filas a la tabla
+                dataClientes.forEach(cliente => {
+
                     const nombre = (person) => {
                         if (person.nombre === null || person.nombre === "null")
                         {
@@ -58,39 +63,23 @@ function getAll_Clients() {
                             return person.empresa
                         }
                     };
-                    let fila = `<tr id="${person.id}"> 
-                        <td>${person.id_cliente} </td>
-                        <td>${nombre(person)}</td>
-                        <td>${apellido(person)}</td>
-                        <td>${empresa(person)}</td>
-                        <td>${person.email}</td>
-                        <td>${person.telefono}</td>
-                        <td>${person.direccion}</td>
-                        <td>${person.condicionIVA}</td>
-                        <td class= "">
-                        <span class="material-symbols-outlined table-toggle" data-bs-target="#CrearFacturaDesdeCliente" onclick="toggleSection('section4')">receipt_long</span>
-                        </td>
-                        <td class= "" >
-                        <span data-bs-toggle="modal" data-bs-target="#M-Editar" class="material-symbols-outlined table-toggle">
-                        manage_accounts</span>
-                        </td>
-                        <td>
-                        <span class="material-symbols-outlined table-toggle" data-bs-target="#EliminarCliente">delete</span>
-                        </td>
-                    </tr>`;
-                    list += fila;
-                });
-                tableBody.innerHTML = list;
+
+                    const fila = [cliente.id_cliente, nombre(cliente), apellido (cliente), empresa(cliente), cliente.email, cliente.telefono,
+                    cliente.direccion, cliente.condicionIVA];
+                    fila.push(`<td><span class="material-symbols-outlined table-toggle" data-bs-target="#CrearFacturaDesdeCliente" onclick="toggleSection('section4')">receipt_long</span></td>`)
+                    fila.push(`<td><span data-bs-toggle="modal" data-bs-target="#M-Editar" class="material-symbols-outlined table-toggle">manage_accounts</span></td>`)
+                    fila.push(`<td><span class="material-symbols-outlined table-toggle" data-bs-target="#EliminarCliente">delete</span></td>`)
+                    miTablaClientes.row.add(fila).draw();
+                });                
             }
         )
         .catch(error => {
-            // error.json().then(data => 
-            //     Swal.fire({
-            //         icon: "error",
-            //         text: data.message
-            //       })
-            //);
-            console.error(error);
+            error.json().then(data => 
+                Swal.fire({
+                    icon: "error",
+                    text: data.message
+                  })
+            );
         })
         .finally(() => {
             console.log("Promesa finalizada (resuelta o rechazada)");
@@ -118,7 +107,7 @@ function insert_Client(){
         }
     };
 
-    id_cliente = document.getElementById('in-cuit').value;
+    const id_cliente = document.getElementById('in-cuit').value;
     
     //Primer consulto si existe el cliente
     fetch(`http://127.0.0.1:5000/usuario/${id_usuario}/cliente/${id_cliente}`, requestOptions)
@@ -182,7 +171,7 @@ function insert_Client(){
                 }
                 //El cliente no existe y se agregará a la base de datos.
                 else{
-                    var jsonInsertCliente = {
+                    const jsonInsertCliente = {
                         "id_cliente": document.getElementById('in-cuit').value,
                         "nombre" : document.getElementById('in-nombre').value, 
                         "apellido" : document.getElementById('in-apellido').value,
@@ -256,9 +245,9 @@ function update_Client(){
         }
     }
     
-    var id_cliente = document.getElementById('ed-cuit').value;
+    const id_cliente = document.getElementById('ed-cuit').value;
 
-    var jsonUpdateCliente = {
+    const jsonUpdateCliente = {
         "nombre" : document.getElementById('ed-nombre').value, 
         "apellido" : document.getElementById('ed-apellido').value,
         "empresa" : document.getElementById('ed-empresa').value, 
@@ -289,7 +278,7 @@ function update_Client(){
                     title: data.message
                   });
     
-                var modal = document.getElementById('M-Editar');
+                const modal = document.getElementById('M-Editar');
                 modal.style.display = 'none';
                 getAll_Clients();
             }
@@ -319,8 +308,8 @@ function delete_Client(data){
     }
     
     //Recupero el Id_Cliente
-    id_cliente = data[0].textContent;
-    id_cliente_identificación = `${data[1].textContent} ${data[2].textContent} (${data[3].textContent})`;
+    const id_cliente = data[0].textContent;
+    const id_cliente_identificación = `${data[1].textContent} ${data[2].textContent} (${data[3].textContent})`;
 
     Swal.fire({
         title: "¡Advertencia - Eliminar Cliente!",
@@ -443,25 +432,25 @@ document.addEventListener('DOMContentLoaded', cargarTipoCondicionIVA());
 //#endregion
 
 //#region Validaciones para la Carga de Cliente
-var cuitInput = document.getElementById('in-cuit');
-var nombreInput = document.getElementById('in-nombre');
-var apellidoInput = document.getElementById('in-apellido');
-var empresaInput = document.getElementById('in-empresa');
-var emailInput = document.getElementById('in-email');
-var direccionInput = document.getElementById('in-direccion');
-var condicionIVAInput = document.getElementById('in-condicionIVA');
+let cuitInput = document.getElementById('in-cuit');
+let nombreInput = document.getElementById('in-nombre');
+let apellidoInput = document.getElementById('in-apellido');
+let empresaInput = document.getElementById('in-empresa');
+let emailInput = document.getElementById('in-email');
+let direccionInput = document.getElementById('in-direccion');
+let condicionIVAInput = document.getElementById('in-condicionIVA');
 
-var mensajeValidacionCUIT = document.getElementById('mensajeValidacionCUIT');
-var mensajeValidacionNombreApellidoEmpresa = document.getElementById('mensajeValidacionNombreApellidoEmpresa');
-var mensajeValidacionEmail = document.getElementById('mensajeValidacionEmail');
-var mensajeValidacionDireccion = document.getElementById('mensajeValidacionDireccion');
-var mensajeValidacionCondicionIVA = document.getElementById('mensajeValidacionCondicionIVA');
+let mensajeValidacionCUIT = document.getElementById('mensajeValidacionCUIT');
+let mensajeValidacionNombreApellidoEmpresa = document.getElementById('mensajeValidacionNombreApellidoEmpresa');
+let mensajeValidacionEmail = document.getElementById('mensajeValidacionEmail');
+let mensajeValidacionDireccion = document.getElementById('mensajeValidacionDireccion');
+let mensajeValidacionCondicionIVA = document.getElementById('mensajeValidacionCondicionIVA');
 
-var botonInsertarCliente = document.getElementById('botonInsertarCliente');
+let botonInsertarCliente = document.getElementById('botonInsertarCliente');
 
 function validarCUILInsercion() {
     // Verificar si el CUIT tiene 11 dígitos y al menos uno de los campos está completado
-    var cuitValido = cuitInput.value.length === 11 && /^\d+$/.test(cuitInput.value);
+    const cuitValido = cuitInput.value.length === 11 && /^\d+$/.test(cuitInput.value);
 
     // Verificar si el CUIT tiene 11 dígitos y al menos uno de los campos está completado
     if (!cuitValido) {
@@ -478,7 +467,7 @@ function validarCUILInsercion() {
 
 function validarNombreApellidoEmpresaInsercion() {
     // Verificar si al menos uno de los campos (nombre, apellido, empresa) está completado
-    var identificacionCompletado = (nombreInput.value.trim() !== '' && apellidoInput.value.trim() !== '') || empresaInput.value.trim() !== '';
+    const identificacionCompletado = (nombreInput.value.trim() !== '' && apellidoInput.value.trim() !== '') || empresaInput.value.trim() !== '';
 
     if (!identificacionCompletado) {
         mensajeValidacionNombreApellidoEmpresa.style.display = 'block';
@@ -497,7 +486,7 @@ function validarNombreApellidoEmpresaInsercion() {
 
 function validarEmailInsercion() {
     // Verificar si el correo electrónico tiene un formato válido
-    var emailValido = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailInput.value);
+    const emailValido = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailInput.value);
 
     // Verificar si el CUIT tiene 11 dígitos y al menos uno de los campos está completado
     if (!emailValido) {
@@ -513,7 +502,7 @@ function validarEmailInsercion() {
 }
 
 function validarDireccionInsercion() {
-    var direccionValida = direccionInput.value.trim() !== ''
+    const direccionValida = direccionInput.value.trim() !== ''
 
     if (!direccionValida) {
         // Mostrar mensaje de validación
@@ -529,7 +518,7 @@ function validarDireccionInsercion() {
 
 function validarCondicionIVAInsercion(){
     // Verificar si el Domicilio no es vacío
-    var condicionIVAValida = condicionIVAInput.value !== ''
+    const condicionIVAValida = condicionIVAInput.value !== ''
 
     if (!condicionIVAValida) {
         // Mostrar mensaje de validación
@@ -569,21 +558,21 @@ condicionIVAInput.addEventListener('change', function(){
 //#endregion
 
 //#region Validaciones para la Edición de un Cliente
-var nombreEdicion = document.getElementById('ed-nombre');
-var apellidoEdicion = document.getElementById('ed-apellido');
-var empresaEdicion = document.getElementById('ed-empresa');
-var emailEdicion = document.getElementById('ed-email');
-var direccionEdicion = document.getElementById('ed-direccion');
+let nombreEdicion = document.getElementById('ed-nombre');
+let apellidoEdicion = document.getElementById('ed-apellido');
+let empresaEdicion = document.getElementById('ed-empresa');
+let emailEdicion = document.getElementById('ed-email');
+let direccionEdicion = document.getElementById('ed-direccion');
 
-var mensajeValidacionEdicionNombreApellidoEmpresa = document.getElementById('mensajeValidacionEdicionNombreApellidoEmpresa');
-var mensajeValidacionEdicionEmail = document.getElementById('mensajeValidacionEdicionEmail');
-var mensajeValidacionEdicionDireccion = document.getElementById('mensajeValidacionEdicionDireccion');
+let mensajeValidacionEdicionNombreApellidoEmpresa = document.getElementById('mensajeValidacionEdicionNombreApellidoEmpresa');
+let mensajeValidacionEdicionEmail = document.getElementById('mensajeValidacionEdicionEmail');
+let mensajeValidacionEdicionDireccion = document.getElementById('mensajeValidacionEdicionDireccion');
 
-var botonEdicionCliente = document.getElementById('botonEdicionCliente');
+let botonEdicionCliente = document.getElementById('botonEdicionCliente');
 
 function validarNombreApellidoEmpresaEdicion() {
     // Verificar si al menos uno de los campos (nombre, apellido, empresa) está completado
-    var identificacionCompletado = (nombreEdicion.value.trim() !== '' && apellidoEdicion.value.trim() !== '') || empresaEdicion.value.trim() !== '';
+    const identificacionCompletado = (nombreEdicion.value.trim() !== '' && apellidoEdicion.value.trim() !== '') || empresaEdicion.value.trim() !== '';
 
     if (!identificacionCompletado) {
         mensajeValidacionEdicionNombreApellidoEmpresa.style.display = 'block';
@@ -602,7 +591,7 @@ function validarNombreApellidoEmpresaEdicion() {
 
 function validarEmailEdicion() {
     // Verificar si el correo electrónico tiene un formato válido
-    var emailValido = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailEdicion.value);
+    const emailValido = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailEdicion.value);
 
     // Verificar si el CUIT tiene 11 dígitos y al menos uno de los campos está completado
     if (!emailValido) {
@@ -618,7 +607,8 @@ function validarEmailEdicion() {
 }
 
 function validarDireccionEdicion() {
-    var direccionValida = direccionEdicion.value.trim() !== ''
+    
+    const direccionValida = direccionEdicion.value.trim() !== ''
 
     if (!direccionValida) {
         // Mostrar mensaje de validación
@@ -646,3 +636,27 @@ empresaEdicion.addEventListener('blur', validarFormularioEdicion);
 emailEdicion.addEventListener('blur', validarFormularioEdicion);
 direccionEdicion.addEventListener('blur', validarFormularioEdicion);
 //#endregion
+
+// Espera a que el documento HTML esté completamente cargado antes de ejecutar el código
+$(document).ready(function() {
+    // Inicializa la tabla con DataTables
+    miTablaclientes = $('#tablaClientes').DataTable({
+        // Configuración de paginación
+        paging: true,           // Habilita la paginación
+        pageLength: 10,         // Establece la cantidad de registros por página
+    
+        // Configuración del idioma para DataTables (en este caso, español)
+        language: {
+        url: 'https://cdn.datatables.net/plug-ins/1.10.25/i18n/Spanish.json'
+        },
+    
+        // Configuración de las columnas
+        columnDefs: [
+        // Aplica la clase "text-center" a todas las columnas
+        { className: "text-center", targets: "_all" },
+        
+        // Deshabilita ordenamiento para la quinta y sexta columna
+        { "orderable": false, "targets": [8,9,10] }
+        ] 
+    });
+ });
