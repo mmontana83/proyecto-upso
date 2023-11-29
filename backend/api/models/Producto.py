@@ -62,7 +62,6 @@ class Producto:
     def actualizarProducto(json):       
         try:            
             producto = Producto(json)
-            print(producto.to_json())
             cur = mysql.connection.cursor()
             cur.callproc('sp_actualizarProducto', [producto._codigoProducto,
                                                 producto._producto, 
@@ -163,11 +162,11 @@ class Producto:
             print(id_usuario)
             print(codigoProducto)
             cur = mysql.connection.cursor()
-            cur.callproc('sp_obtenerProductosByUsuario', [id_usuario, codigoProducto])
+            cur.callproc('sp_obtenerProductoByUsuario', [id_usuario, codigoProducto])
             fila = cur.fetchone()
             
             if fila is not None:   
-                producto = Producto.obtenerProductosByUsuarioToJson(fila)
+                producto = Producto.obtenerProductoByUsuarioToJson(fila)
                 return jsonify(producto), 200
             else:
                 return jsonify({'Cliente':'', 'id_tipoEstado':''})
@@ -200,12 +199,11 @@ class Producto:
             'descripcion': json[3],
             'precio': json[4],
             'stock': json[5],
-            'id_tipoProducto': json[6],
-            'id_tipoEstado': json[7]
+            'id_tipoProducto': json[6]
         }
 
     @classmethod
-    def obtenerProductosByUsuarioToJson(self, json):
+    def obtenerProductoByUsuarioToJson(self, json):
 
         """
             convencion de documentacion PEP 257

@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", ventasTotales);
 document.addEventListener("DOMContentLoaded", ventasTotalesMesActual);
 document.addEventListener("DOMContentLoaded", clientesActivos);
 
-async function controlStock() {
+function controlStock() {
   
   function handleResponse(response)  {
     if (!response.ok){
@@ -29,7 +29,7 @@ async function controlStock() {
     };
     
     //fetch(`127.0.0.1:5000/usuario/${id_usuario}/dashboard/controlStock`, requestOptions)
-    await fetch(`http://127.0.0.1:5000/usuario/20302022731/dashboard/controlStock`, requestOptions)
+    fetch(`http://127.0.0.1:5000/usuario/20302022731/dashboard/controlStock`, requestOptions)
         .then(response => handleResponse(response))
         .then(
             (object) => {
@@ -91,7 +91,7 @@ async function controlStock() {
         });
 }
 
-async function movimientoStock() {
+function movimientoStock() {
   
   function handleResponse(response)  {
     if (!response.ok){
@@ -112,7 +112,7 @@ async function movimientoStock() {
     };
     
     //fetch(`127.0.0.1:5000/usuario/${id_usuario}/dashboard/controlStock`, requestOptions)
-    await fetch(`http://127.0.0.1:5000/usuario/20302022731/dashboard/movimientoStock`, requestOptions)
+    fetch(`http://127.0.0.1:5000/usuario/20302022731/dashboard/movimientoStock`, requestOptions)
         .then(response => handleResponse(response))
         .then(
           (dataMovimientoStock) => {
@@ -139,7 +139,7 @@ async function movimientoStock() {
         });
 }
 
-async function historialVentas() {
+function historialVentas() {
   
   function obtenerNombreDelMes(numeroMes) {
     var meses = [
@@ -172,7 +172,7 @@ async function historialVentas() {
         }
     };
     
-    await fetch(`http://127.0.0.1:5000/usuario/20302022731/dashboard/historialVentas`, requestOptions)
+    fetch(`http://127.0.0.1:5000/usuario/20302022731/dashboard/historialVentas`, requestOptions)
         .then(response => handleResponse(response))
         .then(
             (object) => {
@@ -242,7 +242,7 @@ async function historialVentas() {
         });
 }
 
-async function rankingVentasCliente() {
+function rankingVentasCliente() {
   
   function handleResponse(response)  {
     if (!response.ok){
@@ -263,7 +263,7 @@ async function rankingVentasCliente() {
     };
     
     //fetch(`127.0.0.1:5000/usuario/${id_usuario}/dashboard/rankingVentasByCliente`, requestOptions)
-    await fetch(`http://127.0.0.1:5000/usuario/20302022731/dashboard/rankingVentasByCliente`, requestOptions)
+    fetch(`http://127.0.0.1:5000/usuario/20302022731/dashboard/rankingVentasByCliente`, requestOptions)
         .then(response => handleResponse(response))
         .then(
             (object) => {
@@ -318,7 +318,7 @@ async function rankingVentasCliente() {
         });
 }
 
-async function rankingVentasProducto() {
+function rankingVentasProducto() {
   
   function handleResponse(response)  {
     if (!response.ok){
@@ -338,7 +338,7 @@ async function rankingVentasProducto() {
         }
     };
     
-    await fetch(`http://127.0.0.1:5000/usuario/20302022731/dashboard/rankingVentasByProducto`, requestOptions)
+    fetch(`http://127.0.0.1:5000/usuario/20302022731/dashboard/rankingVentasByProducto`, requestOptions)
         .then(response => handleResponse(response))
         .then(
             (object) => {
@@ -394,7 +394,7 @@ async function rankingVentasProducto() {
         });
 }
 
-async function rankingVentasServicio() {
+function rankingVentasServicio() {
   
   function handleResponse(response)  {
     if (!response.ok){
@@ -414,7 +414,7 @@ async function rankingVentasServicio() {
         }
     };
     
-    await fetch(`http://127.0.0.1:5000/usuario/20302022731/dashboard/rankingVentasByServicio`, requestOptions)
+    fetch(`http://127.0.0.1:5000/usuario/20302022731/dashboard/rankingVentasByServicio`, requestOptions)
         .then(response => handleResponse(response))
         .then(
             (object) => {
@@ -470,7 +470,7 @@ async function rankingVentasServicio() {
         });
 }
 
-async function ventasTotales(){
+function ventasTotales(){
   function handleResponse(response)  {
     if (!response.ok){
         return Promise.reject(response);
@@ -489,7 +489,7 @@ async function ventasTotales(){
         }
     };
     
-    await fetch(`http://127.0.0.1:5000/usuario/20302022731/dashboard/ventasTotales`, requestOptions)
+    fetch(`http://127.0.0.1:5000/usuario/20302022731/dashboard/ventasTotales`, requestOptions)
         .then(response => handleResponse(response))
         .then(data => {
           const ventasTotales = document.getElementById("dashboard-ventasTotales");
@@ -508,7 +508,7 @@ async function ventasTotales(){
         });
 }
 
-async function ventasTotalesMesActual(){
+function ventasTotalesMesActual(){
   function handleResponse(response)  {
     if (!response.ok){
         return Promise.reject(response);
@@ -527,7 +527,7 @@ async function ventasTotalesMesActual(){
         }
     };
     
-    await fetch(`http://127.0.0.1:5000/usuario/20302022731/dashboard/ventasTotalesMesActual`, requestOptions)
+    fetch(`http://127.0.0.1:5000/usuario/20302022731/dashboard/ventasTotalesMesActual`, requestOptions)
         .then(response => handleResponse(response))
         .then(data => {
           const ventasTotalesMesActual = document.getElementById("dashboard-ventasTotalesMesActual");
@@ -546,7 +546,7 @@ async function ventasTotalesMesActual(){
         });
 }
 
-async function clientesActivos(){
+function clientesActivos(){
   function handleResponse(response)  {
     if (!response.ok){
         return Promise.reject(response);
@@ -565,7 +565,7 @@ async function clientesActivos(){
         }
     };
     
-    await fetch(`http://127.0.0.1:5000/usuario/20302022731/dashboard/clientesActivos`, requestOptions)
+    fetch(`http://127.0.0.1:5000/usuario/20302022731/dashboard/clientesActivos`, requestOptions)
         .then(response => handleResponse(response))
         .then(data => {
           const clientesTotales = document.getElementById("dashboard-clientesActivos");

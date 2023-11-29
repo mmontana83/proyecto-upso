@@ -9,7 +9,7 @@ const M_inputTipoComprobante = document.getElementById("M-inputTipoComprobante")
 const M_inputFecha = document.getElementById("M-inputFecha");
 const M_inputPTotal = document.getElementById("M-inputPTotal");
 
-async function getAll_Facturas(){
+function getAll_Facturas(){
     function handleResponse(response)  {
         if (!response.ok){
             return Promise.reject(response)
@@ -28,7 +28,7 @@ async function getAll_Facturas(){
             'user-id': id_usuario        }
     }
 
-    await fetch(`http://127.0.0.1:5000/usuario/${id_usuario}/facturas`, requestOptions)
+    fetch(`http://127.0.0.1:5000/usuario/${id_usuario}/facturas`, requestOptions)
         .then( response => handleResponse(response) )
         .then(
             (data) => {
@@ -68,7 +68,7 @@ async function getAll_Facturas(){
         })
 }
 
-async function getFactura(id_cliente, nroFactura) {
+function getFactura(id_cliente, nroFactura) {
     function handleResponse(response)  {
 
         if (!response.ok){
@@ -89,7 +89,7 @@ async function getFactura(id_cliente, nroFactura) {
         }
     }
 
-    await fetch(`http://127.0.0.1:5000//usuario/${id_usuario}/cliente/${id_cliente}/factura/${nroFactura}`, requestOptions)
+    fetch(`http://127.0.0.1:5000//usuario/${id_usuario}/cliente/${id_cliente}/factura/${nroFactura}`, requestOptions)
         .then( response => handleResponse(response))
         .then(
             (factura) => {
@@ -124,7 +124,7 @@ async function getFactura(id_cliente, nroFactura) {
         })
 }
 
-async function insertFactura(id_cliente, factura){
+function insertFactura(id_cliente, factura){
     
     function handleResponse(response)  {
         if (!response.ok){
@@ -146,7 +146,7 @@ async function insertFactura(id_cliente, factura){
         body: JSON.stringify(factura) 
     };
 
-    await fetch(`http://127.0.0.1:5000/usuario/${id_usuario}/cliente/${id_cliente}/factura`, requestOptions)
+    fetch(`http://127.0.0.1:5000/usuario/${id_usuario}/cliente/${id_cliente}/factura`, requestOptions)
         .then(response => handleResponse(response))
         .then(data => {
             Swal.fire({
