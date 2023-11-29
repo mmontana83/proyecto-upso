@@ -325,18 +325,14 @@
                     <div class="title-text">
                         <h2 class="display-6" >CLIENTES</h2>
                     </div>
-                    <div class="align-items-center mt-5 btn btn-secondary d-inline-flex" data-bs-toggle="modal" data-bs-target="#M-crear">
+                    <div class="align-items-center mb-3 btn btn-secondary d-inline-flex" data-bs-toggle="modal" data-bs-target="#M-crear">
                         <span class="material-symbols-outlined" >person_add</span>
                         <h4>Agregar cliente</h4>
                     </div>
                 </div>
 
-                <label for="" class="form-label mt-3">Buscar Cliente</label>
-                <input class="form-control form-control-lg" type="search" id="f-busqueda" placeholder="Ingresa tu busqueda...">
-
-
                 <div class="table-responsive">
-                    <table class="mt-5 table table-striped table-hover text-center">
+                    <table class="mt-5 table table-striped table-hover text-center" id="tablaClientes">
                         <thead>
                             <tr >
                                 <th class="col"> Cuit </th>
@@ -352,9 +348,6 @@
                                 <th class="col"> Eliminar</th>
                             </tr>
                         </thead>
-                        <tbody id="all-persons">
-            
-                        </tbody>
                     </table>
                 </div>
             </div>
@@ -366,7 +359,7 @@
                     <div class="title-text">
                         <h2 class="display-6" >PRODUCTOS</h2>
                     </div>
-                    <div class="align-items-center mt-5 btn btn-secondary d-inline-flex" data-bs-toggle="modal" data-bs-target="#M-InsertarProducto">
+                    <div class="align-items-center mb-3 btn btn-secondary d-inline-flex" data-bs-toggle="modal" data-bs-target="#M-InsertarProducto">
                         <span class="material-symbols-outlined">add </span>
                         <h4>Agregar Producto</h4>
                     </div>
@@ -400,16 +393,14 @@
                 <div class="title-text">
                     <h2 class="display-6" >FACTURAS</h2>
                 </div>
-                <button class="align-items-center mt-5 btn btn-secondary d-inline-flex " data-bs-target="#CrearFacturaDesdeListado" onclick="toggleSection('section4')">
+                <button class="align-items-center mb-3 btn btn-secondary d-inline-flex " data-bs-target="#CrearFacturaDesdeListado" onclick="toggleSection('section4')">
                     <span data-bs-target="#CrearFacturaDesdeListadobtn" class="material-symbols-outlined" >inventory</span>
                     Crear Factura
                 </button>
             </div>
-            <label for="" class="form-label mt-3">Buscar Factura</label>
-            <input class="form-control form-control-lg" type="search" id="f-busqueda" placeholder="Ingresa tu busqueda...">
 
             <div class="table-responsive">
-                <table class="table table-striped table-hover text-center mt-5">
+                <table class="table table-striped table-hover text-center mt-3" id="tablaFacturas">
                     <thead>
                         <tr >
                             <th> Nro Fact. </th>
@@ -421,9 +412,6 @@
                             <th> Consultar </th>
                         </tr>
                     </thead>
-                    <tbody id="all-facturas">
-                        <!-- aca van las filas de las Facturas -->
-                    </tbody>
                 </table>
             </div>
         </div>

@@ -33,27 +33,25 @@ function getAll_Facturas(){
         .then(
             (data) => {
 
-                const tableBody = document.getElementById('all-facturas');
-                let list = ``;
+                let miTablaFacturas = $('#tablaFacturas').DataTable();
+
+                miTablaFacturas.clear();
+
                 data.forEach(factura => {
-                    let fila = 
-                    `<tr id="${factura.id}"> 
-                        <td>${factura.nroFactura} </td>
-                        <td>${factura.id_cliente}</td>
-                        <td>${factura.razonSocial}</td>
-                        <td>${factura.fecha}</td>
-                        <td>${factura.tipoFactura}</td>
-                        <td>${factura.total}</td>
-                        <td>
-                        <span onclick="getFactura(${factura.id_cliente},${factura.nroFactura})" class="material-symbols-outlined d-flex justify-content-center table-toggle" data-bs-toggle="modal" data-bs-target="#M-verFactura">
-                        visibility
-                        </span>
-                        </td>
-                    </tr>`;
-                    list += fila;
+                    const fila = [factura.nroFactura, factura.id_cliente, factura.razonSocial, factura.fecha, factura.tipoFactura, factura.total];
+                    fila.push(`<td>
+                    <span onclick="getFactura(${factura.id_cliente},${factura.nroFactura})" class="material-symbols-outlined d-flex justify-content-center table-toggle" data-bs-toggle="modal" data-bs-target="#M-verFactura">
+                    visibility
+                    </span>
+                    </td>`)
+                    miTablaFacturas.row.add(fila).draw();
                 });
-                tableBody.innerHTML = list;
             }
+            // ila.push(`<td>
+            //         <span onclick="getFactura(${factura.id_cliente},${factura.nroFactura})" class="material-symbols-outlined d-flex justify-content-center table-toggle" data-bs-toggle="modal" data-bs-target="#M-verFactura">
+            //         visibility
+            //         </span>
+            //         </td>`)
         )
         .catch( (error) => { 
             error.json().then(data => 
@@ -179,3 +177,27 @@ function insertFactura(id_cliente, factura){
             console.log("Promesa finalizada (resuelta o rechazada)");
         });
 }
+
+// Espera a que el documento HTML esté completamente cargado antes de ejecutar el código
+$(document).ready(function() {
+    // Inicializa la tabla con DataTables
+    miTablafacturas = $('#tablaFacturas').DataTable({
+        // Configuración de paginación
+        paging: true,           // Habilita la paginación
+        pageLength: 10,         // Establece la cantidad de registros por página
+    
+        // Configuración del idioma para DataTables (en este caso, español)
+        language: {
+        url: 'https://cdn.datatables.net/plug-ins/1.10.25/i18n/Spanish.json'
+        },
+    
+        // Configuración de las columnas
+        columnDefs: [
+        // Aplica la clase "text-center" a todas las columnas
+        { className: "text-center", targets: "_all" },
+        
+        // Deshabilita ordenamiento para la quinta columna
+        { "orderable": false, "targets": [6] }
+        ] 
+    });
+ });

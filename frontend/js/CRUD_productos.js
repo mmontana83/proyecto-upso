@@ -26,14 +26,7 @@ function getAll_Product() {
                 let miTablaProductos = $('#tablaProductos').DataTable();
 
                 miTablaProductos.clear();
-
-                // // Destruye la instancia existente
-                // if ($.fn.DataTable.isDataTable('#tablaProductos')) {
-                //     miTablaProductos.destroy();
-                // }
-                
-                
-
+              
                 //Agrego las filas a la tabla
                 data.forEach(producto => {
                     const fila = [producto.codigoProducto,producto.producto, producto.descripcion, producto.precio, producto.stock, producto.id_tipoProducto];
@@ -630,7 +623,11 @@ $(document).ready(function() {
         // Configuración de las columnas
         columnDefs: [
         // Aplica la clase "text-center" a todas las columnas
-        { className: "text-center", targets: "_all" }
+        { className: "text-center", targets: "_all" },
+        
+        // Deshabilita ordenamiento para la quinta y sexta columna
+        { "orderable": false, "targets": [6,7] }
+         
         ] 
     });
  });

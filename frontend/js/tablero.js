@@ -119,7 +119,9 @@ function movimientoStock() {
 
               let miTablaMovimientoStock = $('#tablaStockMovimiento').DataTable();
               
-              miTablaMovimientoStock.destroy();
+              //Limpio la tabla para poder recargarla nuevamente.
+              miTablaMovimientoStock.clear();
+
               //Agrego las filas a la tabla
               dataMovimientoStock.forEach(producto => {
                 const fila = [producto.Producto,producto.Movimiento, producto.Fecha, producto.Precio, producto.Cliente, producto.Factura]
@@ -230,13 +232,12 @@ function historialVentas() {
              }
         )
         .catch((error) => { 
-          // error.json().then(data => 
-          //   Swal.fire({
-          //       icon: "error",
-          //       text: data.message
-          //     })
-          // );
-          console.error(error)
+          error.json().then(data => 
+            Swal.fire({
+                icon: "error",
+                text: data.message
+              })
+          );
         })
         .finally(() => {
             console.log("Promesa finalizada (resuelta o rechazada)");
