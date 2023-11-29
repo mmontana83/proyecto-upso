@@ -175,10 +175,10 @@ def get_estadocliente_by_id_cliente(id_usuario, id_cliente):
     - id_cliente: Identificador único del cliente.
 
     Respuestas:
-    - 200 OK: Retorna los datos del cliente en formato JSON.
+    - 200 OK: Retorna el estado actual del cliente (alta o eliminado) en formato JSON.
     - 409 Conflict: En caso de error, se proporciona un mensaje de error en formato JSON.
     """
     try:
-        return Cliente.obtenerClienteByIdCliente(id_usuario, id_cliente)
+        return Cliente.obtenerEstadoClienteByIdCliente(id_usuario, id_cliente)
     except Exception as ex:
         return jsonify({'message': str(ex)}), 409

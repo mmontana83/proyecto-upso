@@ -7,7 +7,7 @@ from api.utils import token_required
 @token_required
 def get_controlStock(id_usuario):
     try:
-        return jsonify(Dashboard.controlStock(id_usuario))
+        return Dashboard.controlStock(id_usuario)
     except Exception as ex:
         return jsonify({'message':str(ex)})
     
@@ -15,7 +15,7 @@ def get_controlStock(id_usuario):
 @token_required
 def get_historialVentas(id_usuario):
     try:
-        return jsonify(Dashboard.historialVentas(id_usuario))
+        return Dashboard.historialVentas(id_usuario)
     except Exception as ex:
         return jsonify({'message':str(ex)})
 
@@ -34,7 +34,7 @@ def get_movimientoStock(id_usuario):
     - 409 Conflict: En caso de error, se proporciona un mensaje de error en formato JSON.
     """
     try:
-        return jsonify(Dashboard.movimientoStock(id_usuario))
+        return Dashboard.movimientoStock(id_usuario)
     except Exception as ex:
         return jsonify({'message': str(ex)})
 
@@ -53,7 +53,7 @@ def get_rankingVentasByCliente(id_usuario):
     - 409 Conflict: En caso de error, se proporciona un mensaje de error en formato JSON.
     """
     try:
-        return jsonify(Dashboard.rankingVentasByCliente(id_usuario))
+        return Dashboard.rankingVentasByCliente(id_usuario)
     except Exception as ex:
         return jsonify({'message': str(ex)})
 
@@ -72,7 +72,7 @@ def get_rankingVentasByProducto(id_usuario):
     - 409 Conflict: En caso de error, se proporciona un mensaje de error en formato JSON.
     """
     try:
-        return jsonify(Dashboard.rankingVentasByProducto(id_usuario))
+        return Dashboard.rankingVentasByProducto(id_usuario)
     except Exception as ex:
         return jsonify({'message': str(ex)})
 
@@ -80,7 +80,7 @@ def get_rankingVentasByProducto(id_usuario):
 @token_required
 def get_rankingVentasByServicio(id_usuario):
     try:
-        return jsonify(Dashboard.rankingVentasByServicio(id_usuario))
+        return Dashboard.rankingVentasByServicio(id_usuario)
     except Exception as ex:
         return jsonify({'message':str(ex)})
     
@@ -99,7 +99,7 @@ def get_ventasTotales(id_usuario):
     - 409 Conflict: En caso de error, se proporciona un mensaje de error en formato JSON.
     """
     try:
-        return jsonify(Dashboard.ventasTotales(id_usuario))
+        return Dashboard.ventasTotales(id_usuario)
     except Exception as ex:
         return jsonify({'message': str(ex)})
 
@@ -117,7 +117,7 @@ def get_ventasTotalesMesActual(id_usuario):
     - 409 Conflict: En caso de error, se proporciona un mensaje de error en formato JSON.
     """
     try:
-        return jsonify(Dashboard.ventasTotalesMesActual(id_usuario))
+        return Dashboard.ventasTotalesMesActual(id_usuario)
     except Exception as ex:
         return jsonify({'message': str(ex)})
 
@@ -135,6 +135,6 @@ def get_clientesActivos(id_usuario):
     - 409 Conflict: En caso de error, se proporciona un mensaje de error en formato JSON.
     """
     try:
-        return jsonify(Dashboard.clientesActivos(id_usuario))
+        return Dashboard.clientesActivos(id_usuario)
     except Exception as ex:
         return jsonify({'message': str(ex)})
