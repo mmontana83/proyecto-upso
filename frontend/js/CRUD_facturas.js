@@ -91,8 +91,8 @@ function getFactura(id_cliente, nroFactura) {
                 factura.detalle.forEach(detalle => {
                     let fila = 
                     `<tr> 
-                        <td>${detalle.cantidad} </td>
                         <td>${detalle.producto}</td>
+                        <td>${detalle.cantidad} </td>
                         <td>${detalle.precio}</td>
                         <td>${detalle.precioTotal}</td>
                     </tr>`;
