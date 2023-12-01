@@ -245,6 +245,7 @@ function update_Product() {
                 let modal = document.getElementById('M-EditarProducto');
                 modal.style.display = 'none';
                 getAll_Product();
+                actualizarDashboardProductos();
             }
         )
         .catch(error => {

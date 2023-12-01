@@ -76,7 +76,7 @@ CREATE TABLE `controlstock` (
   KEY `cs_ibfk_4_idx` (`id_usuario`),
   CONSTRAINT `cs_ibfk_1` FOREIGN KEY (`id_producto`) REFERENCES `productos` (`id_producto`),
   CONSTRAINT `cs_ibfk_2` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id_usuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -85,7 +85,7 @@ CREATE TABLE `controlstock` (
 
 LOCK TABLES `controlstock` WRITE;
 /*!40000 ALTER TABLE `controlstock` DISABLE KEYS */;
-INSERT INTO `controlstock` VALUES (12,24,-2,'2023-11-24 00:00:00',91554.00,'23183214579',1,'20302022731'),(13,27,-1,'2023-11-24 00:00:00',4400.00,'23183214579',1,'20302022731'),(14,7,-100,'2023-11-24 00:00:00',300000.00,'25789457891',2,'20302022731'),(15,8,-100,'2023-11-24 00:00:00',17500.00,'25789457891',2,'20302022731'),(16,8,-50,'2023-11-26 00:00:00',8750.00,'78126543215',3,'20302022731'),(17,9,-2,'2023-11-28 00:00:00',15600.00,'78126543215',5,'20302022731'),(18,9,-1,'2023-12-01 00:00:00',7800.00,'95124568798',6,'20302022731'),(19,8,-3,'2023-12-01 00:00:00',525.00,'95124568798',6,'20302022731'),(20,7,-21,'2023-12-02 00:00:00',63000.00,'25789457891',7,'20302022731'),(21,30,45,'2023-11-29 15:49:42',4500.00,NULL,NULL,'20302022731');
+INSERT INTO `controlstock` VALUES (12,24,-2,'2023-11-24 00:00:00',91554.00,'23183214579',1,'20302022731'),(13,27,-1,'2023-11-24 00:00:00',4400.00,'23183214579',1,'20302022731'),(14,7,-100,'2023-11-24 00:00:00',300000.00,'25789457891',2,'20302022731'),(15,8,-100,'2023-11-24 00:00:00',17500.00,'25789457891',2,'20302022731'),(16,8,-50,'2023-11-26 00:00:00',8750.00,'78126543215',3,'20302022731'),(17,9,-2,'2023-11-28 00:00:00',15600.00,'78126543215',5,'20302022731'),(18,9,-1,'2023-12-01 00:00:00',7800.00,'95124568798',6,'20302022731'),(19,8,-3,'2023-12-01 00:00:00',525.00,'95124568798',6,'20302022731'),(20,7,-21,'2023-12-02 00:00:00',63000.00,'25789457891',7,'20302022731'),(21,30,45,'2023-11-29 15:49:42',4500.00,NULL,NULL,'20302022731'),(22,30,5,'2023-11-30 09:32:15',5400.00,NULL,NULL,'20302022731'),(23,7,-9,'2023-11-30 09:34:07',3000.00,NULL,NULL,'20302022731');
 /*!40000 ALTER TABLE `controlstock` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -110,7 +110,7 @@ CREATE TABLE `detallefactura` (
   KEY `detallefactura_ibfk_1_idx` (`nroFactura`,`id_cliente`,`id_usuario`),
   CONSTRAINT `detallefactura_ibfk_1` FOREIGN KEY (`nroFactura`, `id_cliente`, `id_usuario`) REFERENCES `factura` (`nroFactura`, `id_cliente`, `id_usuario`),
   CONSTRAINT `detallefactura_ibfk_2` FOREIGN KEY (`id_producto`) REFERENCES `productos` (`id_producto`)
-) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -155,7 +155,7 @@ CREATE TABLE `factura` (
 
 LOCK TABLES `factura` WRITE;
 /*!40000 ALTER TABLE `factura` DISABLE KEYS */;
-INSERT INTO `factura` VALUES (1,'23183214579','20302022731','2023-11-24',95954.00,3,1),(2,'25789457891','20302022731','2023-11-24',317500.00,1,1),(3,'78126543215','20302022731','2023-11-26',8750.00,1,1),(4,'78126543215','20302022731','2023-11-27',9000.00,1,1),(5,'78126543215','20302022731','2023-11-28',15600.00,1,1),(6,'95124568798','20302022731','2023-12-01',8325.00,6,5),(7,'25789457891','20302022731','2023-12-02',63000.00,4,1),(8,'30681157375','20302022731','2023-12-02',25000.00,1,1);
+INSERT INTO `factura` VALUES (1,'23183214579','20302022731','2023-11-24',95954.00,3,1),(2,'25789457891','20302022731','2023-11-24',317500.00,1,1),(3,'78126543215','20302022731','2023-11-26',8750.00,1,1),(4,'78126543215','20302022731','2023-11-27',9000.00,1,1),(5,'78126543215','20302022731','2023-11-28',15600.00,1,1),(6,'95124568798','20302022731','2023-12-01',8325.00,6,5),(7,'25789457891','20302022731','2023-12-02',63000.00,4,1),(8,'30681157375','20302022731','2023-12-02',25000.00,1,1),(9,'23183214579','20302022731','2023-11-30',3500.00,1,1);
 /*!40000 ALTER TABLE `factura` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -217,7 +217,7 @@ CREATE TABLE `productos` (
 
 LOCK TABLES `productos` WRITE;
 /*!40000 ALTER TABLE `productos` DISABLE KEYS */;
-INSERT INTO `productos` VALUES (1,123456,'NEUMATICOS','bridgestone',50.20,-6,1,1,'23302022739'),(2,134567,'BUJÍA NAFTERA','BUJÍA',6500.00,50,1,2,'23302022739'),(3,145678,'BUJÍA DIESEL','BUJÍA',7988.00,4,1,1,'23302022739'),(4,145645,'ACEITE MOTOR 15W40','ACEITE MOTOR MÁS CARITO',37880.00,25,1,2,'23302022739'),(5,156456,'SERVICE AUTOMOTOR','SERVICE QUE SE REALIZA CADA 10.000 KM',18000.00,0,2,1,'23302022739'),(6,148457,'AFINACIÓN','AFINACIÓN',15000.00,0,2,1,'23302022739'),(7,254874,'GASAS','Rollo de 100m.',3000.00,29,1,1,'20302022731'),(8,254856,'JERINGA X 10ml','Jeringa apta para visitas.',175.00,47,1,1,'20302022731'),(9,258746,'NEBULIZADOR','No incluye máscara.',7800.00,0,1,1,'20302022731'),(10,245477,'VACUNACION A DOMICILIO','No incluye viáticos.',3000.00,-3,2,1,'20302022731'),(11,254545,'MEDICION PRESION','',500.00,-50,2,1,'20302022731'),(15,198765,'Neumaticos','fate',100.00,10,1,1,'23302022739'),(16,198762,'Neumaticos','continental',100.00,10,1,1,'23302022739'),(17,198764,'Neumaticos','michelin',250.00,100,1,1,'23302022739'),(18,198763,'Neumaticos','yacohama',250.00,100,1,1,'23302022739'),(19,198767,'Neumsasasaticos','yacohama',250.00,100,1,2,'23302022739'),(20,198769,'NEUMATICOS','TWISTER',250.00,100,1,2,'23302022739'),(21,198770,'NEUMATICOS','PINOCHO',250.00,100,1,1,'23302022739'),(22,198771,'NEUMATICOS','LAMOROCHA',250.00,100,1,1,'23302022739'),(23,145648,'ACEITE MOTOR 25W40','ACEITE PARA MOTORES FUNDIDOS',45000.00,5,1,1,'23302022739'),(24,654987,'Purificador','Este producto sirve para purificar el aire',45777.00,2,1,1,'20302022731'),(25,256987,'Purificador','Purificador de Aire',45500.00,3,1,1,'23302022739'),(26,123123,'Purificador','Este producto sirve para purificar el aire',45777.00,3,1,1,'20302022731'),(27,321321,'Vick Vaporub','Para la descongestión nasal',3700.00,15,1,2,'20302022731'),(28,999888,'Novalgina','por 900ml',7880.00,3,1,2,'20302022731'),(29,788777,'TosoTos','Para la Tos y el catarro!',600.00,5,1,2,'20302022731'),(30,232312,'Salbutamol','En aerosol',4500.00,45,1,1,'20302022731');
+INSERT INTO `productos` VALUES (1,123456,'NEUMATICOS','bridgestone',50.20,-6,1,1,'23302022739'),(2,134567,'BUJÍA NAFTERA','BUJÍA',6500.00,50,1,2,'23302022739'),(3,145678,'BUJÍA DIESEL','BUJÍA',7988.00,4,1,1,'23302022739'),(4,145645,'ACEITE MOTOR 15W40','ACEITE MOTOR MÁS CARITO',37880.00,25,1,2,'23302022739'),(5,156456,'SERVICE AUTOMOTOR','SERVICE QUE SE REALIZA CADA 10.000 KM',18000.00,0,2,1,'23302022739'),(6,148457,'AFINACIÓN','AFINACIÓN',15000.00,0,2,1,'23302022739'),(7,254874,'GASAS','Rollo de 100m.',3000.00,20,1,1,'20302022731'),(8,254856,'JERINGA X 10ml','Jeringa apta para visitas.',175.00,47,1,1,'20302022731'),(9,258746,'NEBULIZADOR','No incluye máscara.',7800.00,0,1,1,'20302022731'),(10,245477,'VACUNACION A DOMICILIO','No incluye viáticos.',3000.00,1,2,1,'20302022731'),(11,254545,'MEDICION PRESION','No incluye viáticos',500.00,1,2,1,'20302022731'),(15,198765,'Neumaticos','fate',100.00,10,1,1,'23302022739'),(16,198762,'Neumaticos','continental',100.00,10,1,1,'23302022739'),(17,198764,'Neumaticos','michelin',250.00,100,1,1,'23302022739'),(18,198763,'Neumaticos','yacohama',250.00,100,1,1,'23302022739'),(19,198767,'Neumsasasaticos','yacohama',250.00,100,1,2,'23302022739'),(20,198769,'NEUMATICOS','TWISTER',250.00,100,1,2,'23302022739'),(21,198770,'NEUMATICOS','PINOCHO',250.00,100,1,1,'23302022739'),(22,198771,'NEUMATICOS','LAMOROCHA',250.00,100,1,1,'23302022739'),(23,145648,'ACEITE MOTOR 25W40','ACEITE PARA MOTORES FUNDIDOS',45000.00,5,1,1,'23302022739'),(24,654987,'Purificador','Este producto sirve para purificar el aire',45777.00,2,1,1,'20302022731'),(25,256987,'Purificador','Purificador de Aire',45500.00,3,1,1,'23302022739'),(26,123123,'Purificador','Este producto sirve para purificar el aire',45777.00,3,1,1,'20302022731'),(27,321321,'Vick Vaporub','Para la descongestión nasal',3700.00,15,1,2,'20302022731'),(28,999888,'Novalgina','por 900ml',7880.00,3,1,2,'20302022731'),(29,788777,'TosoTos','Para la Tos y el catarro!',600.00,5,1,2,'20302022731'),(30,232312,'Salbutamol','En aerosol',5400.00,50,1,1,'20302022731');
 /*!40000 ALTER TABLE `productos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -419,6 +419,19 @@ CREATE DEFINER=`proyecto`@`%` PROCEDURE `sp_actualizarProducto`(
     in p_id_usuario varchar(11)    
 )
 BEGIN   
+    -- Antes de actualizar la tabla productos, hago control sobre el stock
+    DECLARE stock_actual INT;
+    DECLARE id_p INT;
+    
+    SELECT stock INTO stock_actual FROM productos WHERE codigoProducto = p_codigoProducto;
+    SELECT id_producto INTO id_p FROM productos WHERE codigoProducto = p_codigoProducto;
+    
+    -- Si el stock actual es menor y mayor, registro la direfencia en la tabla de movimiento de stock
+    IF stock_actual <> p_stock THEN
+        INSERT INTO controlstock (id_producto, movimiento, fecha, precio, id_usuario)
+        VALUES (id_p, p_stock - stock_actual, NOW(), p_precio, p_id_usuario);
+	END IF;
+    
     UPDATE productos
     SET 
 		producto = p_producto, 
@@ -607,7 +620,7 @@ FROM controlstock
 INNER JOIN productos ON productos.id_producto = controlstock.id_producto
 LEFT JOIN clientes ON clientes.id_cliente = controlstock.id_cliente
 WHERE controlstock.id_usuario = p_id_usuario and productos.id_tipoProducto = 1
-ORDER BY Fecha DESC;
+ORDER BY Fecha ASC;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -812,62 +825,65 @@ DELIMITER ;
 DELIMITER ;;
 CREATE DEFINER=`proyecto`@`%` PROCEDURE `sp_insertarFactura`(in p_id_cliente varchar(11), in p_id_usuario varchar(11),
 															 in p_fecha date, in p_total decimal(10,2), in p_id_tipoFactura int,
-                                                             in p_id_condicionVenta int)
+                                                             in p_id_condicionVenta int, in p_detalleFactura json)
 BEGIN
-    DECLARE p_nrofactura int;
-    # Obtengo el número de la última factura asociada al cliente y usuario
+	DECLARE p_nrofactura int; -- En esta variable voy a guardar el último número de factura de la tabla factura
+    DECLARE totalDetalle INT;
+	DECLARE indice INT DEFAULT 0;
+    DECLARE p_id_producto int;
+    DECLARE p_cantidad int;
+    DECLARE p_precio decimal(10,2);
+    DECLARE mysql_errno INT;
+    DECLARE message_text VARCHAR(255);
+    
+  	DECLARE exit handler FOR SQLEXCEPTION
+	BEGIN
+        -- Obtiene información detallada del error
+        GET DIAGNOSTICS CONDITION 1
+            mysql_errno = MYSQL_ERRNO, message_text = MESSAGE_TEXT;
+
+        -- Si ocurre un error, se revierte la transacción
+        ROLLBACK;
+        
+        -- Proporciona un mensaje más informativo
+        SIGNAL SQLSTATE '45000';
+        SET MESSAGE_TEXT = CONCAT('Error en la transacción: ', CAST(mysql_errno AS CHAR), ' - ', message_text);
+    END;
+    
+    -- Inicia la transacción
+	START TRANSACTION;
+	
+    -- Inserta en la tabla de encabezado
+	# Obtengo el número de la última factura asociada al cliente y usuario
 	SELECT MAX(nroFactura) INTO p_nroFactura FROM factura WHERE id_usuario = p_id_usuario;
-    # Si el número obtenido es null lo inicializo en 0 (Significa que el cliente-usuario no tiene facturas asociadas)
-    IF p_nroFactura IS NULL THEN SET p_nroFactura = 0; END IF;
-    #Inserto la nueva factura.
+		
+	# Si el número obtenido es null lo inicializo en 0 (Significa que el cliente-usuario no tiene facturas asociadas)
+	IF p_nroFactura IS NULL THEN SET p_nroFactura = 0; END IF;
+	
+	#Inserto la nueva factura.
 	INSERT INTO factura (nroFactura, id_cliente, id_usuario, fecha, total, id_tipoFactura, id_condicionVenta)
 	VALUES (p_nroFactura + 1, p_id_cliente, p_id_usuario, p_fecha, p_total, p_id_tipoFactura, p_id_condicionVenta);
-END ;;
-DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
-/*!50003 DROP PROCEDURE IF EXISTS `sp_insertarFacturaDetalle` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
-DELIMITER ;;
-CREATE DEFINER=`proyecto`@`%` PROCEDURE `sp_insertarFacturaDetalle`(in p_id_cliente varchar(11), in p_id_usuario varchar(11), in p_id_producto int, 
-																	in p_cantidad int , in p_precio decimal(10,2))
-BEGIN
-	
-    DECLARE p_nroFactura int;
-    DECLARE p_id_tipoProducto int;
-    DECLARE p_fechaFactura datetime;
-	
-    -- obtengo el último número de factura
-    SELECT MAX( nroFactura ) INTO p_nroFactura FROM factura WHERE id_cliente = p_id_cliente and id_usuario = p_id_usuario;
-	
-    -- inserto el detalle de la factura
-    INSERT INTO detallefactura (nroFactura, id_cliente, id_usuario, id_producto, cantidad, precio, precioTotal)
-	VALUES (p_nroFactura, p_id_cliente, p_id_usuario, p_id_producto, p_cantidad, p_precio, p_cantidad * p_precio);
-    
-    -- actualizo el stock en la tabla productos. PENDIENTE: controlar que la cantidad sea menor al stock
-    UPDATE productos
-    SET stock = stock - p_cantidad
-    WHERE id_usuario = p_id_usuario 
-    AND id_producto = p_id_producto;
-    
-    -- agrego esta salida de producto al control de stock. Si es un servicio no lo agrego.
-    SELECT fecha INTO p_fechaFactura FROM factura WHERE id_cliente = p_id_cliente and id_usuario = p_id_usuario and nroFactura = p_nroFactura;
-    SELECT id_tipoProducto into p_id_tipoProducto from productos where id_producto = p_id_producto;
-    IF p_id_tipoProducto = 1
-    THEN 
-		INSERT INTO controlstock(id_producto, movimiento, fecha, precio, id_cliente, nroFactura, id_usuario)
-        VALUES (p_id_producto, -1 * p_cantidad, p_fechaFactura, p_cantidad * p_precio, p_id_cliente, p_nroFactura, p_id_usuario);
-	END IF;
-	
+
+	-- Itera sobre los detalles recibidos como JSON
+	-- Obtiene el total de registros en el array JSON
+	SET totalDetalle = JSON_LENGTH(p_detalleFactura, '$');
+
+	WHILE indice < totalDetalle DO
+		
+		SET p_id_producto = JSON_EXTRACT(p_detalleFactura, CONCAT('$[', indice, '].id_producto'));
+        SET p_cantidad = JSON_EXTRACT(p_detalleFactura, CONCAT('$[', indice, '].cantidad'));
+        SET p_precio = JSON_EXTRACT(p_detalleFactura, CONCAT('$[', indice, '].precio'));
+		
+		-- inserto el detalle de la factura
+		INSERT INTO detallefactura (nroFactura, id_cliente, id_usuario, id_producto, cantidad, precio, precioTotal)
+		VALUES (p_nroFactura +1, p_id_cliente, p_id_usuario, p_id_producto, p_cantidad, p_precio, p_cantidad * p_precio);
+
+		-- Incrementa el índice
+		SET indice = indice + 1;
+	END WHILE;
+
+	-- Confirma la transacción
+	COMMIT;        
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -1354,6 +1370,58 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `testJSON` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`proyecto`@`%` PROCEDURE `testJSON`(in p_detalleFactura json)
+BEGIN
+    DECLARE p_nrofactura INT; 
+    DECLARE totalDetalle INT;
+    DECLARE indice INT DEFAULT 0;
+    DECLARE p_id_producto INT;
+    DECLARE p_cantidad INT;
+    DECLARE p_precio DECIMAL(10,2);
+    
+    -- Itera sobre los detalles recibidos como JSON
+    -- Obtiene el total de registros en el array JSON
+    SET totalDetalle = JSON_LENGTH(p_detalleFactura, '$.detalleFactura');
+
+    -- Itera sobre los detalles del JSON
+    WHILE indice < totalDetalle DO
+        -- Extrae valores del JSON para la fila actual
+        SET p_id_producto = JSON_EXTRACT(p_detalleFactura, CONCAT('$.detalleFactura[', indice, '].id_producto'));
+        SET p_cantidad = JSON_EXTRACT(p_detalleFactura, CONCAT('$.detalleFactura[', indice, '].cantidad'));
+        SET p_precio = CAST(JSON_UNQUOTE(JSON_EXTRACT(p_detalleFactura, CONCAT('$.detalleFactura[', indice, '].precio'))) AS DECIMAL(10,2));
+
+        -- Mensajes de depuración
+        SELECT CONCAT('Iteración: ', indice, ', id_producto: ', p_id_producto, ', cantidad: ', p_cantidad, ', precio: ', p_precio) AS DebugInfo;
+
+        -- Verifica si p_id_producto es nulo
+        IF p_id_producto IS NULL THEN
+            SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Error: p_id_producto es nulo';
+        END IF;
+
+        -- Inserta en la tabla de detalles
+        INSERT INTO testjson (nroFactura, id_cliente, id_usuario, id_producto, cantidad, precio, precioTotal)
+        VALUES (18, '23302022739', '20110336209', p_id_producto, p_cantidad, p_precio, p_cantidad * p_precio);
+
+        -- Incrementa el índice para la siguiente iteración
+        SET indice = indice + 1;
+    END WHILE;
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -1364,4 +1432,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-11-29 18:06:21
+-- Dump completed on 2023-12-01  9:18:42

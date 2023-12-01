@@ -81,7 +81,7 @@ def insertarFactura(id_usuario, id_cliente):
         jsonDetalleFactura = json['detalle']
 
         # Llama al método 'insertarFactura' del modelo 'Factura' y devuelve el resultado como JSON
-        return Factura.insertarFactura(jsonEncabezadoFactura, jsonDetalleFactura)
+        return Factura.insertarFacturaCompleta(jsonEncabezadoFactura, jsonDetalleFactura)
     except Exception as ex:
         return jsonify({'message': str(ex)}), 409
 
