@@ -35,7 +35,7 @@ function getAll_Product() {
                     if (producto.id_tipoProducto === 'SERVICIO') {
                         fila[4] = 0; // Establece el stock en 0 para servicios
                     }
-                    fila.push(`<td class= "table-toggle" ><span data-bs-toggle="modal" data-bs-target="#M-EditarProducto" class="material-symbols-outlined">manage_accounts</span></td>`)
+                    fila.push(`<td><span data-bs-toggle="modal" data-bs-target="#M-EditarProducto" class="material-symbols-outlined table-toggle">manage_accounts</span></td>`)
                     fila.push(`<td> <span class="material-symbols-outlined table-toggle" data-bs-target="#EliminarProducto">delete</span></td>`)
                     miTablaProductos.row.add(fila).draw();
                 });
