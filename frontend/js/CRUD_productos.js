@@ -29,7 +29,12 @@ function getAll_Product() {
               
                 //Agrego las filas a la tabla
                 data.forEach(producto => {
-                    const fila = [producto.codigoProducto,producto.producto, producto.descripcion, producto.precio, producto.stock, producto.id_tipoProducto];
+                    const fila = [producto.codigoProducto,producto.producto, producto.descripcion, producto.precio,producto.stock, producto.id_tipoProducto];
+                    
+                     // Verifica si es un servicio y establece el stock en 0
+                    if (producto.id_tipoProducto === 'SERVICIO') {
+                        fila[4] = 0; // Establece el stock en 0 para servicios
+                    }
                     fila.push(`<td class= "table-toggle" ><span data-bs-toggle="modal" data-bs-target="#M-EditarProducto" class="material-symbols-outlined">manage_accounts</span></td>`)
                     fila.push(`<td> <span class="material-symbols-outlined table-toggle" data-bs-target="#EliminarProducto">delete</span></td>`)
                     miTablaProductos.row.add(fila).draw();
