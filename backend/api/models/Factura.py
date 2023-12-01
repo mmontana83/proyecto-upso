@@ -2,6 +2,7 @@ from api.db.db import mysql
 from flask import request, jsonify
 from datetime import datetime
 from decimal import Decimal
+import json
 
 class Factura():
     """
@@ -73,6 +74,53 @@ class Factura():
                 cur.callproc('sp_insertarFacturaDetalle', [encabezadoFactura._id_cliente, encabezadoFactura._id_usuario, detalleFactura._id_producto,
                                                        detalleFactura._cantidad, detalleFactura._precio])
            
+            # Confirmo los cambios
+            mysql.connection.commit()
+            cur.close()
+            return jsonify({'message':'Factura Creada con Éxito'}), 200
+        except Exception as ex:
+            return jsonify({'message':str(ex)}), 409
+
+    @staticmethod
+    def insertarFacturaCompleta(jsonEncabezadoFactura, jsonDetalleFactura):
+        """
+        Inserta una nueva factura en la base de datos.
+
+        Parameters:
+            jsonEncabezadoFactura (dict): Datos del encabezado de la factura en formato JSON.
+            jsonDetalleFactura (list): Lista de datos del detalle de la factura en formato JSON.
+
+        Returns:
+            tuple: Respuesta JSON y código de estado HTTP.
+        """
+        try:
+            # Creo un objeto que representa el encabezado de la factura a partir del json del request
+            encabezadoFactura = Factura(jsonEncabezadoFactura)
+            
+
+            # Validaciones
+            # Validación CUIL/CUIT cliente
+            if len(encabezadoFactura._id_clientee) != 11:
+                return jsonify({'message': 'El CUIT/CUIL ingresado debe tener 11 números'}), 409
+
+            if '-' in str(encabezadoFactura._id_cliente) or '/' in str(encabezadoFactura._id_cliente):
+                return jsonify({'message': 'El CUIT/CUIL ingresado solo debe contener números'}), 409
+
+            # Validación CUIL/CUIT usuario
+            if len(encabezadoFactura._id_usuario) != 11:
+                return jsonify({'message': 'El CUIT/CUIL ingresado debe tener 11 números'}), 409
+
+            if '-' in str(encabezadoFactura._id_usuario) or '/' in str(encabezadoFactura._id_usuario):
+                return jsonify({'message': 'El CUIT/CUIL ingresado solo debe contener números'}), 409
+            
+            # Calculo el monto total de la factura
+            totalFactura = DetalleFactura.obtenerTotalFactura(jsonDetalleFactura)
+
+            # Inserto el encabezado de la factura en la BD
+            cur = mysql.connection.cursor()
+            cur.callproc('sp_insertarFactura', [encabezadoFactura._id_cliente, encabezadoFactura._id_usuario, encabezadoFactura._fecha,
+                                                totalFactura, encabezadoFactura._id_tipoFactura, encabezadoFactura._id_condicionVenta, json.dumps(jsonDetalleFactura)])
+            
             # Confirmo los cambios
             mysql.connection.commit()
             cur.close()
