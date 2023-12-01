@@ -100,7 +100,7 @@ class Factura():
 
             # Validaciones
             # Validación CUIL/CUIT cliente
-            if len(encabezadoFactura._id_clientee) != 11:
+            if len(encabezadoFactura._id_cliente) != 11:
                 return jsonify({'message': 'El CUIT/CUIL ingresado debe tener 11 números'}), 409
 
             if '-' in str(encabezadoFactura._id_cliente) or '/' in str(encabezadoFactura._id_cliente):
