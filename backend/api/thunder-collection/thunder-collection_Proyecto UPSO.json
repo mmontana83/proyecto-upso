@@ -1,7 +1,7 @@
 {
     "client": "Thunder Client",
     "collectionName": "Proyecto UPSO",
-    "dateExported": "2023-12-01T12:27:33.249Z",
+    "dateExported": "2023-12-01T14:30:18.711Z",
     "version": "1.1",
     "folders": [
         {
@@ -80,13 +80,13 @@
             "method": "POST",
             "sortNum": 10000,
             "created": "2023-11-19T17:48:31.256Z",
-            "modified": "2023-11-27T02:39:04.427Z",
+            "modified": "2023-12-01T13:04:29.168Z",
             "headers": [],
             "params": [],
             "auth": {
                 "type": "basic",
                 "basic": {
-                    "username": "clich",
+                    "username": "mmontana",
                     "password": "1234"
                 }
             },
@@ -536,12 +536,44 @@
             "colId": "15eb39ab-4468-496b-8361-a6e279efaf80",
             "containerId": "3674c275-2e9e-4b55-aa59-27b76c2d0c7d",
             "name": "Obtener Productos por Usuario",
-            "url": "127.0.0.1:5000/usuario/20302022731/productos",
+            "url": "127.0.0.1:5000/usuario/23302022739/productos",
             "method": "GET",
             "sortNum": 200000,
             "created": "2023-11-19T17:48:31.276Z",
-            "modified": "2023-11-21T19:48:03.796Z",
-            "headers": [],
+            "modified": "2023-12-01T14:23:43.522Z",
+            "headers": [
+                {
+                    "name": "user-id",
+                    "value": "23302022739"
+                },
+                {
+                    "name": "x-access-token",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c3VhcmlvIjoiMjMzMDIwMjI3MzkiLCJleHAiOjE3MDE0NDY2MDN9.6oZaoG3BqsBmT0OT1z58Uz1P_ourX_1XndxkqJvDXiQ"
+                }
+            ],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "0de2488b-2ac2-4599-8d27-844a0d365a83",
+            "colId": "15eb39ab-4468-496b-8361-a6e279efaf80",
+            "containerId": "3674c275-2e9e-4b55-aa59-27b76c2d0c7d",
+            "name": "Obtener Producto por Usuario",
+            "url": "127.0.0.1:5000/usuario/23302022739/producto/123456",
+            "method": "GET",
+            "sortNum": 205000,
+            "created": "2023-12-01T14:24:08.975Z",
+            "modified": "2023-12-01T14:24:35.961Z",
+            "headers": [
+                {
+                    "name": "user-id",
+                    "value": "23302022739"
+                },
+                {
+                    "name": "x-access-token",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c3VhcmlvIjoiMjMzMDIwMjI3MzkiLCJleHAiOjE3MDE0NDY2MDN9.6oZaoG3BqsBmT0OT1z58Uz1P_ourX_1XndxkqJvDXiQ"
+                }
+            ],
             "params": [],
             "tests": []
         },
@@ -550,16 +582,25 @@
             "colId": "15eb39ab-4468-496b-8361-a6e279efaf80",
             "containerId": "3674c275-2e9e-4b55-aa59-27b76c2d0c7d",
             "name": "Actualizar Producto",
-            "url": "127.0.0.1:5000/usuario/20302022731/producto/788777",
+            "url": "127.0.0.1:5000/usuario/23302022739/producto/123456",
             "method": "POST",
             "sortNum": 210000,
             "created": "2023-11-19T17:48:31.277Z",
-            "modified": "2023-11-22T15:57:03.494Z",
-            "headers": [],
+            "modified": "2023-12-01T14:22:39.567Z",
+            "headers": [
+                {
+                    "name": "user-id",
+                    "value": "23302022739"
+                },
+                {
+                    "name": "x-access-token",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c3VhcmlvIjoiMjMzMDIwMjI3MzkiLCJleHAiOjE3MDE0NDY0NjF9.tO5AuylCqLaNTSH_0uffN92FYay7ehs-UpMSFP8f-4I"
+                }
+            ],
             "params": [],
             "body": {
                 "type": "json",
-                "raw": "{\n  \"producto\": \"TosoTos\",\n  \"descripcion\": \"Para la Tos y el catarro!\",\n  \"precio\": 7899,\n  \"stock\": 5,\n  \"id_tipoProducto\": 1\n}",
+                "raw": "{\n  \"producto\": \"Neumáticos Bridgestone R18\",\n  \"descripcion\": \"Para todos los caminos!\",\n  \"precio\": 245000,\n  \"stock\": 5,\n  \"id_tipoProducto\": 1\n}",
                 "form": []
             },
             "tests": []
@@ -569,18 +610,22 @@
             "colId": "15eb39ab-4468-496b-8361-a6e279efaf80",
             "containerId": "3674c275-2e9e-4b55-aa59-27b76c2d0c7d",
             "name": "Eliminar Producto",
-            "url": "127.0.0.1:5000/usuario/23302022739/producto/145645",
+            "url": "127.0.0.1:5000/usuario/23302022739/producto/234512",
             "method": "DELETE",
             "sortNum": 215000,
             "created": "2023-11-19T17:48:31.279Z",
-            "modified": "2023-11-19T17:48:31.279Z",
-            "headers": [],
+            "modified": "2023-12-01T14:20:06.431Z",
+            "headers": [
+                {
+                    "name": "user-id",
+                    "value": "23302022739"
+                },
+                {
+                    "name": "x-access-token",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c3VhcmlvIjoiMjMzMDIwMjI3MzkiLCJleHAiOjE3MDE0NDYzOTJ9.lxU0lcY16_crBh_ARkUkO0rQJPpDJm30Hrcak6BLHco"
+                }
+            ],
             "params": [],
-            "body": {
-                "type": "json",
-                "raw": "{\n  \"producto\":\"ACEITE MOTOR 15W40\",\n  \"descripcion\":\"ACEITE MOTOR MÁS CARITO\",\n  \"precio\":\"37880\",\n  \"stock\":25,\n  \"id_tipoProducto\":1\n}",
-                "form": []
-            },
             "tests": []
         },
         {
@@ -588,16 +633,25 @@
             "colId": "15eb39ab-4468-496b-8361-a6e279efaf80",
             "containerId": "3674c275-2e9e-4b55-aa59-27b76c2d0c7d",
             "name": "Insertar Producto",
-            "url": "127.0.0.1:5000/usuario/23302022739/producto/145648",
+            "url": "127.0.0.1:5000/usuario/23302022739/producto/",
             "method": "POST",
             "sortNum": 220000,
             "created": "2023-11-19T17:48:31.278Z",
-            "modified": "2023-11-19T17:48:31.278Z",
-            "headers": [],
+            "modified": "2023-12-01T14:18:29.564Z",
+            "headers": [
+                {
+                    "name": "user-id",
+                    "value": "23302022739"
+                },
+                {
+                    "name": "x-access-token",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c3VhcmlvIjoiMjMzMDIwMjI3MzkiLCJleHAiOjE3MDE0NDE4Njl9.jq_Fj4mXUo3Oxp2srwOSRimftppzlGQk_Iv5pI2f4Dg"
+                }
+            ],
             "params": [],
             "body": {
                 "type": "json",
-                "raw": "{\n  \"producto\":\"ACEITE MOTOR 25W40\",\n  \"descripcion\":\"ACEITE PARA MOTORES FUNDIDOS\",\n  \"precio\":\"45000\",\n  \"stock\":5,\n  \"id_tipoProducto\":1\n}\n\n\n",
+                "raw": "{\n  \"codigoProducto\": 234512,\n  \"producto\":\"CAJA MOTOR ISUZU 1.7\",\n  \"descripcion\":\"CAJA DE CAMBIOS COMPLETA\",\n  \"precio\":\"689000\",\n  \"stock\":9,\n  \"id_tipoProducto\":1\n}\n\n\n",
                 "form": []
             },
             "tests": []
@@ -607,12 +661,21 @@
             "colId": "15eb39ab-4468-496b-8361-a6e279efaf80",
             "containerId": "3674c275-2e9e-4b55-aa59-27b76c2d0c7d",
             "name": "Alta Producto",
-            "url": "127.0.0.1:5000/usuario/23302022739/producto/145648",
-            "method": "PATCH",
+            "url": "127.0.0.1:5000/usuario/23302022739/producto/234512",
+            "method": "PUT",
             "sortNum": 230000,
             "created": "2023-11-19T17:48:31.280Z",
-            "modified": "2023-11-19T17:48:31.280Z",
-            "headers": [],
+            "modified": "2023-12-01T14:21:09.515Z",
+            "headers": [
+                {
+                    "name": "user-id",
+                    "value": "23302022739"
+                },
+                {
+                    "name": "x-access-token",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c3VhcmlvIjoiMjMzMDIwMjI3MzkiLCJleHAiOjE3MDE0NDY0NjF9.tO5AuylCqLaNTSH_0uffN92FYay7ehs-UpMSFP8f-4I"
+                }
+            ],
             "params": [],
             "body": {
                 "type": "json",
@@ -662,6 +725,29 @@
                 {
                     "name": "user-id",
                     "value": "20302022731"
+                }
+            ],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "1fa6a6ad-5be1-4969-b9a7-c250b5b14584",
+            "colId": "15eb39ab-4468-496b-8361-a6e279efaf80",
+            "containerId": "3674c275-2e9e-4b55-aa59-27b76c2d0c7d",
+            "name": "Stock Producto",
+            "url": "127.0.0.1:5000/usuario/23302022739/producto/134567/stock",
+            "method": "GET",
+            "sortNum": 260000,
+            "created": "2023-12-01T14:16:42.085Z",
+            "modified": "2023-12-01T14:18:13.367Z",
+            "headers": [
+                {
+                    "name": "user-id",
+                    "value": "23302022739"
+                },
+                {
+                    "name": "x-access-token",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c3VhcmlvIjoiMjMzMDIwMjI3MzkiLCJleHAiOjE3MDE0NDYyNjN9.4IrTm2r5HKK-2-66I8T6P5CgqwzUD6DM9_7TsojvI0k"
                 }
             ],
             "params": [],
