@@ -1,7 +1,7 @@
 {
     "client": "Thunder Client",
     "collectionName": "Proyecto UPSO",
-    "dateExported": "2023-11-29T21:07:18.051Z",
+    "dateExported": "2023-12-01T12:27:33.249Z",
     "version": "1.1",
     "folders": [
         {
@@ -278,16 +278,25 @@
             "colId": "15eb39ab-4468-496b-8361-a6e279efaf80",
             "containerId": "ac86d89f-a724-4b62-9bad-7adbd07dd0d2",
             "name": "Insertar Factura",
-            "url": "127.0.0.1:5000/usuario/20302022731/cliente/23183214579/factura",
+            "url": "127.0.0.1:5000/usuario/20302022731/cliente/24241966642/factura",
             "method": "POST",
             "sortNum": 90000,
             "created": "2023-11-19T17:48:31.265Z",
-            "modified": "2023-11-19T17:48:31.265Z",
-            "headers": [],
+            "modified": "2023-12-01T12:27:03.203Z",
+            "headers": [
+                {
+                    "name": "user-id",
+                    "value": "20302022731"
+                },
+                {
+                    "name": "x-access-token",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c3VhcmlvIjoiMjAzMDIwMjI3MzEiLCJleHAiOjE3MDE0Mzk1NzZ9.TgxbiiHQE8Y8wO4WlIinQ4wfgzP6GkmSUBVfuUFTE3M"
+                }
+            ],
             "params": [],
             "body": {
                 "type": "json",
-                "raw": "{\n   \"encabezado\": {\n    \"fecha\":\"2023-11-18\",\n    \"total\":\"55000.00\",\n    \"id_tipoFactura\": 1,\n    \"id_condicionVenta\": 2\n  },\n  \"detalle\": [\n    {\n      \"id_producto\": 1,\n      \"cantidad\": 2,\n      \"precio\": \"50000.00\"\n    },\n    {\n      \"id_producto\": 3,\n      \"cantidad\": 2,\n      \"precio\": \"5000.00\"\n    }\n  ]\n}",
+                "raw": "{\n   \"encabezado\": {\n    \"fecha\":\"1/12/2023\",\n    \"total\":\"55000.00\",\n    \"id_tipoFactura\": 1,\n    \"id_condicionVenta\": 2\n  },\n  \"detalle\": [\n    {\n      \"id_producto\": 8,\n      \"cantidad\": 2,\n      \"precio\": \"175.00\"\n    },\n    {\n      \"id_producto\":29 ,\n      \"cantidad\": 3,\n      \"precio\": \"600.00\"\n    }\n  ]\n}",
                 "form": []
             },
             "tests": []
