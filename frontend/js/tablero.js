@@ -28,8 +28,7 @@ function controlStock() {
         }
     };
     
-    //fetch(`127.0.0.1:5000/usuario/${id_usuario}/dashboard/controlStock`, requestOptions)
-    fetch(`http://127.0.0.1:5000/usuario/20302022731/dashboard/controlStock`, requestOptions)
+    fetch(`http://127.0.0.1:5000/usuario/${id_usuario}/dashboard/controlStock`, requestOptions)
         .then(response => handleResponse(response))
         .then(
             (object) => {
@@ -110,8 +109,7 @@ function movimientoStock() {
         }
     };
     
-    //fetch(`127.0.0.1:5000/usuario/${id_usuario}/dashboard/controlStock`, requestOptions)
-    fetch(`http://127.0.0.1:5000/usuario/20302022731/dashboard/movimientoStock`, requestOptions)
+    fetch(`http://127.0.0.1:5000/usuario/${id_usuario}/dashboard/movimientoStock`, requestOptions)
         .then(response => handleResponse(response))
         .then(
           (dataMovimientoStock) => {
@@ -174,7 +172,7 @@ function historialVentas() {
         }
     };
     
-    fetch(`http://127.0.0.1:5000/usuario/20302022731/dashboard/historialVentas`, requestOptions)
+    fetch(`http://127.0.0.1:5000/usuario/${id_usuario}/dashboard/historialVentas`, requestOptions)
         .then(response => handleResponse(response))
         .then(
             (object) => {
@@ -263,8 +261,7 @@ function rankingVentasCliente() {
         }
     };
     
-    //fetch(`127.0.0.1:5000/usuario/${id_usuario}/dashboard/rankingVentasByCliente`, requestOptions)
-    fetch(`http://127.0.0.1:5000/usuario/20302022731/dashboard/rankingVentasByCliente`, requestOptions)
+    fetch(`http://127.0.0.1:5000/usuario/${id_usuario}/dashboard/rankingVentasByCliente`, requestOptions)
         .then(response => handleResponse(response))
         .then(
             (object) => {
@@ -339,7 +336,7 @@ function rankingVentasProducto() {
         }
     };
     
-    fetch(`http://127.0.0.1:5000/usuario/20302022731/dashboard/rankingVentasByProducto`, requestOptions)
+    fetch(`http://127.0.0.1:5000/usuario/${id_usuario}/dashboard/rankingVentasByProducto`, requestOptions)
         .then(response => handleResponse(response))
         .then(
             (object) => {
@@ -415,7 +412,7 @@ function rankingVentasServicio() {
         }
     };
     
-    fetch(`http://127.0.0.1:5000/usuario/20302022731/dashboard/rankingVentasByServicio`, requestOptions)
+    fetch(`http://127.0.0.1:5000/usuario/${id_usuario}/dashboard/rankingVentasByServicio`, requestOptions)
         .then(response => handleResponse(response))
         .then(
             (object) => {
@@ -490,7 +487,7 @@ function ventasTotales(){
         }
     };
     
-    fetch(`http://127.0.0.1:5000/usuario/20302022731/dashboard/ventasTotales`, requestOptions)
+    fetch(`http://127.0.0.1:5000/usuario/${id_usuario}/dashboard/ventasTotales`, requestOptions)
         .then(response => handleResponse(response))
         .then(data => {
           const ventasTotales = document.getElementById("dashboard-ventasTotales");
@@ -528,7 +525,7 @@ function ventasTotalesMesActual(){
         }
     };
     
-    fetch(`http://127.0.0.1:5000/usuario/20302022731/dashboard/ventasTotalesMesActual`, requestOptions)
+    fetch(`http://127.0.0.1:5000/usuario/${id_usuario}/dashboard/ventasTotalesMesActual`, requestOptions)
         .then(response => handleResponse(response))
         .then(data => {
           const ventasTotalesMesActual = document.getElementById("dashboard-ventasTotalesMesActual");
@@ -566,7 +563,7 @@ function clientesActivos(){
         }
     };
     
-    fetch(`http://127.0.0.1:5000/usuario/20302022731/dashboard/clientesActivos`, requestOptions)
+    fetch(`http://127.0.0.1:5000/usuario/${id_usuario}/dashboard/clientesActivos`, requestOptions)
         .then(response => handleResponse(response))
         .then(data => {
           const clientesTotales = document.getElementById("dashboard-clientesActivos");

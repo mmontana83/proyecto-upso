@@ -81,7 +81,7 @@ def insertarFactura(id_usuario, id_cliente):
         jsonDetalleFactura = json['detalle']
 
         # Llama al método 'insertarFactura' del modelo 'Factura' y devuelve el resultado como JSON
-        return Factura.insertarFacturaCompleta(jsonEncabezadoFactura, jsonDetalleFactura)
+        return Factura.insertarFactura(jsonEncabezadoFactura, jsonDetalleFactura)
     except Exception as ex:
         return jsonify({'message': str(ex)}), 409
 
@@ -106,4 +106,14 @@ def get_factura_by_cliente(id_usuario, id_cliente, nroFactura):
         return Factura.obtenerFacturaById_Cliente(id_usuario, id_cliente, nroFactura)
     except Exception as ex:
         # Si hay una excepción, devuelve un mensaje de error como JSON y un código de estado 409 (Conflict)
+        return jsonify({'message': str(ex)}), 409
+
+# Ruta para obtener el número de la última factura insertada
+@app.route('/usuario/<id_usuario>/ultimoNroFactura', methods=['GET'])
+@token_required
+@user_resources
+def get_ultimoNroFactura_by_usuario(id_usuario):
+    try:
+        return Factura.obtenerUltimoNroFacturaByUsuario(id_usuario)
+    except Exception as ex:
         return jsonify({'message': str(ex)}), 409

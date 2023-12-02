@@ -1,7 +1,3 @@
-const { PDFDocument, rgb, StandardFonts} = require('pdf-lib');
-const path = require('path');
-const fs = require('fs').promises;
-
 function login(event) {
     
     //Evito que se recargue la página
@@ -66,6 +62,8 @@ function login(event) {
 };
 
 function logout(){
+    
+    
     // Eliminar el token y el id del usuario del almacenamiento
     sessionStorage.removeItem("id_usuario");
     sessionStorage.removeItem("nombre");
@@ -75,43 +73,3 @@ function logout(){
     // Redirigir al usuario a la página de inicio de sesión
     window.location.href = "index.html";
 };
-
-async function guardarFacturaPDF(){
-
-    // Especifica la ruta al archivo PDF dentro de la carpeta "res"
-    const pdfPath = path.join(__dirname, '..', 'res', 'modelo-factura.pdf');
-
-    // Lee el PDF existente
-    const existingPdfBytes = await fs.readFileSync(pdfPath);
-    
-    // Crea un nuevo documento PDF basado en el PDF existente
-    const pdfDoc = await PDFLib.PDFDocument.load(existingPdfBytes);
-    
-
-    // Obtiene la primera página del PDF (puedes ajustar esto según tus necesidades)
-    const firstPage = pdfDoc.getPages()[0];
-
-    // // Obtiene o crea un formulario en la página
-    // const form = firstPage.getForm();
-
-    // // Define los valores para los campos del formulario
-    // const campo1Valor = 'ValorCampo1';
-    // const campo2Valor = 'ValorCampo2';
-
-    // // Rellena los campos de formulario
-    // form.getTextField('cliente').setText(campo1Valor);
-    // form.getTextField('direccion').setText(campo2Valor);
-    
-    // const pdfBytes = await pdfDoc.save();
-    
-    // const blob = new Blob([pdfBytes], { type: 'application/pdf' });
-    // const url = URL.createObjectURL(blob);
-    //  window.open(url, '_blank');
-
-    Swal.fire({
-        icon: "success",
-        text: "Factura Impresa"
-      })
-    }
-
-module.exports = {login, logout, guardarFacturaPDF};

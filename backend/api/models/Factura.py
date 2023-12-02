@@ -55,48 +55,6 @@ class Factura():
             # Creo un objeto que representa el encabezado de la factura a partir del json del request
             encabezadoFactura = Factura(jsonEncabezadoFactura)
             
-            # Calculo el monto total de la factura
-            totalFactura = DetalleFactura.obtenerTotalFactura(jsonDetalleFactura)
-            
-            # Inserto el encabezado de la factura en la BD
-            cur = mysql.connection.cursor()
-            cur.callproc('sp_insertarFactura', [encabezadoFactura._id_cliente, encabezadoFactura._id_usuario, encabezadoFactura._fecha,
-                                                totalFactura, encabezadoFactura._id_tipoFactura, encabezadoFactura._id_condicionVenta])
-            
-            # Confirmo los cambios
-            mysql.connection.commit()
-            cur.close()
-            
-            cur = mysql.connection.cursor()
-            # Agrego cada fila del detalle de la factura a la BD
-            for fila in jsonDetalleFactura:
-                detalleFactura = DetalleFactura(fila)
-                cur.callproc('sp_insertarFacturaDetalle', [encabezadoFactura._id_cliente, encabezadoFactura._id_usuario, detalleFactura._id_producto,
-                                                       detalleFactura._cantidad, detalleFactura._precio])
-           
-            # Confirmo los cambios
-            mysql.connection.commit()
-            cur.close()
-            return jsonify({'message':'Factura Creada con Éxito'}), 200
-        except Exception as ex:
-            return jsonify({'message':str(ex)}), 409
-
-    @staticmethod
-    def insertarFacturaCompleta(jsonEncabezadoFactura, jsonDetalleFactura):
-        """
-        Inserta una nueva factura en la base de datos.
-
-        Parameters:
-            jsonEncabezadoFactura (dict): Datos del encabezado de la factura en formato JSON.
-            jsonDetalleFactura (list): Lista de datos del detalle de la factura en formato JSON.
-
-        Returns:
-            tuple: Respuesta JSON y código de estado HTTP.
-        """
-        try:
-            # Creo un objeto que representa el encabezado de la factura a partir del json del request
-            encabezadoFactura = Factura(jsonEncabezadoFactura)
-            
 
             # Validaciones
             # Validación CUIL/CUIT cliente
@@ -238,6 +196,19 @@ class Factura():
             return {'encabezado':encabezadoFactura, 'detalle':detalleFactura}, 200
         else:
             return jsonify({'message':'El usuario no tiene facturas registradas.'}), 409
+        cur.close()
+
+    @staticmethod
+    def obtenerUltimoNroFacturaByUsuario(id_usuario):
+        # Primero obtengo el encabezado de la factura
+        cur = mysql.connection.cursor()
+        cur.callproc('sp_obtenerUltimoNroFacturaByUsuario', [id_usuario.strip(),])
+        datos = cur.fetchone()
+        
+        if len(datos) != 0:
+            return {'ultimoNroFactura':datos[0], 'id_cliente':datos[1]}, 200
+        else:
+            return {'message':'El usuario no tiene facturas registradas.'}
         cur.close()
 
 class DetalleFactura():

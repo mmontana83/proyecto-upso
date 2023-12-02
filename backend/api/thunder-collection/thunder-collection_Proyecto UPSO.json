@@ -1,63 +1,63 @@
 {
     "client": "Thunder Client",
     "collectionName": "Proyecto UPSO",
-    "dateExported": "2023-12-01T14:30:18.711Z",
+    "dateExported": "2023-12-02T19:46:31.942Z",
     "version": "1.1",
     "folders": [
         {
-            "_id": "6078c1eb-78ba-41fd-bcf3-137fd999290e",
+            "_id": "c5f9f317-c3c3-4bbe-9838-ceea48cfb8df",
             "name": "Login",
             "containerId": "",
-            "created": "2023-11-19T17:48:31.255Z",
+            "created": "2023-12-02T16:12:17.147Z",
             "sortNum": 10000
         },
         {
-            "_id": "03ce1594-097e-41f8-ae1f-29a16a0d776c",
+            "_id": "03c282f7-9bfc-4776-8177-550724598118",
             "name": "Clientes",
             "containerId": "",
-            "created": "2023-11-19T17:48:31.256Z",
+            "created": "2023-12-02T16:12:17.148Z",
             "sortNum": 20000
         },
         {
-            "_id": "ac86d89f-a724-4b62-9bad-7adbd07dd0d2",
+            "_id": "ac41e89f-dedf-45f9-917f-e1bcc820400e",
             "name": "Facturacion",
             "containerId": "",
-            "created": "2023-11-19T17:48:31.257Z",
+            "created": "2023-12-02T16:12:17.149Z",
             "sortNum": 30000
         },
         {
-            "_id": "2ef16155-160f-4a06-8368-8b3b9d3b7d53",
+            "_id": "0086a2d3-2410-4fd9-8d06-19d2d9e988db",
             "name": "Categorías",
             "containerId": "",
-            "created": "2023-11-19T17:48:31.258Z",
+            "created": "2023-12-02T16:12:17.150Z",
             "sortNum": 40000
         },
         {
-            "_id": "d78cccbf-1082-4c9c-85b3-164451f8114e",
+            "_id": "3bdcc43d-2965-45af-b98e-4fd6b46cf71b",
             "name": "Dashboard",
             "containerId": "",
-            "created": "2023-11-19T17:48:31.259Z",
+            "created": "2023-12-02T16:12:17.151Z",
             "sortNum": 50000
         },
         {
-            "_id": "3674c275-2e9e-4b55-aa59-27b76c2d0c7d",
+            "_id": "6fc7e4ec-ee7f-4b0b-825f-5d648248a147",
             "name": "Productos",
             "containerId": "",
-            "created": "2023-11-19T17:48:31.260Z",
+            "created": "2023-12-02T16:12:17.152Z",
             "sortNum": 60000
         }
     ],
     "requests": [
         {
-            "_id": "7c833cbc-5eab-436a-b7c6-0fd9fad061b1",
-            "colId": "15eb39ab-4468-496b-8361-a6e279efaf80",
-            "containerId": "03ce1594-097e-41f8-ae1f-29a16a0d776c",
+            "_id": "9983d77c-06c5-4522-bd7c-fcd2ad5dbb8c",
+            "colId": "d5b8a53b-c0a6-4e44-803c-b03fcff6753d",
+            "containerId": "03c282f7-9bfc-4776-8177-550724598118",
             "name": "Listar Clientes por Usuario",
             "url": "127.0.0.1:5000/usuario/20302022731/cliente",
             "method": "GET",
             "sortNum": 10000,
-            "created": "2023-11-19T17:48:31.255Z",
-            "modified": "2023-11-29T19:49:47.574Z",
+            "created": "2023-12-02T16:12:17.147Z",
+            "modified": "2023-12-02T16:12:17.147Z",
             "headers": [
                 {
                     "name": "user-id",
@@ -72,15 +72,15 @@
             "tests": []
         },
         {
-            "_id": "fe52db96-e6ee-4167-a339-dd6f4f8f5986",
-            "colId": "15eb39ab-4468-496b-8361-a6e279efaf80",
-            "containerId": "6078c1eb-78ba-41fd-bcf3-137fd999290e",
+            "_id": "851d052c-f2cd-474f-ab31-e7af80fa791e",
+            "colId": "d5b8a53b-c0a6-4e44-803c-b03fcff6753d",
+            "containerId": "c5f9f317-c3c3-4bbe-9838-ceea48cfb8df",
             "name": "Login",
             "url": "127.0.0.1:5000/login",
             "method": "POST",
             "sortNum": 10000,
-            "created": "2023-11-19T17:48:31.256Z",
-            "modified": "2023-12-01T13:04:29.168Z",
+            "created": "2023-12-02T16:12:17.148Z",
+            "modified": "2023-12-02T16:12:17.148Z",
             "headers": [],
             "params": [],
             "auth": {
@@ -93,15 +93,15 @@
             "tests": []
         },
         {
-            "_id": "a8445cfb-4e03-4439-aee6-3c742d3eab00",
-            "colId": "15eb39ab-4468-496b-8361-a6e279efaf80",
-            "containerId": "03ce1594-097e-41f8-ae1f-29a16a0d776c",
+            "_id": "484ea873-1f67-4b8e-9837-e0ff63a30aa8",
+            "colId": "d5b8a53b-c0a6-4e44-803c-b03fcff6753d",
+            "containerId": "03c282f7-9bfc-4776-8177-550724598118",
             "name": "Obtener Cliente por Usuario",
             "url": "127.0.0.1:5000/usuario/20302022731/cliente/12246549873",
             "method": "GET",
             "sortNum": 20000,
-            "created": "2023-11-19T17:48:31.257Z",
-            "modified": "2023-11-29T19:49:35.685Z",
+            "created": "2023-12-02T16:12:17.149Z",
+            "modified": "2023-12-02T16:12:17.149Z",
             "headers": [
                 {
                     "name": "user-id",
@@ -116,15 +116,15 @@
             "tests": []
         },
         {
-            "_id": "ba5f666c-503b-406e-909f-7de0f41a0098",
-            "colId": "15eb39ab-4468-496b-8361-a6e279efaf80",
-            "containerId": "03ce1594-097e-41f8-ae1f-29a16a0d776c",
+            "_id": "1994b4bd-08ad-4cd7-b5e7-7ef76df81ff1",
+            "colId": "d5b8a53b-c0a6-4e44-803c-b03fcff6753d",
+            "containerId": "03c282f7-9bfc-4776-8177-550724598118",
             "name": "Obtener Estado Cliente por Usuario",
             "url": "127.0.0.1:5000/usuario/20302022731/cliente/12246549873/estado",
             "method": "GET",
             "sortNum": 25000,
-            "created": "2023-11-29T19:48:14.673Z",
-            "modified": "2023-11-29T19:48:47.191Z",
+            "created": "2023-12-02T16:12:17.175Z",
+            "modified": "2023-12-02T16:12:17.175Z",
             "headers": [
                 {
                     "name": "user-id",
@@ -139,15 +139,15 @@
             "tests": []
         },
         {
-            "_id": "a2beeaca-30be-4e5a-ba6f-51b233f49c85",
-            "colId": "15eb39ab-4468-496b-8361-a6e279efaf80",
-            "containerId": "03ce1594-097e-41f8-ae1f-29a16a0d776c",
+            "_id": "523b373f-111c-4cc3-8329-19a930fef5f3",
+            "colId": "d5b8a53b-c0a6-4e44-803c-b03fcff6753d",
+            "containerId": "03c282f7-9bfc-4776-8177-550724598118",
             "name": "Registrar Cliente",
             "url": "127.0.0.1:5000/usuario/24302022737/cliente",
             "method": "POST",
             "sortNum": 30000,
-            "created": "2023-11-19T17:48:31.258Z",
-            "modified": "2023-11-19T17:48:31.258Z",
+            "created": "2023-12-02T16:12:17.150Z",
+            "modified": "2023-12-02T16:12:17.150Z",
             "headers": [],
             "params": [],
             "body": {
@@ -158,15 +158,15 @@
             "tests": []
         },
         {
-            "_id": "fc2378f6-0b4a-4b90-b2ba-08e422b61c54",
-            "colId": "15eb39ab-4468-496b-8361-a6e279efaf80",
-            "containerId": "03ce1594-097e-41f8-ae1f-29a16a0d776c",
+            "_id": "3f31a438-650b-4902-8841-ef6c6d9dd38c",
+            "colId": "d5b8a53b-c0a6-4e44-803c-b03fcff6753d",
+            "containerId": "03c282f7-9bfc-4776-8177-550724598118",
             "name": "Actualizar Cliente",
             "url": "127.0.0.1:5000/usuario/23302022739/cliente/23551234568",
             "method": "POST",
             "sortNum": 40000,
-            "created": "2023-11-19T17:48:31.259Z",
-            "modified": "2023-11-19T17:48:31.259Z",
+            "created": "2023-12-02T16:12:17.151Z",
+            "modified": "2023-12-02T16:12:17.151Z",
             "headers": [],
             "params": [],
             "body": {
@@ -177,43 +177,43 @@
             "tests": []
         },
         {
-            "_id": "e9d85431-ce29-4c6f-8a3f-be9175605f51",
-            "colId": "15eb39ab-4468-496b-8361-a6e279efaf80",
-            "containerId": "03ce1594-097e-41f8-ae1f-29a16a0d776c",
+            "_id": "92abb923-a0d3-4e99-adb5-5b29ec8514ff",
+            "colId": "d5b8a53b-c0a6-4e44-803c-b03fcff6753d",
+            "containerId": "03c282f7-9bfc-4776-8177-550724598118",
             "name": "Eliminar Cliente",
             "url": "127.0.0.1:5000/usuario/20302022731/cliente/23183214579",
             "method": "DELETE",
             "sortNum": 50000,
-            "created": "2023-11-19T17:48:31.260Z",
-            "modified": "2023-11-19T17:48:31.260Z",
+            "created": "2023-12-02T16:12:17.152Z",
+            "modified": "2023-12-02T16:12:17.152Z",
             "headers": [],
             "params": [],
             "tests": []
         },
         {
-            "_id": "f3acec78-abd8-4b37-a5c9-7c0e78ebdf43",
-            "colId": "15eb39ab-4468-496b-8361-a6e279efaf80",
-            "containerId": "03ce1594-097e-41f8-ae1f-29a16a0d776c",
+            "_id": "2cd71f50-f38b-43f8-bfc6-1708f02d509c",
+            "colId": "d5b8a53b-c0a6-4e44-803c-b03fcff6753d",
+            "containerId": "03c282f7-9bfc-4776-8177-550724598118",
             "name": "Alta Cliente",
             "url": "127.0.0.1:5000/usuario/20302022731/cliente/23183214579",
             "method": "PUT",
             "sortNum": 60000,
-            "created": "2023-11-19T17:48:31.261Z",
-            "modified": "2023-11-19T17:48:31.261Z",
+            "created": "2023-12-02T16:12:17.153Z",
+            "modified": "2023-12-02T16:12:17.153Z",
             "headers": [],
             "params": [],
             "tests": []
         },
         {
-            "_id": "abc1290e-c920-4d08-965b-1d38328ce5c0",
-            "colId": "15eb39ab-4468-496b-8361-a6e279efaf80",
-            "containerId": "ac86d89f-a724-4b62-9bad-7adbd07dd0d2",
+            "_id": "77538abe-275e-4288-a621-8d7e44122af0",
+            "colId": "d5b8a53b-c0a6-4e44-803c-b03fcff6753d",
+            "containerId": "ac41e89f-dedf-45f9-917f-e1bcc820400e",
             "name": "get_facturas_by_usuario",
             "url": "127.0.0.1:5000/usuario/20302022731/facturas",
             "method": "GET",
             "sortNum": 70000,
-            "created": "2023-11-19T17:48:31.262Z",
-            "modified": "2023-11-29T14:33:50.982Z",
+            "created": "2023-12-02T16:12:17.154Z",
+            "modified": "2023-12-02T16:12:17.154Z",
             "headers": [
                 {
                     "name": "user-id",
@@ -228,15 +228,15 @@
             "tests": []
         },
         {
-            "_id": "1d671507-eac7-486a-892c-26a01775d722",
-            "colId": "15eb39ab-4468-496b-8361-a6e279efaf80",
-            "containerId": "ac86d89f-a724-4b62-9bad-7adbd07dd0d2",
+            "_id": "56c0d4c3-c0a3-495e-9ee4-961cf89c4378",
+            "colId": "d5b8a53b-c0a6-4e44-803c-b03fcff6753d",
+            "containerId": "ac41e89f-dedf-45f9-917f-e1bcc820400e",
             "name": "get_facturas_by_cliente",
             "url": "127.0.0.1:5000/usuario/20302022731/cliente/25789457891/factura",
             "method": "GET",
             "sortNum": 80000,
-            "created": "2023-11-19T17:48:31.263Z",
-            "modified": "2023-11-29T14:34:17.686Z",
+            "created": "2023-12-02T16:12:17.155Z",
+            "modified": "2023-12-02T16:12:17.155Z",
             "headers": [
                 {
                     "name": "user-id",
@@ -251,15 +251,15 @@
             "tests": []
         },
         {
-            "_id": "f85336bf-b67b-4555-9969-32cbb3342794",
-            "colId": "15eb39ab-4468-496b-8361-a6e279efaf80",
-            "containerId": "ac86d89f-a724-4b62-9bad-7adbd07dd0d2",
+            "_id": "bd12b33f-483d-42ca-a990-37b5bc62171b",
+            "colId": "d5b8a53b-c0a6-4e44-803c-b03fcff6753d",
+            "containerId": "ac41e89f-dedf-45f9-917f-e1bcc820400e",
             "name": "get_factura_by_cliente",
             "url": "127.0.0.1:5000/usuario/20302022731/cliente/23183214579/factura/1",
             "method": "GET",
             "sortNum": 90000,
-            "created": "2023-11-19T17:48:31.264Z",
-            "modified": "2023-11-29T14:35:10.752Z",
+            "created": "2023-12-02T16:12:17.156Z",
+            "modified": "2023-12-02T16:12:17.156Z",
             "headers": [
                 {
                     "name": "user-id",
@@ -274,15 +274,15 @@
             "tests": []
         },
         {
-            "_id": "f42c99a7-6ac7-4a4c-831e-ac2b44fecfce",
-            "colId": "15eb39ab-4468-496b-8361-a6e279efaf80",
-            "containerId": "ac86d89f-a724-4b62-9bad-7adbd07dd0d2",
+            "_id": "70c084c1-c332-4502-b01d-a15ca12082fd",
+            "colId": "d5b8a53b-c0a6-4e44-803c-b03fcff6753d",
+            "containerId": "ac41e89f-dedf-45f9-917f-e1bcc820400e",
             "name": "Insertar Factura",
             "url": "127.0.0.1:5000/usuario/20302022731/cliente/24241966642/factura",
             "method": "POST",
             "sortNum": 90000,
-            "created": "2023-11-19T17:48:31.265Z",
-            "modified": "2023-12-01T12:27:03.203Z",
+            "created": "2023-12-02T16:12:17.157Z",
+            "modified": "2023-12-02T16:12:17.157Z",
             "headers": [
                 {
                     "name": "user-id",
@@ -302,15 +302,15 @@
             "tests": []
         },
         {
-            "_id": "db4e1097-64b5-4166-b521-d88ea13739c6",
-            "colId": "15eb39ab-4468-496b-8361-a6e279efaf80",
-            "containerId": "2ef16155-160f-4a06-8368-8b3b9d3b7d53",
+            "_id": "ccdd7e65-4667-4781-b203-727e3c0487c8",
+            "colId": "d5b8a53b-c0a6-4e44-803c-b03fcff6753d",
+            "containerId": "0086a2d3-2410-4fd9-8d06-19d2d9e988db",
             "name": "MostrarTipoCondicionIVA",
             "url": "127.0.0.1:5000/dashboard/listarTipoCondicionIVA",
             "method": "GET",
             "sortNum": 100000,
-            "created": "2023-11-19T17:48:31.266Z",
-            "modified": "2023-11-29T17:00:17.848Z",
+            "created": "2023-12-02T16:12:17.158Z",
+            "modified": "2023-12-02T16:12:17.158Z",
             "headers": [
                 {
                     "name": "x-access-token",
@@ -325,15 +325,38 @@
             "tests": []
         },
         {
-            "_id": "5211ff18-4139-48ce-b974-f7be9cf4a0e0",
-            "colId": "15eb39ab-4468-496b-8361-a6e279efaf80",
-            "containerId": "2ef16155-160f-4a06-8368-8b3b9d3b7d53",
+            "_id": "6cc3c66b-26d2-4c63-931d-cff79f42cdf7",
+            "colId": "d5b8a53b-c0a6-4e44-803c-b03fcff6753d",
+            "containerId": "ac41e89f-dedf-45f9-917f-e1bcc820400e",
+            "name": "Obtener Último Nro Factura por Usuario",
+            "url": "127.0.0.1:5000/usuario/20302022731/ultimoNroFactura",
+            "method": "GET",
+            "sortNum": 100000,
+            "created": "2023-12-02T19:45:12.798Z",
+            "modified": "2023-12-02T19:46:19.510Z",
+            "headers": [
+                {
+                    "name": "user-id",
+                    "value": "20302022731"
+                },
+                {
+                    "name": "x-access-token",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c3VhcmlvIjoiMjAzMDIwMjI3MzEiLCJleHAiOjE3MDEyNzMyMTN9.xHW68hAHUlF1psRn47CLb_2RUknTd-IMadZ8WhXisNw"
+                }
+            ],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "5d2abafc-a3ad-460f-8542-b3d19490cf23",
+            "colId": "d5b8a53b-c0a6-4e44-803c-b03fcff6753d",
+            "containerId": "0086a2d3-2410-4fd9-8d06-19d2d9e988db",
             "name": "MostrarTipoFactura",
             "url": "127.0.0.1:5000/dashboard/listarTipoFactura",
             "method": "GET",
             "sortNum": 110000,
-            "created": "2023-11-19T17:48:31.267Z",
-            "modified": "2023-11-29T17:01:29.147Z",
+            "created": "2023-12-02T16:12:17.159Z",
+            "modified": "2023-12-02T16:12:17.159Z",
             "headers": [
                 {
                     "name": "x-access-token",
@@ -348,15 +371,15 @@
             "tests": []
         },
         {
-            "_id": "da1d1338-5773-41a7-84ac-0af1568c7b54",
-            "colId": "15eb39ab-4468-496b-8361-a6e279efaf80",
-            "containerId": "2ef16155-160f-4a06-8368-8b3b9d3b7d53",
+            "_id": "a8bcd75d-cfcb-4126-b22e-197127abf5a7",
+            "colId": "d5b8a53b-c0a6-4e44-803c-b03fcff6753d",
+            "containerId": "0086a2d3-2410-4fd9-8d06-19d2d9e988db",
             "name": "MostrarTipoProducto",
             "url": "127.0.0.1:5000/dashboard/listarTipoProducto",
             "method": "GET",
             "sortNum": 120000,
-            "created": "2023-11-19T17:48:31.268Z",
-            "modified": "2023-11-29T17:01:48.464Z",
+            "created": "2023-12-02T16:12:17.160Z",
+            "modified": "2023-12-02T16:12:17.160Z",
             "headers": [
                 {
                     "name": "x-access-token",
@@ -371,15 +394,15 @@
             "tests": []
         },
         {
-            "_id": "dde3f8fe-95b5-4e11-8741-44d2b19b705c",
-            "colId": "15eb39ab-4468-496b-8361-a6e279efaf80",
-            "containerId": "2ef16155-160f-4a06-8368-8b3b9d3b7d53",
+            "_id": "4bf795ba-7f3d-4fc7-9f9a-bfcc4459de5e",
+            "colId": "d5b8a53b-c0a6-4e44-803c-b03fcff6753d",
+            "containerId": "0086a2d3-2410-4fd9-8d06-19d2d9e988db",
             "name": "MostrarTipoCondicionVenta",
             "url": "127.0.0.1:5000/dashboard/listarTipoCondicionVenta",
             "method": "GET",
             "sortNum": 130000,
-            "created": "2023-11-19T17:48:31.269Z",
-            "modified": "2023-11-29T17:02:18.839Z",
+            "created": "2023-12-02T16:12:17.161Z",
+            "modified": "2023-12-02T16:12:17.161Z",
             "headers": [
                 {
                     "name": "x-access-token",
@@ -394,15 +417,15 @@
             "tests": []
         },
         {
-            "_id": "a3361908-9d10-40a3-a0a3-b9303dbe2e4b",
-            "colId": "15eb39ab-4468-496b-8361-a6e279efaf80",
-            "containerId": "d78cccbf-1082-4c9c-85b3-164451f8114e",
+            "_id": "3d5faac4-594b-4f91-9087-2535b99fd39d",
+            "colId": "d5b8a53b-c0a6-4e44-803c-b03fcff6753d",
+            "containerId": "3bdcc43d-2965-45af-b98e-4fd6b46cf71b",
             "name": "Control Stock",
             "url": "127.0.0.1:5000/usuario/23302022731/dashboard/controlStock",
             "method": "GET",
             "sortNum": 140000,
-            "created": "2023-11-19T17:48:31.270Z",
-            "modified": "2023-11-29T17:19:10.363Z",
+            "created": "2023-12-02T16:12:17.162Z",
+            "modified": "2023-12-02T16:12:17.162Z",
             "headers": [
                 {
                     "name": "x-access-token",
@@ -417,15 +440,15 @@
             "tests": []
         },
         {
-            "_id": "6b19439e-b7d6-4c62-b88c-de41f56df61c",
-            "colId": "15eb39ab-4468-496b-8361-a6e279efaf80",
-            "containerId": "d78cccbf-1082-4c9c-85b3-164451f8114e",
+            "_id": "1c982a17-70c2-44a5-84ba-5f97a794eadf",
+            "colId": "d5b8a53b-c0a6-4e44-803c-b03fcff6753d",
+            "containerId": "3bdcc43d-2965-45af-b98e-4fd6b46cf71b",
             "name": "Historial de Ventas",
             "url": "127.0.0.1:5000/usuario/20302022731/dashboard/historialVentas",
             "method": "GET",
             "sortNum": 150000,
-            "created": "2023-11-19T17:48:31.271Z",
-            "modified": "2023-11-29T17:19:29.637Z",
+            "created": "2023-12-02T16:12:17.163Z",
+            "modified": "2023-12-02T16:12:17.163Z",
             "headers": [
                 {
                     "name": "x-access-token",
@@ -440,15 +463,15 @@
             "tests": []
         },
         {
-            "_id": "e5ac0342-6939-4375-9e9c-b5f40c88d2d2",
-            "colId": "15eb39ab-4468-496b-8361-a6e279efaf80",
-            "containerId": "d78cccbf-1082-4c9c-85b3-164451f8114e",
+            "_id": "6b9e175b-f2c9-45df-afa7-bb0122e6e45e",
+            "colId": "d5b8a53b-c0a6-4e44-803c-b03fcff6753d",
+            "containerId": "3bdcc43d-2965-45af-b98e-4fd6b46cf71b",
             "name": "Movimiento de Stock",
             "url": "127.0.0.1:5000/usuario/20302022731/dashboard/movimientoStock",
             "method": "GET",
             "sortNum": 160000,
-            "created": "2023-11-19T17:48:31.272Z",
-            "modified": "2023-11-29T17:19:53.381Z",
+            "created": "2023-12-02T16:12:17.164Z",
+            "modified": "2023-12-02T16:12:17.164Z",
             "headers": [
                 {
                     "name": "x-access-token",
@@ -463,15 +486,15 @@
             "tests": []
         },
         {
-            "_id": "a3a96e86-9f36-43aa-899d-fdeb0b37ca0d",
-            "colId": "15eb39ab-4468-496b-8361-a6e279efaf80",
-            "containerId": "d78cccbf-1082-4c9c-85b3-164451f8114e",
+            "_id": "88248619-9ee6-432c-9dae-7bbfde979304",
+            "colId": "d5b8a53b-c0a6-4e44-803c-b03fcff6753d",
+            "containerId": "3bdcc43d-2965-45af-b98e-4fd6b46cf71b",
             "name": "Ranking de Ventas por Cliente",
             "url": "127.0.0.1:5000/usuario/20302022731/dashboard/rankingVentasByCliente",
             "method": "GET",
             "sortNum": 170000,
-            "created": "2023-11-19T17:48:31.273Z",
-            "modified": "2023-11-29T17:20:11.792Z",
+            "created": "2023-12-02T16:12:17.165Z",
+            "modified": "2023-12-02T16:12:17.165Z",
             "headers": [
                 {
                     "name": "x-access-token",
@@ -486,15 +509,15 @@
             "tests": []
         },
         {
-            "_id": "859a2f09-21bd-4352-bdc4-816a3d363f82",
-            "colId": "15eb39ab-4468-496b-8361-a6e279efaf80",
-            "containerId": "d78cccbf-1082-4c9c-85b3-164451f8114e",
+            "_id": "f7e64082-5122-4cb1-aa1d-0e23b95f9f50",
+            "colId": "d5b8a53b-c0a6-4e44-803c-b03fcff6753d",
+            "containerId": "3bdcc43d-2965-45af-b98e-4fd6b46cf71b",
             "name": "Ranking de Ventas por Producto",
             "url": "127.0.0.1:5000/usuario/20302022731/dashboard/rankingVentasByProducto",
             "method": "GET",
             "sortNum": 180000,
-            "created": "2023-11-19T17:48:31.274Z",
-            "modified": "2023-11-29T17:20:29.747Z",
+            "created": "2023-12-02T16:12:17.166Z",
+            "modified": "2023-12-02T16:12:17.166Z",
             "headers": [
                 {
                     "name": "x-access-token",
@@ -509,15 +532,15 @@
             "tests": []
         },
         {
-            "_id": "f3c488f3-940a-4b57-8b53-8ea4d3ee36d2",
-            "colId": "15eb39ab-4468-496b-8361-a6e279efaf80",
-            "containerId": "d78cccbf-1082-4c9c-85b3-164451f8114e",
+            "_id": "82b87b6f-d2a6-4c93-96f1-b9bda873a90a",
+            "colId": "d5b8a53b-c0a6-4e44-803c-b03fcff6753d",
+            "containerId": "3bdcc43d-2965-45af-b98e-4fd6b46cf71b",
             "name": "Ranking de Ventas por Servicio",
             "url": "127.0.0.1:5000/usuario/20302022731/dashboard/rankingVentasByServicio",
             "method": "GET",
             "sortNum": 190000,
-            "created": "2023-11-19T17:48:31.275Z",
-            "modified": "2023-11-29T17:20:48.664Z",
+            "created": "2023-12-02T16:12:17.167Z",
+            "modified": "2023-12-02T16:12:17.167Z",
             "headers": [
                 {
                     "name": "x-access-token",
@@ -532,15 +555,15 @@
             "tests": []
         },
         {
-            "_id": "a16271e3-9b57-463b-8405-2aad43eec19d",
-            "colId": "15eb39ab-4468-496b-8361-a6e279efaf80",
-            "containerId": "3674c275-2e9e-4b55-aa59-27b76c2d0c7d",
+            "_id": "eaf6474e-413e-44d6-bf8a-527af6b7fa08",
+            "colId": "d5b8a53b-c0a6-4e44-803c-b03fcff6753d",
+            "containerId": "6fc7e4ec-ee7f-4b0b-825f-5d648248a147",
             "name": "Obtener Productos por Usuario",
             "url": "127.0.0.1:5000/usuario/23302022739/productos",
             "method": "GET",
             "sortNum": 200000,
-            "created": "2023-11-19T17:48:31.276Z",
-            "modified": "2023-12-01T14:23:43.522Z",
+            "created": "2023-12-02T16:12:17.168Z",
+            "modified": "2023-12-02T16:12:17.168Z",
             "headers": [
                 {
                     "name": "user-id",
@@ -555,15 +578,15 @@
             "tests": []
         },
         {
-            "_id": "0de2488b-2ac2-4599-8d27-844a0d365a83",
-            "colId": "15eb39ab-4468-496b-8361-a6e279efaf80",
-            "containerId": "3674c275-2e9e-4b55-aa59-27b76c2d0c7d",
+            "_id": "bbebe009-dc26-4ab1-bdf7-b293faf4063f",
+            "colId": "d5b8a53b-c0a6-4e44-803c-b03fcff6753d",
+            "containerId": "6fc7e4ec-ee7f-4b0b-825f-5d648248a147",
             "name": "Obtener Producto por Usuario",
             "url": "127.0.0.1:5000/usuario/23302022739/producto/123456",
             "method": "GET",
             "sortNum": 205000,
-            "created": "2023-12-01T14:24:08.975Z",
-            "modified": "2023-12-01T14:24:35.961Z",
+            "created": "2023-12-02T16:12:17.177Z",
+            "modified": "2023-12-02T16:12:17.177Z",
             "headers": [
                 {
                     "name": "user-id",
@@ -578,15 +601,15 @@
             "tests": []
         },
         {
-            "_id": "e18f78db-f804-441f-9d33-dfb6a675e2a5",
-            "colId": "15eb39ab-4468-496b-8361-a6e279efaf80",
-            "containerId": "3674c275-2e9e-4b55-aa59-27b76c2d0c7d",
+            "_id": "915f85bd-2fdb-45ee-9e12-a1d5e19209fb",
+            "colId": "d5b8a53b-c0a6-4e44-803c-b03fcff6753d",
+            "containerId": "6fc7e4ec-ee7f-4b0b-825f-5d648248a147",
             "name": "Actualizar Producto",
             "url": "127.0.0.1:5000/usuario/23302022739/producto/123456",
             "method": "POST",
             "sortNum": 210000,
-            "created": "2023-11-19T17:48:31.277Z",
-            "modified": "2023-12-01T14:22:39.567Z",
+            "created": "2023-12-02T16:12:17.169Z",
+            "modified": "2023-12-02T16:12:17.169Z",
             "headers": [
                 {
                     "name": "user-id",
@@ -606,15 +629,15 @@
             "tests": []
         },
         {
-            "_id": "9b1d1828-3dce-4019-9030-b5efeaaa753c",
-            "colId": "15eb39ab-4468-496b-8361-a6e279efaf80",
-            "containerId": "3674c275-2e9e-4b55-aa59-27b76c2d0c7d",
+            "_id": "236beae4-12e7-464f-a8bb-09db111a9a3e",
+            "colId": "d5b8a53b-c0a6-4e44-803c-b03fcff6753d",
+            "containerId": "6fc7e4ec-ee7f-4b0b-825f-5d648248a147",
             "name": "Eliminar Producto",
             "url": "127.0.0.1:5000/usuario/23302022739/producto/234512",
             "method": "DELETE",
             "sortNum": 215000,
-            "created": "2023-11-19T17:48:31.279Z",
-            "modified": "2023-12-01T14:20:06.431Z",
+            "created": "2023-12-02T16:12:17.171Z",
+            "modified": "2023-12-02T16:12:17.171Z",
             "headers": [
                 {
                     "name": "user-id",
@@ -629,15 +652,15 @@
             "tests": []
         },
         {
-            "_id": "9139557a-c975-45ad-b38d-94063177f900",
-            "colId": "15eb39ab-4468-496b-8361-a6e279efaf80",
-            "containerId": "3674c275-2e9e-4b55-aa59-27b76c2d0c7d",
+            "_id": "72a6cbd1-f933-4980-af90-6de8e1ce5546",
+            "colId": "d5b8a53b-c0a6-4e44-803c-b03fcff6753d",
+            "containerId": "6fc7e4ec-ee7f-4b0b-825f-5d648248a147",
             "name": "Insertar Producto",
             "url": "127.0.0.1:5000/usuario/23302022739/producto/",
             "method": "POST",
             "sortNum": 220000,
-            "created": "2023-11-19T17:48:31.278Z",
-            "modified": "2023-12-01T14:18:29.564Z",
+            "created": "2023-12-02T16:12:17.170Z",
+            "modified": "2023-12-02T16:12:17.170Z",
             "headers": [
                 {
                     "name": "user-id",
@@ -657,15 +680,15 @@
             "tests": []
         },
         {
-            "_id": "4f3b87de-ba35-4c45-9a7f-befd05e3cf05",
-            "colId": "15eb39ab-4468-496b-8361-a6e279efaf80",
-            "containerId": "3674c275-2e9e-4b55-aa59-27b76c2d0c7d",
+            "_id": "8a799d49-96ef-472e-b213-a3ff7ccdd70a",
+            "colId": "d5b8a53b-c0a6-4e44-803c-b03fcff6753d",
+            "containerId": "6fc7e4ec-ee7f-4b0b-825f-5d648248a147",
             "name": "Alta Producto",
             "url": "127.0.0.1:5000/usuario/23302022739/producto/234512",
             "method": "PUT",
             "sortNum": 230000,
-            "created": "2023-11-19T17:48:31.280Z",
-            "modified": "2023-12-01T14:21:09.515Z",
+            "created": "2023-12-02T16:12:17.172Z",
+            "modified": "2023-12-02T16:12:17.172Z",
             "headers": [
                 {
                     "name": "user-id",
@@ -685,15 +708,15 @@
             "tests": []
         },
         {
-            "_id": "adb04fef-fcb9-4cf0-afe8-6e7b830a1f2d",
-            "colId": "15eb39ab-4468-496b-8361-a6e279efaf80",
-            "containerId": "d78cccbf-1082-4c9c-85b3-164451f8114e",
+            "_id": "60680791-0773-463d-9bd2-0e97febe95a4",
+            "colId": "d5b8a53b-c0a6-4e44-803c-b03fcff6753d",
+            "containerId": "3bdcc43d-2965-45af-b98e-4fd6b46cf71b",
             "name": "Ventas Totales",
             "url": "127.0.0.1:5000/usuario/20302022731/dashboard/ventasTotales",
             "method": "GET",
             "sortNum": 240000,
-            "created": "2023-11-24T17:30:02.210Z",
-            "modified": "2023-11-29T17:22:13.480Z",
+            "created": "2023-12-02T16:12:17.173Z",
+            "modified": "2023-12-02T16:12:17.173Z",
             "headers": [
                 {
                     "name": "x-access-token",
@@ -708,15 +731,15 @@
             "tests": []
         },
         {
-            "_id": "c5be2bf5-248c-4062-8c85-012509d2bb63",
-            "colId": "15eb39ab-4468-496b-8361-a6e279efaf80",
-            "containerId": "d78cccbf-1082-4c9c-85b3-164451f8114e",
+            "_id": "7696eb62-8fa5-44b8-8f53-915de0d80dbb",
+            "colId": "d5b8a53b-c0a6-4e44-803c-b03fcff6753d",
+            "containerId": "3bdcc43d-2965-45af-b98e-4fd6b46cf71b",
             "name": "Clientes Activos",
             "url": "127.0.0.1:5000/usuario/20302022731/dashboard/clientesActivos",
             "method": "GET",
             "sortNum": 250000,
-            "created": "2023-11-24T18:05:29.061Z",
-            "modified": "2023-11-29T17:22:35.000Z",
+            "created": "2023-12-02T16:12:17.174Z",
+            "modified": "2023-12-02T16:12:17.174Z",
             "headers": [
                 {
                     "name": "x-access-token",
@@ -731,15 +754,15 @@
             "tests": []
         },
         {
-            "_id": "1fa6a6ad-5be1-4969-b9a7-c250b5b14584",
-            "colId": "15eb39ab-4468-496b-8361-a6e279efaf80",
-            "containerId": "3674c275-2e9e-4b55-aa59-27b76c2d0c7d",
+            "_id": "c57ec986-187b-405c-a647-43b2e62abd3b",
+            "colId": "d5b8a53b-c0a6-4e44-803c-b03fcff6753d",
+            "containerId": "6fc7e4ec-ee7f-4b0b-825f-5d648248a147",
             "name": "Stock Producto",
             "url": "127.0.0.1:5000/usuario/23302022739/producto/134567/stock",
             "method": "GET",
             "sortNum": 260000,
-            "created": "2023-12-01T14:16:42.085Z",
-            "modified": "2023-12-01T14:18:13.367Z",
+            "created": "2023-12-02T16:12:17.176Z",
+            "modified": "2023-12-02T16:12:17.176Z",
             "headers": [
                 {
                     "name": "user-id",

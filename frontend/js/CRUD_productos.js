@@ -117,6 +117,7 @@ function insert_Product() {
                                             text: `El producto ${data.producto} fue dado de alta nuevamente`,
                                             icon: "success"
                                         });
+                                        cargarListadoProductosFacturaNueva();
                                         getAll_Product();
                                         actualizarDashboardProductos();
                                     })
@@ -164,6 +165,7 @@ function insert_Product() {
 
                             let modal = document.getElementById('M-InsertarProducto');
                             modal.style.display = 'none';
+                            cargarListadoProductosFacturaNueva();
                             getAll_Product();
                             actualizarDashboardProductos();
                         })

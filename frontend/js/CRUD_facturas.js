@@ -8,8 +8,7 @@ const M_inputCondicionVenta = document.getElementById("M-inputCondicionVenta");
 const M_inputTipoComprobante = document.getElementById("M-inputTipoComprobante");
 const M_inputFecha = document.getElementById("M-inputFecha");
 const M_inputPTotal = document.getElementById("M-inputPTotal");
-
-
+ 
 function getAll_Facturas(){
     function handleResponse(response)  {
         if (!response.ok){
@@ -87,6 +86,10 @@ function getFactura(id_cliente, nroFactura) {
         .then( response => handleResponse(response))
         .then(
             (factura) => {
+                //Guardo la factura para luego imprimirla.
+                sessionStorage.removeItem('factura');
+                sessionStorage.setItem('factura', JSON.stringify(factura));
+                
                 const tableBody = document.getElementById('M-tablaFactura');
                 let list = ``;
                 factura.detalle.forEach(detalle => {
@@ -112,10 +115,17 @@ function getFactura(id_cliente, nroFactura) {
                 M_inputPTotal.value = factura.encabezado.total
             }
         )
-        .catch( (error) => { console.log("Promesa rechazada por" , error)})
-        .finally( () => { 
-            console.log("Promesa finalizada (resuelta o rechazada)");
+        .catch(error => {
+            error.json().then(data => 
+                Swal.fire({
+                    icon: "error",
+                    text: data.message
+                    })
+            );
         })
+        .finally(() => {
+            console.log("Promesa finalizada (resuelta o rechazada)");
+        });
 }
 
 function insertFactura(id_cliente, factura){
@@ -145,19 +155,83 @@ function insertFactura(id_cliente, factura){
         .then(data => {
             Swal.fire({
                 title: "Factura Nueva",
-                text: `La factura fue generada con éxito.`,
+                text: `La factura fue generada con éxito.\n¿Desea imprimirla?`,
                 icon: "success",
                 showCancelButton: false,
+                showDenyButton: true,
                 confirmButtonColor: "#3085d6",
                 cancelButtonColor: "#d33",
-                confirmButtonText: "Aceptar"
+                confirmButtonText: "Sí",
+                denyButtonText: "No"
               })
               .then((result) => {
+                actualizarDashboardVentas();
                 if (result.isConfirmed) {
+
+                    const requestOptions = {
+                        method: 'GET',
+                        headers: {
+                            'Accept': '*/*',
+                            'Content-Type': 'application/json',
+                            'x-access-token': token,
+                            'user-id': id_usuario
+                        }
+                    };
+
+                    //Obtengo el último nro de la nueva factura
+                    fetch(`http://127.0.0.1:5000/usuario/${id_usuario}/ultimoNroFactura`, requestOptions)
+                    .then(response => handleResponse(response))
+                    .then(data =>{
+                        const requestOptions = {
+                            method: 'GET',
+                            headers: {
+                                'Accept': '*/*',
+                                'Content-Type': 'application/json',
+                                'x-access-token': token,
+                                'user-id': id_usuario
+                            }
+                        };
+                        
+                        //Obtengo la última factura
+                        fetch(`http://127.0.0.1:5000//usuario/${id_usuario}/cliente/${data.id_cliente}/factura/${data.ultimoNroFactura}`, requestOptions)
+                        .then(response => handleResponse(response))
+                        .then(
+                            factura =>{
+                                sessionStorage.removeItem('factura');
+                                sessionStorage.setItem('factura', JSON.stringify(factura));
+                                imprimirFacturaPDF();
+                                toggleSection('section5');
+                            }
+                        )
+                        .catch(error => {
+                            error.json().then(data => 
+                                Swal.fire({
+                                    icon: "error",
+                                    text: data.message
+                                    })
+                            );
+                        })
+                        .finally(() => {
+                            console.log("Promesa finalizada (resuelta o rechazada)");
+                        });    
+                    })
+                    .catch(error => {
+                        error.json().then(data => 
+                            Swal.fire({
+                                icon: "error",
+                                text: data.message
+                                })
+                        );
+                    })
+                    .finally(() => {
+                        console.log("Promesa finalizada (resuelta o rechazada)");
+                    });
+                }
+                else{
                     getAll_Facturas();
                     toggleSection('section6');
-                    actualizarDashboardVentas();
                 }
+                
             });
             
         })
@@ -168,6 +242,8 @@ function insertFactura(id_cliente, factura){
                     text: data.message
                     })
             );
+
+            toggleSection('section6');
         })
         .finally(() => {
             console.log("Promesa finalizada (resuelta o rechazada)");
