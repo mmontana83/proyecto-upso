@@ -174,27 +174,6 @@ function insertFactura(id_cliente, factura){
         });
 }
 
-function guardarFacturaPDF(){
-
-    
-    // Crear un nuevo objeto jsPDF
-    const pdf = new jsPDF();
-
-    // Definir campos y valores
-    const camposParaCompletar = {'cliente': 'Juan', 'CUIL': '25239879871', 'direccion': 'La Paz 234'};
-
-    // Completar campos en el PDF
-    for (const [campo, valor] of Object.entries(camposParaCompletar)) {
-      pdf.addField({
-        name: campo,
-        type: 'text',
-        value: valor,
-      });
-    }
-
-    // Guardar y descargar el PDF
-    pdf.save('output.pdf');
-}
 //#region Configuración del DataTable Facturas
 $(document).ready(function() {
     // Inicializa la tabla con DataTables
