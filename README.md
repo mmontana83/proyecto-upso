@@ -438,6 +438,3 @@ varias provincias. Siendo más abarcativos podríamos agregar País, para aquell
 * Se podría agregar un campo adicional por cada producto “stock mínimo”, que cuando el stock de ese producto llegue a esa cantidad, nos avise que hay que  realizar un pedido del producto. Este stock mínimo variará de acuerdo al producto y cuánto demore su proceso de reposición.
 
 </details>
-
-
-
