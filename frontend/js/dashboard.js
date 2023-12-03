@@ -250,7 +250,8 @@ document.addEventListener("keyup", e => {
     if (e.target.matches('#f-busquedaClienteParaFacturar')) {
         const searchTerm = e.target.value.toLowerCase();
 
-        const data = listaClientes.filter(cliente => cliente.id_cliente.includes(searchTerm) || cliente.empresa.toLowerCase().includes(searchTerm));
+        const data = listaClientes.filter(cliente => cliente.id_cliente.includes(searchTerm) || cliente.empresa.toLowerCase().includes(searchTerm)
+        || cliente.nombre.toLowerCase().includes(searchTerm) || cliente.apellido.toLowerCase().includes(searchTerm));
 
         if (data.length === 0 || searchTerm === ''){
             inputNombre.value = ''
