@@ -112,7 +112,14 @@ Es importante mencionar que, si bien los stored procedures tienen ventajas, tamb
 </details>
 
 <details>
-<summary>Rutas API Rest</summary>
+<summary>Rutas API Diagrama</summary>
+
+![image](https://github.com/mmontana83/proyecto-upso/assets/101347311/935e448e-3f91-41fd-8877-d6fcb06e09e9)
+	
+</details>
+
+<details>
+<summary>Rutas API Rest en Detalle</summary>
 	
 <Rule '/login' (POST, OPTIONS) -> login>
 - Parámetros de Entrada: Authentication <Username, Password>
@@ -314,5 +321,12 @@ Es importante mencionar que, si bien los stored procedures tienen ventajas, tamb
 </details>
 
 ## FRONTEND
+
+<details>
+<summary>Diagrama Sitio Web</summary>
+
+![image](https://github.com/mmontana83/proyecto-upso/assets/101347311/9fcc4099-5d76-488e-a0fa-81b20cd7a10a)
+
+</details>
 
 
