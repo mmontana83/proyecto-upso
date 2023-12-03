@@ -12,6 +12,12 @@ Integrantes:
 
 ### Desarrollo del Proyecto
 
+<details>
+  <summary>Click para ver la sección</summary>
+  
+  Contenido de la sección que puede expandirse y contraerse.
+</details>
+
 ## BACKEND
 
 1. Crear directorio de proyecto (PROYECTO)
