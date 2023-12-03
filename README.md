@@ -16,6 +16,7 @@ Integrantes:
 
 <details>
 <summary>Instalación</summary>
+	
 1. Crear directorio de proyecto (PROYECTO)
 
 2. Crear entorno virtual    **py -3 -m venv .venv**
@@ -30,10 +31,12 @@ Integrantes:
 	+ flask-cors
 
 5. Instalar dependencias    **pip install -r requirements.txt** 
+
 </details>
 
 <details>
-<summary>Estructura de Directorios</summary>
+<summary>Árbol de Directorios</summary>
+
 6. Crear estructura de directorios
 	* /PROYECTO
 		* /PROYECTO/backend/api
@@ -58,24 +61,12 @@ Integrantes:
       			+ /PROYECTO/frontend/styles
       		* /PROYECTO/frontend/dashboard.html
       		* /PROYECTO/frontend/index.html
----
+
 </details>
 
-## Explicación:
+<details>
+<summary>Explicación de Directorios</summary>	
 
-### main.py 
-Es el punto de inicio de la aplicación, su función es importar el objeto app y ejecutar su método run.
-
-	from api import app
-	import sys
-
-	if len(sys.argv) > 1 and sys.argv[1] == "list":
-		print(app.url_map)
-	elif __name__ == "__main__":
-		app.run( debug=True, port= 5000)
-
----
-	
 ### Directorios 
 + /backend carpeta principal donde se concentra la logica del proyecto
 + /backend/api organiza la estructura interna de la aplicación.
@@ -87,121 +78,241 @@ Es el punto de inicio de la aplicación, su función es importar el objeto app y
 + /frontend/js contiene los archivos necesarios para realizar los fetch al back y aplicar el dinamismo al sitio web
 + /frontend/styles contiene las hojas de estilo del sitio
 + /frontend- se encuentran los archivos HTML
-  
----
-## GUIA EXPLICATIVA
+</details>
 
-### Archivos
-**api/_\_init_\_.py** crea el objeto app como una instancia de Flask, incorpora CORS y configura la clave secreta de la aplicación. También debe importar todas las rutas para cada recurso.
+<details>
+<summary>Diagrama de Base de Datos</summary>
 
-	from flask import Flask
-	from flask_cors import CORS
-	app = Flask(__name__)
-	CORS(app)
-	app.config['SECRET_KEY'] = 'app_123'
-	import api.routes.client
-	import api.routes.user
-
-**api/utils.py** contiene funciones genéricas que se utilizan en diferentes partes de la aplicación, por ejemplo los wrappers empleados para el control de acceso a diferentes rutas.
-
-	from functools import wraps
-	from flask import request, jsonify
-	import jwt
-	from api import app
-	from api.db.db import mysql
-
-	def token_required(func):
-		@wraps(func)
-		def decorated(\*args, \*\*kwargs):
-			\# Control de token y retorno en caso de errores 
-			\...
-			return func(\*args, \*\*kwargs)
-		return decorated
+A continuación un diagrama de la base de datos implementada en mysql.
+En el repositorio se encuentra el script para crear la misma.
 	
-	\# Otras funciones ..
+![image](https://github.com/mmontana83/proyecto-upso/assets/101347311/ab5e6b80-e615-417d-bf7d-c5df1cd8457c)
 
-**api/db/db.py** contiene la configuración de la BD y crea el objeto mysql, que debe ser importado desde todos los módulos que requieran una conección a la BD.
+En cuanto al acceso a la base de datos, se decidió por el uso de stored procedures en MySQL en lugar de ejecutar consultas directamente desde el lenguaje de programación. Esto tiene varias ventajas y puede ser conveniente en ciertos escenarios. A continuación algunas razones:
 
-	from api import app
-	from flask_mysqldb import MySQL
-	app.config['MYSQL_HOST'] = '192.168.0.254' #o reemplazar por casitamontana.ddns.net
-	app.config['MYSQL_USER'] = 'proyecto'
-	app.config['MYSQL_PASSWORD'] ='proyecto'
-	app.config['MYSQL_DB'] = 'proyecto'
-	mysql = MySQL(app)
+### Reutilización de Código:
+Almacenar consultas complejas en un procedimiento almacenado permite reutilizar el código en diferentes partes de tu aplicación sin tener que repetir la lógica de la consulta en cada lugar. Esto facilita el mantenimiento y la consistencia del código.
 
-**api/models/Cliente.py** contiene la definición de la clase Cliente, con su constructor y un método para formatear en JSON.
+### Seguridad:
+Los procedimientos almacenados pueden proporcionar una capa adicional de seguridad al limitar el acceso directo a las tablas y vistas. Se pueden conceder permisos específicos solo para ejecutar el procedimiento almacenado y no directamente sobre las tablas, reduciendo así el riesgo de inyección de SQL.
 
-	class Cliente():
+### Optimización del Rendimiento:
+Los stored procedures se pueden compilar y almacenar en caché, lo que puede mejorar el rendimiento en comparación con la ejecución de consultas directas desde el código. Esto es especialmente útil cuando se trata de consultas complejas que se ejecutan con frecuencia.
 
-    def __init__(self, fila):
-        self._id_cliente = fila[0]
-        self._nombre = fila[1]
-        self._apellido = fila[2]
-        self._empresa = fila[3]
-        self._email = fila[4]
-        self._telefono = fila[5]
-        self._direccion = fila[6]
-        self._id_tipoCondicionIVA = fila[7]
-        self._id_usuario = fila[8]
+### Abstracción de la Lógica de Negocio:
+Al mover la lógica de negocio a procedimientos almacenados, se puede separar claramente la capa de acceso a datos de la lógica de la aplicación. Esto mejora la modularidad y facilita futuros cambios en la lógica sin afectar directamente a las consultas en el código.
 
-    @classmethod
-    def sp_listarClientesByUsuarioToJson(self, fila):
-        return{
-            'id_cliente': fila[0],
-            'nombre': fila[1],
-            'apellido': fila[2],
-            'empresa': fila[3],
-            'email': fila[4],
-            'telefono': fila[5],
-            'direccion': fila[6],
-            'condicionIVA': fila[7]
-        }
+### Facilidad en Mantenimiento:
+Cambios en la lógica de la base de datos, como ajustes en las consultas o la estructura de las tablas, pueden gestionarse de manera centralizada en el stored procedure sin necesidad de modificar el código de la aplicación.
 
-    def to_json(self):
-        return {
-            'id_cliente': self._id_cliente,
-            'nombre': self._nombre,
-            'apellido': self._apellido,
-            'empresa': self._empresa,
-            'email': self._email,
-            'telefono': self._telefono,
-            'direccion': self._direccion,
-            'id_tipoCondicionIVA': self._id_tipoCondicionIVA,
-            'id_usuario': self._id_usuario
-        }
-   
-**api/routes/Cliente.py** contiene las rutas para las operaciones CRUD del recurso client, y puede incorporar otras funcionalidades específicas sobre ese recurso. Debe importar la clase Cliente, el objeto app, el objeto mysql y las funciones de utilidades necesarias.
+### Transacciones:
+Los stored procedures pueden contener transacciones, lo que permite ejecutar varias consultas como una única unidad atómica. Esto garantiza la consistencia de los datos, ya que todas las operaciones se realizan correctamente o ninguna se realiza.
+Es importante mencionar que, si bien los stored procedures tienen ventajas, también tienen algunas desventajas, como una mayor complejidad en el manejo del código y una dependencia más fuerte de la base de datos específica. 
 	
- 	from api import app
-    from flask import request, jsonify
-    from api.db.db import mysql
-    from api.models.Cliente import Cliente
+</details>
 
-    #Obtengo la lista de clientes de un usuario
-    @app.route('/usuario/<id_usuario>/clientes', methods = ['GET'])
-    def get_clientes_by_usuario(id_usuario):
-    cur = mysql.connection.cursor()
-    cur.callproc('sp_listarClientesByUsuario',[id_usuario])
-    datos = cur.fetchall()
+<details>
+<summary>Rutas API Rest</summary>
+	
+<Rule '/login' (POST, OPTIONS) -> login>
+- Parámetros de Entrada: Authentication <Username, Password>
+- Json Body: None
+- Json Salida: {"apellido", "email", "id_usuario", "nombre", "telefono", "token"}, 200, 401, 409
 
-    if datos != None:
-        clientes = []
-        for fila in datos:
-            cliente = Cliente.sp_listarClientesByUsuarioToJson(fila)
-            clientes.append(cliente)
-    return jsonify(clientes)
+<Rule '/usuario/<id_usuario>/cliente' (GET, HEAD, OPTIONS) -> get_clientes_by_usuario>
+- Parámetros de entrada: <id_usuario>
+- Json Headers: user-id = <id_usuario>, x-access-token = token
+- Json Body: None
+- Json Respuesta: [{ "apellido", "condicionIVA", "direccion", "email", "empresa", "id_cliente", "nombre", "telefono"}, …], 200, 401, 409
 
-    #Obtengo los datos de un cliente en particular
-    @app.route('/usuario/<id_usuario>/clientes/<id_cliente>', methods = ['GET'])
-    def get_cliente_by_id_cliente(id_usuario, id_cliente):
-    cur = mysql.connection.cursor()
-    cur.callproc('sp_obtenerClienteByID',[id_usuario, id_cliente])
-    fila = cur.fetchone()
+<Rule '/usuario/<id_usuario>/cliente' (POST, OPTIONS) -> registrar_cliente>
+- Parámetros de entrada: <id_usuario>
+- Json Headers: user-id = <id_usuario>, x-access-token = token
+- Json Body: {"id_cliente", "nombre", "apellido", "empresa",  "email", "telefono",  "direccion", "id_tipoCondicionIVA"}
+- Json Respuesta: 200, 401, 409
 
-    if fila != None:
-        cliente = Cliente.sp_listarClientesByUsuarioToJson(fila)
-    return jsonify(cliente)
+<Rule '/usuario/<id_usuario>/cliente/<id_cliente>' (GET, HEAD, OPTIONS) -> get_cliente_by_id_cliente>
+- Parámetros de entrada: <id_usuario>, <id_cliente>
+- Json Headers: user-id = <id_usuario>, x-access-token = token
+- Json Body: None
+- Json Respuesta: { "apellido", "condicionIVA", "direccion", "email", "empresa", "estado", "id_cliente", "nombre", "telefono"}, 200, 401, 409
+
+<Rule '/usuario/<id_usuario>/cliente/<id_cliente>' (POST, OPTIONS) -> actualizar_cliente>
+- Parámetros de entrada: <id_usuario>, <id_cliente>
+- Json Headers: user-id = <id_usuario>, x-access-token = token
+- Json Body: { "nombre", "apellido", "empresa", "email", "telefono", "direccion", "id_tipoCondicionIVA"}
+- Json Salida: Respuesta 200, 401, 409
+
+<Rule '/usuario/<id_usuario>/cliente/<id_cliente>' (DELETE, OPTIONS) -> eliminar_cliente>
+- Parámetros de entrada: <id_usuario>, <id_cliente>
+- Json Headers: user-id = <id_usuario>, x-access-token = token
+- Json Body: None
+- Json Salida: Respuesta 200, 401, 409
+
+<Rule '/usuario/<id_usuario>/cliente/<id_cliente>' (PUT, OPTIONS) -> alta_cliente>
+- Parámetros de entrada: <id_usuario>, <id_cliente>
+- Json Headers: user-id = <id_usuario>, x-access-token = token
+- Json Body: None
+- Json Salida: Respuesta 200, 401, 409
+
+<Rule '/usuario/<id_usuario>/cliente/<id_cliente>/estado' (GET, HEAD, OPTIONS) -> get_estadocliente_by_id_cliente>
+- Parámetros de entrada: <id_usuario>, <id_cliente>
+- Json Headers: user-id = <id_usuario>, x-access-token = token
+- Json Body: None
+- Json Salida: Respuesta 200, 401, 409
+
+<Rule '/usuario/<id_usuario>/facturas' (GET, HEAD, OPTIONS) -> get_facturas_by_usuario>
+- Parámetros de entrada: <id_usuario>
+- Json Headers: user-id = <id_usuario>, x-access-token = token
+- Json Body: None
+- Json Salida: [{"condicionIVA", "condicionVenta", "direccion", "fecha", "id_cliente", "nroFactura", "razonSocial", "telefono", "tipoFactura", "total"},…] 200, 401, 409
+
+<Rule '/usuario/<id_usuario>/cliente/<id_cliente>/factura' (GET, HEAD, OPTIONS) -> get_facturas_by_cliente>
+- Parámetros de entrada: <id_usuario>, <id_cliente>
+- Json Headers: user-id = <id_usuario>, x-access-token = token
+- Json Body: None
+- Json Salida: [{"condicionIVA", "condicionVenta", "direccion", "fecha", "id_cliente", "nroFactura", "razonSocial", "telefono", "tipoFactura", "total"},…] 200, 401, 409
+
+<Rule '/usuario/<id_usuario>/cliente/<id_cliente>/factura' (POST, OPTIONS) -> insertarFactura>
+- Parámetros de entrada: <id_usuario>, <id_cliente>
+- Json Headers: user-id = <id_usuario>, x-access-token = token
+- Json Body: {"encabezado": {"fecha","total","id_tipoFactura","id_condicionVenta": 2},"detalle": [{"id_producto", "cantidad", "precio"},…]}
+- Json Salida: Respuesta 200, 401, 409
+
+<Rule '/usuario/<id_usuario>/cliente/<id_cliente>/factura/<nroFactura>' (GET, HEAD, OPTIONS) -> get_factura_by_cliente>
+- Parámetros de entrada: <id_usuario>, <id_cliente>
+- Json Headers: user-id = <id_usuario>, x-access-token = token
+- Json Body: None
+- Json Salida: [“encabezado”: {"condicionIVA", "condicionVenta", "direccion", "fecha", "id_cliente", "nroFactura", "razonSocial", "telefono", "tipoFactura", "total"}, “detalle”:[{"cantidad", "precio", "precioTotal", "producto"},…]] 200, 401, 409
+
+<Rule '/usuario/<id_usuario>/ultimoNroFactura' (GET, HEAD, OPTIONS) -> get_ultimoNroFactura_by_usuario>
+- Parámetros de entrada: <id_usuario>, <id_cliente>
+- Json Headers: user-id = <id_usuario>, x-access-token = token
+- Json Body: None
+- Json Salida: {"id_cliente", "ultimoNroFactura"} 200, 401, 409
+
+<Rule '/dashboard/listarTipoCondicionIVA' (GET, HEAD, OPTIONS) -> mostrarTipoCondicionIVA>
+- Parámetros de entrada: None
+- Json Headers: user-id = <id_usuario>, x-access-token = token
+- Json Body: None
+- Json Salida: [{"descripcion", "id_tipoCondicionIVA"},…], 200, 401, 409
+
+<Rule '/dashboard/listarTipoFactura' (GET, HEAD, OPTIONS) -> mostrarTipoFactura>
+- Parámetros de entrada: None
+- Json Headers: user-id = <id_usuario>, x-access-token = token
+- Json Body: None
+- Json Salida: [{"id_tipoFactura", "tipoFactura"},…], 200, 401, 409
+
+<Rule '/dashboard/listarTipoProducto' (GET, HEAD, OPTIONS) -> mostrarTipoProducto>
+- Parámetros de entrada: None
+- Json Headers: user-id = <id_usuario>, x-access-token = token
+- Json Body: None
+- Json Salida: [{"id_tipoProducto", "tipoProducto"},…], 200, 401, 409
+
+<Rule '/dashboard/listarTipoCondicionVenta' (GET, HEAD, OPTIONS) -> mostrarTipoCondicionVenta>
+- Parámetros de entrada: None
+- Json Headers: user-id = <id_usuario>, x-access-token = token
+- Json Body: None
+- Json Salida: [{"descripcion ", "id_tipoCondicionVenta"},…], 200, 401, 409
+
+<Rule '/usuario/<id_usuario>/dashboard/controlStock' (GET, HEAD, OPTIONS) -> get_controlStock>
+- Parámetros de entrada: <id_usuario>
+- Json Headers: user-id = <id_usuario>, x-access-token = token
+- Json Body: None
+- Json Salida: [{"Producto", "Stock"},…], 200, 401, 409
+
+<Rule '/usuario/<id_usuario>/dashboard/historialVentas' (GET, HEAD, OPTIONS) -> get_historialVentas>
+- Parámetros de entrada: <id_usuario>
+- Json Headers: user-id = <id_usuario>, x-access-token = token
+- Json Body: None
+- Json Salida: {…,“2022”: {"Mes", "Venta"},…], “2023” : {"Mes", "Venta"},…],…}, 200, 401, 409
+
+<Rule '/usuario/<id_usuario>/dashboard/movimientoStock' (GET, HEAD, OPTIONS) -> get_movimientoStock>
+- Parámetros de entrada: <id_usuario>
+- Json Headers: user-id = <id_usuario>, x-access-token = token
+- Json Body: None
+- Json Salida: [{"Cliente","Factura","Fecha", "Movimiento", "Precio", "Producto"},…], 200, 401, 409
+
+<Rule '/usuario/<id_usuario>/dashboard/rankingVentasByCliente' (GET, HEAD, OPTIONS) -> get_rankingVentasByCliente>
+- Parámetros de entrada: <id_usuario>
+- Json Headers: user-id = <id_usuario>, x-access-token = token
+- Json Body: None
+- Json Salida: [{"Cliente","Venta"},…], 200, 401, 409
+
+<Rule '/usuario/<id_usuario>/dashboard/rankingVentasByProducto' (GET, HEAD, OPTIONS) -> get_rankingVentasByProducto>
+- Parámetros de entrada: <id_usuario>
+- Json Headers: user-id = <id_usuario>, x-access-token = token
+- Json Body: None
+- Json Salida: [{"Producto","Venta"},…], 200, 401, 409
+
+<Rule '/usuario/<id_usuario>/dashboard/rankingVentasByServicio' (GET, HEAD, OPTIONS) -> get_rankingVentasByServicio>
+- Parámetros de entrada: <id_usuario>
+- Json Headers: user-id = <id_usuario>, x-access-token = token
+- Json Body: None
+- Json Salida: [{"Servicio","Venta"},…], 200, 401, 409
+
+<Rule '/usuario/<id_usuario>/dashboard/ventasTotales' (GET, HEAD, OPTIONS) -> get_ventasTotales>
+- Parámetros de entrada: <id_usuario>
+- Json Headers: user-id = <id_usuario>, x-access-token = token
+- Json Body: None
+- Json Salida: {“VentasTotales”}, 200, 401, 409
+
+<Rule '/usuario/<id_usuario>/dashboard/ventasTotalesMesActual' (GET, HEAD, OPTIONS) -> get_ventasTotalesMesActual>
+- Parámetros de entrada: <id_usuario>
+- Json Headers: user-id = <id_usuario>, x-access-token = token
+- Json Body: None
+- Json Salida: {“VentasTotalesMesActual”}, 200, 401, 409
+
+<Rule '/usuario/<id_usuario>/dashboard/clientesActivos' (GET, HEAD, OPTIONS) -> get_clientesActivos>
+- Parámetros de entrada: <id_usuario>
+- Json Headers: user-id = <id_usuario>, x-access-token = token
+- Json Body: None
+- Json Salida: {“ClientesActivos”}, 200, 401, 409
+
+<Rule '/usuario/<id_usuario>/producto/<codigoProducto>' (POST, OPTIONS) -> actualizar_producto>
+- Parámetros de entrada: <id_usuario>, <codigoProducto>
+- Json Headers: user-id = <id_usuario>, x-access-token = token
+- Json Body: { "producto", "descripcion", "precio", "stock", "id_tipoProducto"}
+- Json Salida: Respuesta 200, 401, 409
+
+<Rule '/usuario/<id_usuario>/producto/<codigoProducto>' (PUT, OPTIONS) -> post_alta_producto_by_usuario>
+- Parámetros de entrada: <id_usuario>, <codigoProducto >
+- Json Headers: user-id = <id_usuario>, x-access-token = token
+- Json Body: None
+- Json Salida: Respuesta 200, 401, 409
+
+<Rule '/usuario/<id_usuario>/producto/<codigoProducto>' (GET, HEAD, OPTIONS) -> get_producto_by_id_usuario>
+- Parámetros de entrada: <id_usuario>, <codigoProducto >
+- Json Headers: user-id = <id_usuario>, x-access-token = token
+- Json Body: None
+- Json Salida: {"codigoProducto", "descripcion", "id_producto", "id_tipoProducto", "precio", "producto", "stock"} Respuesta 200, 401, 409
+
+<Rule '/usuario/<id_usuario>/productos' (GET, HEAD, OPTIONS) -> get_productos_by_id_usuario>
+- Parámetros de entrada: <id_usuario>, <codigoProducto >
+- Json Headers: user-id = <id_usuario>, x-access-token = token
+- Json Body: None
+- Json Salida: [{"codigoProducto", "descripcion", "id_producto", "id_tipoProducto", "precio", "producto", "stock"},…] Respuesta 200, 401, 409
+
+<Rule '/usuario/<id_usuario>/producto/<codigoProducto>' (DELETE, OPTIONS) -> eliminar_producto>
+- Parámetros de entrada: <id_usuario>, <codigoProducto>
+- Json Headers: user-id = <id_usuario>, x-access-token = token
+- Json Body: None
+- Json Salida: Respuesta 200, 401, 409
+
+<Rule '/usuario/<id_usuario>/producto/' (POST, OPTIONS) -> insertar_producto>
+- Parámetros de entrada: <id_usuario>
+- Json Headers: user-id = <id_usuario>, x-access-token = token
+- Json Body: {"codigoProducto”, “producto”, “descripción”, “precio”, “stock”, “id_tipoProducto”}
+- Json Respuesta: 200, 401, 409
+
+<Rule '/usuario/<id_usuario>/producto/<id_producto>/stock' (GET, HEAD, OPTIONS) -> get_stock_by_codigoProducto>])
+- Parámetros de entrada: <id_usuario>, <id_producto>
+- Json Headers: user-id = <id_usuario>, x-access-token = token
+- Json Body: {"id_tipoProducto”, “stock”}
+- Json Respuesta: 200, 401, 409
+
+</details>
+
+## FRONTEND
 
 
-Con esta estructura, la escalabilidad del proyecto se logra creando archivos de modelo y rutas para cada nuevo recurso que se deba incorporar.
