@@ -12,14 +12,10 @@ Integrantes:
 
 ### Desarrollo del Proyecto
 
-<details>
-  <summary>Click para ver la sección</summary>
-  
-  Contenido de la sección que puede expandirse y contraerse.
-</details>
-
 ## BACKEND
 
+<details>
+<summary>Instalación</summary>
 1. Crear directorio de proyecto (PROYECTO)
 
 2. Crear entorno virtual    **py -3 -m venv .venv**
@@ -33,8 +29,11 @@ Integrantes:
 	+ PyJWT == 2.8.0
 	+ flask-cors
 
-5. Instalar dependencias    **pip install -r requirements.txt**
+5. Instalar dependencias    **pip install -r requirements.txt** 
+</details>
 
+<details>
+<summary>Estructura de Directorios</summary>
 6. Crear estructura de directorios
 	* /PROYECTO
 		* /PROYECTO/backend/api
@@ -60,6 +59,7 @@ Integrantes:
       		* /PROYECTO/frontend/dashboard.html
       		* /PROYECTO/frontend/index.html
 ---
+</details>
 
 ## Explicación:
 
