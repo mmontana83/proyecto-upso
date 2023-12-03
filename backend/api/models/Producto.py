@@ -344,7 +344,7 @@ class Producto:
 
 
     @staticmethod
-    def obtenerStockPorProducto(id_usuario, codigoProducto):
+    def obtenerStockPorProducto(id_usuario, id_producto):
         """
         Obtiene el stock de un producto específico de un usuario.
 
@@ -361,7 +361,7 @@ class Producto:
             cur = mysql.connection.cursor()
 
             # Llamar al procedimiento almacenado 'sp_obtenerStockPorProducto' con los parámetros del usuario y código del producto
-            cur.callproc('sp_obtenerStockPorProducto', [id_usuario, codigoProducto])
+            cur.callproc('sp_obtenerStockPorProducto', [id_usuario, id_producto])
 
             # Obtener la primera fila del resultado
             fila = cur.fetchone()

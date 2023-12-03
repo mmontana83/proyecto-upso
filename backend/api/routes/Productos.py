@@ -208,10 +208,10 @@ def insertar_producto(id_usuario):
         return jsonify({'message': str(ex)})
     
 # Ruta para obtener el stock de un producto por parte de un usuario
-@app.route('/usuario/<id_usuario>/producto/<codigoProducto>/stock', methods=['GET'])
+@app.route('/usuario/<id_usuario>/producto/<id_producto>/stock', methods=['GET'])
 @token_required
 @user_resources
-def get_stock_by_codigoProducto(id_usuario, codigoProducto):
+def get_stock_by_codigoProducto(id_usuario, id_producto):
     """
     Obtiene el stock de un producto específico para un usuario .
 
@@ -227,7 +227,7 @@ def get_stock_by_codigoProducto(id_usuario, codigoProducto):
     """
     try:
         # Llamar al método estático obtenerStockPorProducto de la clase Producto
-        return Producto.obtenerStockPorProducto(id_usuario, codigoProducto)
+        return Producto.obtenerStockPorProducto(id_usuario, id_producto)
     except Exception as ex:
         # Devolver un mensaje de error en formato JSON en caso de excepción
         return jsonify({'message': str(ex)}), 409
