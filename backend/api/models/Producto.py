@@ -292,7 +292,7 @@ class Producto:
                 return jsonify(productos), 200
             else:
                 # Devolver una respuesta JSON indicando que no se encontraron productos y código 409 (conflicto)
-                return jsonify({'message': 'Productos no encontrado'}), 409
+                return jsonify({'message': 'NO tiene productos dado de alta'}), 409
 
         # Capturar cualquier excepción que ocurra durante las operaciones anteriores
         except Exception as ex:
