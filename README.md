@@ -343,6 +343,14 @@ Es importante mencionar que, si bien los stored procedures tienen ventajas, tamb
 
 </details>
 
+<details>
+<summary>Diagrama de Clases y Dependencias </summary>
+
+![DF Proyecto (1)](https://github.com/mmontana83/proyecto-upso/assets/101347311/6ed26419-9be5-4c39-97e9-7b10d5e7b470)
+
+ 
+</details>
+
 ## FRONTEND
 
 <details>
