@@ -357,17 +357,17 @@ Es importante mencionar que, si bien los stored procedures tienen ventajas, tamb
 Lo primero que vemos al abrir la URL es la página de ingreso donde aparece la opción de Logueo. 
 Es necesario tener una cuenta para acceder a las funcionalidades del sistema.
 
-![image](https://github.com/mmontana83/proyecto-upso/assets/64754435/90d12db2-eb0c-4327-97d9-5020e6513438)
+
 
 Luego de loguearse podemos comenzar a utilizar todas las funcionalidades que la página nos ofrece
 
-![image](https://github.com/mmontana83/proyecto-upso/assets/64754435/73601054-e3c9-4407-b553-d91443ff5048)
+
 
 ####VISTA RESPONSIVE
 La siguiente imagen ilustra cómo nuestra aplicación se ajusta a pantallas más pequeñas
 manteniendo la usabilidad y proporcionando una experiencia fluida para los usuarios móviles.
 
-![image](https://github.com/mmontana83/proyecto-upso/assets/64754435/068a4b50-f774-4a54-ab14-43565152556e)
+
 
 
 </details>
