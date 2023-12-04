@@ -137,7 +137,7 @@ Es importante mencionar que, si bien los stored procedures tienen ventajas, tamb
 <details>
 <summary>Rutas API Diagrama</summary>
 
-![image](https://github.com/mmontana83/proyecto-upso/assets/101347311/935e448e-3f91-41fd-8877-d6fcb06e09e9)
+<img width="2720" alt="DIAGRAMA RUTA" src="https://github.com/mmontana83/proyecto-upso/assets/101347311/2df42fb5-9218-4db1-8f22-d80c21ba6aba">
 	
 </details>
 
